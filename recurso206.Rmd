@@ -1,6 +1,6 @@
 ---
-title: <span style="color:#034a94"> **Representación gráfica de datos**</span>
-author: "Nivelatorio de Estadística"
+title: <span style="color:#034a94"> **Análisis de varianza - ANOVA**</span>
+author: "Modelos Estadísticos para la toma de decisiones"
 output: html_document
 css: style.css
 ---

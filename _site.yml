@@ -3,7 +3,7 @@ output_dir: "docs"
 navbar:
   title: "Modelos Estadísticos "
   left:
-    - text: "Modelo Múltiple"
+    - text: "Conceptos básicos"
       href: recurso201.html
     - text: "Estimación"
       href: recurso202.html
