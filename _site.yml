@@ -1,12 +1,20 @@
 name: " "
 output_dir: "docs"
 navbar:
-  title: "My Website"
+  title: "Modelos Estadísticos "
   left:
-    - text: "Home"
-      href: index.html
-    - text: "About"
-      href: about.html
+    - text: "Modelo Múltiple"
+      href: recurso201.html
+    - text: "Estimación"
+      href: recurso202.html
+    - text: "Supuestos"
+      href: recurso203.html
+    - text: "Métricas de validación"
+      href: recurso204.html
+    - text: "Variables categóricas"
+      href: recurso205.html
+    - text: "ANOVA"
+      href: recurso206.html
 output:
   html_document:
     css: style.css
