@@ -24,7 +24,7 @@ c4="#686868"
 <br/> <br/>
 
 
-# **Sobre los parámetros del modelo**
+# <span style="color:#034a94">**Sobre los parámetros del modelo**</span>
 
 </br>
 
@@ -46,7 +46,7 @@ Basados en este resultado se pueden construir pruebas de hipótesis e intervalos
 
 </br></br>
 
-## **Pruebas de hipótesis sobre los parámetros**
+## <span style="color:#034a94">**Pruebas de hipótesis sobre los parámetros**</span>
 
 </br>
 
@@ -75,14 +75,16 @@ Un caso particular de las pruebas de hipótesis anteriores son las conocidas **p
 
 
 <div class="content-box-yellow">
-### **NOTA** 
+### <span style="color:#FF7F00"> **Nota**</span>
 
 En todos los casos un valor-p bajo apuntará hacia el rechazo de $H_0$ y la aceptación de $H_1$ como verdad, en caso contrario no se rechaza $H_0$, se asume que Ho es verdadera.
 </div>
 
 </br></br></br>
 
-## **Intervalos de confianza para los parámetros**
+## <span style="color:#034a94">**Intervalos de confianza para los parámetros**</span>
+
+</br>
 
 De nuevo con base en el resultado $(\star)$ un intervalo de confianza (IC) del ${(1 - \alpha)\%}$ para el $j$-ésimo parámetro ${\beta_j}$ ($j = 0, 1, \ldots, k$), es:
 

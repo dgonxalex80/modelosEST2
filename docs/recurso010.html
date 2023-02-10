@@ -388,7 +388,8 @@ $(document).ready(function () {
 
 <p></br></br></p>
 <div id="exploración-de-posibles-asociaciones" class="section level1">
-<h1><strong>Exploración de posibles asociaciones</strong></h1>
+<h1><span style="color:#034a94"><strong>Exploración de posibles
+asociaciones</strong></span></h1>
 <p></br></p>
 <p>Inicialmente, puede ser útil realizar chequeos gráficos de la
 naturaleza y la fuerza de las asociaciones entre las variables
@@ -417,8 +418,8 @@ coeficientes de correlación entre la variable respuesta con cada una de
 las predictoras y también todas las correlaciones entre las
 predictoras.</p>
 <p></br></br></br></p>
-<div id="ejemplo" class="section level3">
-<h3><strong>Ejemplo</strong></h3>
+<div id="ejemplo" class="section level3 content-box-yellow">
+<h3><span style="color:#FF7F00"> <strong>Ejemplo</strong></span></h3>
 <p></br></p>
 <p>En la siguiente figura se presentan algunas matrices de gráficos de
 dispersión para un conjunto de datos sobre tres variables y su prelación
@@ -435,6 +436,10 @@ este caso variable dependiente</li>
 <li><strong>antg</strong> : antiguedad en la empresa</li>
 <li><strong>sala</strong> : salario que debenga</li>
 </ul>
+</div>
+<p>El diagrama de dispersión permite visualizar la relación lineal que
+puede existir entre dos variables numéticas, para ello se construye la
+siguiente matriz de diagramas.</p>
 <p></br></br></p>
 <center>
 <p><img src="recurso010_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
@@ -470,10 +475,16 @@ antigüedad</p>
 <ul>
 <li><strong>Matrices de diagramas de dispersión:</strong> Simple (abajo
 izquierda),</li>
+</ul>
+<p></br></p>
+<ul>
 <li><strong>Diagrama de desnsidad</strong> en la diagonal</li>
+</ul>
+<p></br></p>
+<ul>
 <li><strong>Correlaciones</strong> parte superior derecha de la matriz,
-acompañadas de su significancia (<span class="math inline">\(Ho: \rho =
-0\)</span> vs <span class="math inline">\(Ha: \rho \neq 0\)</span>)</li>
+acompañadas de su significancia <span class="math inline">\((Ho: \rho =
+0 \text{ vs } Ha: \rho \neq 0)\)</span></li>
 </ul>
 <p></br></p>
 <p>Se puede observar que la mayor relación de la variable <span
@@ -487,9 +498,8 @@ existen fuertes correlaciones, lo cual puede generar problemas en la
 estimación del modelo y su inferencia. Este tema (multicolinealidad)
 será abordado más adelante.</p>
 <p></br></br></p>
-</div>
 <div id="nota" class="section level3 content-box-yellow">
-<h3><strong>Nota</strong></h3>
+<h3><span style="color:#FF7F00"> <strong>Nota</strong></span></h3>
 <p>Las variables independientes deben de ser independientes unas de
 otras, por tanto sus correlaciones deberán ser no significativas al
 realizar pruebas de hipótesis ( <span class="math inline">\(Ho: \rho =

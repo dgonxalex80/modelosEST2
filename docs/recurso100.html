@@ -386,7 +386,8 @@ Estimación del modelo</strong></span></h1>
 
 <p></br></br></p>
 <div id="estimación-del-modelo-método-mco" class="section level2">
-<h2><strong>Estimación del modelo método MCO</strong></h2>
+<h2><span style="color:#034a94"><strong>Estimación del modelo método
+MCO</strong></span></h2>
 <p></br></p>
 <p>Para estimar el modelo por el método de mínimos cuadrados ordinarios
 se utiliza la función lm</p>
@@ -397,8 +398,8 @@ lm(formula, data, subset, weights, na.action,
    singular.ok = TRUE, contrasts = NULL, offset, ...)                      
 </pre>
 <p></br></br></p>
-<div id="ejemplo" class="section level3">
-<h3><strong>Ejemplo</strong></h3>
+<div id="ejemplo" class="section level3 content-box-yellow">
+<h3><span style="color:#FF7F00"> <strong>Ejemplo</strong></span></h3>
 <p></br></p>
 <p>Para la base de datos arboles1 que con tiene las variables</p>
 <table>
@@ -450,7 +451,8 @@ cero en otro caso</td>
 </tr>
 </tbody>
 </table>
-<p></br></p>
+</div>
+<p></br></br></p>
 <pre class="r"><code>library(paqueteMOD)
 data(&quot;arboles1&quot;)
 arboles1$D1 = as.numeric(arboles1$mg==&quot;GENOTIPO_2&quot;)
@@ -463,32 +465,32 @@ arboles1$altura = as.numeric(arboles1$altura)
 
 modelo1 &lt;- lm(peso ~ diametro + altura + D2 + D3, data = arboles1)
 summary(modelo1)</code></pre>
-<pre><code>## 
-## Call:
-## lm(formula = peso ~ diametro + altura + D2 + D3, data = arboles1)
-## 
-## Residuals:
-##    Min     1Q Median     3Q    Max 
-## -5.667 -1.987 -0.518  1.803 12.087 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) -10.0175     1.3801  -7.258 1.72e-10 ***
-## diametro      3.8374     0.7261   5.285 9.59e-07 ***
-## altura        0.9423     0.5579   1.689 0.094890 .  
-## D2            1.3837     0.9756   1.418 0.159777    
-## D3            3.5217     0.8928   3.945 0.000164 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 3.191 on 85 degrees of freedom
-## Multiple R-squared:  0.8538, Adjusted R-squared:  0.847 
-## F-statistic: 124.1 on 4 and 85 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre><code>
+Call:
+lm(formula = peso ~ diametro + altura + D2 + D3, data = arboles1)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-5.667 -1.987 -0.518  1.803 12.087 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -10.0175     1.3801  -7.258 1.72e-10 ***
+diametro      3.8374     0.7261   5.285 9.59e-07 ***
+altura        0.9423     0.5579   1.689 0.094890 .  
+D2            1.3837     0.9756   1.418 0.159777    
+D3            3.5217     0.8928   3.945 0.000164 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 3.191 on 85 degrees of freedom
+Multiple R-squared:  0.8538,    Adjusted R-squared:  0.847 
+F-statistic: 124.1 on 4 and 85 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p></br></br></p>
 </div>
-</div>
 <div id="estimación-paso-a-paso-o-steppwise" class="section level2">
-<h2><strong>Estimación paso a paso o Steppwise</strong></h2>
+<h2><span style="color:#034a94"><strong>Estimación paso a paso o
+Steppwise</strong></span></h2>
 <p>Me diante esta metodología se estima un modelo de manera gradual,
 partiendo de un modelo con solo el intercepto y en cada paso se
 incorpora una variable hasta cumplir con el criterio de parada.</p>
@@ -504,49 +506,49 @@ forward &lt;- step(modelo_b0, direction=&#39;forward&#39;, scope=formula(modelo_
 
 # Visualización de los resultados 
 forward$anova</code></pre>
-<pre><code>##         Step Df   Deviance Resid. Df Resid. Dev      AIC
-## 1            NA         NA        89  5922.2107 378.7990
-## 2 + diametro -1 4883.97267        88  1038.2381 224.0924
-## 3       + D3 -1  131.32781        87   906.9103 213.9210
-## 4       + D1 -1   20.94959        86   885.9607 213.8177
-## 5   + altura -1  138.30309        85   747.6576 200.5422</code></pre>
+<pre><code>        Step Df   Deviance Resid. Df Resid. Dev      AIC
+1            NA         NA        89  5922.2107 378.7990
+2 + diametro -1 4883.97267        88  1038.2381 224.0924
+3       + D3 -1  131.32781        87   906.9103 213.9210
+4       + D1 -1   20.94959        86   885.9607 213.8177
+5   + altura -1  138.30309        85   747.6576 200.5422</code></pre>
 <pre class="r"><code># resultado final del modelo
 summary(forward)</code></pre>
-<pre><code>## 
-## Call:
-## lm(formula = peso ~ diametro + D3 + D1 + altura, data = arboles1)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -5.1019 -1.8644 -0.5082  1.5538 12.8666 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) -13.9325     1.5562  -8.953 6.73e-14 ***
-## diametro      2.5675     0.7521   3.414 0.000984 ***
-## D3            3.5331     0.7055   5.008 2.95e-06 ***
-## D1           -4.4876     1.1310  -3.968 0.000151 ***
-## altura        2.9819     0.7520   3.965 0.000152 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 2.966 on 85 degrees of freedom
-## Multiple R-squared:  0.8738, Adjusted R-squared:  0.8678 
-## F-statistic: 147.1 on 4 and 85 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre><code>
+Call:
+lm(formula = peso ~ diametro + D3 + D1 + altura, data = arboles1)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-5.1019 -1.8644 -0.5082  1.5538 12.8666 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -13.9325     1.5562  -8.953 6.73e-14 ***
+diametro      2.5675     0.7521   3.414 0.000984 ***
+D3            3.5331     0.7055   5.008 2.95e-06 ***
+D1           -4.4876     1.1310  -3.968 0.000151 ***
+altura        2.9819     0.7520   3.965 0.000152 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 2.966 on 85 degrees of freedom
+Multiple R-squared:  0.8738,    Adjusted R-squared:  0.8678 
+F-statistic: 147.1 on 4 and 85 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p></br></br></p>
 </div>
 <div id="estimación-por-el-método-de-máxima-verosimilitud"
 class="section level2">
-<h2><strong>Estimación por el método de Máxima
-Verosimilitud</strong></h2>
+<h2><span style="color:#034a94"><strong>Estimación por el método de
+Máxima Verosimilitud</strong></span></h2>
 <p></br></p>
 <pre class="r"><code>library(stats4) # para la función mle
 library(bbmle) # para la función mle2</code></pre>
-<pre><code>## 
-## Attaching package: &#39;bbmle&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
-## 
-##     slice</code></pre>
+<pre><code>
+Attaching package: &#39;bbmle&#39;</code></pre>
+<pre><code>The following object is masked from &#39;package:dplyr&#39;:
+
+    slice</code></pre>
 </div>
 
 

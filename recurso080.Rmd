@@ -18,7 +18,7 @@ c4="#686868"
 
 </br>
 
-## **Comparación de efectos parciales de las variables predictoras**
+## <span style="color:#034a94"> **Comparación de efectos parciales de las variables predictoras**</span>
 
 </br>
 
@@ -73,7 +73,7 @@ Además, los $\beta_j^*$ pueden servir para determinar la importancia relativa d
 
 </br></br>
 
-## **Multicolinealidad**
+## <span style="color:#034a94"> **Multicolinealidad**</span>
 
 </br>
 
@@ -81,7 +81,7 @@ Multicolinealidad es la existencia de dependencia casi lineal entre variables pr
 
 Si existiera dependencia lineal exacta entre dos o más variables predictoras, la matriz 
 
-$\boldsymbol{X}'\boldsymbol{X}$ sería singular y por tanto **no podríamos hallar los estimadores de mínimos cuadrados!**.
+$\boldsymbol{X}'\boldsymbol{X}$ sería una matriz singular y por tanto **no podríamos hallar los estimadores de mínimos cuadrados!**.
 
 ```{r, comment = NA, include = F}
 #dt <- read.table('trabajos/RLM/bases/Equipo60.txt', h = T)[, -(4:6)]

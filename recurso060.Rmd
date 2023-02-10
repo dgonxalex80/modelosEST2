@@ -24,8 +24,9 @@ Antes de utilizar los resultados obtenidos al estimar un modelo de regresión co
 
 
 </br></br>
+<div class="content-box-gray">
 
-Procedimiento:
+### **Procedimiento**
 
 </br>
 
@@ -48,7 +49,7 @@ Procedimiento:
 
 
 5. Los valores de $Y$ de la muestra de validación y los respectivos valores de $\widehat{Y}$ estimados en el punto 4, son correlacionados, obteniendo $r_{y, \widehat{y}}$ . El valor obtenido se compara con el $R^{2}$ del modelo obtenido con toda la muestra y así evaluar el grado de encogimiento.
-
+</div>
 
 </br>
 

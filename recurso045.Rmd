@@ -55,7 +55,7 @@ el cual tiene las siguientes propiedades:
 </br></br>
 
 <div class="content-box-gray">
-## **Resumen**
+### <span style="color:#FF7F00"> **Resumen**</span>
 
 $$\widehat{Y}_0 \sim N\left(E\left[ Y\vert\boldsymbol{x_0}\right], \sigma^2\,\boldsymbol{x_0}\left(\boldsymbol{X}'\boldsymbol{X}\right)^{-1}\boldsymbol{x_0}'\right)$$
 </div>
@@ -73,7 +73,7 @@ $T = \dfrac{\widehat{Y}_0 - E\left[ Y\vert\boldsymbol{x_0}\right]}{\text{se}(\wi
   
 </br></br></br>
 
-## **Pruebas de hipótesis sobre la respuesta media** 
+## <span style="color:#034a94">**Pruebas de hipótesis sobre la respuesta media**</span> 
 
 </br>
 
@@ -87,7 +87,7 @@ donde ${t_{\alpha/2, n - p}}$ es el percentil $1 - \alpha/2$ de la distribución
 
 </br></br>
 
-### **IC del ($\boldsymbol{1} - \boldsymbol{\alpha}$)100% para la respuesta media $\boldsymbol{E\left[ Y\vert\boldsymbol{x_0}\right]}$**
+## <span style="color:#034a94">**IC del ($\boldsymbol{1} - \boldsymbol{\alpha}$)100% para la respuesta media $\boldsymbol{E\left[ Y\vert\boldsymbol{x_0}\right]}$**</span>
 
 </br>
 
@@ -137,7 +137,7 @@ Con esto podemos hallar los siguientes resultados:
 
 </br></br></br>
 
-### **IP del ($\boldsymbol{1} - \boldsymbol{\alpha}$)100% para un valor futuro $\boldsymbol{Y_0}$**
+## <span style="color:#034a94">**IP del ($\boldsymbol{1} - \boldsymbol{\alpha}$)100% para un valor futuro $\boldsymbol{Y_0}$**</span>
   
 </br>
 
@@ -160,7 +160,7 @@ $$\widehat{Y}_0 \ \pm \ t_{\alpha/2, n - p} \,\text{se}(Y_0 - \widehat{Y}_0)$$
 </br></br>
 
 <div class="content-box-gray">
-### **Notas:**
+### <span style="color:#FF7F00"> **Nota**</span>
 
 </br>
 
@@ -177,10 +177,13 @@ $$\widehat{Y}_0 \ \pm \ t_{\alpha/2, n - p} \,\text{se}(Y_0 - \widehat{Y}_0)$$
 </div>
 </br></br></br>
 
-### **Precaución:**
+<div class="content-box-yellow">
+### <span style="color:#FF7F00">**Precaución:**</span>
 
 </br>
 Deben evitarse las extrapolaciones por fuera del rango de experimentación en el espacio de las predictoras, para lo cual no basta con evaluar si cada valor componente del vector $\boldsymbol{x_0}$ se encuentra dentro del rango usado (u observado) para la correspondiente predictora, sino que es necesario evaluar si $x_0$ pertenece a la región de observación conjunta.
+
+</div>
 
 </br>
 

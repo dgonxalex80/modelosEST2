@@ -5,7 +5,7 @@ css: style.css
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, comment = NA)
 
 library(paqueteMOD)
 data("arboles1")
@@ -31,7 +31,7 @@ library(modelsummary) # tablas de regresion
 
 </br></br>
 
-## **Estimación del modelo método MCO**
+## <span style="color:#034a94">**Estimación del modelo método MCO**</span>
 
 </br>
 
@@ -47,7 +47,8 @@ lm(formula, data, subset, weights, na.action,
 
 </br></br>
 
-### **Ejemplo**
+<div class="content-box-yellow">
+### <span style="color:#FF7F00"> **Ejemplo**</span>
 
 </br>
 
@@ -64,9 +65,9 @@ Para  la base de datos arboles1 que con tiene las variables
 | **D2**         | variable binaria que toma valor de 1 para FINCA_2 y 0 en otro caso     |
 | **D3**         | variable binaria que toma valor de 1 para FINCA_3 y cero en otro caso  |
 
-</br>
+</div>
 
-
+</br></br>
 
 ```{r}
 library(paqueteMOD)
@@ -85,7 +86,8 @@ summary(modelo1)
 
 </br></br>
 
-## **Estimación paso a paso  o Steppwise**
+## <span style="color:#034a94">**Estimación paso a paso  o Steppwise**</span>
+
 
 Me diante esta metodología se estima un modelo de manera gradual, partiendo de un modelo con solo el intercepto y en cada paso se incorpora una variable hasta cumplir con el criterio de parada.
 
@@ -112,7 +114,7 @@ summary(forward)
 </br></br>
 
 
-## **Estimación por el método de Máxima Verosimilitud**
+## <span style="color:#034a94">**Estimación por el método de Máxima Verosimilitud**</span>
 
 </br>
 

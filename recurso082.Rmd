@@ -26,7 +26,7 @@ Esta matriz resulta útil para detectar multicolinealidad si en ésta no intervi
       
 También valores de $\text{COR}\left(X_j, X_k\right)$ pequeños no necesariamente implican la ausencia de multicolinealidad.
 
-</br>
+</br></br>
 
 2. **Factores de Inflación de Varianza:** denotados $\text{VIF}_j,\ j = 1, \ldots, k$ se calculan como: 
 
@@ -96,7 +96,7 @@ A continuación se establece el criterio para detectar la multicolinealidad de a
 # Resultados$beta_slu <- coef(lm(Yslu ~ X1slu + X2slu + X3slu + 0))
 ```
 
-</br>
+</br></br>
 
 3. **Análisis de los valores propios de $\boldsymbol{X}'\boldsymbol{X}$:** se trata de evaluar si hay valores propios con valores cercanos a cero. Para ello se definen las medidas que se presentan a continuación:
 
@@ -126,10 +126,11 @@ Proporciones altas ($\pi_{ij} > 0.5$) para dos o más coeficientes de regresión
 
 </br></br>
 
-**Nota:** 
+<div class="content-box-gray">
+### <span style="color:#FF7F00"> **Nota**</span>
 
 El análisis de valores propios se puede realizar usando datos centrados o con los datos originales. 
 
-
+</div>
 
 

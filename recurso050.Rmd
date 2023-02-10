@@ -19,7 +19,7 @@ c4="#686868"
 </br></br>
 
 
-## **Validación de los supuestos**
+## <span style="color:#034a94"> **Validación de los supuestos**</span>
 
 </br>
 
@@ -37,7 +37,7 @@ $$\widehat{\varepsilon_i} = e_i = (y_i-\widehat{y_i}) ,\hspace{1cm} i=1, \ldots,
 
 </br></br>
 
-## **Residuales escalados**
+## <span style="color:#034a94"> **Residuales escalados**</span>
 
 </br>
 
@@ -85,7 +85,7 @@ Este residual, con mayor razón debe moverse entre -3 y 3. Se considera atípica
 </br></br>
 
 <div class="content-box-gray">
-**NOTAS**
+### <span style="color:#FF7F00"> **Nota**</span>
 
 * Si el modelo de RLM especificado es correcto los $r_i$ tienen varianza aproximadamente constante!! igual a 1.
 * En conjuntos grandes de datos la varianza de los $r_i$ se puede estabilizar en 1 y así no habrá mucha diferencia entre éstos y los $d_i$.
@@ -103,7 +103,7 @@ La validación de los supuestos vista en regresión lineal simple se mantiene, s
 
 </br></br></br>
 
-# **Validación de los supuestos en los errores**
+# <span style="color:#034a94">**Validación de los supuestos en los errores**</span>
 
 </br>
 

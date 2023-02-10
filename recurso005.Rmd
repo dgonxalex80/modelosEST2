@@ -26,8 +26,8 @@ En el ajuste y análisis de este modelo se obtienen resultados que son extension
 
 </br></br></br>
 
-## **Definición del modelo** 
-
+## <span style="color:#034a94">**Definición del modelo** </span>
+&
 </br>
 
 Considere el caso en el cual se desea modelar la variabilidad total de una variable respuesta de interés $Y$, en función de relaciones lineales con dos o más variables predictoras ($X_1, X_2, \dots, X_k$), formuladas simultáneamente en un único modelo.
@@ -96,7 +96,7 @@ $$
 
 </br></br></br>
 
-## **Significado de los coeficientes de regresión**
+## <span style="color:#034a94">**Significado de los coeficientes de regresión**</span>
 
 </br>
 
@@ -124,7 +124,7 @@ Como los efectos de una predictora sobre la respuesta media no dependen del nive
 </br>
 
 <div class="content-box-yellow">
-### **NOTA:** 
+### <span style="color:#FF7F00">**NOTA:**</span> 
 
 El término *modelo lineal* significa que el modelo es lineal en los parámetros, lo cual no hace referencia a la forma de la superficie de respuesta.
 
@@ -137,7 +137,7 @@ El término *modelo lineal* significa que el modelo es lineal en los parámetros
 
 </br></br>
 
-## **Tipos de variables y de efectos en los modelos**
+## <span style="color:#034a94">**Tipos de variables y de efectos en los modelos**</span>
 
 </br>
 

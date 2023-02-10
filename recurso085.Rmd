@@ -15,7 +15,7 @@ data("creditos")
 
 </br></br>
 
-## **Selección de variables**
+## <span style="color:#034a94">**Selección de variables**</span>
 
 </br>
 
@@ -26,7 +26,7 @@ Dependiendo de los usos que se deseen dar a un modelo de regresión variará el 
 
 </br></br>
 
-## **Método de todas las regresiones posibles**
+## <span style="color:#034a94">**Método de todas las regresiones posibles**</span>
 
 </br>
 
@@ -51,9 +51,14 @@ y comparar tales modelos con base en criterios estadísticos.
 
 </br></br></br>
 
-## **Criterios estadísticos en la comparación de modelos**
+## <span style="color:#034a94">**Criterios estadísticos en la comparación de modelos**</span>
 
-* $\boldsymbol{R^2_p}$: el mejor modelo es aquel con el mayor valor en este estadístico, sin embargo, al ser una función no decreciente del número de predictoras, tiende a señalar al modelo con todas las predictoras.
+
+</br>
+
+###  $\boldsymbol{R^2_p}$
+
+El mejor modelo es aquel con el mayor valor en este estadístico, sin embargo, al ser una función no decreciente del número de predictoras, tiende a señalar al modelo con todas las predictoras.
 
    Con el fin de resolver esta dificultad, se busca un modelo con un menor número de variables cuyo $R^2$ no cambie significativamente al aumentar el número de predictoras.
 
@@ -70,7 +75,7 @@ knitr::include_graphics("img/diagrama2.png")
 Fuente: Mongomery et al. (2002)
 </center>
 
-</br>
+</br></br>
 
 * $\boldsymbol{R_{\textbf{adj,p}}^2}$ (o $\textbf{MSE}_{\boldsymbol{p}}$): el mejor modelo es aquel con mayor (menor) valor en este estadístico.
 
@@ -84,10 +89,12 @@ knitr::include_graphics("img/diagrama3.png")
 Fuente: Mongomery et al. (2002)
 </center>
 
-</br>
+</br></br>
 
 
-* **$\boldsymbol{C_p}$ de Mallows**: el mejor modelo es aquél para el cual $C_p$ es el más pequeño posible (es decir, el modelo con el menor número de variables predictoras posible) y tal que la diferencia $\vert C_p - p\vert$ es mínima, con $p$ igual al número de parámetros del modelo considerado, incluyendo el intercepto.
+### **$\boldsymbol{C_p}$ de Mallows**
+
+El mejor modelo es aquél para el cual $C_p$ es el más pequeño posible (es decir, el modelo con el menor número de variables predictoras posible) y tal que la diferencia $\vert C_p - p\vert$ es mínima, con $p$ igual al número de parámetros del modelo considerado, incluyendo el intercepto.
 
 
 Este estadístico es una medida del sesgo en el modelo de regresión, es decir, de $E\left(\widehat{Y}_i\right) - \mu_i$, y es tal que a mayor sesgo, mayor $C_{p}$. Este estadístico se calcula como:
@@ -119,7 +126,9 @@ Fuente: Mongomery et al. (2002)
 
 </br></br>
 
-* **$\textbf{PRESS}_{\boldsymbol{p}}$ o suma de cuadrados de predicción**: mide qué también el uso de los valores ajustados por un submodelo puede predecir las respuestas observadas. Mientras menor sea esta medida, mejor se considera el modelo. 
+### **$\textbf{PRESS}_{\boldsymbol{p}}$**
+
+Tambienllamado  suma de cuadrados de predicción, mide qué también el uso de los valores ajustados por un submodelo puede predecir las respuestas observadas. Mientras menor sea esta medida, mejor se considera el modelo. 
 
 </br>
 
@@ -136,7 +145,7 @@ Si se usan dos o más criterios de selección de modelos, es posible que cada cr
 
 </br></br>
 
-## **Método paso a paso o Stepwise**
+## <span style="color:#034a94"> **Método paso a paso o Stepwise**</span>
 
 </br></br>
 
@@ -144,19 +153,19 @@ Este método selecciona las variables paso a paso. En cada paso puede incorporar
 
 </br>
 
-Paso 1: Incluye la variable más correlacionada con la variable dependiente, validando el criterio de inclusión. 
+**Paso 1**: Incluye la variable más correlacionada con la variable dependiente, validando el criterio de inclusión. 
 
 </br>
 
-Paso 2:  Se incluye en el modelo una segunda variable con el mayor coeficiente de correlación parcial con la variable dependiente, excluida la variable introducida en el primer paso, validando el criterio de inclusión. 
+**Paso 2**:  Se incluye en el modelo una segunda variable con el mayor coeficiente de correlación parcial con la variable dependiente, excluida la variable introducida en el primer paso, validando el criterio de inclusión. 
 
 </br>
 
-Paso 3:  Se incluye la variable con mayor coeficiente de correlación parcial con la variable dependiente, excluidas las dos variables que estan en el modelo, validando el criterio de inclusión. 
+**Paso 3**:  Se incluye la variable con mayor coeficiente de correlación parcial con la variable dependiente, excluidas las dos variables que estan en el modelo, validando el criterio de inclusión. 
 
 </br>
 
-Paso 4 : Cuando al verificar el criterio de inclusión y 
+**Paso 4** : Cuando al verificar el criterio de inclusión y 
 
 </br>
 

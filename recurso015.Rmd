@@ -17,7 +17,7 @@ A continuación se revisan una serie de propiedades y conceptos de algebra relac
 
 </br></br>
 
-# **Algunas definiciones básicas en teoría matricial**
+# <span style="color:#034a94"> **Algunas definiciones básicas en teoría matricial**</span>
 
 </br>
 
@@ -100,7 +100,7 @@ se le llama forma cuadrática de $\boldsymbol{x}$, donde $a_{ij}$ es la $ij$-és
 </br></br></br>
 
 
-# **Algunas propiedades de derivadas vectoriales o matriciales**
+# <span style="color:#034a94"> **Algunas propiedades de derivadas vectoriales o matriciales**</span>
 
 </br>
 
@@ -132,7 +132,7 @@ Entonces:
 
 </br></br></br>
 
-# **Algunos resultados distribucionales para vectores aleatorios**
+# <span style="color:#034a94"> **Algunos resultados distribucionales para vectores aleatorios**</span>
 
 </br>
 
@@ -174,7 +174,8 @@ $$
 </br>
 
 <div class="content-box-gray">
-### **Nota:** 
+
+### <span style="color:#FF7F00"> **Nota**</span>
 
 Si $\boldsymbol{\Sigma_y} = \sigma^2\boldsymbol{I}$, entonces $\boldsymbol{U}$ y $\boldsymbol{W}$ son independientes si $\boldsymbol{BA} = \boldsymbol{0}$.
 </div>
@@ -186,7 +187,7 @@ Si $\boldsymbol{\Sigma_y} = \sigma^2\boldsymbol{I}$, entonces $\boldsymbol{U}$ y
 </br>
 
 <div class="content-box-gray">
-### **Nota:** 
+### <span style="color:#FF7F00"> **Nota**</span>
 
 Si $\boldsymbol{\Sigma_y} = \sigma^2\boldsymbol{I}$, entonces $\boldsymbol{U}$ y $\boldsymbol{V}$ son independientes si $\boldsymbol{AB} = \boldsymbol{0}$.
 </div>

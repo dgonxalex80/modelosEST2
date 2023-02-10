@@ -14,7 +14,7 @@ data("creditos")
 </br></br>
 
 
-## **Causas de la multicolinealidad**
+## <span style="color:#034a94">**Causas de la multicolinealidad**</span>
 
 </br>
 
@@ -56,7 +56,7 @@ Algunas de las causas más comunes de la multicolinealidad son:
 
 </br></br></br>
 
-## **Efectos de la multicolinealidad**
+## <span style="color:#034a94">**Efectos de la multicolinealidad**</span>
 
 </br>
 
@@ -78,7 +78,9 @@ donde $R_j^2$ es el coeficiente de determinación muestral obtenido de una regre
 
 2. **$\boldsymbol{\widehat{\beta}_j}$ muy grandes en términos absolutos:** esto se manifiesta en una traza muy grande de la matriz $\left(\boldsymbol{X}'\boldsymbol{X}\right)^{-1}$, donde: 
 
-$\text{traza}\left(\boldsymbol{X}'\boldsymbol{X}\right)^{-1} = \sum_{j = 1}^{p} \frac{1}{\lambda_j},\ \lambda_j > 0$ es el $j$-ésimo valor propio (usualmente ordenados de mayor a menor) de la matriz $\boldsymbol{X}'\boldsymbol{X}$.
+$$\text{traza}\left(\boldsymbol{X}'\boldsymbol{X}\right)^{-1} = \sum_{j = 1}^{p} \frac{1}{\lambda_j}$$  
+
+y  $\lambda_j > 0$ es el $j$-ésimo valor propio (usualmente ordenados de mayor a menor) de la matriz $\boldsymbol{X}'\boldsymbol{X}$.
 
 </br>
 

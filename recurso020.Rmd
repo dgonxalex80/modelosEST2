@@ -19,7 +19,7 @@ c4="#686868"
 
 </br></br></br>
 
-# **Notación** 
+# <span style="color:#034a94">**Notación**</span> 
 
 Para facilitar la notación y el desarrollo de algunas pruebas se utiliza con frecuencia una escritura del modelo en **forma matricial**, 
 
@@ -49,7 +49,7 @@ $$\left[\begin{array}{c} Y_1\\ Y_2\\ \vdots\\ Y_n\end{array}\right] =
 
 </br></br></br>
 
-## **Vectores aleatorios**
+## <span style="color:#034a94">**Vectores aleatorios**</br>
 
 </br>
 <div class="content-box-blue">
@@ -83,7 +83,7 @@ $$
 </br></br>
 
 <div class="content-box-yellow">
-### **Nota**
+### <span style="color:#FF7F00"> **Nota**</span>
 
 Observe que en la matriz $\boldsymbol{\Sigma_y}$ los elementos:
 
@@ -109,7 +109,7 @@ $$
 
 <div class="content-box-gray">
 
-**Resumen**
+### <span style="color:#FF7F00"> **Resumen**</span>
 
 En resumen, la matriz de varianzas-covarianzas asociada a un vector aleatorio es una matriz:
 
@@ -123,7 +123,7 @@ En resumen, la matriz de varianzas-covarianzas asociada a un vector aleatorio es
 
 </br></br>
 
-## **Algunas propiedades de $E\left[y\right]$ y  $V[y]$**
+## <span style="color:#034a94">**Algunas propiedades de $E\left[y\right]$ y  $V[y]$**</span>
 
 </br>
 
@@ -146,7 +146,7 @@ Sean $\boldsymbol{A}$ una matriz $m\times n$ de constantes y $\boldsymbol{b}$ un
 </br></br>
 
 <div class="content-box-yellow">
-### **Nota**
+### <span style="color:#FF7F00"> **Nota**</span>
 
 Observe que se conservan las propiedades de la esperanza y la varianza del caso univariado, por ejemplo.
 

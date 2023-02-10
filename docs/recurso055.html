@@ -386,11 +386,13 @@ $(document).ready(function () {
 
 <p></br></br></p>
 <div id="indicadores-de-bondad-de-ajuste" class="section level2">
-<h2><strong>Indicadores de bondad de ajuste</strong></h2>
+<h2><span style="color:#034a94"><strong>Indicadores de bondad de
+ajuste</strong></span></h2>
 <p></br></br></p>
 </div>
 <div id="falta-de-ajuste-en-el-modelo-de-rlm" class="section level2">
-<h2><strong>Falta de ajuste en el modelo de RLM</strong></h2>
+<h2><span style="color:#034a94"><strong>Falta de ajuste en el modelo de
+RLM</strong></span></h2>
 <p></br></p>
 <p>La falta de ajuste también puede ser evaluada y para el modelo de
 regresión múltiple se quiere saber si</p>
@@ -421,8 +423,10 @@ descompocisión de la SSE</p>
 <p></br></p>
 <p>El procedimiento de prueba se resume en la siguiente tabla:</p>
 <p></br></br></p>
-<p><strong>ANOVA con prueba de falta de ajuste en el modelo de
-RLM</strong></p>
+<div id="anova-con-prueba-de-falta-de-ajuste-en-el-modelo-de-rlm"
+class="section level3">
+<h3><strong>ANOVA con prueba de falta de ajuste en el modelo de
+RLM</strong></h3>
 <p></br></p>
 <table>
 <colgroup>
@@ -498,8 +502,10 @@ class="math inline">\({F_0 &gt; f_{\alpha, m - p, n - m}}\)</span>. En
 tal caso se concluye que la superficie de respuesta no es apropiada.</p>
 <p></br></br></br></p>
 </div>
+</div>
 <div id="medidas-remediales" class="section level2">
-<h2><strong>Medidas remediales</strong></h2>
+<h2><span style="color:#034a94"><strong>Medidas
+remediales</strong></span></h2>
 <p></br></p>
 <p>Las medidas remediales descritas en el caso de RLS también son
 aplicables en RLM. Con el fin de superar las deficiencias del modelo se
@@ -520,8 +526,8 @@ sin embargo, tales modelos están más allá del alcance de este curso.</p>
 </div>
 <div id="identificación-de-observaciones-extremas-en-el-modelo-de-rlm"
 class="section level2">
-<h2><strong>Identificación de observaciones extremas en el modelo de
-RLM</strong></h2>
+<h2><span style="color:#034a94"><strong>Identificación de observaciones
+extremas en el modelo de RLM</strong></span></h2>
 <p></br></p>
 <p>Además de la validación de supuestos en los errores de un modelo de
 RLM, se debe chequear la presencia de observaciones extremas, tales
@@ -533,10 +539,10 @@ como:</p>
 <li><p>Observaciones influenciales</p></li>
 </ul>
 <p></br></br></br></p>
-<p></br></br></br></p>
 </div>
 <div id="observaciones-atípicas" class="section level2">
-<h2><strong>Observaciones atípicas</strong></h2>
+<h2><span style="color:#034a94"><strong>Observaciones
+atípicas</strong></span></h2>
 <p></br></p>
 <p>Una observación <strong>atípica</strong> (o <strong>outlier</strong>)
 es aquella que está separada (en su valor de la respuesta <span
@@ -565,7 +571,8 @@ de confianza reales menores de lo esperado.</p>
 <p></br></br></br></p>
 </div>
 <div id="puntos-de-balanceo" class="section level2">
-<h2><strong>Puntos de balanceo</strong></h2>
+<h2><span style="color:#034a94"><strong>Puntos de
+balanceo</strong></span></h2>
 <p></br></p>
 <p>Un <strong>punto de balanceo</strong> es una observación en el
 espacio de las predictoras, alejada del resto de la muestra y que puede
@@ -616,7 +623,8 @@ grandes probablemente serán influenciales.</li>
 <p></br></br></br></p>
 </div>
 <div id="observaciones-influenciales" class="section level2">
-<h2><strong>Observaciones influenciales</strong></h2>
+<h2><span style="color:#034a94"><strong>Observaciones
+influenciales</strong></span></h2>
 <p></br></p>
 <p>Una observación es <strong>influencial</strong> si tiene un impacto
 notable sobre los coeficientes de regresión ajustados, esto es, una
@@ -675,8 +683,8 @@ la observación <span class="math inline">\(i\)</span> tiene influencia
 sobre el vector de parámetros estimados <span
 class="math inline">\(\boldsymbol{\widehat{\beta}}\)</span>.</p>
 <p></br></br></p>
-<div class="content-box-gray">
-<p><strong>NOTAS</strong></p>
+<div id="notas" class="section level3 content-box-gray">
+<h3><span style="color:#FF7F00"> <strong>Notas</strong></span></h3>
 <ul>
 <li><p>Si <span class="math inline">\(D_i = f_{0.5, p, n - p}\)</span>
 entonces al eliminar el punto <span class="math inline">\(i\)</span> se
@@ -743,8 +751,8 @@ class="math inline">\(i\)</span>.</p>
 class="math inline">\(\vert \text{DFBETAS}_{j\left(i\right)}\vert &gt;
 2/\sqrt{n}\)</span>.</p>
 <p></br></p>
-<div class="content-box-gray">
-<p><strong>NOTA:</strong></p>
+<div id="nota" class="section level3 content-box-gray">
+<h3><span style="color:#FF7F00"> <strong>Nota</strong></span></h3>
 <p>Tanto los <span class="math inline">\(D_i\)</span>, como los DFFITS y
 los DFBETAS se pueden afectar tanto por un error de ajuste grande como
 por un gran balanceo, por eso, los puntos que sean detectados por estos

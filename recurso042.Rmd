@@ -12,7 +12,7 @@ data("creditos")
 ```
 </br></br>
 
-## **Prueba de la significancia** 
+## <span style="color:#034a94"> **Prueba de la significancia**</span> 
 
 </br>
 
@@ -49,7 +49,7 @@ $$\text{SSR}\left(A\vert B\right) = \text{SSR}\left(A \cup B\right) - \text{SSR}
 
 <div class="content-box-yellow">
 
-### **Ejemplo** 
+### <span style="color:#FF7F00"> **Ejemplo**</span>
 
 Suponga un modelo de regresión múltiple de una respuesta $Y$ en función de tres variables predictoras $X_1, X_2, X_3$, esto es,
 
@@ -127,7 +127,7 @@ $$
 </br></br>
 
 <div class="content-box-yellow">
-### **Ejemplo**
+### <span style="color:#FF7F00"> **Ejemplo**</span>
 
 </br>
 
@@ -188,7 +188,7 @@ A un nivel de significancia $\alpha$, el criterio de rechazo es $F_0 > f_{\alpha
 </br></br>
 
 <div class="content-box-yellow">
-### **Ejemplo:**
+### <span style="color:#FF7F00"> **Ejemplo**</span>
 
 En el modelo $Y = \beta_0 + \beta_1X_1 + \beta_2X_2 + \beta_3X_3 + \beta_4X_4 + \beta_5X_5 + \varepsilon$, para probar la hipótesis:
 $$
@@ -213,8 +213,9 @@ y con un nivel de significancia $\alpha$ el criterio de rechazo de la hipótesis
 
 <!-- ## **Uso de SSextra para la prueba de significancia de un coeficiente individual** -->
 
-<H2> **Uso de SSextra para la prueba de significancia de un coeficiente individual** </H2>
-
+<H2> 
+<span style="color:#034a94">**Uso de SSextra para la prueba de significancia de un coeficiente individual**</span> 
+</H2>
 </br>
 
 En un modelo de RLM con $k$ predictoras, esta prueba establece que
@@ -248,7 +249,9 @@ Por otro lado, también se puede ver la prueba de significancia de la regresión
 
 
 
-<H2> **Prueba de la hipótesis lineal general**</H2>
+<H2> 
+<span style="color:#034a94">**Prueba de la hipótesis lineal general**</span>
+</H2>
 
 </br>
 
@@ -334,7 +337,9 @@ Veamos, ejemplos de cómo trabaja este procedimiento de prueba.
 
 <div class="content-box-yellow">
 
-<H3>**Ejemplo**</H3>
+<H3>
+<span style="color:#FF7F00"> **Ejemplo**</span>
+</H3>
 
 Suponga un modelo de RLM con $k = 4$ variables predictoras, entonces se puede formular la siguiente prueba de hipótesis:
 $$H_0: \beta_1 = \beta _2,\ \beta_3 = \beta_4$$
@@ -414,7 +419,10 @@ $$
 </br></br>
 
 <div class="content-box-gray">
-**NOTA:** 
+<H3>
+<span style="color:#FF7F00"> **Nota**</span>
+</H3>
+ 
 
 Observe que en el denominador se encuentra el cuadrado medio del modelo completo que tiene $n - 5$ grados de libertad.
 
@@ -424,7 +432,10 @@ Bajo $H_0$ y los supuestos sobre los errores, $F_0\sim f_{2, n - 5}$. Se rechaza
 </br></br>
 
 <div class="content-box-yellow">
-<H3>**Ejemplo**</H3>
+
+<H3>
+<span style="color:#FF7F00"> **Ejemplo**</span>
+</H3>
 
 Bajo el mismo modelo de RLM con $k=4$ considere la siguiente prueba:
 
@@ -509,7 +520,7 @@ Bajo $H_0$ y los supuestos sobre los errores, $F_0\sim f_{3, n - 5}$. Se rechaza
 </br></br>
 
 <div class="content-box-yellow">
-### **Ejemplo**
+### <span style="color:#FF7F00"> **Ejemplo**</span>
 
 </br>
 
@@ -523,7 +534,7 @@ $$
 </br></br>
 
 <div class="content-box-gray">
-### **Nota**
+### <span style="color:#FF7F00"> **Nota**</span>
 
 </br>
 
@@ -597,19 +608,15 @@ Por lo tanto, bajo $H_0$ y los supuestos sobre los errores se cumple que, $F_0 \
 
 
 <div class="content-box-gray">
-### **Reto** 
+### <span style="color:#FF7F00"> **Retos**</span>
 
-Comprobar que una prueba de significancia individual o para un subconjunto de coeficientes de regresión son casos particulares de la prueba de hipótesis lineal general.)
-</div>
+* Comprobar que una prueba de significancia individual o para un subconjunto de coeficientes de regresión son casos particulares de la prueba de hipótesis lineal general.)
+
 
 </br></br>
 
-<div class="content-box-gray">
-### **NOTA:** 
 
-</br>
-
-También es posible probar hipótesis lineales generales del tipo
+* También es posible probar hipótesis lineales generales del tipo
 $H_0: \boldsymbol{L\beta} = \boldsymbol{c}\ \text{ vs. }\ H_1: \boldsymbol{L\beta} \neq \boldsymbol{c}$, donde $\boldsymbol{c}$ es un vector de constantes arbitrario.
 </div>
 

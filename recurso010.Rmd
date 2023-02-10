@@ -14,7 +14,7 @@ data("creditos")
 
 </br></br>
 
-# **Exploración de posibles asociaciones**
+# <span style="color:#034a94">**Exploración de posibles asociaciones**</span>
 
 </br>
 
@@ -37,7 +37,9 @@ Es útil también acompañar este análisis gráfico con la matriz de correlacio
 
 </br></br></br>
 
-### **Ejemplo**
+<div class="content-box-yellow">
+
+### <span style="color:#FF7F00"> **Ejemplo**</span>
 
  </br>
  
@@ -55,6 +57,9 @@ La base ausentismo  contenida en paqueteMOD contiene las variables
 * **antg**   : antiguedad en la empresa
 * **sala**   : salario que debenga
 
+</div>
+
+El diagrama de dispersión permite visualizar la relación lineal que puede existir entre dos variables numéticas, para ello  se construye la siguiente matriz de diagramas.
 
 </br></br>
 
@@ -113,8 +118,14 @@ ggpairs(data, title=" ")
 </br></br>
 
 * **Matrices de diagramas de dispersión:** Simple (abajo izquierda), 
+
+</br>
+
 * **Diagrama de desnsidad** en la diagonal
-* **Correlaciones**  parte superior derecha de la matriz, acompañadas de su significancia ($Ho: \rho = 0$ vs $Ha: \rho \neq 0$)
+
+</br>
+
+* **Correlaciones**  parte superior derecha de la matriz, acompañadas de su significancia $(Ho: \rho = 0 \text{ vs } Ha: \rho \neq 0)$
 
 </br>
 
@@ -128,7 +139,7 @@ Tambien es importante notar que entre las variables independientes existen fuert
 
 <div class="content-box-yellow">
 
-### **Nota**
+### <span style="color:#FF7F00"> **Nota**</span>
 
 Las variables independientes  deben de ser independientes unas de otras, por tanto sus correlaciones deberán ser no significativas al realizar pruebas de hipótesis ( $Ho: \rho = 0$).
 

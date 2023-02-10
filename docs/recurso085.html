@@ -387,7 +387,8 @@ $(document).ready(function () {
 <p></br></br></p>
 <p></br></br></p>
 <div id="selección-de-variables" class="section level2">
-<h2><strong>Selección de variables</strong></h2>
+<h2><span style="color:#034a94"><strong>Selección de
+variables</strong></span></h2>
 <p></br></p>
 <p>En algunos estudios observacionales o exploratorios se parte de un
 modelo de regresión en el que se considera un conjunto grande de
@@ -405,7 +406,8 @@ variables.</p>
 </div>
 <div id="método-de-todas-las-regresiones-posibles"
 class="section level2">
-<h2><strong>Método de todas las regresiones posibles</strong></h2>
+<h2><span style="color:#034a94"><strong>Método de todas las regresiones
+posibles</strong></span></h2>
 <p></br></p>
 <p>Este procedimiento consiste en correr todos los <span
 class="math inline">\(2^k - 1\)</span> modelos posibles (con intercepto)
@@ -431,19 +433,19 @@ predictoras,</p>
 </div>
 <div id="criterios-estadísticos-en-la-comparación-de-modelos"
 class="section level2">
-<h2><strong>Criterios estadísticos en la comparación de
-modelos</strong></h2>
-<ul>
-<li><p><span class="math inline">\(\boldsymbol{R^2_p}\)</span>: el mejor
-modelo es aquel con el mayor valor en este estadístico, sin embargo, al
-ser una función no decreciente del número de predictoras, tiende a
-señalar al modelo con todas las predictoras.</p>
+<h2><span style="color:#034a94"><strong>Criterios estadísticos en la
+comparación de modelos</strong></span></h2>
+<p></br></p>
+<div id="boldsymbolr2_p" class="section level3">
+<h3><span class="math inline">\(\boldsymbol{R^2_p}\)</span></h3>
+<p>El mejor modelo es aquel con el mayor valor en este estadístico, sin
+embargo, al ser una función no decreciente del número de predictoras,
+tiende a señalar al modelo con todas las predictoras.</p>
 <p>Con el fin de resolver esta dificultad, se busca un modelo con un
 menor número de variables cuyo <span class="math inline">\(R^2\)</span>
-no cambie significativamente al aumentar el número de
-predictoras.</p></li>
-</ul>
+no cambie significativamente al aumentar el número de predictoras.</p>
 <p></br></br></p>
+</div>
 <div id="ilustración-criterio-boldsymbolr2_p" class="section level3">
 <h3><strong>Ilustración criterio <span
 class="math inline">\(\boldsymbol{R^2_p}\)</span></strong></h3>
@@ -452,7 +454,7 @@ class="math inline">\(\boldsymbol{R^2_p}\)</span></strong></h3>
 <p><img src="img/diagrama2.png" width="70%" style="display: block; margin: auto;" /></p>
 Fuente: Mongomery et al. (2002)
 </center>
-<p></br></p>
+<p></br></br></p>
 <ul>
 <li><span
 class="math inline">\(\boldsymbol{R_{\textbf{adj,p}}^2}\)</span> (o
@@ -464,17 +466,18 @@ mejor modelo es aquel con mayor (menor) valor en este estadístico.</li>
 <p><img src="img/diagrama3.png" width="70%" style="display: block; margin: auto;" /></p>
 Fuente: Mongomery et al. (2002)
 </center>
-<p></br></p>
-<ul>
-<li><strong><span class="math inline">\(\boldsymbol{C_p}\)</span> de
-Mallows</strong>: el mejor modelo es aquél para el cual <span
+<p></br></br></p>
+</div>
+<div id="boldsymbolc_p-de-mallows" class="section level3">
+<h3><strong><span class="math inline">\(\boldsymbol{C_p}\)</span> de
+Mallows</strong></h3>
+<p>El mejor modelo es aquél para el cual <span
 class="math inline">\(C_p\)</span> es el más pequeño posible (es decir,
 el modelo con el menor número de variables predictoras posible) y tal
 que la diferencia <span class="math inline">\(\vert C_p -
 p\vert\)</span> es mínima, con <span class="math inline">\(p\)</span>
 igual al número de parámetros del modelo considerado, incluyendo el
-intercepto.</li>
-</ul>
+intercepto.</p>
 <p>Este estadístico es una medida del sesgo en el modelo de regresión,
 es decir, de <span class="math inline">\(E\left(\widehat{Y}_i\right) -
 \mu_i\)</span>, y es tal que a mayor sesgo, mayor <span
@@ -500,13 +503,14 @@ class="math inline">\(\boldsymbol{C_p}\)</span></strong></p>
 Fuente: Mongomery et al. (2002)
 </center>
 <p></br></br></p>
-<ul>
-<li><strong><span
-class="math inline">\(\textbf{PRESS}_{\boldsymbol{p}}\)</span> o suma de
-cuadrados de predicción</strong>: mide qué también el uso de los valores
-ajustados por un submodelo puede predecir las respuestas observadas.
-Mientras menor sea esta medida, mejor se considera el modelo.</li>
-</ul>
+</div>
+<div id="textbfpress_boldsymbolp" class="section level3">
+<h3><strong><span
+class="math inline">\(\textbf{PRESS}_{\boldsymbol{p}}\)</span></strong></h3>
+<p>Tambienllamado suma de cuadrados de predicción, mide qué también el
+uso de los valores ajustados por un submodelo puede predecir las
+respuestas observadas. Mientras menor sea esta medida, mejor se
+considera el modelo.</p>
 <p></br></p>
 <p>El PRESS es como un SSE, pero en el cual el valor ajustado para cada
 observación <span class="math inline">\(Y_i\)</span> se halla estimando
@@ -537,25 +541,28 @@ en el ámbito en el cual está inmerso el problema.</p>
 </div>
 </div>
 <div id="método-paso-a-paso-o-stepwise" class="section level2">
-<h2><strong>Método paso a paso o Stepwise</strong></h2>
+<h2><span style="color:#034a94"> <strong>Método paso a paso o
+Stepwise</strong></span></h2>
 <p></br></br></p>
 <p>Este método selecciona las variables paso a paso. En cada paso puede
 incorporar una variable o eliminarla segun criterio de inclusión o
 exclusión.</p>
 <p></br></p>
-<p>Paso 1: Incluye la variable más correlacionada con la variable
-dependiente, validando el criterio de inclusión.</p>
+<p><strong>Paso 1</strong>: Incluye la variable más correlacionada con
+la variable dependiente, validando el criterio de inclusión.</p>
 <p></br></p>
-<p>Paso 2: Se incluye en el modelo una segunda variable con el mayor
-coeficiente de correlación parcial con la variable dependiente, excluida
-la variable introducida en el primer paso, validando el criterio de
+<p><strong>Paso 2</strong>: Se incluye en el modelo una segunda variable
+con el mayor coeficiente de correlación parcial con la variable
+dependiente, excluida la variable introducida en el primer paso,
+validando el criterio de inclusión.</p>
+<p></br></p>
+<p><strong>Paso 3</strong>: Se incluye la variable con mayor coeficiente
+de correlación parcial con la variable dependiente, excluidas las dos
+variables que estan en el modelo, validando el criterio de
 inclusión.</p>
 <p></br></p>
-<p>Paso 3: Se incluye la variable con mayor coeficiente de correlación
-parcial con la variable dependiente, excluidas las dos variables que
-estan en el modelo, validando el criterio de inclusión.</p>
-<p></br></p>
-<p>Paso 4 : Cuando al verificar el criterio de inclusión y</p>
+<p><strong>Paso 4</strong> : Cuando al verificar el criterio de
+inclusión y</p>
 <p></br></p>
 <p>Existen dos versiones del metodo, una hacia atraś, el cual parte
 incluye todas las variables independientes sin importar que tan

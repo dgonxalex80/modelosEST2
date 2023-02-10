@@ -13,7 +13,7 @@ data("creditos")
 
 </br></br>
 
-# **Algunas propiedades de $\widehat{\beta}$**
+# <span style="color:#034a94">**Algunas propiedades de $\widehat{\beta}$**</span>
 
 </br>
 
@@ -67,7 +67,7 @@ La cual tiene en su diagonal principal a las varianzas de los estimadores de los
 </br></br>
 
 <div class="content-box-yellow">
-### **Nota**
+### <span style="color:#FF7F00"> **Nota**</span>
 
 $\boldsymbol{\widehat\beta} = \boldsymbol{A}\boldsymbol{y}$ implica que cada parámetro estimado es una combinación lineal de las observaciones, así que $\widehat\beta_j$ es una variable aleatoria con distribución normal (ya que los $y_i$'s son normales).
 </div>
@@ -76,7 +76,7 @@ $\boldsymbol{\widehat\beta} = \boldsymbol{A}\boldsymbol{y}$ implica que cada par
 
 <div class="content-box-gray">
 
-### **Resumen**
+### <span style="color:#FF7F00"> **Resumen**</span>
 
 $$\boldsymbol{\widehat\beta}\sim\boldsymbol{N}\left(\boldsymbol{\beta}, \, \sigma^2\left(\boldsymbol{X}'\boldsymbol{X}\right)^{-1}\right),$$
 </div>

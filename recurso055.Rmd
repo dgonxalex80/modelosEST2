@@ -13,7 +13,7 @@ data("creditos")
 
 </br></br>
 
-## **Indicadores de bondad de ajuste**
+## <span style="color:#034a94">**Indicadores de bondad de ajuste**</span>
 
 </br></br>
 
@@ -21,7 +21,7 @@ data("creditos")
 
 
 
-## **Falta de ajuste en el modelo de RLM**
+## <span style="color:#034a94">**Falta de ajuste en el modelo de RLM**</span>
 
 </br>
 
@@ -58,7 +58,7 @@ El procedimiento de prueba se resume en la siguiente tabla:
 
 </br></br>
 
-**ANOVA con prueba de falta de ajuste en el modelo de RLM**
+### **ANOVA con prueba de falta de ajuste en el modelo de RLM**
                                
 </br>
 
@@ -74,7 +74,7 @@ Se rechaza $H_0$ a un nivel de significancia $\alpha$ si ${F_0 > f_{\alpha, m - 
 
 </br></br></br>
 
-## **Medidas remediales**
+## <span style="color:#034a94">**Medidas remediales**</span>
 
 </br>
 
@@ -90,7 +90,7 @@ Si las desviaciones respecto al supuesto de normalidad son severas, y ninguna tr
 
 </br></br></br>
 
-## **Identificación de observaciones extremas en el modelo de RLM**
+## <span style="color:#034a94">**Identificación de observaciones extremas en el modelo de RLM**</span>
 
 </br>
 
@@ -107,9 +107,8 @@ Además de la validación de supuestos en los errores de un modelo de RLM, se de
 </br></br></br>
 
 
-</br></br></br>
 
-## **Observaciones atípicas**
+## <span style="color:#034a94">**Observaciones atípicas**</span>
 
 </br>
 
@@ -137,7 +136,7 @@ Muchos **outliers** en los datos pueden causar niveles de confianza reales menor
 
 </br></br></br>
 
-## **Puntos de balanceo**
+## <span style="color:#034a94">**Puntos de balanceo**</span>
 
 </br>
 
@@ -181,7 +180,7 @@ con $p$ el número de variables predictoras del modelo de RLM.
 
 </br></br></br>
 
-## **Observaciones influenciales**
+## <span style="color:#034a94">**Observaciones influenciales**</span>
 
 </br>
 
@@ -231,7 +230,7 @@ donde, $\boldsymbol{\widehat{\beta}}_{\left(i\right)}$ es el vector de parámetr
 
 
 <div class="content-box-gray">
-**NOTAS**
+### <span style="color:#FF7F00"> **Notas**</span>
 
 * Si $D_i = f_{0.5, p, n - p}$ entonces al eliminar el punto $i$ se movería $\boldsymbol{\widehat{\beta}_{\left(i\right)}}$ hacia la frontera de una región de confianza aproximada del 50\% para $\boldsymbol{\beta}$, basándose en el conjunto completo de datos, lo cual es un desplazamiento grande e indica que el estimador por mínimos cuadrados es sensible al $i$-ésimo punto de datos.
 
@@ -270,7 +269,7 @@ Una observación será **influencial** si $\vert \text{DFBETAS}_{j\left(i\right)
 </br>
 
 <div class="content-box-gray">
-**NOTA:** 
+### <span style="color:#FF7F00"> **Nota**</span>
 
 Tanto los $D_i$, como los DFFITS y los DFBETAS se pueden afectar tanto por un error de ajuste grande como por un gran balanceo, por eso, los puntos que sean detectados por estos criterios deben ser investigados.
 
