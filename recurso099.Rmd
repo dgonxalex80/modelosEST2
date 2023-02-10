@@ -1,0 +1,78 @@
+---
+title: <span style="color:#034a94"> **R - Analisis descriptivo**</span>
+output: html_document
+css: style.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(paqueteMOD)
+data("arboles1")
+arboles1$D1 = as.numeric(arboles1$mg=="GENOTIPO_2")
+arboles1$D2 = as.numeric(arboles1$finca=="FINCA_2")
+arboles1$D3 = as.numeric(arboles1$finca=="FINCA_3")
+arboles1$peso = as.numeric(arboles1$peso)
+arboles1$diametro = as.numeric(arboles1$diametro)
+arboles1$altura = as.numeric(arboles1$altura)
+
+
+library(tidyverse)
+library(lmtest) # diagnosticos de modelos lineales
+library(sandwich) # errores estandar robustos
+library(ggeffects) # efectos y predicciones en modelos de regresion
+library(modelsummary) # tablas de regresion
+
+#install.packages("bbmle")
+#install.packages("stats4")
+
+
+```
+
+
+</br></br>
+
+## **Exploración previa**
+
+En esta etapa se realiza una exploración de la data, tipo de variables, datos faltantes, datos atípicos. Podemos realizarlo con la función summary() o con 
+</br>
+
+```{r, warning=FALSE, message=FALSE}
+library(paqueteMOD)
+library(tidyverse)
+library(modelsummary)
+data("arboles1")
+arboles1$D1 = as.numeric(arboles1$mg=="GENOTIPO_2")
+arboles1$D2 = as.numeric(arboles1$finca=="FINCA_2")
+arboles1$D3 = as.numeric(arboles1$finca=="FINCA_3")
+arboles1$peso = as.numeric(arboles1$peso)
+arboles1$diametro = as.numeric(arboles1$diametro)
+arboles1$altura = as.numeric(arboles1$altura)
+
+summary(arboles1)
+# modelsummary::datasummary_skim(arboles1)
+# library(stats4) # para la función mle
+# library(bbmle) # para la función mle2
+```
+</br></br>
+
+
+```{r}
+glimpse(arboles1)
+```
+
+
+```{r, message=FALSE, warning=FALSE}
+library(Hmisc)
+describe(arboles1)
+```
+
+
+
+## **Asociación entre las variables cuantitativas**
+
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.align='center'}
+library(GGally)
+ggpairs(arboles1[,3:5], title=" ") 
+```

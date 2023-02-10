@@ -11,7 +11,7 @@
 
 
 
-<title> R - Validación cruzada</title>
+<title> R - Validación del modelo</title>
 
 <script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -353,6 +353,9 @@ $(document).ready(function () {
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="recurso099.html">Análisis previo</a>
+    </li>
+    <li>
       <a href="recurso100.html">Estimación MCO</a>
     </li>
     <li>
@@ -376,12 +379,356 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore"><span style="color:#034a94"> <strong>R -
-Validación cruzada</strong></span></h1>
+Validación del modelo</strong></span></h1>
 
 </div>
 
 
 <p></br></br></p>
+<p></br></br></p>
+<div id="exploración-previa" class="section level2">
+<h2><strong>Exploración previa</strong></h2>
+<p></br></p>
+<pre class="r"><code>library(paqueteMOD)
+library(tidyverse)
+library(modelsummary)
+data(&quot;arboles1&quot;)
+arboles1$D1 = as.numeric(arboles1$mg==&quot;GENOTIPO_2&quot;)
+arboles1$D2 = as.numeric(arboles1$finca==&quot;FINCA_2&quot;)
+arboles1$D3 = as.numeric(arboles1$finca==&quot;FINCA_3&quot;)
+arboles1$peso = as.numeric(arboles1$peso)
+arboles1$diametro = as.numeric(arboles1$diametro)
+arboles1$altura = as.numeric(arboles1$altura)
+
+summary(arboles1)</code></pre>
+<pre><code>##     finca                mg                 peso          diametro    
+##  Length:90          Length:90          Min.   : 5.98   Min.   :2.200  
+##  Class :character   Class :character   1st Qu.:13.64   1st Qu.:4.525  
+##  Mode  :character   Mode  :character   Median :17.48   Median :5.400  
+##                                        Mean   :18.77   Mean   :5.446  
+##                                        3rd Qu.:22.80   3rd Qu.:6.500  
+##                                        Max.   :47.87   Max.   :8.800  
+##      altura             D1            D2               D3        
+##  Min.   : 3.300   Min.   :0.0   Min.   :0.0000   Min.   :0.0000  
+##  1st Qu.: 5.225   1st Qu.:0.0   1st Qu.:0.0000   1st Qu.:0.0000  
+##  Median : 6.450   Median :0.5   Median :0.0000   Median :0.0000  
+##  Mean   : 6.634   Mean   :0.5   Mean   :0.3333   Mean   :0.3333  
+##  3rd Qu.: 7.875   3rd Qu.:1.0   3rd Qu.:1.0000   3rd Qu.:1.0000  
+##  Max.   :11.300   Max.   :1.0   Max.   :1.0000   Max.   :1.0000</code></pre>
+<pre class="r"><code># modelsummary::datasummary_skim(arboles1)</code></pre>
+<p></br></br></p>
+</div>
+<div id="validación-simple" class="section level2">
+<h2><strong>Validación simple</strong></h2>
+<p></br></p>
+<p>`</p>
+<pre class="r"><code># Se seleccionan 196 índices aleatorios que formarán el training set. 
+set.seed(1)
+train &lt;- sample(x = 1:90, 90*0.6)
+
+
+modelo_train &lt;- lm(peso ~ diametro + altura + D2 + D3, data = arboles1, subset = train)
+summary(modelo_train)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = peso ~ diametro + altura + D2 + D3, data = arboles1, 
+##     subset = train)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -6.2439 -1.5659 -0.2644  1.7555 10.4622 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) -12.4815     1.8778  -6.647 2.34e-08 ***
+## diametro      4.4267     0.9069   4.881 1.16e-05 ***
+## altura        0.9197     0.6870   1.339  0.18685    
+## D2            0.5413     1.3024   0.416  0.67950    
+## D3            3.2834     1.2005   2.735  0.00866 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 3.243 on 49 degrees of freedom
+## Multiple R-squared:  0.8736, Adjusted R-squared:  0.8633 
+## F-statistic: 84.65 on 4 and 49 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p></br></br></p>
+<pre class="r"><code>predicciones &lt;- predict(object = modelo_train, newdata = arboles1[-train, ])
+error &lt;- mean((arboles1$peso[-train] - predicciones)^2)
+error</code></pre>
+<pre><code>## [1] 11.11746</code></pre>
+<p></br></br></p>
+<p>De acuerdo con <a
+href="https://rpubs.com/Joaquin_AR/238251#:~:text=Consiste%20en%20dividir%20los%20datos,como%20validaci%C3%B3n%20en%20cada%20iteraci%C3%B3n.">Joaquín
+Amat Rodrigo</a> la validación siple puede presentar algunas desventajas
+debido a la dependencia de la estimación de lerro y la elección de la
+muestra de entrenamiento.</p>
+<p></br></br></p>
+<pre class="r"><code>library(ggplot2)
+library(gridExtra)
+library(dplyr)
+
+cv_MSE &lt;- rep(NA,100)
+for (i in 1:100) {
+  train &lt;- sample(x = 1:90, 90*0.6)
+  modelo_train &lt;- lm(peso ~ diametro +  D3, data = arboles1, subset = train)
+  predicciones &lt;- predict(object = modelo_train, newdata = arboles1[-train, ])
+  cv_MSE[i] &lt;- mean((arboles1$peso[-train] - predicciones)^2)
+}
+
+p1 &lt;- ggplot(data = data.frame(cv_MSE = cv_MSE), aes(x = 1, y = cv_MSE)) +
+      geom_boxplot(outlier.shape = NA) +
+      geom_jitter(colour = c(&quot;firebrick3&quot;), width = 0.1) +
+      coord_flip() +
+      labs(title = &quot;Distribución del error de validación simple&quot;) +
+      theme_bw() +
+      theme(axis.title.x = element_blank())
+p1</code></pre>
+<p><img src="recurso120_files/figure-html/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p></br></br></p>
+</div>
+<div id="bootstrapping" class="section level2">
+<h2><strong>Bootstrapping</strong></h2>
+<p></br></p>
+<p>Este método permite estudiar la variabilidad de la estimación de los
+coeficientes de regresión lineal.</p>
+<p>El método consiste en tomar una muestra con repetición de la data y
+con ella estimar el modelo. Los coeficientes estimados son guardados en
+un vector por cada estimador, al que se le obtiene la media y la
+desviación estandar.</p>
+<p></br></br></p>
+<pre class="r"><code>#-------------------------------------------------------------------------------
+library(boot)
+# Se define la función que devuelve el estadístico de interés, los coeficientes
+# de regresión
+fun_coeficientes &lt;- function(data, index){
+  return(coef(lm(peso  ~ diametro + D3, data = arboles1, subset = index)))
+}
+
+# Se implementa un bucle que genere los modelos de forma iterativa y almacene
+# los coeficientes. El data frame Auto tiene 392 observaciones
+beta_0 &lt;- rep(NA,9999)
+beta_1 &lt;- rep(NA,9999)
+beta_2 &lt;- rep(NA,9999)
+
+for(i in 1:9999) {
+  coeficientes &lt;- fun_coeficientes(data = arboles1,
+                                   index = sample(1:90, 90, replace = TRUE))
+  beta_0[i] &lt;- coeficientes[1]
+  beta_1[i] &lt;- coeficientes[2]
+  beta_2[i] &lt;- coeficientes[3]
+  }
+# Se muestra la distribución de los coeficientes
+p0 &lt;- ggplot(data = data.frame(beta_0 = beta_0), aes(beta_0)) +
+  geom_histogram(colour = &quot;firebrick3&quot;) + 
+  theme_bw()
+p1 &lt;- ggplot(data = data.frame(beta_1 = beta_1), aes(beta_1)) +
+  geom_histogram(colour = &quot;firebrick3&quot;) +
+  theme_bw()
+p2 &lt;- ggplot(data = data.frame(beta_2 = beta_2), aes(beta_2)) +
+  geom_histogram(colour = &quot;firebrick3&quot;) +
+  theme_bw()
+
+grid.arrange(p0,p1,p2, ncol = 3, nrow=2,top = &quot;Bootstrap distribution de los coeficientes&quot;)</code></pre>
+<p><img src="recurso120_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p></br></br></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Coeficiente estimado</th>
+<th align="right">media</th>
+<th align="right">desviación estandar</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><span
+class="math inline">\(\widehat{\beta}_0\)</span></td>
+<td align="right">-10.01251</td>
+<td align="right">1.948114</td>
+</tr>
+<tr class="even">
+<td align="left"><span
+class="math inline">\(\widehat{\beta}_1\)</span></td>
+<td align="right">5.118228</td>
+<td align="right">0.3805767</td>
+</tr>
+<tr class="odd">
+<td align="left"><span
+class="math inline">\(\widehat{\beta}_2\)</span></td>
+<td align="right">2.616257</td>
+<td align="right">0.6410573</td>
+</tr>
+<tr class="even">
+<td align="left"><span
+class="math inline">\(\widehat{\beta}_3\)</span></td>
+<td align="right">0.54685</td>
+<td align="right">0.825865</td>
+</tr>
+</tbody>
+</table>
+<p></br></br></p>
+<p>Igual procedimiento se puede realiar con la función
+<code>boot</code></p>
+<p></br></p>
+<pre class="r"><code>library(boot)
+boot(data = arboles1, statistic = fun_coeficientes, R = 9999)</code></pre>
+<pre><code>## 
+## ORDINARY NONPARAMETRIC BOOTSTRAP
+## 
+## 
+## Call:
+## boot(data = arboles1, statistic = fun_coeficientes, R = 9999)
+## 
+## 
+## Bootstrap Statistics :
+##      original       bias    std. error
+## t1* -9.998769 -0.038639968   1.9837296
+## t2*  5.125354 -0.003195156   0.3864227
+## t3*  2.563446  0.054499682   0.6374615</code></pre>
+<p>Al comparar los resultados obtenidos por el remuestreo y las
+estimaciones del modelo se obtienen diferencias pequeñas</p>
+<p></br></br></p>
+<pre class="r"><code>summary(lm(peso ~ diametro +  D3, data = arboles1))$coef</code></pre>
+<pre><code>##              Estimate Std. Error   t value     Pr(&gt;|t|)
+## (Intercept) -9.998769  1.3563715 -7.371704 9.189463e-11
+## diametro     5.125354  0.2358231 21.733890 6.474284e-37
+## D3           2.563446  0.7222181  3.549407 6.253543e-04</code></pre>
+<pre class="r"><code>library(knitr)
+modelo4 &lt;- lm(peso ~ diametro + D3 , data = arboles1)
+modelo3 &lt;- lm(peso ~ diametro + D2 , data = arboles1)
+modelo2 &lt;- lm(peso ~ diametro + D2 + D3, data = arboles1)
+modelo1 &lt;- lm(peso ~ diametro + altura + D2 + D3, data = arboles1)
+
+g1 &lt;- glance(modelo1)
+g2 &lt;- glance(modelo2)
+g3 &lt;- glance(modelo3)
+g4 &lt;- glance(modelo4)
+
+kable(rbind(g1, g2, g3, g4), digits = 2)</code></pre>
+<table>
+<colgroup>
+<col width="10%" />
+<col width="14%" />
+<col width="6%" />
+<col width="10%" />
+<col width="8%" />
+<col width="3%" />
+<col width="8%" />
+<col width="7%" />
+<col width="7%" />
+<col width="9%" />
+<col width="12%" />
+<col width="5%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="right">r.squared</th>
+<th align="right">adj.r.squared</th>
+<th align="right">sigma</th>
+<th align="right">statistic</th>
+<th align="right">p.value</th>
+<th align="right">df</th>
+<th align="right">logLik</th>
+<th align="right">AIC</th>
+<th align="right">BIC</th>
+<th align="right">deviance</th>
+<th align="right">df.residual</th>
+<th align="right">nobs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">0.85</td>
+<td align="right">0.85</td>
+<td align="right">3.19</td>
+<td align="right">124.13</td>
+<td align="right">0</td>
+<td align="right">4</td>
+<td align="right">-229.57</td>
+<td align="right">471.14</td>
+<td align="right">486.14</td>
+<td align="right">865.64</td>
+<td align="right">85</td>
+<td align="right">90</td>
+</tr>
+<tr class="even">
+<td align="right">0.85</td>
+<td align="right">0.84</td>
+<td align="right">3.23</td>
+<td align="right">161.09</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">-231.05</td>
+<td align="right">472.11</td>
+<td align="right">484.61</td>
+<td align="right">894.69</td>
+<td align="right">86</td>
+<td align="right">90</td>
+</tr>
+<tr class="odd">
+<td align="right">0.83</td>
+<td align="right">0.82</td>
+<td align="right">3.44</td>
+<td align="right">207.32</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">-237.26</td>
+<td align="right">482.53</td>
+<td align="right">492.53</td>
+<td align="right">1027.09</td>
+<td align="right">87</td>
+<td align="right">90</td>
+</tr>
+<tr class="even">
+<td align="right">0.85</td>
+<td align="right">0.84</td>
+<td align="right">3.23</td>
+<td align="right">240.56</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">-231.66</td>
+<td align="right">471.33</td>
+<td align="right">481.33</td>
+<td align="right">906.91</td>
+<td align="right">87</td>
+<td align="right">90</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>library(stargazer)
+stargazer(modelo1, modelo2, modelo3, modelo4, type = &quot;text&quot;,
+          omit.stat=c(&quot;ser&quot;,&quot;f&quot;), 
+          model.numbers = FALSE, object.names = TRUE,
+          star.cutoffs = c(0.05, 0.01, 0.001))</code></pre>
+<pre><code>## 
+## =====================================================
+##                        Dependent variable:           
+##              ----------------------------------------
+##                                peso                  
+##               modelo1    modelo2   modelo3   modelo4 
+## -----------------------------------------------------
+## diametro      3.837***  4.976***  5.226***  5.125*** 
+##               (0.726)    (0.273)   (0.281)   (0.236) 
+##                                                      
+## altura         0.942                                 
+##               (0.558)                                
+##                                                      
+## D2             1.384      1.046    -0.836            
+##               (0.976)    (0.965)   (0.861)           
+##                                                      
+## D3            3.522***  3.074***            2.563*** 
+##               (0.893)    (0.862)             (0.722) 
+##                                                      
+## Constant     -10.017*** -9.703*** -9.412*** -9.999***
+##               (1.380)    (1.382)   (1.470)   (1.356) 
+##                                                      
+## -----------------------------------------------------
+## Observations     90        90        90        90    
+## R2             0.854      0.849     0.827     0.847  
+## Adjusted R2    0.847      0.844     0.823     0.843  
+## =====================================================
+## Note:                   *p&lt;0.05; **p&lt;0.01; ***p&lt;0.001</code></pre>
+</div>
 
 
 

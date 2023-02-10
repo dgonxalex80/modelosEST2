@@ -11,7 +11,7 @@
 
 
 
-<title> Causas - Efectos</title>
+<title> R - Analisis descriptivo</title>
 
 <script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -378,108 +378,125 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore"><span style="color:#034a94"> <strong>Causas
-- Efectos</strong></span></h1>
+<h1 class="title toc-ignore"><span style="color:#034a94"> <strong>R -
+Analisis descriptivo</strong></span></h1>
 
 </div>
 
 
 <p></br></br></p>
-<div id="causas-de-la-multicolinealidad" class="section level2">
-<h2><strong>Causas de la multicolinealidad</strong></h2>
-<p></br></p>
-<p>Algunas de las causas más comunes de la multicolinealidad son:</p>
-<p></br></p>
-<ol style="list-style-type: decimal">
-<li><strong>El método de recolección de los datos.</strong>, muestras
-recogidas en un rango reducido de valores.</li>
-</ol>
-<p><!-- **Datos de tiempos de entrega** (*Fuente: Mongomery et al. (2002)*) --></p>
-<p></br></p>
-<ol start="2" style="list-style-type: decimal">
-<li><strong>Restricciones en el modelo o en la población.</strong></li>
-</ol>
-<!-- <center> -->
-<!-- ```{r, echo=FALSE, out.width="60%", fig.align = "center"} -->
-<!-- knitr::include_graphics("img/diagrama1.png") -->
-<!-- ``` -->
-<!-- Fuente: Datos de consumo de electricidad - Mongomery et al. (2002) -->
-<!-- </center> -->
-<p></br></p>
-<ol start="3" style="list-style-type: decimal">
-<li><strong>Especificación del modelo.</strong> Por ejemplo, al agregar
-términos polinomiales a un modelo cuando el rango de la predictora es
-pequeño.</li>
-</ol>
-<p></br></p>
-<ol start="4" style="list-style-type: decimal">
-<li><strong>Un modelo sobredefinido.</strong> Por ejemplo, en
-investigación médica donde para algunos pocos pacientes se toma una gran
-cantidad de predictoras. Es decir que posee más variables que
-observaciones.</li>
-</ol>
-<p></br></br></br></p>
-</div>
-<div id="efectos-de-la-multicolinealidad" class="section level2">
-<h2><strong>Efectos de la multicolinealidad</strong></h2>
-<p></br></p>
-<p>Algunos de los efectos más notorios de la multicolinealidad son:</p>
-<p></br></p>
-<ol style="list-style-type: decimal">
-<li><strong>Inflación de las varianzas de los estimadores:</strong>
-consiste en la inflación de los valores <span
-class="math inline">\(c^*_{jj}\)</span> en las varianzas de los
-estimadores <span class="math inline">\(V(\widehat\beta_j^*) = \sigma^2
-c^*_{jj}\)</span>, cuando se considera un modelo con variables escaladas
-de longitud unitaria, en cuyo caso se puede demostrar que:</li>
-</ol>
-<p><span class="math display">\[
-c^*_{jj} = \frac{1}{1 - R_j^2},
-\]</span></p>
-<p></br></p>
-<p>donde <span class="math inline">\(R_j^2\)</span> es el coeficiente de
-determinación muestral obtenido de una regresión de <span
-class="math inline">\(X_j\)</span> (como respuesta) en función de las
-otras variables predictoras consideradas en el modelo (actuando como
-predictoras de la primera).</p>
-<p></br></p>
-<ol start="2" style="list-style-type: decimal">
-<li><strong><span
-class="math inline">\(\boldsymbol{\widehat{\beta}_j}\)</span> muy
-grandes en términos absolutos:</strong> esto se manifiesta en una traza
-muy grande de la matriz <span
-class="math inline">\(\left(\boldsymbol{X}&#39;\boldsymbol{X}\right)^{-1}\)</span>,
-donde:</li>
-</ol>
-<p><span
-class="math inline">\(\text{traza}\left(\boldsymbol{X}&#39;\boldsymbol{X}\right)^{-1}
-= \sum_{j = 1}^{p} \frac{1}{\lambda_j},\ \lambda_j &gt; 0\)</span> es el
-<span class="math inline">\(j\)</span>-ésimo valor propio (usualmente
-ordenados de mayor a menor) de la matriz <span
-class="math inline">\(\boldsymbol{X}&#39;\boldsymbol{X}\)</span>.</p>
-<p></br></p>
-<p>Si la <span
-class="math inline">\(\text{traza}\left(\boldsymbol{X}&#39;\boldsymbol{X}\right)^{-1}\)</span>
-es muy grande, mayor es la distancia entre el vector de parámetros
-estimados y el verdadero valor del vector de parámetros.</p>
-<p></br></p>
-<ol start="3" style="list-style-type: decimal">
-<li><strong>Valores de los coeficientes con signo contrario a lo
-esperado:</strong> esto puede ser causado por la presencia de
-multicolinealidad.</li>
-</ol>
-<p></br></p>
-<ol start="4" style="list-style-type: decimal">
-<li><strong>Regresión significativa pero ninguna variable
-individualmente significativa:</strong> otra de las maneras en que se
-puede manifestar la multicolinealidad grave es cuando el modelo de
-regresión ajustado es significativo (según la prueba <span
-class="math inline">\(F\)</span> de la tabla ANOVA) pero
-individualmente, ninguno de los coeficientes asociados a las variables
-predictoras resulta significativo (según las pruebas <span
-class="math inline">\(T\)</span> de significancia individual).</li>
-</ol>
+<div id="exploración-previa" class="section level2">
+<h2><strong>Exploración previa</strong></h2>
+<p>En esta etapa se realiza una exploración de la data, tipo de
+variables, datos faltantes, datos atípicos. Podemos realizarlo con la
+función summary() o con </br></p>
+<pre class="r"><code>library(paqueteMOD)
+library(tidyverse)
+library(modelsummary)
+data(&quot;arboles1&quot;)
+arboles1$D1 = as.numeric(arboles1$mg==&quot;GENOTIPO_2&quot;)
+arboles1$D2 = as.numeric(arboles1$finca==&quot;FINCA_2&quot;)
+arboles1$D3 = as.numeric(arboles1$finca==&quot;FINCA_3&quot;)
+arboles1$peso = as.numeric(arboles1$peso)
+arboles1$diametro = as.numeric(arboles1$diametro)
+arboles1$altura = as.numeric(arboles1$altura)
+
+summary(arboles1)</code></pre>
+<pre><code>##     finca                mg                 peso          diametro    
+##  Length:90          Length:90          Min.   : 5.98   Min.   :2.200  
+##  Class :character   Class :character   1st Qu.:13.64   1st Qu.:4.525  
+##  Mode  :character   Mode  :character   Median :17.48   Median :5.400  
+##                                        Mean   :18.77   Mean   :5.446  
+##                                        3rd Qu.:22.80   3rd Qu.:6.500  
+##                                        Max.   :47.87   Max.   :8.800  
+##      altura             D1            D2               D3        
+##  Min.   : 3.300   Min.   :0.0   Min.   :0.0000   Min.   :0.0000  
+##  1st Qu.: 5.225   1st Qu.:0.0   1st Qu.:0.0000   1st Qu.:0.0000  
+##  Median : 6.450   Median :0.5   Median :0.0000   Median :0.0000  
+##  Mean   : 6.634   Mean   :0.5   Mean   :0.3333   Mean   :0.3333  
+##  3rd Qu.: 7.875   3rd Qu.:1.0   3rd Qu.:1.0000   3rd Qu.:1.0000  
+##  Max.   :11.300   Max.   :1.0   Max.   :1.0000   Max.   :1.0000</code></pre>
+<pre class="r"><code># modelsummary::datasummary_skim(arboles1)
+# library(stats4) # para la función mle
+# library(bbmle) # para la función mle2</code></pre>
 <p></br></br></p>
+<pre class="r"><code>glimpse(arboles1)</code></pre>
+<pre><code>## Rows: 90
+## Columns: 8
+## $ finca    &lt;chr&gt; &quot;FINCA_1&quot;, &quot;FINCA_1&quot;, &quot;FINCA_1&quot;, &quot;FINCA_1&quot;, &quot;FINCA_1&quot;, &quot;FINCA…
+## $ mg       &lt;chr&gt; &quot;GENOTIPO_1&quot;, &quot;GENOTIPO_1&quot;, &quot;GENOTIPO_1&quot;, &quot;GENOTIPO_1&quot;, &quot;GENO…
+## $ peso     &lt;dbl&gt; 13.73, 14.58, 15.88, 8.99, 6.99, 19.34, 21.44, 13.81, 11.88, …
+## $ diametro &lt;dbl&gt; 4.7, 5.3, 4.8, 3.2, 2.2, 6.3, 6.6, 5.3, 4.9, 5.9, 2.5, 4.7, 2…
+## $ altura   &lt;dbl&gt; 5.0, 5.6, 5.8, 4.3, 3.3, 7.9, 8.3, 7.3, 6.7, 7.1, 3.7, 5.7, 3…
+## $ D1       &lt;dbl&gt; 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0…
+## $ D2       &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…
+## $ D3       &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…</code></pre>
+<pre class="r"><code>library(Hmisc)
+describe(arboles1)</code></pre>
+<pre><code>## arboles1 
+## 
+##  8  Variables      90  Observations
+## --------------------------------------------------------------------------------
+## finca 
+##        n  missing distinct 
+##       90        0        3 
+##                                   
+## Value      FINCA_1 FINCA_2 FINCA_3
+## Frequency       30      30      30
+## Proportion   0.333   0.333   0.333
+## --------------------------------------------------------------------------------
+## mg 
+##        n  missing distinct 
+##       90        0        2 
+##                                 
+## Value      GENOTIPO_1 GENOTIPO_2
+## Frequency          45         45
+## Proportion        0.5        0.5
+## --------------------------------------------------------------------------------
+## peso 
+##        n  missing distinct     Info     Mean      Gmd      .05      .10 
+##       90        0       87        1    18.77    8.822    7.650    9.926 
+##      .25      .50      .75      .90      .95 
+##   13.640   17.485   22.803   30.542   33.091 
+## 
+## lowest :  5.98  6.98  6.99  7.03  7.47, highest: 33.42 34.38 37.74 45.41 47.87
+## --------------------------------------------------------------------------------
+## diametro 
+##        n  missing distinct     Info     Mean      Gmd      .05      .10 
+##       90        0       47    0.999    5.446    1.653    3.045    3.590 
+##      .25      .50      .75      .90      .95 
+##    4.525    5.400    6.500    7.100    7.855 
+## 
+## lowest : 2.2 2.5 3.0 3.1 3.2, highest: 7.8 7.9 8.2 8.7 8.8
+## --------------------------------------------------------------------------------
+## altura 
+##        n  missing distinct     Info     Mean      Gmd      .05      .10 
+##       90        0       52    0.999    6.634     2.05    4.135    4.580 
+##      .25      .50      .75      .90      .95 
+##    5.225    6.450    7.875    9.210    9.820 
+## 
+## lowest :  3.3  3.5  3.7  4.0  4.3, highest: 10.0 10.1 10.5 10.9 11.3
+## --------------------------------------------------------------------------------
+## D1 
+##        n  missing distinct     Info      Sum     Mean      Gmd 
+##       90        0        2     0.75       45      0.5   0.5056 
+## 
+## --------------------------------------------------------------------------------
+## D2 
+##        n  missing distinct     Info      Sum     Mean      Gmd 
+##       90        0        2    0.667       30   0.3333   0.4494 
+## 
+## --------------------------------------------------------------------------------
+## D3 
+##        n  missing distinct     Info      Sum     Mean      Gmd 
+##       90        0        2    0.667       30   0.3333   0.4494 
+## 
+## --------------------------------------------------------------------------------</code></pre>
+</div>
+<div id="asociación-entre-las-variables-cuantitativas"
+class="section level2">
+<h2><strong>Asociación entre las variables cuantitativas</strong></h2>
+<p><img src="recurso099_files/figure-html/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 
 

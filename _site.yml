@@ -49,6 +49,8 @@ navbar:
           href: recurso082.html          
     - text: "R "
       menu:
+        - text: "Análisis previo"
+          href: recurso099.html         
         - text: "Estimación MCO"
           href: recurso100.html   
         - text: "Validación de supuestos"
