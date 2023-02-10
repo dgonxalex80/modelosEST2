@@ -1,0 +1,277 @@
+---
+title: <span style="color:#034a94"> **Indicadores de ajuste**</span>
+output: html_document
+css: style.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(paqueteMOD)
+data("creditos")
+
+```
+
+</br></br>
+
+## **Indicadores de bondad de ajuste**
+
+</br></br>
+
+
+
+
+
+## **Falta de ajuste en el modelo de RLM**
+
+</br>
+
+La falta de ajuste también puede ser evaluada y para el modelo de regresión múltiple se quiere saber si
+
+</br>
+
+$$E\left[ Y\vert X_1, X_2, \ldots, X_k\right] = \beta_0 + \beta_1X_1 + \beta_2X_2 + \cdots + \beta_kX_k,$$
+</br>
+
+es una superficie de respuesta apropiada, es decir, se quiere probar
+
+$$
+\begin{array}{l}
+H_0: E\left[ Y\vert X_1, X_2, \ldots, X_k\right] = \beta_0 + \beta_1X_1 + \beta_2X_2 + \cdots + \beta_kX_k\\
+H_1: E\left[ Y\vert X_1, X_2, \ldots, X_k\right] \ne \beta_0 + \beta_1X_1 + \beta_2X_2 + \cdots + \beta_kX_k
+\end{array}
+$$
+
+</br>
+
+Para llevar a cabo esta prueba, se necesitan replicaciones de la respuesta en las combinaciones de niveles de las variables predictoras. El procedimiento es el mismo que se estudió en RLS y se basa en la descompocisión de la SSE
+
+</br>
+
+<div class="content-box-blue">
+$$\text{SSE} = \text{SSLOF} + \text{SSPE}$$
+</div>
+
+</br>
+
+
+El procedimiento de prueba se resume en la siguiente tabla:
+
+</br></br>
+
+**ANOVA con prueba de falta de ajuste en el modelo de RLM**
+                               
+</br>
+
+| Fuente de variación | Suma de cuadrados | Grados de libertad | Cuadrado medio | $F$ calculada |
+|:--------------------|------------------:|:-------------------:|:-------------:|:-------------:|
+| Regresión           | SSR               |  k                  | $\text{MSR} = \frac{\text{SSR}}{k}$ | $F_0 = \frac{\text{MSR}}{\text{MSE}}$ |
+| Error               | $\text{SSE}$ | $n-p$ | $\text{MSE} = \frac{\text{SSE}}{n-p}$ | |
+| $\color{gray}{\scriptsize \textit{Falta de ajuste}}$ | $\ \color{gray}{\scriptsize \textit{SSLOF}}$ | $\ \color{gray}{\scriptsize m - p}$ | $\color{gray}{\scriptsize \textit{MSLOF} = \frac{\textit{SSLOF}}{m-p}}$ | $\color{gray}{\scriptsize F_0 = \frac{\textit{MSLOF}}{\textit{MSPE}}}$ |
+| $\color{gray}{\scriptsize \textit{Error Puro}}$ | $\ \color{gray}{\scriptsize \textit{SSPE}}$  | $\ \color{gray}{\scriptsize n - m}$ | $\ \color{gray}{\scriptsize \textit{MSPE} = \frac{\textit{SSPE}}{n - m}}$ | |
+| Total               | SST | $n - 1$ | | |
+
+Se rechaza $H_0$ a un nivel de significancia $\alpha$ si ${F_0 > f_{\alpha, m - p, n - m}}$. En tal caso se concluye que la superficie de respuesta no es apropiada.
+
+</br></br></br>
+
+## **Medidas remediales**
+
+</br>
+
+Las medidas remediales descritas en el caso de RLS también son aplicables en RLM. Con el fin de superar las deficiencias del modelo se pueden realizar transformaciones sobre la variable respuesta y/o sobre las variables predictoras.
+
+</br>
+
+Las transformaciones sobre la respuesta pueden ayudar en el caso de que los errores no resulten normales o la varianza no sea constante. Transformaciones sobre las variables predictoras resultan útiles cuando la superficie de respuesta es curvilínea.
+
+</br>
+
+Si las desviaciones respecto al supuesto de normalidad son severas, y ninguna transformación resulta útil y/o interpretable, existe otra alternativa, los llamados *modelos lineales generalizados* con los cuales se pueden modelar respuestas que no se distribuyen normales; sin embargo, tales modelos están más allá del alcance de este curso.
+
+</br></br></br>
+
+## **Identificación de observaciones extremas en el modelo de RLM**
+
+</br>
+
+Además de la validación de supuestos en los errores de un modelo de RLM, se debe chequear la presencia de observaciones extremas, tales como:
+
+</br>
+
+* Observaciones atípicas (outliers)
+
+* Puntos de balanceo
+
+* Observaciones influenciales
+
+</br></br></br>
+
+
+</br></br></br>
+
+## **Observaciones atípicas**
+
+</br>
+
+Una observación **atípica** (o **outlier**) es aquella que está separada (en su valor de la respuesta $Y$) del resto de las observaciones y por tanto puede afectar los resultados del ajuste del modelo de regresión.
+
+</br>
+
+Interesa identificarlas para luego, si es posible analizar si se tratan de observaciones malas (por errores de registro o medición) que pueden ser descartadas, o si realmente son datos correctos pero extraños que no deben ser eliminados del conjunto de datos.
+
+</br>
+
+Para detectar observaciones atípicas se usan los *residuales escalados* definidos anteriormente. Se considera que una observación es **atípica** cuando su residual estudentizado $r_i$, es tal que: $\vert r_i\vert > 3$.
+
+</br>
+
+Muchos **outliers** en los datos pueden causar niveles de confianza reales menores de lo esperado.
+
+<!-- </br> -->
+
+<!-- La siguiente Figura ilustra el caso de **dos observaciones atípicas**.$\vspace{-0.25cm}$ -->
+<!-- ```{r fig35a, echo = F, fig.align = 'center', out.width = '78%'} -->
+<!-- #knitr::include_graphics("figures/grafobsatipica.png") -->
+<!-- ``` -->
+
+
+</br></br></br>
+
+## **Puntos de balanceo**
+
+</br>
+
+
+Un **punto de balanceo** es una observación en el espacio de las predictoras, alejada del resto de la muestra y que puede controlar ciertas propiedades del modelo ajustado.
+
+</br>
+
+Este tipo de observaciones posiblemente no afecte los coeficientes de regresión estimados pero sí las estadísticas de resumen como el $R^2$ y los errores estándar de los coeficientes estimados.
+
+</br>
+
+Los puntos de balanceo son detectados mediante el análisis de los elementos de la diagonal principal de la matriz $\boldsymbol{H}$, los $h_{ii}$, que proporcionan una medida estandarizada de la distancia de la $i$-ésima observación al centro del espacio definido por las predictoras.
+
+
+</br>
+
+Se tiene lo siguiente:
+
+* La media de los $h_{ii}$ es:
+
+$$\bar{h} = \dfrac{\sum\limits_{i = 1}^n h_{ii}}{n} = \frac{\text{traza}\left(\boldsymbol{H}\right)}{n} = \frac{p}{n},$$
+
+con $p$ el número de variables predictoras del modelo de RLM.
+
+</br>
+
+* Se asume que la observación $i$ es un **punto de balanceo** si $h_{ii} > 2p/n$, pero si $2p/n > 1$ este criterio no funciona pues los $h_{ii}$ siempre son menores que 1.
+
+</br>
+
+* Observaciones con $h_{ii}$ grandes y residuales $r_i$ también grandes probablemente serán influenciales.
+
+<!-- </br> -->
+
+
+<!-- La próxima Figura ilustra el caso de **una observación de balanceo**.$\vspace{-0.25cm}$ -->
+<!-- ```{r fig35b, echo = F, fig.align = 'center', out.width = '78%'} -->
+<!-- #knitr::include_graphics("figures/grafobspalanca.png") -->
+<!-- ``` -->
+
+</br></br></br>
+
+## **Observaciones influenciales**
+
+</br>
+
+Una observación es **influencial** si tiene un impacto notable sobre los coeficientes de regresión ajustados, esto es, una observación influencial se dice `hala` al modelo en su dirección, es decir, una observación es influencial si su exclusión del modelo causa cambios importantes en la ecuación de regresión ajustada.
+
+</br>
+
+Estas observaciones se caracterizan por tener un valor moderadamente inusual tanto en el espacio de las predictoras como en la respuesta.
+
+</br>
+
+Después de identificar las observaciones que están alejadas con respecto a los valores de $Y$ (atípicas) y/o con respecto a sus valores en $X$ (puntos de balanceo) evaluamos si éstas son influenciales.
+
+</br>
+
+<!-- La Figura siguiente ilustra el caso de **una observación influyente**.$\vspace{-0.25cm}$ -->
+<!-- ```{r fig35c, echo = F, fig.align = 'center', out.width = '78%'} -->
+<!-- #knitr::include_graphics("figures/grafobsinfluyente.png") -->
+<!-- ``` -->
+
+</br>
+
+Para la evaluación se cuenta con las siguientes medidas:
+
+* **Distancia de Cook**.
+
+* **Diagnóstico DFFITS**.
+
+* **Diagnóstico DFBETAS**.
+
+A continuación se presentan los diagnósticos para detectar observaciones influenciales.
+
+</br>
+
+1. **Distancia de Cook:** es una medida de la distancia cuadrática entre,
+el estimador de $\boldsymbol\beta$ por mínimos cuadrados basado en las $n$ observaciones, y el estimador de $\boldsymbol\beta$ obtenido eliminando la $i$-ésima observación, así:
+
+<div class="content-box-blue">
+$$D_i = \frac{\left(\boldsymbol{\widehat{\beta}}_{\left(i\right)} - \boldsymbol{\widehat{\beta}}\right)'\boldsymbol{X'X}\left(\boldsymbol{\widehat{\beta}}_{\left(i\right)} - \boldsymbol{\widehat{\beta}}\right)}{p\,\text{MSE}} = \frac{r_i^2}{p}\left(\frac{h_{ii}}{1 - h_{ii}}\right),\ i = 1, \ldots, n$$
+</div>
+
+donde, $\boldsymbol{\widehat{\beta}}_{\left(i\right)}$ es el vector de parámetros estimados obtenido cuando no se considera en el ajuste del modelo a la observación $i$.
+   
+   Note que si $D_i$ es alto entonces la observación $i$ tiene influencia sobre el vector de parámetros estimados $\boldsymbol{\widehat{\beta}}$.
+
+</br></br>
+
+
+<div class="content-box-gray">
+**NOTAS**
+
+* Si $D_i = f_{0.5, p, n - p}$ entonces al eliminar el punto $i$ se movería $\boldsymbol{\widehat{\beta}_{\left(i\right)}}$ hacia la frontera de una región de confianza aproximada del 50\% para $\boldsymbol{\beta}$, basándose en el conjunto completo de datos, lo cual es un desplazamiento grande e indica que el estimador por mínimos cuadrados es sensible al $i$-ésimo punto de datos.
+
+* Como $f_{0.5, p, n - p}\approx 1$ se dice que la observación $i$ será **influencial** si $D_i > 1$.
+
+</div>
+
+</br>
+
+2. **Diagnóstico DFFITS:** es el número de desviaciones estándar que el valor ajustado $\widehat{y}_i$ se mueve si la observación $i$ es omitida,
+
+<div class="content-box-blue">
+$$
+\text{DFFITS}_i = \frac{\widehat{Y}_i - \widehat{Y}_{\left(i\right)}}{\sqrt{\text{MSE}_{\left(i\right)}\,h_{ii}}} = \frac{e_i}{\sqrt{MSE_{\left(i\right)}\left(1 - h_{ii}\right)}}\left(\frac{h_{ii}}{1 - h_{ii}}\right)^{1/2}
+$$
+
+</div>
+
+donde, $\widehat{Y}_{\left(i\right)}$ es el $i$-ésimo valor ajustado obtenido cuando no se considera en el ajuste del modelo a la observación $i$ y $\text{MSE}_{\left(i\right)}$ es el cuadrado medio del error obtenido cuando no se considera en el ajuste del modelo a la observación $i$.
+
+   Una observación será **influencial** si $\vert\text{DFFITS}_i\vert > 2\sqrt{\frac{p}{n}}$.
+
+</br>
+
+3. **Diagnóstico DFBETAS:** indica cuánto cambia el $j$-ésimo coeficiente de regresión estimado $\widehat{\beta}_j$ en unidades de desviación estándar, si se omite la $i$-ésima observación,
+
+
+<div class="content-box-blue">
+$$\text{DFBETAS}_{j\left(i\right)} = \frac{\widehat{\beta}_j - \widehat{\beta}_{j\left(i\right)}}{\sqrt{\text{MSE}_{\left(i\right)}\,c_{jj}}}$$
+</div>
+
+donde $c_{jj}$ es el $j$-ésimo elemento en la diagonal principal de la matriz $(\boldsymbol{X'X})^{-1}$ y $\text{MSE}_{\left(i\right)}$ es el MSE de la regresión sin la observación $i$.
+   
+Una observación será **influencial** si $\vert \text{DFBETAS}_{j\left(i\right)}\vert > 2/\sqrt{n}$.
+
+</br>
+
+<div class="content-box-gray">
+**NOTA:** 
+
+Tanto los $D_i$, como los DFFITS y los DFBETAS se pueden afectar tanto por un error de ajuste grande como por un gran balanceo, por eso, los puntos que sean detectados por estos criterios deben ser investigados.
+
+</div>

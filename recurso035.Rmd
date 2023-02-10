@@ -1,0 +1,117 @@
+---
+title: <span style="color:#034a94"> **Propiedades de los estimadores MCO**</span>
+output: html_document
+css: style.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(paqueteMOD)
+data("creditos")
+
+```
+
+</br></br>
+
+# **Algunas propiedades de $\widehat{\beta}$**
+
+</br>
+
+* Los estimadores de mínimos cuadrados corresponden a los estimadores de máxima verosimilitud, bajo el modelo lineal normal.
+
+* $\boldsymbol{\widehat\beta}$ es un estimador insesgado del vector de parámetros $\boldsymbol{\beta}$, es decir
+
+<div class="content-box-blue">
+$$
+E\left[\boldsymbol{\widehat\beta}\right] = E\left[\left(\boldsymbol{X}'\boldsymbol{X}\right)^{-1}\boldsymbol{X}'\boldsymbol{y}\right] = \boldsymbol{\beta}
+$$
+</div>
+
+</br>
+
+En efecto, sea $\boldsymbol{A} = \left(\boldsymbol{X}'\boldsymbol{X}\right)^{-1}\boldsymbol{X}'$ una matriz $p \times n$ de valores fijos (constantes). Entonces,
+
+</br>
+
+$$
+E\left[\boldsymbol{\widehat\beta}\right] = E\left[\boldsymbol{A}\boldsymbol{y}\right] = \boldsymbol{A}E\left[\boldsymbol{y}\right] = \boldsymbol{A\ X\beta} = \left(\boldsymbol{X}'\boldsymbol{X}\right)^{-1}\boldsymbol{X}'\ \boldsymbol{X\beta} = \boldsymbol{\beta}
+$$
+  
+</br>
+
+* La matriz de varianzas covarianzas de $\boldsymbol{\widehat\beta}$ es 
+
+
+<div class="content-box-blue">
+$$
+V\left(\boldsymbol{\widehat\beta}\right) = \sigma^2\left(\boldsymbol{X'X}\right)^{-1}
+$$
+</div>
+
+</br>
+
+En efecto,
+
+$$
+\begin{aligned}
+V\left[\boldsymbol{\widehat\beta}\right] &= V\left[\boldsymbol{A}\boldsymbol{y}\right] = \boldsymbol{A}V\left[\boldsymbol{y}\right]\boldsymbol{A}' = \boldsymbol{A}\, \sigma^2\boldsymbol{I}_n\, \boldsymbol{A}'\\
+&= \sigma^2\left\{\left(\boldsymbol{X}'\boldsymbol{X}\right)^{-1}\boldsymbol{X}'\boldsymbol{I}_n\left[\left(\boldsymbol{X}'\boldsymbol{X}\right)^{-1}\boldsymbol{X}'\right]'\right\}\\
+&= \sigma^2\left\{\left(\boldsymbol{X}'\boldsymbol{X}\right)^{-1}\boldsymbol{X}'\,\boldsymbol{X}\left[\left(\boldsymbol{X}'\boldsymbol{X}\right)^{-1}\right]'\right\} = \sigma^2\left(\boldsymbol{X}'\boldsymbol{X}\right)^{-1},
+\end{aligned}
+$$
+</br>
+
+
+La cual tiene en su diagonal principal a las varianzas de los estimadores de los parámetros, $V\left(\widehat\beta_j\right), j = 0, 1, \ldots, k$, y por fuera de su diagonal principal a las covarianzas entre tales estimadores.
+
+</br></br>
+
+<div class="content-box-yellow">
+### **Nota**
+
+$\boldsymbol{\widehat\beta} = \boldsymbol{A}\boldsymbol{y}$ implica que cada parámetro estimado es una combinación lineal de las observaciones, así que $\widehat\beta_j$ es una variable aleatoria con distribución normal (ya que los $y_i$'s son normales).
+</div>
+
+</br></br>
+
+<div class="content-box-gray">
+
+### **Resumen**
+
+$$\boldsymbol{\widehat\beta}\sim\boldsymbol{N}\left(\boldsymbol{\beta}, \, \sigma^2\left(\boldsymbol{X}'\boldsymbol{X}\right)^{-1}\right),$$
+</div>
+
+</br>
+
+y en el caso particular del estimador del $j$-ésimo parámetro del modelo se tiene que:
+
+</br>
+
+$$\widehat\beta_j\sim N\left(\beta_j, \, \sigma^2\,c_{jj}\right),\ j = 0, 1, \ldots, k.$$
+
+</br>
+
+Observe que en las expresiones anteriores $\sigma^2$ es desconocido, de manera que debe estimarse.
+
+</br>
+
+Un estimador de $\sigma^2$ surge del método de máxima verosimilitud al igual que en el modelo de Regresión Lineal Simple, el cual se define como:
+
+</br>
+
+$$\text{MSE} = \frac{\displaystyle\sum_{i = 1}^n \left(y_i - \widehat{y}_i\right)^2}{n - p} = \frac{\text{SSE}}{n - p}.$$
+</br>
+
+
+Luego, una estimación de la matriz de varianzas-covarianzas es: 
+
+</br>
+
+$$V\left(\boldsymbol{\widehat\beta}\right) = \text{MSE}\left(\boldsymbol{X}'\boldsymbol{X}\right)^{-1},$$
+
+cuyos elementos en la diagonal principal corresponden a las estimaciones de las varianzas de los respectivos estimadores $\widehat\beta_j$, esto es, $$\widehat{V}\left(\widehat\beta_j\right) = \text{MSE}\,c_{jj},$$
+
+donde $c_{jj}$, es el $j$-ésimo elemento de la diagonal de la matriz $\left(\boldsymbol{X}'\boldsymbol{X}\right)^{-1}$.
+
+
+</br></br>

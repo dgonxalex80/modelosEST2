@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title> Diagnóstico</title>
+
+<script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Modelos Estadísticos para la toma de decisiones</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="recurso101.html">Conceptos</a>
+</li>
+<li>
+  <a href="recurso102.html">Estimación</a>
+</li>
+<li>
+  <a href="recurso103.html">Inferencia</a>
+</li>
+<li>
+  <a href="recurso104.html">Diagnóstico</a>
+</li>
+<li>
+  <a href="recurso105.html">Var.categóricas</a>
+</li>
+<li>
+  <a href="recurso106.html">Problemas</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore"><span style="color:#034a94">
+<strong>Diagnóstico</strong></span></h1>
+
+</div>
+
+
+<p></br></br></p>
+<div id="inferencias-sobre-la-respuesta-media-y-valores-futuros"
+class="section level2">
+<h2>Inferencias sobre la respuesta media y valores futuros</h2>
+<p>Suponga que se desea estimar la respuesta media para los valores en
+las predictoras <span class="math inline">\(X_1 = x_{01}, X_2 = x_{02},
+\ldots, X_k = x_{0k}\)</span>.</p>
+<p>Sea <span class="math inline">\(Y_0\)</span> la respuesta desconocida
+en tal conjunto de valores, si se define el vector fila <span
+class="math inline">\(\boldsymbol{x_0} = [\begin{array}{ccccc} 1 &amp;
+x_{01} &amp; x_{02} &amp; \ldots &amp; x_{0k}\end{array}]\)</span>,
+entonces se puede escribir <span class="math inline">\(Y_0 =
+\boldsymbol{x_0\beta} + \varepsilon_0\)</span>, por tanto la respuesta
+media en tal punto es <span
+class="math display">\[\mu_{Y\vert\boldsymbol{x_0}} = E\left[
+Y\vert\boldsymbol{x_0}\right] = \boldsymbol{x_0\beta} = \beta_0 +
+\beta_1x_{01} + \beta_2x_{02} + \cdots + \beta_kx_{0k}.\]</span></p>
+<p>Este valor es estimado por la correspondiente respuesta o valor
+ajustado, <span class="math inline">\(\widehat{Y}_0\)</span>, que puede
+escribirse como: <span class="math display">\[\widehat{Y}_0 =
+\boldsymbol{x_0\widehat\beta} = \widehat\beta_0 + \widehat\beta_1x_{01}
++ \widehat\beta_2x_{02} + \cdots + \widehat\beta_kx_{0k},\]</span></p>
+<hr />
+<p>el cual tiene las siguientes propiedades:</p>
+<ul>
+<li><p><span class="math inline">\(E\left[\widehat{Y}_0\right] =
+E\left[\boldsymbol{x_0}\boldsymbol{\widehat\beta}\right] =
+\boldsymbol{x_0}\,E\left[\boldsymbol{\widehat\beta}\right] =
+\boldsymbol{x_0\beta} = E\left[ Y\vert\boldsymbol{x_0}\right]\)</span>,
+esto es, <span class="math inline">\(\widehat{Y}_0\)</span> es un
+estimador insesgado de la respuesta media <span
+class="math inline">\(E\left[
+Y\vert\boldsymbol{x_0}\right]\)</span>.</p></li>
+<li><p><span class="math inline">\(V\left[\widehat{Y}_0\right] =
+V\left[\boldsymbol{x_0}\boldsymbol{\widehat\beta}\right] =
+\boldsymbol{x_0}\,V\left[\widehat\beta\right]\boldsymbol{x_0}&#39; =
+\sigma^2\,\boldsymbol{x_0}\left(\boldsymbol{X}&#39;\boldsymbol{X}\right)^{-1}\boldsymbol{x_0}&#39;\)</span>,
+que es estimada por <span
+class="math inline">\(\widehat{V}\left[\widehat{Y}_0\right] =
+\text{MSE}\,\boldsymbol{x_0}\left(\boldsymbol{X}&#39;\boldsymbol{X}\right)^{-1}\boldsymbol{x_0}&#39;\)</span>.</p></li>
+<li><p>Bajo el supuesto de normalidad en los errores, <span
+class="math inline">\(\widehat{Y}_0\)</span> es una variable aleatoria
+normal, debido a que es una combinación lineal de los <span
+class="math inline">\(\widehat\beta_j\)</span>’s que también son
+normales.</p></li>
+</ul>
+<p>En resumen, <span class="math display">\[\widehat{Y}_0 \sim
+N\left(E\left[ Y\vert\boldsymbol{x_0}\right],
+\sigma^2\,\boldsymbol{x_0}\left(\boldsymbol{X}&#39;\boldsymbol{X}\right)^{-1}\boldsymbol{x_0}&#39;\right)\]</span></p>
+<hr />
+<p>Luego, se tiene que el estadístico <span class="math inline">\(T =
+\dfrac{\widehat{Y}_0 - E\left[
+Y\vert\boldsymbol{x_0}\right]}{\text{se}(\widehat{Y}_0)} \sim t_{n -
+p}\)</span>, con <span class="math inline">\(\text{se}(\widehat{Y}_0) =
+\sqrt{\widehat{V}[\widehat{Y}_0]}\)</span>, lo cual permite demostrar lo
+siguiente:</p>
+<ul>
+<li>Para la respuesta media <span class="math inline">\(E\left[
+Y\vert\boldsymbol{x_0}\right]\)</span> en un vector apropiado <span
+class="math inline">\(\boldsymbol{x_0}\)</span>.</li>
+</ul>
+<div
+id="pruebas-de-hipótesis-sobre-la-respuesta-media-para-un-nivel-de-significancia-boldsymbolalpha"
+class="section level3">
+<h3>Pruebas de hipótesis sobre la respuesta media para un nivel de
+significancia <span
+class="math inline">\(\boldsymbol\alpha\)</span></h3>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="43%" />
+<col width="31%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"><strong>Juego de hipótesis</strong></th>
+<th align="center"><strong>Estadístico de prueba</strong></th>
+<th align="center"><strong>Criterio de rechazo</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><span class="math inline">\(\begin{array}{l} H_0:
+\mu_{Y\vert\boldsymbol{x_0}} = c\\ H_1: \mu_{Y\vert\boldsymbol{x_0}}
+\neq c \end{array}\)</span> con <span class="math inline">\(c \in
+\mathbb{R}\)</span></td>
+<td align="center"><span class="math inline">\(T_0 =
+\dfrac{\widehat{Y}_0 - c}{\text{se}\left(\widehat{Y}_0\right)}
+\overset{\text{bajo }H_0}{\sim} t_{n - p}\)</span></td>
+<td align="center">Se rechaza <span class="math inline">\(H_0\)</span>
+si <span class="math inline">\(\vert T_0 \vert &gt; t_{\alpha/2, n -
+p}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>donde <span class="math inline">\({t_{\alpha/2, n - p}}\)</span> es
+el percentil <span class="math inline">\(1 - \alpha/2\)</span> de la
+distribución <span class="math inline">\(t\)</span>-Student con <span
+class="math inline">\(n - p\)</span> grados de libertad.</p>
+<hr />
+</div>
+<div
+id="ic-del-boldsymbol1---boldsymbolalpha100-para-la-respuesta-media-boldsymboleleft-yvertboldsymbolx_0right"
+class="section level3">
+<h3>IC del (<span class="math inline">\(\boldsymbol{1} -
+\boldsymbol{\alpha}\)</span>)100% para la respuesta media <span
+class="math inline">\(\boldsymbol{E\left[
+Y\vert\boldsymbol{x_0}\right]}\)</span></h3>
+<p>Basados de nuevo en que el estadístico <span class="math display">\[T
+= \dfrac{\widehat{Y}_0 - E\left[
+Y\vert\boldsymbol{x_0}\right]}{\text{se}(\widehat{Y}_0)} \sim t_{n -
+p},\]</span></p>
+<p>lo cual implica que: <span
+class="math display">\[P\left(-t_{\alpha/2, n -
+p}&lt;\dfrac{\widehat{Y}_0 - E\left[
+Y\vert\boldsymbol{x_0}\right]}{\text{se}(\widehat{Y}_0)}&lt;t_{\alpha/2,
+n - p}\right) = 1 - \alpha\]</span></p>
+<p>De donde se obtiene que un IC del (<span class="math inline">\(1 -
+\alpha\)</span>)100% para la respuesta media <span
+class="math inline">\(E\left[ Y\vert\boldsymbol{x_0}\right]\)</span> es:
+<span class="math display">\[\widehat{y}_0 \pm t_{\alpha/2, n - p}
+\,\text{se}(\widehat{Y}_0).\]</span></p>
+<hr />
+<p>Considere ahora el problema de predecir un valor futuro <span
+class="math inline">\(Y_0\)</span> (no observado en la muestra) de la
+variable respuesta, en <span class="math inline">\(X_1 = x_{01}, X_2 =
+x_{02}, \ldots, X_k = x_{0k}\)</span>.</p>
+<p>Claramente, usando el modelo ajustado, predecimos tal valor por <span
+class="math inline">\(\widehat{Y}_0\)</span>, pero sabemos que no es un
+estimador insesgado de <span class="math inline">\(Y_0\)</span>, por lo
+que siempre se genera un error de predicción <span
+class="math inline">\(Y_0 - \widehat{Y}_0\)</span>.</p>
+<p>Note que el error de predicción tiene media cero y dado que el valor
+futuro y su pronóstico son independientes, entonces la varianza del
+error de predicción <span class="math inline">\(\widehat{Y}_0 -
+Y_0\)</span> está dada por <span class="math display">\[V\left[Y_0 -
+\widehat{Y}_0\right] = V\left[Y_0\right] + V\left[\widehat{Y}_0\right] =
+\sigma^2\left[ 1 +
+\boldsymbol{x_0}\left(\boldsymbol{X}&#39;\boldsymbol{X}\right)^{-1}\boldsymbol{x_0}\right],\]</span></p>
+<p>que es estimada por <span
+class="math inline">\(\widehat{V}\left[\widehat{Y}_0 - Y_0\right] =
+\text{MSE}\left[ 1 +
+\boldsymbol{x_0}\left(\boldsymbol{X}&#39;\boldsymbol{X}\right)^{-1}\boldsymbol{x_0}\right]\)</span>.</p>
+<hr />
+<p>Con esto podemos hallar los siguientes resultados:</p>
+<ul>
+<li>Para un valor futuro <span class="math inline">\(Y_0\)</span> en un
+vector apropiado <span
+class="math inline">\(\boldsymbol{x_0}\)</span></li>
+</ul>
+</div>
+<div
+id="ip-del-boldsymbol1---boldsymbolalpha100-para-un-valor-futuro-boldsymboly_0"
+class="section level3">
+<h3>IP del (<span class="math inline">\(\boldsymbol{1} -
+\boldsymbol{\alpha}\)</span>)100% para un valor futuro <span
+class="math inline">\(\boldsymbol{Y_0}\)</span></h3>
+<p>Basados en este caso en que el estadístico <span
+class="math display">\[T = \dfrac{Y_0 - \widehat{Y}_0}{\text{se}(Y_0 -
+\widehat{Y}_0)} \sim t_{n - p},\]</span></p>
+<p>con <span class="math inline">\(\text{se}(Y_0 - \widehat{Y}_0) =
+\sqrt{\widehat{V}[Y_0 - \widehat{Y}_0]}\)</span>, lo cual implica que:
+<span class="math display">\[P\left(-t_{\alpha/2, n - p}&lt;\dfrac{Y_0 -
+\widehat{Y}_0 }{\text{se}(Y_0 - \widehat{Y}_0)}&lt;t_{\alpha/2, n -
+p}\right) = 1 - \alpha\]</span></p>
+<p>De donde se obtiene que un IP del (<span class="math inline">\(1 -
+\alpha\)</span>)100% para un valor futuro <span
+class="math inline">\(Y_0\)</span> es: <span
+class="math display">\[\widehat{Y}_0 \ \pm \ t_{\alpha/2, n - p}
+\,\text{se}(Y_0 - \widehat{Y}_0)\]</span></p>
+<hr />
+<p><strong>Notas:</strong></p>
+<ul>
+<li><p>Los intervalos de predicción estiman los posibles valores para un
+valor particular de la variable respuesta (no para su media) en un
+vector dado <span
+class="math inline">\(\boldsymbol{x_0}\)</span>.</p></li>
+<li><p>Asumimos que este valor particular es un valor futuro de la
+variable aleatoria <span class="math inline">\(Y\)</span>, y por tanto,
+no fue utilizado en la regresión.</p></li>
+<li><p>Si <span class="math inline">\(Y_0\)</span> es un valor futuro y
+<span class="math inline">\(\widehat{Y}_0 =
+\boldsymbol{x_0\widehat\beta}\)</span> es su estimador, entonces estas
+dos variables aleatorias son estadísticamente independientes, dado que
+<span class="math inline">\(Y_0\)</span> no fue utilizado para hallar
+los parámetros estimados, de ahí el estadístico y los límites del
+intervalo de predicción.</p></li>
+</ul>
+<hr />
+<p><strong>Precaución:</strong></p>
+<p>Deben evitarse las extrapolaciones por fuera del rango de
+experimentación en el espacio de las predictoras, para lo cual no basta
+con evaluar si cada valor componente del vector <span
+class="math inline">\(\boldsymbol{x_0}\)</span> se encuentra dentro del
+rango usado (u observado) para la correspondiente predictora, sino que
+es necesario evaluar si <span class="math inline">\(x_0\)</span>
+pertenece a la región de observación conjunta.</p>
+<p>Para ello basta con verificar si <span class="math inline">\(h_{00} =
+\boldsymbol{x_0\left(\boldsymbol{X}&#39;\boldsymbol{X}\right)^{-1}x&#39;_0}
+&lt; \max\limits_{1\leq i\leq n} \left\{h_{ii}\right\}\)</span>, con
+<span class="math inline">\(h_{ii}\)</span> el <span
+class="math inline">\(i\)</span>-ésimo elemento de la matriz ‘hat’ <span
+class="math inline">\(\boldsymbol{H}\)</span>.</p>
+</div>
+</div>
+<div id="validación-de-los-supuestos-del-modelo-de-rlm"
+class="section level2">
+<h2>Validación de los supuestos del modelo de RLM</h2>
+<p>Para la validación de supuestos se usan generalmente los residuales
+del modelo, los cuales sabemos que se definen así: <span
+class="math display">\[e_i=y_i-\hat y_i,\ i=1, \ldots, n\]</span></p>
+<p>Observe que, la magnitud de los residuales <span
+class="math inline">\(e_i\)</span> depende de la escala de medida de la
+respuesta <span class="math inline">\(Y\)</span>, lo cual no permite
+determinar cuando un residual es ‘grande’. Para resolver este problema
+en lugar de usar los residuales crudos definidos arriba, se recomienda
+utilizar residuales escalados que transforman a los anteriores para
+tener media cero y varianza unitaria.</p>
+</div>
+<div id="residuales-escalados" class="section level2">
+<h2>Residuales escalados</h2>
+<p>Se han definido varias versiones de residuales escalados, entre los
+que se destacan:</p>
+<ul>
+<li><strong>Residuales estandarizados:</strong> para su definición se
+considera el supuesto sobre los errores, que establece que <span
+class="math inline">\(\varepsilon_i\)</span> se distribuye con media
+cero y varianza <span class="math inline">\(\sigma^2\)</span>. Por
+tanto, los residuales estandarizados, denotados <span
+class="math inline">\(d_i\)</span> se definen como: <span
+class="math display">\[d_i = \frac{e_i}{\sqrt{\text{MSE}}},\ i = 1,
+\ldots, n\]</span></li>
+</ul>
+<p>Si el supuesto es adecuado los valores de <span
+class="math inline">\(d_i\)</span> deben oscilar entre -3 y 3. Por
+tanto, Un <span class="math inline">\(d_i\)</span> grande (<span
+class="math inline">\(\vert d_i\vert &gt; 3\)</span>) es indicio de una
+observación atípica potencial.</p>
+<hr />
+<ul>
+<li><p><strong>Residuales estudentizados:</strong> para su definición se
+considera el hecho de que realmente los residuales <span
+class="math inline">\(e_i\)</span> en general no son independientes ni
+tienen varianza constante como los errores <span
+class="math inline">\(\varepsilon_i\)</span>. Veamos,</p>
+<p>Sabemos que, <span class="math inline">\(\boldsymbol{e} =
+(\boldsymbol{I}-\boldsymbol{H})\boldsymbol{Y}\)</span>, donde <span
+class="math inline">\(\boldsymbol{I}-\boldsymbol{H}\)</span> es una
+matriz simétrica e idempotente. Luego, <span
+class="math display">\[\begin{aligned}
+E\left[\boldsymbol{e}\right] &amp;=
+E\left[(\boldsymbol{I}-\boldsymbol{H})\boldsymbol{Y}\right] =
+(\boldsymbol{I}-\boldsymbol{H}) E\left[\boldsymbol{Y}\right] =
+(\boldsymbol{I}-\boldsymbol{H}) \boldsymbol{X\beta}\\
+&amp;= \boldsymbol{X\beta} - \boldsymbol{H}\boldsymbol{X\beta} =
+\boldsymbol{X\beta} -
+\boldsymbol{X}\left(\boldsymbol{X}&#39;\boldsymbol{X}\right)^{-1}\
+\boldsymbol{X}&#39;\boldsymbol{X\beta} = \boldsymbol{0}\\[0.2cm]
+V\left[\boldsymbol{e}\right] &amp;=
+V\left[(\boldsymbol{I}-\boldsymbol{H})\boldsymbol{Y}\right] =
+(\boldsymbol{I}-\boldsymbol{H}) V\left[\boldsymbol{Y}\right]
+(\boldsymbol{I}-\boldsymbol{H})&#39; = \sigma^2(\boldsymbol{I-H})
+\end{aligned}\]</span></p>
+<p>De donde, <span class="math inline">\(V(e_i) =
+\sigma^2(1-h_{ii})\)</span> y <span
+class="math inline">\(\text{cov}(e_i, e_j) =
+-\sigma^2h_{ij}\)</span>.</p></li>
+</ul>
+<hr />
+<p>Por tanto, mientras que los errores <span
+class="math inline">\(\varepsilon_i\)</span> tienen varianza constante
+<span class="math inline">\(\sigma^2\)</span> y son incorrelacionados,
+los residuales no necesariamente tienen la misma varianza y pueden ser
+correlacionados!.</p>
+<p>De esta forma, los residuales estudentizados, denotados <span
+class="math inline">\(r_i\)</span>, se definen como: <span
+class="math display">\[r_i=\frac{e_i}{\sqrt{\text{MSE}(1 - h_{ii})}},\ i
+= 1, \ldots, n.\]</span> Este residual, con mayor razón debe moverse
+entre -3 y 3. Se considera atípica aquella observación con un <span
+class="math inline">\(r_i\)</span> grande (<span
+class="math inline">\(\vert r_i\vert &gt; 3\)</span>).</p>
+<hr />
+<p><strong>NOTAS:</strong></p>
+<ul>
+<li>Si el modelo de RLM especificado es correcto los <span
+class="math inline">\(r_i\)</span> tienen varianza aproximadamente
+constante!! igual a 1.</li>
+<li>En conjuntos grandes de datos la varianza de los <span
+class="math inline">\(r_i\)</span> se puede estabilizar en 1 y así no
+habrá mucha diferencia entre éstos y los <span
+class="math inline">\(d_i\)</span>.</li>
+<li>Si todos los supuestos del modelo se cumplen, se espera que
+aproximadamente el 68% de los residuales <span
+class="math inline">\(d_i\)</span> ó <span
+class="math inline">\(r_i\)</span>, estén entre <span
+class="math inline">\(-1\)</span> y <span
+class="math inline">\(+1\)</span>, aproximadamente el 95% entre <span
+class="math inline">\(-2\)</span> y <span
+class="math inline">\(+2\)</span> y aproximadamente 99.7% entre <span
+class="math inline">\(-3\)</span> y <span
+class="math inline">\(+3\)</span>.</li>
+</ul>
+<p>La validación de los supuestos vista en regresión lineal simple se
+mantiene, solo que ahora se recomienda utilizar residuales escalados
+(<span class="math inline">\(d_i\)</span> ó preferiblemente <span
+class="math inline">\(r_i\)</span>) en lugar de utilizar los residuales
+crudos <span class="math inline">\(e_i\)</span>.</p>
+</div>
+<div id="validación-de-los-supuestos-en-los-errores"
+class="section level2">
+<h2>Validación de los supuestos en los errores</h2>
+<p>Recuerde que en los modelos de regresión se han impuesto las
+siguientes cuatro condiciones sobre el término de error:</p>
+<ul>
+<li><p>Los errores son variables aleatorias normales.</p></li>
+<li><p>Los errores tienen media cero.</p></li>
+<li><p>Los errores tienen varianza constante.</p></li>
+<li><p>Los errores son mutuamente independientes.</p></li>
+</ul>
+<hr />
+<p>Recuerde que en esta asignatura asumiremos el supuesto de
+independencia de los errores y en virtud de que usando los residuales
+del modelo el supuesto de media cero siempre se cumple, entonces se
+define lo siguiente:</p>
+<ul>
+<li><p>El supuesto de normalidad puede chequearse bien sea con el
+gráfico de probabilidad normal de los residuales o con alguna de las
+pruebas analíticas de normalidad, entre las cuales se tienen las de
+Shapiro Wilk, Kolmogorov Smirnov, Cramér von Mises y Anderson
+Darling.</p></li>
+<li><p>Para chequear el supuesto de varianza constante, resulta útil un
+gráfico de residuales versus valores ajustados de la respuesta.</p></li>
+</ul>
+</div>
+<div id="falta-de-ajuste-en-el-modelo-de-rlm" class="section level2">
+<h2>Falta de ajuste en el modelo de RLM</h2>
+<p>La falta de ajuste también puede ser evaluada y para el modelo de
+regresión múltiple se quiere saber si <span
+class="math display">\[E\left[ Y\vert X_1, X_2, \ldots, X_k\right] =
+\beta_0 + \beta_1X_1 + \beta_2X_2 + \cdots + \beta_kX_k,\]</span></p>
+<p>es una superficie de respuesta apropiada, es decir, se quiere probar
+<span class="math display">\[
+\begin{array}{l}
+H_0: E\left[ Y\vert X_1, X_2, \ldots, X_k\right] = \beta_0 + \beta_1X_1
++ \beta_2X_2 + \cdots + \beta_kX_k\\
+H_1: E\left[ Y\vert X_1, X_2, \ldots, X_k\right] \ne \beta_0 +
+\beta_1X_1 + \beta_2X_2 + \cdots + \beta_kX_k
+\end{array}
+\]</span></p>
+<p>Para llevar a cabo esta prueba, se necesitan replicaciones de la
+respuesta en las combinaciones de niveles de las variables predictoras.
+El procedimiento es el mismo que se estudió en RLS y se basa en la
+descompocisión de la SSE <span class="math display">\[\text{SSE} =
+\text{SSLOF} + \text{SSPE}\]</span></p>
+<hr />
+<p>El procedimiento de prueba se resume en la siguiente tabla:</p>
+<p><strong>ANOVA con prueba de falta de ajuste en el modelo de
+RLM</strong></p>
+<table>
+<colgroup>
+<col width="17%" />
+<col width="14%" />
+<col width="20%" />
+<col width="23%" />
+<col width="23%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Fuente de variación</th>
+<th>Suma de cuadrados</th>
+<th align="center">Grados de libertad</th>
+<th align="center">Cuadrado medio</th>
+<th align="center"><span class="math inline">\(F\)</span> calculada</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\vspace{0.2cm}\)</span>Regresión</td>
+<td>SSR</td>
+<td align="center">k</td>
+<td align="center"><span class="math inline">\(\text{MSR} =
+\frac{\text{SSR}}{k}\)</span></td>
+<td align="center"><span class="math inline">\(F_0 =
+\frac{\text{MSR}}{\text{MSE}}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\vspace{0.2cm}\)</span>Error</td>
+<td><span class="math inline">\(\text{SSE}\)</span></td>
+<td align="center"><span class="math inline">\(n-p\)</span></td>
+<td align="center"><span class="math inline">\(\text{MSE} =
+\frac{\text{SSE}}{n-p}\)</span></td>
+<td align="center"></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\vspace{0.2cm}\ \color{gray}{\scriptsize
+\textit{Falta de ajuste}}\)</span></td>
+<td><span class="math inline">\(\ \color{gray}{\scriptsize
+\textit{SSLOF}}\)</span></td>
+<td align="center"><span class="math inline">\(\
+\color{gray}{\scriptsize m - p}\)</span></td>
+<td align="center"><span class="math inline">\(\color{gray}{\scriptsize
+\textit{MSLOF} = \frac{\textit{SSLOF}}{m-p}}\)</span></td>
+<td align="center"><span class="math inline">\(\color{gray}{\scriptsize
+F_0 = \frac{\textit{MSLOF}}{\textit{MSPE}}}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\vspace{0.2cm}\ \color{gray}{\scriptsize
+\textit{Error Puro}}\)</span></td>
+<td><span class="math inline">\(\ \color{gray}{\scriptsize
+\textit{SSPE}}\)</span></td>
+<td align="center"><span class="math inline">\(\
+\color{gray}{\scriptsize n - m}\)</span></td>
+<td align="center"><span class="math inline">\(\
+\color{gray}{\scriptsize \textit{MSPE} = \frac{\textit{SSPE}}{n -
+m}}\)</span></td>
+<td align="center"></td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td>SST</td>
+<td align="center"><span class="math inline">\(n - 1\)</span></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p>Se rechaza <span class="math inline">\(H_0\)</span> a un nivel de
+significancia <span class="math inline">\(\alpha\)</span> si <span
+class="math inline">\({F_0 &gt; f_{\alpha, m - p, n - m}}\)</span>. En
+tal caso se concluye que la superficie de respuesta no es apropiada.</p>
+<hr />
+</div>
+<div id="medidas-remediales" class="section level2">
+<h2>Medidas remediales</h2>
+<p>Las medidas remediales descritas en el caso de RLS también son
+aplicables en RLM. Con el fin de superar las deficiencias del modelo se
+pueden realizar transformaciones sobre la variable respuesta y/o sobre
+las variables predictoras.</p>
+<p>Las transformaciones sobre la respuesta pueden ayudar en el caso de
+que los errores no resulten normales o la varianza no sea constante.
+Transformaciones sobre las variables predictoras resultan útiles cuando
+la superficie de respuesta es curvilínea.</p>
+<p>Si las desviaciones respecto al supuesto de normalidad son severas, y
+ninguna transformación resulta útil y/o interpretable, existe otra
+alternativa, los llamados <em>modelos lineales generalizados</em> con
+los cuales se pueden modelar respuestas que no se distribuyen normales;
+sin embargo, tales modelos están más allá del alcance de este curso.</p>
+</div>
+<div id="identificación-de-observaciones-extremas-en-el-modelo-de-rlm"
+class="section level2">
+<h2>Identificación de observaciones extremas en el modelo de RLM</h2>
+<p>Además de la validación de supuestos en los errores de un modelo de
+RLM, se debe chequear la presencia de observaciones extremas, tales
+como:</p>
+<ul>
+<li><p>Observaciones atípicas (outliers)</p></li>
+<li><p>Puntos de balanceo</p></li>
+<li><p>Observaciones influenciales</p></li>
+</ul>
+</div>
+<div id="observaciones-atípicas" class="section level2">
+<h2>Observaciones atípicas</h2>
+<p>Una observación <strong>atípica</strong> (o <strong>outlier</strong>)
+es aquella que está separada (en su valor de la respuesta <span
+class="math inline">\(Y\)</span>) del resto de las observaciones y por
+tanto puede afectar los resultados del ajuste del modelo de
+regresión.</p>
+<p>Interesa identificarlas para luego, si es posible analizar si se
+tratan de observaciones malas (por errores de registro o medición) que
+pueden ser descartadas, o si realmente son datos correctos pero extraños
+que no deben ser eliminados del conjunto de datos.</p>
+<p>Para detectar observaciones atípicas se usan los <em>residuales
+escalados</em> definidos anteriormente. Se considera que una observación
+es <strong>atípica</strong> cuando su residual estudentizado <span
+class="math inline">\(r_i\)</span>, es tal que: <span
+class="math inline">\(\vert r_i\vert &gt; 3\)</span>.</p>
+<p>Muchos <strong>outliers</strong> en los datos pueden causar niveles
+de confianza reales menores de lo esperado.</p>
+<hr />
+<p>La siguiente Figura ilustra el caso de <strong>dos observaciones
+atípicas</strong>.<span
+class="math inline">\(\vspace{-0.25cm}\)</span></p>
+</div>
+<div id="puntos-de-balanceo" class="section level2">
+<h2>Puntos de balanceo</h2>
+<p>Un <strong>punto de balanceo</strong> es una observación en el
+espacio de las predictoras, alejada del resto de la muestra y que puede
+controlar ciertas propiedades del modelo ajustado.</p>
+<p>Este tipo de observaciones posiblemente no afecte los coeficientes de
+regresión estimados pero sí las estadísticas de resumen como el <span
+class="math inline">\(R^2\)</span> y los errores estándar de los
+coeficientes estimados.</p>
+<p>Los puntos de balanceo son detectados mediante el análisis de los
+elementos de la diagonal principal de la matriz <span
+class="math inline">\(\boldsymbol{H}\)</span>, los <span
+class="math inline">\(h_{ii}\)</span>, que proporcionan una medida
+estandarizada de la distancia de la <span
+class="math inline">\(i\)</span>-ésima observación al centro del espacio
+definido por las predictoras.</p>
+<hr />
+<p>Se tiene lo siguiente:</p>
+<ul>
+<li><p>La media de los <span class="math inline">\(h_{ii}\)</span> es:
+<span class="math display">\[\bar{h} = \frac{\sum\limits_{i = 1}^n
+h_{ii}}{n} = \frac{\text{traza}\left(\boldsymbol{H}\right)}{n} =
+\frac{p}{n},\]</span></p>
+<p>con <span class="math inline">\(p\)</span> el número de variables
+predictoras del modelo de RLM.</p></li>
+<li><p>Se asume que la observación <span
+class="math inline">\(i\)</span> es un <strong>punto de
+balanceo</strong> si <span class="math inline">\(h_{ii} &gt;
+2p/n\)</span>, pero si <span class="math inline">\(2p/n &gt; 1\)</span>
+este criterio no funciona pues los <span
+class="math inline">\(h_{ii}\)</span> siempre son menores que
+1.</p></li>
+<li><p>Observaciones con <span class="math inline">\(h_{ii}\)</span>
+grandes y residuales <span class="math inline">\(r_i\)</span> también
+grandes probablemente serán influenciales.</p></li>
+</ul>
+<hr />
+<p>La próxima Figura ilustra el caso de <strong>una observación de
+balanceo</strong>.<span
+class="math inline">\(\vspace{-0.25cm}\)</span></p>
+</div>
+<div id="observaciones-influenciales" class="section level2">
+<h2>Observaciones influenciales</h2>
+<p>Una observación es <strong>influencial</strong> si tiene un impacto
+notable sobre los coeficientes de regresión ajustados, esto es, una
+observación influencial se dice <code>hala</code> al modelo en su
+dirección, es decir, una observación es influencial si su exclusión del
+modelo causa cambios importantes en la ecuación de regresión
+ajustada.</p>
+<p>Estas observaciones se caracterizan por tener un valor moderadamente
+inusual tanto en el espacio de las predictoras como en la respuesta.</p>
+<p>Después de identificar las observaciones que están alejadas con
+respecto a los valores de <span class="math inline">\(Y\)</span>
+(atípicas) y/o con respecto a sus valores en <span
+class="math inline">\(X\)</span> (puntos de balanceo) evaluamos si éstas
+son influenciales.</p>
+<hr />
+<p>La Figura siguiente ilustra el caso de <strong>una observación
+influyente</strong>.<span
+class="math inline">\(\vspace{-0.25cm}\)</span></p>
+<hr />
+<p>Para la evaluación se cuenta con las siguientes medidas:</p>
+<ul>
+<li><p>Distancia de Cook.</p></li>
+<li><p>Diagnóstico DFFITS.</p></li>
+<li><p>Diagnóstico DFBETAS.</p></li>
+</ul>
+<p>A continuación se presentan los diagnósticos para detectar
+observaciones influenciales.</p>
+<hr />
+<ol style="list-style-type: decimal">
+<li><p><strong>Distancia de Cook:</strong> es una medida de la distancia
+cuadrática entre, el estimador de <span
+class="math inline">\(\boldsymbol\beta\)</span> por mínimos cuadrados
+basado en las <span class="math inline">\(n\)</span> observaciones, y el
+estimador de <span class="math inline">\(\boldsymbol\beta\)</span>
+obtenido eliminando la <span class="math inline">\(i\)</span>-ésima
+observación, así: <span class="math display">\[D_i =
+\frac{\left(\boldsymbol{\widehat{\beta}}_{\left(i\right)} -
+\boldsymbol{\widehat{\beta}}\right)&#39;\boldsymbol{X&#39;X}\left(\boldsymbol{\widehat{\beta}}_{\left(i\right)}
+- \boldsymbol{\widehat{\beta}}\right)}{p\,\text{MSE}} =
+\frac{r_i^2}{p}\left(\frac{h_{ii}}{1 - h_{ii}}\right),\ i = 1, \ldots,
+n\]</span></p>
+<p>donde, <span
+class="math inline">\(\boldsymbol{\widehat{\beta}}_{\left(i\right)}\)</span>
+es el vector de parámetros estimados obtenido cuando no se considera en
+el ajuste del modelo a la observación <span
+class="math inline">\(i\)</span>.</p>
+<p>Note que si <span class="math inline">\(D_i\)</span> es alto entonces
+la observación <span class="math inline">\(i\)</span> tiene influencia
+sobre el vector de parámetros estimados <span
+class="math inline">\(\boldsymbol{\widehat{\beta}}\)</span>.</p></li>
+</ol>
+<hr />
+<p><strong>NOTAS:</strong></p>
+<ul>
+<li><p>Si <span class="math inline">\(D_i = f_{0.5, p, n - p}\)</span>
+entonces al eliminar el punto <span class="math inline">\(i\)</span> se
+movería <span
+class="math inline">\(\boldsymbol{\widehat{\beta}_{\left(i\right)}}\)</span>
+hacia la frontera de una región de confianza aproximada del 50% para
+<span class="math inline">\(\boldsymbol{\beta}\)</span>, basándose en el
+conjunto completo de datos, lo cual es un desplazamiento grande e indica
+que el estimador por mínimos cuadrados es sensible al <span
+class="math inline">\(i\)</span>-ésimo punto de datos.</p></li>
+<li><p>Como <span class="math inline">\(f_{0.5, p, n - p}\approx
+1\)</span> se dice que la observación <span
+class="math inline">\(i\)</span> será <strong>influencial</strong> si
+<span class="math inline">\(D_i &gt; 1\)</span>.</p></li>
+</ul>
+<hr />
+<ol start="2" style="list-style-type: decimal">
+<li><p><strong>Diagnóstico DFFITS:</strong> es el número de desviaciones
+estándar que el valor ajustado <span
+class="math inline">\(\widehat{y}_i\)</span> se mueve si la observación
+<span class="math inline">\(i\)</span> es omitida, <span
+class="math display">\[
+\text{DFFITS}_i = \frac{\widehat{Y}_i -
+\widehat{Y}_{\left(i\right)}}{\sqrt{\text{MSE}_{\left(i\right)}\,h_{ii}}}
+= \frac{e_i}{\sqrt{MSE_{\left(i\right)}\left(1 -
+h_{ii}\right)}}\left(\frac{h_{ii}}{1 - h_{ii}}\right)^{1/2}
+\]</span></p>
+<p>donde, <span
+class="math inline">\(\widehat{Y}_{\left(i\right)}\)</span> es el <span
+class="math inline">\(i\)</span>-ésimo valor ajustado obtenido cuando no
+se considera en el ajuste del modelo a la observación <span
+class="math inline">\(i\)</span> y <span
+class="math inline">\(\text{MSE}_{\left(i\right)}\)</span> es el
+cuadrado medio del error obtenido cuando no se considera en el ajuste
+del modelo a la observación <span class="math inline">\(i\)</span>.</p>
+<p>Una observación será <strong>influencial</strong> si <span
+class="math inline">\(\vert\text{DFFITS}_i\vert &gt;
+2\sqrt{\frac{p}{n}}\)</span>.</p></li>
+</ol>
+<hr />
+<ol start="3" style="list-style-type: decimal">
+<li><p><strong>Diagnóstico DFBETAS:</strong> indica cuánto cambia el
+<span class="math inline">\(j\)</span>-ésimo coeficiente de regresión
+estimado <span class="math inline">\(\widehat{\beta}_j\)</span> en
+unidades de desviación estándar, si se omite la <span
+class="math inline">\(i\)</span>-ésima observación, <span
+class="math display">\[\text{DFBETAS}_{j\left(i\right)} =
+\frac{\widehat{\beta}_j -
+\widehat{\beta}_{j\left(i\right)}}{\sqrt{\text{MSE}_{\left(i\right)}\,c_{jj}}}\]</span></p>
+<p>donde <span class="math inline">\(c_{jj}\)</span> es el <span
+class="math inline">\(j\)</span>-ésimo elemento en la diagonal principal
+de la matriz <span
+class="math inline">\((\boldsymbol{X&#39;X})^{-1}\)</span> y <span
+class="math inline">\(\text{MSE}_{\left(i\right)}\)</span> es el MSE de
+la regresión sin la observación <span
+class="math inline">\(i\)</span>.</p>
+<p>Una observación será <strong>influencial</strong> si <span
+class="math inline">\(\vert \text{DFBETAS}_{j\left(i\right)}\vert &gt;
+2/\sqrt{n}\)</span>.</p></li>
+</ol>
+<hr />
+<p><strong>NOTA:</strong> Tanto los <span
+class="math inline">\(D_i\)</span>, como los DFFITS y los DFBETAS se
+pueden afectar tanto por un error de ajuste grande como por un gran
+balanceo, por eso, los puntos que sean detectados por estos criterios
+deben ser investigados.</p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,159 @@
+---
+title: <span style="color:#034a94"> **Modelo de Regresión Lineal Múltiple**</span>
+output: html_document
+css: style.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(paqueteMOD)
+data("creditos")
+
+```
+
+</br></br>
+
+En análisis de regresión usualmente se utiliza más de una variable predictora $X_1, X_2, ....$,  para modelar el valor de una variable respuesta de interés $Y$. Si la relación funcional entre la respuesta $Y$ y las variables predictoras es lineal en los parámetros, se llega al caso de la regresión lineal múltiple (**RLM**).
+
+</br>
+
+En el ajuste y análisis de este modelo se obtienen resultados que son extensiones de los que se revisaron  para el regresión lineal simple.
+
+</br>
+
+<!-- A continuación se introducen nociones preliminares relacionados con la forma matricial del modelo que permite un manejo más simple de la estructura del modelo del RLM. -->
+
+
+</br></br></br>
+
+## **Definición del modelo** 
+
+</br>
+
+Considere el caso en el cual se desea modelar la variabilidad total de una variable respuesta de interés $Y$, en función de relaciones lineales con dos o más variables predictoras ($X_1, X_2, \dots, X_k$), formuladas simultáneamente en un único modelo.
+
+</br>
+
+Suponemos en principio que las variables predictoras guardan poca asociación lineal entre sí, es decir, cada variable predictora aporta información independiente de las demás predictoras presentes en el modelo (hasta cierto grado, la información aportada por cada una no es redundante).
+
+</br>
+
+La ecuación del modelo de regresión en este caso es:
+
+</br>
+
+<div class="content-box-blue">
+
+$$
+Y_i = \beta_0 + \beta_1X_{i1} + \beta_2X_{i2} + \cdots+ \beta_kX_{ik} + \varepsilon_i, \quad i = 1, 2, \ldots, n.
+$$ 
+ </div>
+ 
+</br>
+
+Donde:
+
+* $\beta_0, \beta_1, \ldots, \beta_k$ :  son los $p$ parámetros del modelo (uno por cada variable predictora más uno por el intercepto, en total  $p = (k + 1$) parámetros a estimar.
+
+</br>
+
+* $X_{i1}, X_{i2}, \ldots, X_{ik}$ :  son los valores en la $i$-ésima observación muestral, de las $k$ variables predictoras consideradas en el modelo.
+
+</br>
+
+* $\varepsilon_i \overset{\text{iid}}{\sim} N\left(0,\sigma ^2 \right), \quad i = 1, 2, \ldots, n$, los errores identica e independientemente distribuidos nornal con media cero y varianza constante.
+
+
+
+</br>
+
+Este modelo es de primer orden ya que no se presentan efectos de interacción entre las $k$ variables predictoras. Por otro lado, estadísticamente, se establece que la respuesta media está dada por:
+
+</br>
+
+
+<div class="content-box-blue">
+
+$$
+E\left(Y\vert X_1, X_2, \ldots, X_k\right) = \beta_0 + \beta_1X_1 + \beta_2X_2 + \cdots + \beta_kX_k,
+$$
+</div>
+
+</br>
+la cual representa un hiperplano en un espacio de dimensión ${k + 1}$, llamado *superficie de regresión* o *superficie de respuesta*.
+
+ </br>
+
+Similar al modelo de regresión lineal simple, bajo los supuestos de normalidad, independencia y varianza constante de los errores, se tiene que:
+
+</br>
+
+<div class="content-box-blue">
+$$
+Y_i\vert_{X_{i1}, \ldots, X_{ik}} \overset{\text{ind}}{\sim} N\left(\beta_0 + \beta_1X_{i1} + \cdots+ \beta_kX_{ik}\hspace{.1cm} , \hspace{.1cm} \sigma^2\right), \quad i = 1, 2, \ldots, n.
+$$
+</div>
+
+</br></br></br>
+
+## **Significado de los coeficientes de regresión**
+
+</br>
+
+<div class="content-box-blue">
+$\beta_0$, el intercepto $Y$ del plano, representa la respuesta media de $Y$ cuando en el conjunto de observaciones se incluye la coordenada 
+
+$${\left(X_1, X_2, \ldots, X_k\right) = \left(0, 0, \ldots, 0\right)},$$ 
+</div>
+
+</br>
+
+de lo contrario si tal coordenada no es observada o no está incluida en el rango experimental, entonces ${\beta_0}$ no será interpretable.
+
+</br>
+
+<div class="content-box-blue">
+${\beta_j,\hspace{.3cm} j = 1, 2, \dots, k}$, indican el cambio en la respuesta media de ${Y}$ por unidad de incremento en la respectiva variable ${X_j}$, cuando las demás predictoras permanecen constantes (sin importar en qué nivel son fijadas estas últimas).
+</div>
+
+</br>
+
+Como los efectos de una predictora sobre la respuesta media no dependen del nivel de las demás, tales efectos son denominados *efectos aditivos*. Los parámetros ${\beta_j}$, son también llamados *coeficientes de regresión parcial* porque reflejan el efecto parcial de una variable predictora sobre la respuesta media en presencia de las demás predictoras que aparecen en el modelo.
+
+
+</br>
+
+<div class="content-box-yellow">
+### **NOTA:** 
+
+El término *modelo lineal* significa que el modelo es lineal en los parámetros, lo cual no hace referencia a la forma de la superficie de respuesta.
+
+|                         |                                |
+|:------------------------|:-------------------------------|
+| lineal en parámetros    | $Y_i = \beta_0 + \beta_1X_{i1} + \beta_2X_{i2} + \cdots+ \beta_kX_{ik} + \varepsilon_i$          |
+| no lineal en parámetros | $Y_i =  \beta_0 \hspace{.2cm}\exp{\{ \beta_1X_{i1} + \beta_2X_{i2} + \cdots+ \beta_kX_{ik}\}} + \varepsilon_i$   |
+
+</div>
+
+</br></br>
+
+## **Tipos de variables y de efectos en los modelos**
+
+</br>
+
+Las variables predictoras ($X_{i}$) pueden ser:
+
+* **Cuantitativas**, caso en el cual se supone se miden sin error (o el error es despreciable). 
+
+* **Cualitativas** o categóricas, en este caso su manejo en el modelo se realiza a través de la definición de variables indicadoras, las cuales toman valores de 0 ó 1.
+
+* **Polinómicas**, en caso tener una de las variables independientes con potencias, como por ejemplo : $X_j^{2}$, $X_j^{3}$, $X_j^{4}$, $\dots$
+
+</br>
+
+La variable dependiente o respuesta se considera en todos los casos como una variable cuantitativa
+
+</br></br>
+
+Todos estos casos serán abordados en esta Unidad.
+

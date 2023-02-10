@@ -1,0 +1,187 @@
+---
+title: <span style="color:#034a94"> **Inferencia sobre respuesta media y valores futuros**</span>
+output: html_document
+css: style.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(paqueteMOD)
+data("creditos")
+
+```
+
+</br></br>
+
+
+Suponga que se desea estimar la respuesta media para los valores en las predictoras $X_1 = x_{01}, X_2 = x_{02}, \ldots, X_k = x_{0k}$.
+
+</br>
+
+Sea $Y_0$ la respuesta desconocida en tal conjunto de valores, si se define el vector fila $\boldsymbol{x_0} = [\begin{array}{ccccc} 1 & x_{01} & x_{02} & \ldots & x_{0k}\end{array}]$, entonces se puede escribir $Y_0 = \boldsymbol{x_0\beta} + \varepsilon_0$, por tanto la respuesta media en tal punto es 
+
+</br>
+<div class="content-box-blue">
+$$\mu_{Y\vert\boldsymbol{x_0}} = E\left[ Y\vert\boldsymbol{x_0}\right] = \boldsymbol{x_0\beta} = \beta_0 + \beta_1x_{01} + \beta_2x_{02} + \cdots + \beta_kx_{0k}.$$
+
+</div>
+
+</br>
+
+Este valor es estimado por la correspondiente respuesta o valor ajustado, $\widehat{Y}_0$, que puede escribirse como:
+
+</br>
+
+<div class="content-box-blue">
+$$\widehat{Y}_0 = \boldsymbol{x_0\widehat\beta} = \widehat\beta_0 + \widehat\beta_1x_{01} + \widehat\beta_2x_{02} + \cdots + \widehat\beta_kx_{0k},$$
+</div>
+
+</br></br>
+
+el cual tiene las siguientes propiedades:
+
+</br>
+
+* $E\left[\widehat{Y}_0\right] = E\left[\boldsymbol{x_0}\boldsymbol{\widehat\beta}\right] =  \boldsymbol{x_0}\,E\left[\boldsymbol{\widehat\beta}\right] = \boldsymbol{x_0\beta} = E\left[ Y\vert\boldsymbol{x_0}\right]$, esto es, $\widehat{Y}_0$ es un estimador insesgado de la respuesta media $E\left[ Y\vert\boldsymbol{x_0}\right]$.
+
+</br>
+
+* $V\left[\widehat{Y}_0\right] = V\left[\boldsymbol{x_0}\boldsymbol{\widehat\beta}\right] =  \boldsymbol{x_0}\,V\left[\widehat\beta\right]\boldsymbol{x_0}' = \sigma^2\,\boldsymbol{x_0}\left(\boldsymbol{X}'\boldsymbol{X}\right)^{-1}\boldsymbol{x_0}'$, que es estimada por $\widehat{V}\left[\widehat{Y}_0\right] = \text{MSE}\,\boldsymbol{x_0}\left(\boldsymbol{X}'\boldsymbol{X}\right)^{-1}\boldsymbol{x_0}'$.
+
+</br>
+
+* Bajo el supuesto de normalidad en los errores, $\widehat{Y}_0$ es una variable aleatoria normal, debido a que es una combinación lineal de los $\widehat\beta_j$'s que también son normales.
+
+</br></br>
+
+<div class="content-box-gray">
+## **Resumen**
+
+$$\widehat{Y}_0 \sim N\left(E\left[ Y\vert\boldsymbol{x_0}\right], \sigma^2\,\boldsymbol{x_0}\left(\boldsymbol{X}'\boldsymbol{X}\right)^{-1}\boldsymbol{x_0}'\right)$$
+</div>
+
+
+Luego, se tiene que el estadístico
+
+</br>
+
+$T = \dfrac{\widehat{Y}_0 - E\left[ Y\vert\boldsymbol{x_0}\right]}{\text{se}(\widehat{Y}_0)} \sim t_{n - p}$, con $\text{se}(\widehat{Y}_0) = \sqrt{\widehat{V}[\widehat{Y}_0]}$, lo cual permite demostrar lo siguiente:
+
+</br>
+
+* Para la respuesta media $E\left[ Y\vert\boldsymbol{x_0}\right]$ en un vector apropiado $\boldsymbol{x_0}$.
+  
+</br></br></br>
+
+## **Pruebas de hipótesis sobre la respuesta media** 
+
+</br>
+
+| **Juego de hipótesis** | **Estadístico de prueba** | **Criterio de rechazo** |
+|:--:|:-----:|:---:|
+| $\begin{array}{l} H_0: \mu_{Y\vert\boldsymbol{x_0}} = c\\ H_1: \mu_{Y\vert\boldsymbol{x_0}} \neq c \end{array}$ con $c \in \mathbb{R}$ | $T_0 = \dfrac{\widehat{Y}_0 - c}{\text{se}\left(\widehat{Y}_0\right)} \overset{\text{bajo }H_0}{\sim} t_{n - p}$ | Se rechaza $H_0$ si $\vert T_0 \vert > t_{\alpha/2, n - p}$ |
+
+</br>
+
+donde ${t_{\alpha/2, n - p}}$ es el percentil $1 - \alpha/2$ de la distribución $t$-Student con $n - p$ grados de libertad.
+
+</br></br>
+
+### **IC del ($\boldsymbol{1} - \boldsymbol{\alpha}$)100% para la respuesta media $\boldsymbol{E\left[ Y\vert\boldsymbol{x_0}\right]}$**
+
+</br>
+
+Basados de nuevo en que el estadístico
+
+</br>
+
+$$T = \dfrac{\widehat{Y}_0 - E\left[ Y\vert\boldsymbol{x_0}\right]}{\text{se}(\widehat{Y}_0)} \sim t_{n - p},$$
+</br>
+
+lo cual implica que:
+
+</br>
+
+$$P\left(-t_{\alpha/2, n - p}<\dfrac{\widehat{Y}_0 - E\left[ Y\vert\boldsymbol{x_0}\right]}{\text{se}(\widehat{Y}_0)}<t_{\alpha/2, n - p}\right) = 1 - \alpha$$
+
+</br>
+
+De donde se obtiene que un IC del ($1 - \alpha$)100% para la respuesta media $E\left[ Y\vert\boldsymbol{x_0}\right]$ es:
+
+</br></br>
+
+<div class="content-box-blue">
+$$\widehat{y}_0 \pm t_{\alpha/2, n - p} \,\text{se}(\widehat{Y}_0).$$
+</div>
+
+</br></br>
+
+Considere ahora el problema de predecir un valor futuro $Y_0$ (no observado en la muestra) de la variable respuesta, en $X_1 = x_{01}, X_2 = x_{02}, \ldots, X_k = x_{0k}$.
+
+</br>
+
+Claramente, usando el modelo ajustado, predecimos tal valor por $\widehat{Y}_0$, pero sabemos que no es un estimador insesgado de $Y_0$, por lo que siempre se genera un error de predicción $Y_0 - \widehat{Y}_0$.
+
+</br>
+Note que el error de predicción tiene media cero y dado que el valor futuro y su pronóstico son independientes, entonces la varianza del error de predicción $\widehat{Y}_0 - Y_0$ está dada por
+$$V\left[Y_0 - \widehat{Y}_0\right] = V\left[Y_0\right] + V\left[\widehat{Y}_0\right] = \sigma^2\left[ 1 + \boldsymbol{x_0}\left(\boldsymbol{X}'\boldsymbol{X}\right)^{-1}\boldsymbol{x_0}\right],$$
+
+que es estimada por $\widehat{V}\left[\widehat{Y}_0 - Y_0\right] = \text{MSE}\left[ 1 + \boldsymbol{x_0}\left(\boldsymbol{X}'\boldsymbol{X}\right)^{-1}\boldsymbol{x_0}\right]$.
+
+
+</br>
+
+Con esto podemos hallar los siguientes resultados:
+
+* Para un valor futuro $Y_0$ en un vector apropiado $\boldsymbol{x_0}$
+
+</br></br></br>
+
+### **IP del ($\boldsymbol{1} - \boldsymbol{\alpha}$)100% para un valor futuro $\boldsymbol{Y_0}$**
+  
+</br>
+
+Basados en este caso en que el estadístico
+$$T = \dfrac{Y_0 - \widehat{Y}_0}{\text{se}(Y_0 - \widehat{Y}_0)} \sim t_{n - p},$$
+
+con $\text{se}(Y_0 - \widehat{Y}_0) = \sqrt{\widehat{V}[Y_0 - \widehat{Y}_0]}$, lo cual implica que:
+
+</br>
+
+$$P\left(-t_{\alpha/2, n - p}<\dfrac{Y_0 - \widehat{Y}_0 }{\text{se}(Y_0 - \widehat{Y}_0)}<t_{\alpha/2, n - p}\right) = 1 - \alpha$$
+</br>
+De donde se obtiene que un IP del ($1 - \alpha$)100% para un valor futuro $Y_0$ es:
+
+<div class="content-box-blue">
+$$\widehat{Y}_0 \ \pm \ t_{\alpha/2, n - p} \,\text{se}(Y_0 - \widehat{Y}_0)$$
+
+</div>
+
+</br></br>
+
+<div class="content-box-gray">
+### **Notas:**
+
+</br>
+
+* Los intervalos de predicción estiman los posibles valores para un valor particular de la variable respuesta (no para su media) en un vector dado $\boldsymbol{x_0}$.
+
+</br>
+
+* Asumimos que este valor particular es un valor futuro de la variable aleatoria $Y$, y por tanto, no fue utilizado en la regresión.
+
+</br>
+
+* Si $Y_0$ es un valor futuro y $\widehat{Y}_0 = \boldsymbol{x_0\widehat\beta}$ es su estimador, entonces estas dos variables aleatorias son estadísticamente independientes, dado que $Y_0$ no fue utilizado para hallar los parámetros estimados, de ahí el estadístico y los límites del intervalo de predicción.
+
+</div>
+</br></br></br>
+
+### **Precaución:**
+
+</br>
+Deben evitarse las extrapolaciones por fuera del rango de experimentación en el espacio de las predictoras, para lo cual no basta con evaluar si cada valor componente del vector $\boldsymbol{x_0}$ se encuentra dentro del rango usado (u observado) para la correspondiente predictora, sino que es necesario evaluar si $x_0$ pertenece a la región de observación conjunta.
+
+</br>
+
+Para ello basta con verificar si $h_{00} = \boldsymbol{x_0\left(\boldsymbol{X}'\boldsymbol{X}\right)^{-1}x'_0} < \max\limits_{1\leq i\leq n} \left\{h_{ii}\right\}$, con $h_{ii}$ el $i$-ésimo elemento de la matriz 'hat' $\boldsymbol{H}$.

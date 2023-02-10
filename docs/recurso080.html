@@ -9,9 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Unidad 2" />
 
 
-<title> Introducción</title>
+<title> Multicolinealidad</title>
 
 <script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -376,22 +377,95 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore"><span style="color:#034a94">
-<strong>Introducción</strong></span></h1>
+<strong>Multicolinealidad</strong></span></h1>
+<h4 class="author">Unidad 2</h4>
 
 </div>
 
 
+<p></br></p>
+<div id="comparación-de-efectos-parciales-de-las-variables-predictoras"
+class="section level2">
+<h2><strong>Comparación de efectos parciales de las variables
+predictoras</strong></h2>
+<p></br></p>
+<p>Considere el modelo de RLM:</p>
+</br>
+<div class="content-box-blue">
+<p><span class="math display">\[Y_i = \beta_0 + \beta_1X_{i1} +
+\beta_2X_{i2} + \cdots + \beta_kX_{ik} + \ \varepsilon_i,\text{ con }\
+\varepsilon_i \overset{\text{i.i.d}}{\sim} N\left(0,
+\sigma^2\right).\]</span></p>
+</div>
+<p></br></p>
+<ol style="list-style-type: decimal">
+<li>Si las variables predictoras no están en una misma escala de medida,
+no podemos determinar cual tiene mayor o menor efecto parcial sobre la
+respuesta promedio, en presencia de las demás, esto es, la magnitud de
+<span class="math inline">\(\beta_j\)</span> refleja las unidades de la
+variable <span class="math inline">\(X_j\)</span>.</li>
+</ol>
+<p></br></p>
+<ol start="2" style="list-style-type: decimal">
+<li>Para hacer comparaciones en forma directa de los coeficientes de
+regresión se recurre al uso de variables escaladas, tanto en la
+respuesta como en las predictoras.</li>
+</ol>
+<p></br></p>
+<p><strong>Escalamiento de longitud unitaria:</strong> cada variable es
+escalada restando su media muestral y dividiendo esta diferencia por la
+raíz cuadrada de la suma de cuadrados corregida de cada variable, es
+decir,</p>
+<p></br></p>
+<p><span class="math display">\[\begin{aligned}
+&amp;Y_i^* = \frac{Y_i - \bar{Y}}{\sqrt{\sum\limits_{h = 1}^n \left(Y_h
+- \bar{Y}\right)^2}}, \quad X_{ij}^* = \frac{X_{ij} -
+\bar{X}_j}{\sqrt{\sum\limits_{h = 1}^n \left(X_{hj} -
+\bar{X}_j\right)^2}},\\[0.2cm]
+&amp;\\
+&amp;\text{con } \left\{\begin{array}{c}
+i = 1, 2, \ldots, n\\
+j = 1, 2, \ldots, k
+\end{array}\right.
+\end{aligned}\]</span></p>
+<p></br></p>
+<p>Luego, se ajusta el modelo de RLM sin intercepto</p>
+<p></br></p>
+<div class="content-box-blue">
+<p><span class="math display">\[Y_i^* = \beta_1^*X_{i1}^* +
+\beta_2^*X_{i2}^* + \cdots + \beta_k^*X_{ik}^* +
+\varepsilon_i,\hspace{.5cm}\text{con } \hspace{.5cm}\varepsilon_i
+\overset{\text{i.i.d}}{\sim} N\left(0, \sigma^2\right)\]</span></p>
+</div>
+<p></br></p>
+<p>Los coeficientes <span class="math inline">\(\beta_j^*\)</span> son
+llamados <em>coeficientes de regresión estandarizados</em>, y estos
+pueden ser comparados directamente teniendo en cuenta que siguen siendo
+coeficientes de regresión parcial, es decir, <span
+class="math inline">\(\beta_j^*\)</span> mide el efecto de <span
+class="math inline">\(X_j^*\)</span> dado que las demás variables
+predictoras están en el modelo.</p>
+<p></br></p>
+<p>Además, los <span class="math inline">\(\beta_j^*\)</span> pueden
+servir para determinar la importancia relativa de <span
+class="math inline">\(X_j^*\)</span> en presencia de las demás
+variables, en la muestra o conjunto de datos particular considerado para
+el ajuste.</p>
 <p></br></br></p>
-<p><img src="img/banner_presentacion.png" width="100%" style="display: block; margin: auto;" /></p>
-<p></br></br></br></p>
-<p>En esta unidad se presentan los principales conceptos del
-<strong>Modelo de Regresión Lineal Múltiple</strong> (RLM), su
-estructura en forma matricial, estimación por el método de Mínimos
-Cuadrados Ordinarios (MCO), las propiedades de los estimadores, los
-supuestos que lo rigen, la validación de los mismos, inferencia tanto
-para los estimadores como las predicciones y pronósticos de la variable
-dependiente, el problema de la multicolinealidad y el código en R
-relacionado con las anteriores estimaciones y validaciones.</p>
+</div>
+<div id="multicolinealidad" class="section level2">
+<h2><strong>Multicolinealidad</strong></h2>
+<p></br></p>
+<p>Multicolinealidad es la existencia de dependencia casi lineal entre
+variables predictoras en el modelo de RLM.</p>
+<p>Si existiera dependencia lineal exacta entre dos o más variables
+predictoras, la matriz</p>
+<p><span
+class="math inline">\(\boldsymbol{X}&#39;\boldsymbol{X}\)</span> sería
+singular y por tanto <strong>no podríamos hallar los estimadores de
+mínimos cuadrados!</strong>.</p>
+<p></br></br></p>
+</div>
 
 
 

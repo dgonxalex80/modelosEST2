@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title> Indicadores de ajuste</title>
+
+<script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Modelos Estadísticos para la toma de decisiones</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Conceptos
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso005.html">Modelo de Regresión Lineal Múltiple</a>
+    </li>
+    <li>
+      <a href="recurso010.html">Correlación</a>
+    </li>
+    <li>
+      <a href="recurso015.html">Algebra Lineal</a>
+    </li>
+    <li>
+      <a href="recurso020.html">Notación matricial de modelo</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Estimación
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso030.html">Mínimos Cuadrados Ordinarios</a>
+    </li>
+    <li>
+      <a href="recurso050.html">Validación de los supuestos</a>
+    </li>
+    <li>
+      <a href="recurso035.html">Propiedades de los estimadores</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Inferencia
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso040.html">Inferencia sobre los parámetros</a>
+    </li>
+    <li>
+      <a href="recurso042.html">Inferencia sobre subconjunto de parámetros</a>
+    </li>
+    <li>
+      <a href="recurso045.html">Sobre los pronósticos</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Ajuste del modelo
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso055.html">Indicadores de ajuste</a>
+    </li>
+    <li>
+      <a href="recurso060.html">Validación cruzada</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Variables cat.
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso061.html">En el modelo de RLM</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Multicolinealidad
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso080.html">Multicolinealidad</a>
+    </li>
+    <li>
+      <a href="recurso081.html">Causas / Efectos</a>
+    </li>
+    <li>
+      <a href="recurso082.html">Diagnóstico</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    R 
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso100.html">Estimación MCO</a>
+    </li>
+    <li>
+      <a href="recurso110.html">Validación de supuestos</a>
+    </li>
+    <li>
+      <a href="recurso120.html">Validación cruzada</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore"><span style="color:#034a94">
+<strong>Indicadores de ajuste</strong></span></h1>
+
+</div>
+
+
+<p></br></br></p>
+<div id="indicadores-de-bondad-de-ajuste" class="section level2">
+<h2><strong>Indicadores de bondad de ajuste</strong></h2>
+<p></br></br></p>
+</div>
+<div id="falta-de-ajuste-en-el-modelo-de-rlm" class="section level2">
+<h2><strong>Falta de ajuste en el modelo de RLM</strong></h2>
+<p></br></p>
+<p>La falta de ajuste también puede ser evaluada y para el modelo de
+regresión múltiple se quiere saber si</p>
+<p></br></p>
+<p><span class="math display">\[E\left[ Y\vert X_1, X_2, \ldots,
+X_k\right] = \beta_0 + \beta_1X_1 + \beta_2X_2 + \cdots +
+\beta_kX_k,\]</span> </br></p>
+<p>es una superficie de respuesta apropiada, es decir, se quiere
+probar</p>
+<p><span class="math display">\[
+\begin{array}{l}
+H_0: E\left[ Y\vert X_1, X_2, \ldots, X_k\right] = \beta_0 + \beta_1X_1
++ \beta_2X_2 + \cdots + \beta_kX_k\\
+H_1: E\left[ Y\vert X_1, X_2, \ldots, X_k\right] \ne \beta_0 +
+\beta_1X_1 + \beta_2X_2 + \cdots + \beta_kX_k
+\end{array}
+\]</span></p>
+<p></br></p>
+<p>Para llevar a cabo esta prueba, se necesitan replicaciones de la
+respuesta en las combinaciones de niveles de las variables predictoras.
+El procedimiento es el mismo que se estudió en RLS y se basa en la
+descompocisión de la SSE</p>
+<p></br></p>
+<div class="content-box-blue">
+<p><span class="math display">\[\text{SSE} = \text{SSLOF} +
+\text{SSPE}\]</span></p>
+</div>
+<p></br></p>
+<p>El procedimiento de prueba se resume en la siguiente tabla:</p>
+<p></br></br></p>
+<p><strong>ANOVA con prueba de falta de ajuste en el modelo de
+RLM</strong></p>
+<p></br></p>
+<table>
+<colgroup>
+<col width="23%" />
+<col width="20%" />
+<col width="23%" />
+<col width="16%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Fuente de variación</th>
+<th align="right">Suma de cuadrados</th>
+<th align="center">Grados de libertad</th>
+<th align="center">Cuadrado medio</th>
+<th align="center"><span class="math inline">\(F\)</span> calculada</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Regresión</td>
+<td align="right">SSR</td>
+<td align="center">k</td>
+<td align="center"><span class="math inline">\(\text{MSR} =
+\frac{\text{SSR}}{k}\)</span></td>
+<td align="center"><span class="math inline">\(F_0 =
+\frac{\text{MSR}}{\text{MSE}}\)</span></td>
+</tr>
+<tr class="even">
+<td align="left">Error</td>
+<td align="right"><span class="math inline">\(\text{SSE}\)</span></td>
+<td align="center"><span class="math inline">\(n-p\)</span></td>
+<td align="center"><span class="math inline">\(\text{MSE} =
+\frac{\text{SSE}}{n-p}\)</span></td>
+<td align="center"></td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math inline">\(\color{gray}{\scriptsize
+\textit{Falta de ajuste}}\)</span></td>
+<td align="right"><span class="math inline">\(\ \color{gray}{\scriptsize
+\textit{SSLOF}}\)</span></td>
+<td align="center"><span class="math inline">\(\
+\color{gray}{\scriptsize m - p}\)</span></td>
+<td align="center"><span class="math inline">\(\color{gray}{\scriptsize
+\textit{MSLOF} = \frac{\textit{SSLOF}}{m-p}}\)</span></td>
+<td align="center"><span class="math inline">\(\color{gray}{\scriptsize
+F_0 = \frac{\textit{MSLOF}}{\textit{MSPE}}}\)</span></td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math inline">\(\color{gray}{\scriptsize
+\textit{Error Puro}}\)</span></td>
+<td align="right"><span class="math inline">\(\ \color{gray}{\scriptsize
+\textit{SSPE}}\)</span></td>
+<td align="center"><span class="math inline">\(\
+\color{gray}{\scriptsize n - m}\)</span></td>
+<td align="center"><span class="math inline">\(\
+\color{gray}{\scriptsize \textit{MSPE} = \frac{\textit{SSPE}}{n -
+m}}\)</span></td>
+<td align="center"></td>
+</tr>
+<tr class="odd">
+<td align="left">Total</td>
+<td align="right">SST</td>
+<td align="center"><span class="math inline">\(n - 1\)</span></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p>Se rechaza <span class="math inline">\(H_0\)</span> a un nivel de
+significancia <span class="math inline">\(\alpha\)</span> si <span
+class="math inline">\({F_0 &gt; f_{\alpha, m - p, n - m}}\)</span>. En
+tal caso se concluye que la superficie de respuesta no es apropiada.</p>
+<p></br></br></br></p>
+</div>
+<div id="medidas-remediales" class="section level2">
+<h2><strong>Medidas remediales</strong></h2>
+<p></br></p>
+<p>Las medidas remediales descritas en el caso de RLS también son
+aplicables en RLM. Con el fin de superar las deficiencias del modelo se
+pueden realizar transformaciones sobre la variable respuesta y/o sobre
+las variables predictoras.</p>
+<p></br></p>
+<p>Las transformaciones sobre la respuesta pueden ayudar en el caso de
+que los errores no resulten normales o la varianza no sea constante.
+Transformaciones sobre las variables predictoras resultan útiles cuando
+la superficie de respuesta es curvilínea.</p>
+<p></br></p>
+<p>Si las desviaciones respecto al supuesto de normalidad son severas, y
+ninguna transformación resulta útil y/o interpretable, existe otra
+alternativa, los llamados <em>modelos lineales generalizados</em> con
+los cuales se pueden modelar respuestas que no se distribuyen normales;
+sin embargo, tales modelos están más allá del alcance de este curso.</p>
+<p></br></br></br></p>
+</div>
+<div id="identificación-de-observaciones-extremas-en-el-modelo-de-rlm"
+class="section level2">
+<h2><strong>Identificación de observaciones extremas en el modelo de
+RLM</strong></h2>
+<p></br></p>
+<p>Además de la validación de supuestos en los errores de un modelo de
+RLM, se debe chequear la presencia de observaciones extremas, tales
+como:</p>
+<p></br></p>
+<ul>
+<li><p>Observaciones atípicas (outliers)</p></li>
+<li><p>Puntos de balanceo</p></li>
+<li><p>Observaciones influenciales</p></li>
+</ul>
+<p></br></br></br></p>
+<p></br></br></br></p>
+</div>
+<div id="observaciones-atípicas" class="section level2">
+<h2><strong>Observaciones atípicas</strong></h2>
+<p></br></p>
+<p>Una observación <strong>atípica</strong> (o <strong>outlier</strong>)
+es aquella que está separada (en su valor de la respuesta <span
+class="math inline">\(Y\)</span>) del resto de las observaciones y por
+tanto puede afectar los resultados del ajuste del modelo de
+regresión.</p>
+<p></br></p>
+<p>Interesa identificarlas para luego, si es posible analizar si se
+tratan de observaciones malas (por errores de registro o medición) que
+pueden ser descartadas, o si realmente son datos correctos pero extraños
+que no deben ser eliminados del conjunto de datos.</p>
+<p></br></p>
+<p>Para detectar observaciones atípicas se usan los <em>residuales
+escalados</em> definidos anteriormente. Se considera que una observación
+es <strong>atípica</strong> cuando su residual estudentizado <span
+class="math inline">\(r_i\)</span>, es tal que: <span
+class="math inline">\(\vert r_i\vert &gt; 3\)</span>.</p>
+<p></br></p>
+<p>Muchos <strong>outliers</strong> en los datos pueden causar niveles
+de confianza reales menores de lo esperado.</p>
+<!-- </br> -->
+<!-- La siguiente Figura ilustra el caso de **dos observaciones atípicas**.$\vspace{-0.25cm}$ -->
+<!-- ```{r fig35a, echo = F, fig.align = 'center', out.width = '78%'} -->
+<!-- #knitr::include_graphics("figures/grafobsatipica.png") -->
+<!-- ``` -->
+<p></br></br></br></p>
+</div>
+<div id="puntos-de-balanceo" class="section level2">
+<h2><strong>Puntos de balanceo</strong></h2>
+<p></br></p>
+<p>Un <strong>punto de balanceo</strong> es una observación en el
+espacio de las predictoras, alejada del resto de la muestra y que puede
+controlar ciertas propiedades del modelo ajustado.</p>
+<p></br></p>
+<p>Este tipo de observaciones posiblemente no afecte los coeficientes de
+regresión estimados pero sí las estadísticas de resumen como el <span
+class="math inline">\(R^2\)</span> y los errores estándar de los
+coeficientes estimados.</p>
+<p></br></p>
+<p>Los puntos de balanceo son detectados mediante el análisis de los
+elementos de la diagonal principal de la matriz <span
+class="math inline">\(\boldsymbol{H}\)</span>, los <span
+class="math inline">\(h_{ii}\)</span>, que proporcionan una medida
+estandarizada de la distancia de la <span
+class="math inline">\(i\)</span>-ésima observación al centro del espacio
+definido por las predictoras.</p>
+<p></br></p>
+<p>Se tiene lo siguiente:</p>
+<ul>
+<li>La media de los <span class="math inline">\(h_{ii}\)</span> es:</li>
+</ul>
+<p><span class="math display">\[\bar{h} = \dfrac{\sum\limits_{i = 1}^n
+h_{ii}}{n} = \frac{\text{traza}\left(\boldsymbol{H}\right)}{n} =
+\frac{p}{n},\]</span></p>
+<p>con <span class="math inline">\(p\)</span> el número de variables
+predictoras del modelo de RLM.</p>
+<p></br></p>
+<ul>
+<li>Se asume que la observación <span class="math inline">\(i\)</span>
+es un <strong>punto de balanceo</strong> si <span
+class="math inline">\(h_{ii} &gt; 2p/n\)</span>, pero si <span
+class="math inline">\(2p/n &gt; 1\)</span> este criterio no funciona
+pues los <span class="math inline">\(h_{ii}\)</span> siempre son menores
+que 1.</li>
+</ul>
+<p></br></p>
+<ul>
+<li>Observaciones con <span class="math inline">\(h_{ii}\)</span>
+grandes y residuales <span class="math inline">\(r_i\)</span> también
+grandes probablemente serán influenciales.</li>
+</ul>
+<!-- </br> -->
+<!-- La próxima Figura ilustra el caso de **una observación de balanceo**.$\vspace{-0.25cm}$ -->
+<!-- ```{r fig35b, echo = F, fig.align = 'center', out.width = '78%'} -->
+<!-- #knitr::include_graphics("figures/grafobspalanca.png") -->
+<!-- ``` -->
+<p></br></br></br></p>
+</div>
+<div id="observaciones-influenciales" class="section level2">
+<h2><strong>Observaciones influenciales</strong></h2>
+<p></br></p>
+<p>Una observación es <strong>influencial</strong> si tiene un impacto
+notable sobre los coeficientes de regresión ajustados, esto es, una
+observación influencial se dice <code>hala</code> al modelo en su
+dirección, es decir, una observación es influencial si su exclusión del
+modelo causa cambios importantes en la ecuación de regresión
+ajustada.</p>
+<p></br></p>
+<p>Estas observaciones se caracterizan por tener un valor moderadamente
+inusual tanto en el espacio de las predictoras como en la respuesta.</p>
+<p></br></p>
+<p>Después de identificar las observaciones que están alejadas con
+respecto a los valores de <span class="math inline">\(Y\)</span>
+(atípicas) y/o con respecto a sus valores en <span
+class="math inline">\(X\)</span> (puntos de balanceo) evaluamos si éstas
+son influenciales.</p>
+<p></br></p>
+<!-- La Figura siguiente ilustra el caso de **una observación influyente**.$\vspace{-0.25cm}$ -->
+<!-- ```{r fig35c, echo = F, fig.align = 'center', out.width = '78%'} -->
+<!-- #knitr::include_graphics("figures/grafobsinfluyente.png") -->
+<!-- ``` -->
+<p></br></p>
+<p>Para la evaluación se cuenta con las siguientes medidas:</p>
+<ul>
+<li><p><strong>Distancia de Cook</strong>.</p></li>
+<li><p><strong>Diagnóstico DFFITS</strong>.</p></li>
+<li><p><strong>Diagnóstico DFBETAS</strong>.</p></li>
+</ul>
+<p>A continuación se presentan los diagnósticos para detectar
+observaciones influenciales.</p>
+<p></br></p>
+<ol style="list-style-type: decimal">
+<li><strong>Distancia de Cook:</strong> es una medida de la distancia
+cuadrática entre, el estimador de <span
+class="math inline">\(\boldsymbol\beta\)</span> por mínimos cuadrados
+basado en las <span class="math inline">\(n\)</span> observaciones, y el
+estimador de <span class="math inline">\(\boldsymbol\beta\)</span>
+obtenido eliminando la <span class="math inline">\(i\)</span>-ésima
+observación, así:</li>
+</ol>
+<div class="content-box-blue">
+<p><span class="math display">\[D_i =
+\frac{\left(\boldsymbol{\widehat{\beta}}_{\left(i\right)} -
+\boldsymbol{\widehat{\beta}}\right)&#39;\boldsymbol{X&#39;X}\left(\boldsymbol{\widehat{\beta}}_{\left(i\right)}
+- \boldsymbol{\widehat{\beta}}\right)}{p\,\text{MSE}} =
+\frac{r_i^2}{p}\left(\frac{h_{ii}}{1 - h_{ii}}\right),\ i = 1, \ldots,
+n\]</span></p>
+</div>
+<p>donde, <span
+class="math inline">\(\boldsymbol{\widehat{\beta}}_{\left(i\right)}\)</span>
+es el vector de parámetros estimados obtenido cuando no se considera en
+el ajuste del modelo a la observación <span
+class="math inline">\(i\)</span>.</p>
+<p>Note que si <span class="math inline">\(D_i\)</span> es alto entonces
+la observación <span class="math inline">\(i\)</span> tiene influencia
+sobre el vector de parámetros estimados <span
+class="math inline">\(\boldsymbol{\widehat{\beta}}\)</span>.</p>
+<p></br></br></p>
+<div class="content-box-gray">
+<p><strong>NOTAS</strong></p>
+<ul>
+<li><p>Si <span class="math inline">\(D_i = f_{0.5, p, n - p}\)</span>
+entonces al eliminar el punto <span class="math inline">\(i\)</span> se
+movería <span
+class="math inline">\(\boldsymbol{\widehat{\beta}_{\left(i\right)}}\)</span>
+hacia la frontera de una región de confianza aproximada del 50% para
+<span class="math inline">\(\boldsymbol{\beta}\)</span>, basándose en el
+conjunto completo de datos, lo cual es un desplazamiento grande e indica
+que el estimador por mínimos cuadrados es sensible al <span
+class="math inline">\(i\)</span>-ésimo punto de datos.</p></li>
+<li><p>Como <span class="math inline">\(f_{0.5, p, n - p}\approx
+1\)</span> se dice que la observación <span
+class="math inline">\(i\)</span> será <strong>influencial</strong> si
+<span class="math inline">\(D_i &gt; 1\)</span>.</p></li>
+</ul>
+</div>
+<p></br></p>
+<ol start="2" style="list-style-type: decimal">
+<li><strong>Diagnóstico DFFITS:</strong> es el número de desviaciones
+estándar que el valor ajustado <span
+class="math inline">\(\widehat{y}_i\)</span> se mueve si la observación
+<span class="math inline">\(i\)</span> es omitida,</li>
+</ol>
+<div class="content-box-blue">
+<p><span class="math display">\[
+\text{DFFITS}_i = \frac{\widehat{Y}_i -
+\widehat{Y}_{\left(i\right)}}{\sqrt{\text{MSE}_{\left(i\right)}\,h_{ii}}}
+= \frac{e_i}{\sqrt{MSE_{\left(i\right)}\left(1 -
+h_{ii}\right)}}\left(\frac{h_{ii}}{1 - h_{ii}}\right)^{1/2}
+\]</span></p>
+</div>
+<p>donde, <span
+class="math inline">\(\widehat{Y}_{\left(i\right)}\)</span> es el <span
+class="math inline">\(i\)</span>-ésimo valor ajustado obtenido cuando no
+se considera en el ajuste del modelo a la observación <span
+class="math inline">\(i\)</span> y <span
+class="math inline">\(\text{MSE}_{\left(i\right)}\)</span> es el
+cuadrado medio del error obtenido cuando no se considera en el ajuste
+del modelo a la observación <span class="math inline">\(i\)</span>.</p>
+<p>Una observación será <strong>influencial</strong> si <span
+class="math inline">\(\vert\text{DFFITS}_i\vert &gt;
+2\sqrt{\frac{p}{n}}\)</span>.</p>
+<p></br></p>
+<ol start="3" style="list-style-type: decimal">
+<li><strong>Diagnóstico DFBETAS:</strong> indica cuánto cambia el <span
+class="math inline">\(j\)</span>-ésimo coeficiente de regresión estimado
+<span class="math inline">\(\widehat{\beta}_j\)</span> en unidades de
+desviación estándar, si se omite la <span
+class="math inline">\(i\)</span>-ésima observación,</li>
+</ol>
+<div class="content-box-blue">
+<p><span class="math display">\[\text{DFBETAS}_{j\left(i\right)} =
+\frac{\widehat{\beta}_j -
+\widehat{\beta}_{j\left(i\right)}}{\sqrt{\text{MSE}_{\left(i\right)}\,c_{jj}}}\]</span></p>
+</div>
+<p>donde <span class="math inline">\(c_{jj}\)</span> es el <span
+class="math inline">\(j\)</span>-ésimo elemento en la diagonal principal
+de la matriz <span
+class="math inline">\((\boldsymbol{X&#39;X})^{-1}\)</span> y <span
+class="math inline">\(\text{MSE}_{\left(i\right)}\)</span> es el MSE de
+la regresión sin la observación <span
+class="math inline">\(i\)</span>.</p>
+<p>Una observación será <strong>influencial</strong> si <span
+class="math inline">\(\vert \text{DFBETAS}_{j\left(i\right)}\vert &gt;
+2/\sqrt{n}\)</span>.</p>
+<p></br></p>
+<div class="content-box-gray">
+<p><strong>NOTA:</strong></p>
+<p>Tanto los <span class="math inline">\(D_i\)</span>, como los DFFITS y
+los DFBETAS se pueden afectar tanto por un error de ajuste grande como
+por un gran balanceo, por eso, los puntos que sean detectados por estos
+criterios deben ser investigados.</p>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

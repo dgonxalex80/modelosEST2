@@ -1,0 +1,168 @@
+---
+title: <span style="color:#034a94"> **Notación matricial**</span>
+author: "Unidad 2"
+output: html_document
+css: style.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA)
+
+# colores
+c1="#FF7F00"
+c2="#=EB0C6"
+c3="#034A94"
+c4="#686868"
+
+
+```
+
+</br></br></br>
+
+# **Notación** 
+
+Para facilitar la notación y el desarrollo de algunas pruebas se utiliza con frecuencia una escritura del modelo en **forma matricial**, 
+
+<div class="content-box-blue">
+$$Y = X \beta + \varepsilon$$
+Donde :
+
+* $Y$ : vector de valores de $y$, variable dependiente ($dim = n \times 1$)
+
+* $X$ : matriz que contiene los valores de las $k$ variables independientes ($dim = n \times k$)
+
+* $\varepsilon$ : vector de errores ($dim = n \times 1$)
+
+Conformando un sistema de $n$ ecuaciones con $k$ incognitas ($\beta_{i}$)
+
+</div>
+
+la cual requiere establecer algunas definiciones que se presentan a continuación.
+
+</br></br>
+
+$$\left[\begin{array}{c} Y_1\\ Y_2\\ \vdots\\ Y_n\end{array}\right] = 
+\left[\begin{array}{ccccc} 1 & X_{11} & X_{12} & \cdots & X_{1k}\\ 1 & X_{21} & X_{22} & \cdots & X_{2k}\\ \vdots & \vdots & \vdots & \cdots & \vdots\\ 1 & X_{n1} & X_{n2} & \cdots & X_{nk}\end{array}\right]
+\left[\begin{array}{c} \beta_0\\ \beta_1\\ \vdots\\ \beta_k\end{array}\right] +  
+\left[\begin{array}{c} \varepsilon_1\\ \varepsilon_2\\ \vdots\\ \varepsilon_n\end{array}\right]$$
+
+
+</br></br></br>
+
+## **Vectores aleatorios**
+
+</br>
+<div class="content-box-blue">
+Sean $y_1, y_2, \ldots, y_n$ variables aleatorias con medias $\mu_1, \mu_2, \ldots, \mu_n$ y varianzas $\sigma^2_1, \sigma^2_2, \ldots, \sigma^2_n$, respectivamente.
+
+</br>
+
+Sean $\sigma_{ij} = \text{COV}\left[ y_i, y_j\right] = E\left[\left(y_i - \mu_i\right)\left(y_j - \mu_j\right)\right]$ la covarianza entre las variables $y_i$ e $y_j$, con $i,j=1,2,\ldots,n$.
+
+</br>
+
+Se define el vector con **media o vector de medias** y **varianza o matriz de varianzas-covarianzas**
+
+$$\boldsymbol{y} = \left[ y_1, y_2, \ldots, y_n\right]'$$
+</br>
+
+$$\boldsymbol{\mu_y} = E\left[\boldsymbol{y}\right] = \left[ E\left[ y_1\right], \cdots, E\left[ y_n\right]\right]' = \left[\mu_1, \ldots, \mu_n\right]',$$
+</br>
+
+$$
+\boldsymbol{\Sigma_y} = V(\boldsymbol{y}) = \begin{bmatrix}
+\sigma_{11} &\sigma_{12} &\cdots &\sigma_{1n}\\
+\sigma_{21} &\sigma_{22} &\cdots &\sigma_{2n}\\
+\vdots &\vdots &\ddots &\vdots\\
+\sigma_{n1} &\sigma_{n2} &\cdots &\sigma_{nn}
+\end{bmatrix}
+$$
+
+</div>
+
+</br></br>
+
+<div class="content-box-yellow">
+### **Nota**
+
+Observe que en la matriz $\boldsymbol{\Sigma_y}$ los elementos:
+
+* $\sigma_{ij} = \sigma_{ji}$, es decir, la matriz $\boldsymbol{\Sigma_y}$ es una matriz simétrica.
+
+* $\sigma_{ii}=\sigma_i^2$, es decir, los elementos de la diagonal principal de $\boldsymbol{\Sigma_y}$ corresponden a las varianzas de las variables $y_i$.
+</div>
+
+</br>
+
+Por lo tanto se puede escribir,
+
+$$
+\boldsymbol{\Sigma_y} = \begin{bmatrix}
+\sigma^2_1 &\sigma_{12} &\cdots &\sigma_{1n}\\
+\sigma_{12} &\sigma^2_2 &\cdots &\sigma_{2n}\\
+\vdots &\vdots &\ddots &\vdots\\
+\sigma_{1n} &\sigma_{2n} &\cdots &\sigma^2_n
+\end{bmatrix}
+$$
+
+</br></br>
+
+<div class="content-box-gray">
+
+**Resumen**
+
+En resumen, la matriz de varianzas-covarianzas asociada a un vector aleatorio es una matriz:
+
+* Cuadrada y simétrica, de orden igual al tamaño del vector aleatorio.
+
+* En la diagonal principal contiene las varianzas asociadas a cada elemento del vector aleatorio.
+
+* Por fuera de la diagonal están las covarianzas entre los pares de elementos del vector aleatorio.
+
+</div>
+
+</br></br>
+
+## **Algunas propiedades de $E\left[y\right]$ y  $V[y]$**
+
+</br>
+
+<div class="content-box-blue">
+Sea $\boldsymbol{y}$ un vector aleatorio $n\times 1$ con media (vector de medias) $\boldsymbol{\mu_y}$ y varianza (matriz de varianzas-covarianzas) $\boldsymbol{\Sigma_y}$, como fueron definidos antes.
+
+Sean $\boldsymbol{A}$ una matriz $m\times n$ de constantes y $\boldsymbol{b}$ un vector $m\times 1$ de constantes, entonces:
+
+
+
+1. $E\left[\boldsymbol{Ay}\right] = \boldsymbol{A}E\left[\boldsymbol{y}\right] = \boldsymbol{A\mu_y}$.
+
+2. $E\left[\boldsymbol{Ay + b}\right] = E\left[\boldsymbol{Ay}\right] + E\left[\boldsymbol{b}\right] = \boldsymbol{A\mu_y} + \boldsymbol{b}$.
+
+3. $V\left[\boldsymbol{Ay}\right] = \boldsymbol{A}\ V\left[\boldsymbol{y}\right]\boldsymbol{A}' = \boldsymbol{A\ \Sigma_y\,A}'$.
+
+4. $V\left[\boldsymbol{Ay + b}\right] = V\left[\boldsymbol{Ay}\right] + V\left[\boldsymbol{b}\right] = \boldsymbol{A\ \Sigma_y\,A}' + \boldsymbol{0} = \boldsymbol{A\ \Sigma_y\,A}'$.
+</div>
+
+</br></br>
+
+<div class="content-box-yellow">
+### **Nota**
+
+Observe que se conservan las propiedades de la esperanza y la varianza del caso univariado, por ejemplo.
+
+</br>
+
+* $E\left[\boldsymbol{b}\right] = \boldsymbol{b}$, es decir, la esperanza de un vector constante es el mismo vector constante.
+
+</br>
+
+* $V\left[\boldsymbol{b}\right] = \boldsymbol{0}$, donde $\boldsymbol{0}$ es una matriz nula (cuyos elementos son todos cero) de orden $m\times m$. Así, la varianza de un vector constante es una matriz cuadrada nula de orden correspondiente al número de elementos del vector constante.
+
+</br>
+
+* $V\left[\boldsymbol{Ay}\right] = \boldsymbol{A\ \Sigma_y\,A}'$, es decir, la varianza de un vector aleatorio por una matriz constante resulta en una forma cuadrática de la matriz constante que involucra a la varianza del vector aleatorio.
+
+</div>
+
+</br></br>
+

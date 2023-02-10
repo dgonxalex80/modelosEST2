@@ -1,0 +1,54 @@
+---
+title: <span style="color:#034a94"> **formato**</span>
+output: html_document
+css: style.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(paqueteMOD)
+data("creditos")
+
+```
+
+</br></br>
+
+
+
+
+$$ 
+A= \left[\begin{array}{ccccc} a_{11} & a_{12} & \cdots & a_{1n}\\ 
+                           a_{21} & a_{22} & \cdots & a_{2n}\\ 
+                           \vdots & \vdots & \vdots & \cdots \\ 
+                           a_{n1} & a_{n2} & \cdots & a_{nn}\end{array}\right]
+\hspace{1cm}
+B= \left[\begin{array}{ccccc} b_{11} & b_{12} & \cdots & b_{1n}\\ 
+                              b_{21} & b_{22} & \cdots & b_{2n}\\ 
+                              \vdots & \vdots & \vdots & \cdots \\
+                              \vdots & \vdots & \vdots & \cdots \\
+                              b_{m1} & b_{m2} & \cdots & b_{mn}\end{array}\right]
+$$
+
+
+
+$$
+\text{x} =\left[\begin{array}{c} x_1\\ x_2\\ \vdots\\ x_n\end{array}\right] 
+\hspace{1cm}
+a = \left[\begin{array}{c} a_1\\ a_2\\ \vdots\\ a_n\end{array}\right] 
+\hspace{1cm}
+$$
+
+
+
+
+$$  
+\left[\begin{array}{c} \varepsilon_1\\ \varepsilon_2\\ \vdots\\ \varepsilon_n\end{array}\right]$$
+$$
+
+$$\left[\begin{array}{c} Y_1\\ Y_2\\ \vdots\\ Y_n\end{array}\right] = 
+\left[\begin{array}{ccccc} 1 & X_{11} & X_{12} & \cdots & X_{1k}\\ 1 & X_{21} & X_{22} & \cdots & X_{2k}\\ \vdots & \vdots & \vdots & \cdots & \vdots\\ 1 & X_{n1} & X_{n2} & \cdots & X_{nk}\end{array}\right]
+\left[\begin{array}{c} \beta_0\\ \beta_1\\ \vdots\\ \beta_k\end{array}\right] +  
+\left[\begin{array}{c} \varepsilon_1\\ \varepsilon_2\\ \vdots\\ \varepsilon_n\end{array}\right]$$
+
+
+$$\left[\begin{array}{c} Y_1\\ Y_2\\ \vdots\\ Y_n\end{array}\right]$$

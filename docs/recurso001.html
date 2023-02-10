@@ -11,7 +11,7 @@
 
 
 
-<title> Introducción</title>
+<title> formato</title>
 
 <script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -376,22 +376,55 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore"><span style="color:#034a94">
-<strong>Introducción</strong></span></h1>
+<strong>formato</strong></span></h1>
 
 </div>
 
 
 <p></br></br></p>
-<p><img src="img/banner_presentacion.png" width="100%" style="display: block; margin: auto;" /></p>
-<p></br></br></br></p>
-<p>En esta unidad se presentan los principales conceptos del
-<strong>Modelo de Regresión Lineal Múltiple</strong> (RLM), su
-estructura en forma matricial, estimación por el método de Mínimos
-Cuadrados Ordinarios (MCO), las propiedades de los estimadores, los
-supuestos que lo rigen, la validación de los mismos, inferencia tanto
-para los estimadores como las predicciones y pronósticos de la variable
-dependiente, el problema de la multicolinealidad y el código en R
-relacionado con las anteriores estimaciones y validaciones.</p>
+<p><span class="math display">\[
+A= \left[\begin{array}{ccccc} a_{11} &amp; a_{12} &amp; \cdots &amp;
+a_{1n}\\
+                           a_{21} &amp; a_{22} &amp; \cdots &amp;
+a_{2n}\\
+                           \vdots &amp; \vdots &amp; \vdots &amp; \cdots
+\\
+                           a_{n1} &amp; a_{n2} &amp; \cdots &amp;
+a_{nn}\end{array}\right]
+\hspace{1cm}
+B= \left[\begin{array}{ccccc} b_{11} &amp; b_{12} &amp; \cdots &amp;
+b_{1n}\\
+                              b_{21} &amp; b_{22} &amp; \cdots &amp;
+b_{2n}\\
+                              \vdots &amp; \vdots &amp; \vdots &amp;
+\cdots \\
+                              \vdots &amp; \vdots &amp; \vdots &amp;
+\cdots \\
+                              b_{m1} &amp; b_{m2} &amp; \cdots &amp;
+b_{mn}\end{array}\right]
+\]</span></p>
+<p><span class="math display">\[
+\text{x} =\left[\begin{array}{c} x_1\\ x_2\\ \vdots\\
+x_n\end{array}\right]
+\hspace{1cm}
+a = \left[\begin{array}{c} a_1\\ a_2\\ \vdots\\ a_n\end{array}\right]
+\hspace{1cm}
+\]</span></p>
+<p><span class="math display">\[  
+\left[\begin{array}{c} \varepsilon_1\\ \varepsilon_2\\ \vdots\\
+\varepsilon_n\end{array}\right]\]</span> $$</p>
+<p><span class="math display">\[\left[\begin{array}{c} Y_1\\ Y_2\\
+\vdots\\ Y_n\end{array}\right] =
+\left[\begin{array}{ccccc} 1 &amp; X_{11} &amp; X_{12} &amp; \cdots
+&amp; X_{1k}\\ 1 &amp; X_{21} &amp; X_{22} &amp; \cdots &amp; X_{2k}\\
+\vdots &amp; \vdots &amp; \vdots &amp; \cdots &amp; \vdots\\ 1 &amp;
+X_{n1} &amp; X_{n2} &amp; \cdots &amp; X_{nk}\end{array}\right]
+\left[\begin{array}{c} \beta_0\\ \beta_1\\ \vdots\\
+\beta_k\end{array}\right] +  
+\left[\begin{array}{c} \varepsilon_1\\ \varepsilon_2\\ \vdots\\
+\varepsilon_n\end{array}\right]\]</span></p>
+<p><span class="math display">\[\left[\begin{array}{c} Y_1\\ Y_2\\
+\vdots\\ Y_n\end{array}\right]\]</span></p>
 
 
 

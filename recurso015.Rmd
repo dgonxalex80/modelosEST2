@@ -1,0 +1,199 @@
+---
+title: <span style="color:#034a94"> **Algebra Lineal**</span>
+output: html_document
+css: style.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(paqueteMOD)
+data("creditos")
+
+```
+
+</br></br>
+
+A continuación se revisan una serie de propiedades y conceptos de algebra relacionados con vectores y matrices, importantes para entender la estimación de MCO y los procesos de inferencia estadiística bajo el enfoque matricial.
+
+</br></br>
+
+# **Algunas definiciones básicas en teoría matricial**
+
+</br>
+
+<div class="content-box-blue">
+
+Sean : 
+
+* $\boldsymbol{A}$ y $\boldsymbol{B}$ matrices de constantes de orden $n\times n$ y $m\times n$ respectivamente,
+
+$$ 
+A= \left[\begin{array}{ccccc} a_{11} & a_{12} & \cdots & a_{1n}\\ 
+                           a_{21} & a_{22} & \cdots & a_{2n}\\ 
+                           \vdots & \vdots & \vdots & \cdots \\ 
+                           a_{n1} & a_{n2} & \cdots & a_{nn}\end{array}\right]
+\hspace{1cm}
+B= \left[\begin{array}{ccccc} b_{11} & b_{12} & \cdots & b_{1n}\\ 
+                              b_{21} & b_{22} & \cdots & b_{2n}\\ 
+                              \vdots & \vdots & \vdots & \cdots \\
+                              \vdots & \vdots & \vdots & \cdots \\
+                              b_{m1} & b_{m2} & \cdots & b_{mn}\end{array}\right]
+$$
+
+
+* $\boldsymbol{x} = \left[ x_1, \ldots, x_n\right]'$ un vector de variables de orden $n\times 1$, 
+
+* $\boldsymbol{a}$ un vector de constantes de orden $n\times 1$; y 
+
+$$
+\text{x} =\left[\begin{array}{c} x_1\\ x_2\\ \vdots\\ x_n\end{array}\right] 
+\hspace{1cm}
+a = \left[\begin{array}{c} a_1\\ a_2\\ \vdots\\ a_n\end{array}\right] 
+\hspace{1cm}
+$$
+
+
+* $\boldsymbol{I}$ la matriz identidad de orden $n$.
+
+
+$$
+I_n = \left[\begin{array}{ccccc} 1 & 0 & \cdots & 0\\ 
+                              0 & 1 & \cdots & 0\\ 
+                              \vdots & \vdots & \vdots & \cdots \\ 
+                              0 & 0 & \cdots & 1\end{array}\right]
+$$
+
+</br>
+
+Entonces:
+
+1. $\boldsymbol{\left(BA\right)}' = \boldsymbol{A}'\boldsymbol{B}'$,  la traspuesta de un producto es igual al producto invertido de las traspuestas.
+
+</br>
+
+2. $\boldsymbol{A}$ es simétrica si $\boldsymbol{A}' = \boldsymbol{A}$.
+
+</br>
+
+3. $\boldsymbol{A}$ es idempotente si $\boldsymbol{AA} = \boldsymbol{A}$.
+
+</br>
+
+4. Si $\boldsymbol{A}$ es simétrica e idempotente, entonces $\left(\boldsymbol{I} - \boldsymbol{A}\right)$ también es simétrica e idempotente.
+
+</br>
+
+5. **Forma cuadrática:** la función 
+
+$$\boldsymbol{x}'\boldsymbol{Ax} = \sum_{i = 1}^n \sum_{j = 1}^n a_{ij}x_ix_j = a_{11}x_{1}^{2}+ a_{12}x_1x_2+a_{13}x_1x_3+ \dots + a_{nn}x_{n}^{2}$$ 
+
+se le llama forma cuadrática de $\boldsymbol{x}$, donde $a_{ij}$ es la $ij$-ésima componente de la matriz $\boldsymbol{A}$.
+
+</br>
+
+6. **Matriz definida positiva y semidefinida positiva:** la matriz $\boldsymbol{A}$ se dice que es:
+   a) Definida positiva, si $\boldsymbol{x}'\boldsymbol{Ax} > 0,\; \forall\boldsymbol{x}$.
+   a) Semidefinida positiva si $\boldsymbol{x}'\boldsymbol{Ax} \geq 0,\; \forall\boldsymbol{x}$.
+
+</div>
+
+</br></br></br>
+
+
+# **Algunas propiedades de derivadas vectoriales o matriciales**
+
+</br>
+
+<div class="content-box-blue">
+Sean :
+
+* $\boldsymbol{A}$ una matriz de constantes de orden $n\times n$; 
+
+* $\boldsymbol{x} = \left[ x_1, \ldots, x_n\right]'$ un vector de variables de orden $n\times 1$; y 
+
+* $\boldsymbol{a}$ un vector de constantes de orden $n\times 1$.
+
+</br>
+
+Entonces:
+
+</br>
+
+1. $\dfrac{\partial\left(\boldsymbol{a}'\boldsymbol{x}\right)}{\partial\boldsymbol{x}} = \dfrac{\partial\left(\boldsymbol{x}'\boldsymbol{a}\right)}{\partial\boldsymbol{x}} = \boldsymbol{a}$.
+
+</br>
+
+2. $\dfrac{\partial\left(\boldsymbol{x}'\boldsymbol{x}\right)}{\partial\boldsymbol{x}} = 2\boldsymbol{x}$.
+
+</br>
+
+3. $\dfrac{\partial\left(\boldsymbol{x}'\boldsymbol{Ax}\right)}{\partial\boldsymbol{x}} = \boldsymbol{Ax} + \boldsymbol{A}'\boldsymbol{x}$, pero si $\boldsymbol{A}$ es simétrica, entonces $\dfrac{\partial\left(\boldsymbol{x}'\boldsymbol{Ax}\right)}{\partial\boldsymbol{x}} = 2\boldsymbol{Ax}$.
+</div>
+
+</br></br></br>
+
+# **Algunos resultados distribucionales para vectores aleatorios**
+
+</br>
+
+<div class="content-box-blue">
+
+Sea $\boldsymbol{y}$ un vector aleatorio normal $n$-variado con media $\boldsymbol{\mu_y}$ y matriz de varianzas-covarianzas no singular $\boldsymbol{\Sigma_y}$, es decir, $\boldsymbol{y} \sim \boldsymbol{N}_n\boldsymbol{\left(\mu_y, \Sigma_y\right)}$.
+
+Sean $\boldsymbol{A}$ una matriz $n\times n$ de constantes y $\boldsymbol{U}$ una forma cuadrática de $\boldsymbol{y}$ definida como: $\boldsymbol{U} = \boldsymbol{y}'\boldsymbol{Ay}$.
+
+</br></br>
+
+Se tienen los siguientes resultados:
+
+1. Si $\boldsymbol{A\Sigma_y}$ ó $\boldsymbol{\Sigma_yA}$ es una matriz idempotente de rango $p$, entonces
+$$
+\boldsymbol{U} \sim \chi^2_{p, \lambda}
+$$
+
+   donde, $\lambda = \boldsymbol{\mu_y}'\boldsymbol{A\mu_y}$ es el parámetro de no centralidad de la distribución chi-cuadrado. 
+
+</br>
+
+2. Si $\boldsymbol{\Sigma_y} = \sigma^2\boldsymbol{I}$ y $\boldsymbol{A}$ es idempotente y de rango $p$, entonces
+$$
+\frac{\boldsymbol{U}}{\sigma^2}\sim \chi^2_{p,\lambda}
+$$
+
+   donde, $\lambda = \boldsymbol{\mu_y}'\boldsymbol{A\mu_y}/\sigma^2$.
+
+</br>
+
+3. Sean $\boldsymbol{B}$ una matriz $m\times n$ y $\boldsymbol{W}$ una forma lineal definida como: $\boldsymbol{W} = \boldsymbol{By}$, entonces la forma cuadrática $\boldsymbol{U} = \boldsymbol{y}'\boldsymbol{Ay}$ y $\boldsymbol{W}$ son independientes si
+$$
+\boldsymbol{B\Sigma_yA} = \boldsymbol{0}
+$$
+
+   donde $\boldsymbol{0}$ es la matriz nula de orden $m\times n$.
+
+</br>
+
+<div class="content-box-gray">
+### **Nota:** 
+
+Si $\boldsymbol{\Sigma_y} = \sigma^2\boldsymbol{I}$, entonces $\boldsymbol{U}$ y $\boldsymbol{W}$ son independientes si $\boldsymbol{BA} = \boldsymbol{0}$.
+</div>
+
+</br>
+
+4. Sean $\boldsymbol{B}$ una matriz $n\times n$ y $\boldsymbol{V} = \boldsymbol{y}'\boldsymbol{By}$ otra forma cuadrática de $\boldsymbol{y}$, entonces las dos formas cuadráticas $\boldsymbol{U}$ y $\boldsymbol{V}$ son independientes si $$\boldsymbol{A\Sigma_yB} = \boldsymbol{0}$$
+
+</br>
+
+<div class="content-box-gray">
+### **Nota:** 
+
+Si $\boldsymbol{\Sigma_y} = \sigma^2\boldsymbol{I}$, entonces $\boldsymbol{U}$ y $\boldsymbol{V}$ son independientes si $\boldsymbol{AB} = \boldsymbol{0}$.
+</div>
+
+</div>
+
+</br></br>
+
+
+Los anteriores resultados se utilizan en la construcción de la estimación por MCO y las propiedades de los estimadores, la matriz de varianza covarianzas de los errores y la sus respectivas inferencias.

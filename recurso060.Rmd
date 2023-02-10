@@ -1,0 +1,57 @@
+---
+title: <span style="color:#034a94"> **Validación cruzada**</span>
+author: "Unidad 2"
+output: html_document
+css: style.css
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA)
+
+
+# colores
+c1="#FF7F00"
+c2="#=EB0C6"
+c3="#034A94"
+c4="#686868"
+
+```
+
+</br></br>
+
+Antes de utilizar los resultados obtenidos al estimar un modelo de regresión consiste en validar la sensibilidad del modelo al ser expuesto a información diferente a la utilizada para su estimación. Mediante la validación cruzada se evalua se examina si el modelo de regresión conserva una estabilidad al probarse con otra información.
+
+
+</br></br>
+
+Procedimiento:
+
+</br>
+
+1. Se utilizan todos los datos para realizar una primera estimación del modelo
+
+</br>
+
+2. Los datos disponible se dividen en dos partes : una muestra para la estimación del modelo y una parte de validación . La primera puede contener entre el 50% al 90% de la muestra total
+
+</br>
+
+3. El modelo de regresión se estima utilizando únicamente la muestra de estimación, el cual es comparado con la estimación realizada en el punto 1, para determinar la concordancia con las magnitudes y los signos de los coeficientes
+
+
+</br>
+
+4. El modelo estimado en el punto 3, es utilizado para estimar los valores de la variable dependiente ($\widehat{Y}$) para la muestra de validación 
+
+</br>
+
+
+5. Los valores de $Y$ de la muestra de validación y los respectivos valores de $\widehat{Y}$ estimados en el punto 4, son correlacionados, obteniendo $r_{y, \widehat{y}}$ . El valor obtenido se compara con el $R^{2}$ del modelo obtenido con toda la muestra y así evaluar el grado de encogimiento.
+
+
+</br>
+
+Adicionalmente se puede realizar nuevamente la validación invirtiendo las muestras, es decir utilizando la muestra de validación como muestra de estimación y la muestra de estimación como muestra de validación, para finalmente realizar una comparación de los resultados. A este procedimiento se le conoce como validación cruzada doble.
+
+</br></br>

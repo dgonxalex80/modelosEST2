@@ -11,7 +11,7 @@
 
 
 
-<title> Introducción</title>
+<title> Modelo de Regresión Lineal Múltiple</title>
 
 <script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -375,23 +375,188 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore"><span style="color:#034a94">
-<strong>Introducción</strong></span></h1>
+<h1 class="title toc-ignore"><span style="color:#034a94"> <strong>Modelo
+de Regresión Lineal Múltiple</strong></span></h1>
 
 </div>
 
 
 <p></br></br></p>
-<p><img src="img/banner_presentacion.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>En análisis de regresión usualmente se utiliza más de una variable
+predictora <span class="math inline">\(X_1, X_2, ....\)</span>, para
+modelar el valor de una variable respuesta de interés <span
+class="math inline">\(Y\)</span>. Si la relación funcional entre la
+respuesta <span class="math inline">\(Y\)</span> y las variables
+predictoras es lineal en los parámetros, se llega al caso de la
+regresión lineal múltiple (<strong>RLM</strong>).</p>
+<p></br></p>
+<p>En el ajuste y análisis de este modelo se obtienen resultados que son
+extensiones de los que se revisaron para el regresión lineal simple.</p>
+<p></br></p>
+<!-- A continuación se introducen nociones preliminares relacionados con la forma matricial del modelo que permite un manejo más simple de la estructura del modelo del RLM. -->
 <p></br></br></br></p>
-<p>En esta unidad se presentan los principales conceptos del
-<strong>Modelo de Regresión Lineal Múltiple</strong> (RLM), su
-estructura en forma matricial, estimación por el método de Mínimos
-Cuadrados Ordinarios (MCO), las propiedades de los estimadores, los
-supuestos que lo rigen, la validación de los mismos, inferencia tanto
-para los estimadores como las predicciones y pronósticos de la variable
-dependiente, el problema de la multicolinealidad y el código en R
-relacionado con las anteriores estimaciones y validaciones.</p>
+<div id="definición-del-modelo" class="section level2">
+<h2><strong>Definición del modelo</strong></h2>
+<p></br></p>
+<p>Considere el caso en el cual se desea modelar la variabilidad total
+de una variable respuesta de interés <span
+class="math inline">\(Y\)</span>, en función de relaciones lineales con
+dos o más variables predictoras (<span class="math inline">\(X_1, X_2,
+\dots, X_k\)</span>), formuladas simultáneamente en un único modelo.</p>
+<p></br></p>
+<p>Suponemos en principio que las variables predictoras guardan poca
+asociación lineal entre sí, es decir, cada variable predictora aporta
+información independiente de las demás predictoras presentes en el
+modelo (hasta cierto grado, la información aportada por cada una no es
+redundante).</p>
+<p></br></p>
+<p>La ecuación del modelo de regresión en este caso es:</p>
+<p></br></p>
+<div class="content-box-blue">
+<span class="math display">\[
+Y_i = \beta_0 + \beta_1X_{i1} + \beta_2X_{i2} + \cdots+ \beta_kX_{ik} +
+\varepsilon_i, \quad i = 1, 2, \ldots, n.
+\]</span>
+</div>
+<p></br></p>
+<p>Donde:</p>
+<ul>
+<li><span class="math inline">\(\beta_0, \beta_1, \ldots,
+\beta_k\)</span> : son los <span class="math inline">\(p\)</span>
+parámetros del modelo (uno por cada variable predictora más uno por el
+intercepto, en total <span class="math inline">\(p = (k + 1\)</span>)
+parámetros a estimar.</li>
+</ul>
+<p></br></p>
+<ul>
+<li><span class="math inline">\(X_{i1}, X_{i2}, \ldots, X_{ik}\)</span>
+: son los valores en la <span class="math inline">\(i\)</span>-ésima
+observación muestral, de las <span class="math inline">\(k\)</span>
+variables predictoras consideradas en el modelo.</li>
+</ul>
+<p></br></p>
+<ul>
+<li><span class="math inline">\(\varepsilon_i \overset{\text{iid}}{\sim}
+N\left(0,\sigma ^2 \right), \quad i = 1, 2, \ldots, n\)</span>, los
+errores identica e independientemente distribuidos nornal con media cero
+y varianza constante.</li>
+</ul>
+<p></br></p>
+<p>Este modelo es de primer orden ya que no se presentan efectos de
+interacción entre las <span class="math inline">\(k\)</span> variables
+predictoras. Por otro lado, estadísticamente, se establece que la
+respuesta media está dada por:</p>
+<p></br></p>
+<div class="content-box-blue">
+<p><span class="math display">\[
+E\left(Y\vert X_1, X_2, \ldots, X_k\right) = \beta_0 + \beta_1X_1 +
+\beta_2X_2 + \cdots + \beta_kX_k,
+\]</span></p>
+</div>
+<p></br> la cual representa un hiperplano en un espacio de dimensión
+<span class="math inline">\({k + 1}\)</span>, llamado <em>superficie de
+regresión</em> o <em>superficie de respuesta</em>.</p>
+<p></br></p>
+<p>Similar al modelo de regresión lineal simple, bajo los supuestos de
+normalidad, independencia y varianza constante de los errores, se tiene
+que:</p>
+<p></br></p>
+<div class="content-box-blue">
+<p><span class="math display">\[
+Y_i\vert_{X_{i1}, \ldots, X_{ik}} \overset{\text{ind}}{\sim}
+N\left(\beta_0 + \beta_1X_{i1} + \cdots+ \beta_kX_{ik}\hspace{.1cm} ,
+\hspace{.1cm} \sigma^2\right), \quad i = 1, 2, \ldots, n.
+\]</span></p>
+</div>
+<p></br></br></br></p>
+</div>
+<div id="significado-de-los-coeficientes-de-regresión"
+class="section level2">
+<h2><strong>Significado de los coeficientes de regresión</strong></h2>
+<p></br></p>
+<div class="content-box-blue">
+<p><span class="math inline">\(\beta_0\)</span>, el intercepto <span
+class="math inline">\(Y\)</span> del plano, representa la respuesta
+media de <span class="math inline">\(Y\)</span> cuando en el conjunto de
+observaciones se incluye la coordenada</p>
+<p><span class="math display">\[{\left(X_1, X_2, \ldots, X_k\right) =
+\left(0, 0, \ldots, 0\right)},\]</span></p>
+</div>
+<p></br></p>
+<p>de lo contrario si tal coordenada no es observada o no está incluida
+en el rango experimental, entonces <span
+class="math inline">\({\beta_0}\)</span> no será interpretable.</p>
+<p></br></p>
+<div class="content-box-blue">
+<p><span class="math inline">\({\beta_j,\hspace{.3cm} j = 1, 2, \dots,
+k}\)</span>, indican el cambio en la respuesta media de <span
+class="math inline">\({Y}\)</span> por unidad de incremento en la
+respectiva variable <span class="math inline">\({X_j}\)</span>, cuando
+las demás predictoras permanecen constantes (sin importar en qué nivel
+son fijadas estas últimas).</p>
+</div>
+<p></br></p>
+<p>Como los efectos de una predictora sobre la respuesta media no
+dependen del nivel de las demás, tales efectos son denominados
+<em>efectos aditivos</em>. Los parámetros <span
+class="math inline">\({\beta_j}\)</span>, son también llamados
+<em>coeficientes de regresión parcial</em> porque reflejan el efecto
+parcial de una variable predictora sobre la respuesta media en presencia
+de las demás predictoras que aparecen en el modelo.</p>
+<p></br></p>
+<div id="nota" class="section level3 content-box-yellow">
+<h3><strong>NOTA:</strong></h3>
+<p>El término <em>modelo lineal</em> significa que el modelo es lineal
+en los parámetros, lo cual no hace referencia a la forma de la
+superficie de respuesta.</p>
+<table>
+<colgroup>
+<col width="43%" />
+<col width="56%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td align="left">lineal en parámetros</td>
+<td align="left"><span class="math inline">\(Y_i = \beta_0 +
+\beta_1X_{i1} + \beta_2X_{i2} + \cdots+ \beta_kX_{ik} +
+\varepsilon_i\)</span></td>
+</tr>
+<tr class="even">
+<td align="left">no lineal en parámetros</td>
+<td align="left"><span class="math inline">\(Y_i = \beta_0
+\hspace{.2cm}\exp{\{ \beta_1X_{i1} + \beta_2X_{i2} + \cdots+
+\beta_kX_{ik}\}} + \varepsilon_i\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p></br></br></p>
+</div>
+<div id="tipos-de-variables-y-de-efectos-en-los-modelos"
+class="section level2">
+<h2><strong>Tipos de variables y de efectos en los modelos</strong></h2>
+<p></br></p>
+<p>Las variables predictoras (<span
+class="math inline">\(X_{i}\)</span>) pueden ser:</p>
+<ul>
+<li><p><strong>Cuantitativas</strong>, caso en el cual se supone se
+miden sin error (o el error es despreciable).</p></li>
+<li><p><strong>Cualitativas</strong> o categóricas, en este caso su
+manejo en el modelo se realiza a través de la definición de variables
+indicadoras, las cuales toman valores de 0 ó 1.</p></li>
+<li><p><strong>Polinómicas</strong>, en caso tener una de las variables
+independientes con potencias, como por ejemplo : <span
+class="math inline">\(X_j^{2}\)</span>, <span
+class="math inline">\(X_j^{3}\)</span>, <span
+class="math inline">\(X_j^{4}\)</span>, <span
+class="math inline">\(\dots\)</span></p></li>
+</ul>
+<p></br></p>
+<p>La variable dependiente o respuesta se considera en todos los casos
+como una variable cuantitativa</p>
+<p></br></br></p>
+<p>Todos estos casos serán abordados en esta Unidad.</p>
+</div>
 
 
 

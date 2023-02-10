@@ -11,7 +11,7 @@
 
 
 
-<title> Introducción</title>
+<title> Causas - Efectos</title>
 
 <script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -375,23 +375,109 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore"><span style="color:#034a94">
-<strong>Introducción</strong></span></h1>
+<h1 class="title toc-ignore"><span style="color:#034a94"> <strong>Causas
+- Efectos</strong></span></h1>
 
 </div>
 
 
 <p></br></br></p>
-<p><img src="img/banner_presentacion.png" width="100%" style="display: block; margin: auto;" /></p>
+<div id="causas-de-la-multicolinealidad" class="section level2">
+<h2><strong>Causas de la multicolinealidad</strong></h2>
+<p></br></p>
+<p>Algunas de las causas más comunes de la multicolinealidad son:</p>
+<p></br></p>
+<ol style="list-style-type: decimal">
+<li><strong>El método de recolección de los datos.</strong>, muestras
+recogidas en un rango reducido de valores.</li>
+</ol>
+<p><!-- **Datos de tiempos de entrega** (*Fuente: Mongomery et al. (2002)*) --></p>
+<p></br></p>
+<ol start="2" style="list-style-type: decimal">
+<li><strong>Restricciones en el modelo o en la población.</strong></li>
+</ol>
+<!-- <center> -->
+<!-- ```{r, echo=FALSE, out.width="60%", fig.align = "center"} -->
+<!-- knitr::include_graphics("img/diagrama1.png") -->
+<!-- ``` -->
+<!-- Fuente: Datos de consumo de electricidad - Mongomery et al. (2002) -->
+<!-- </center> -->
+<p></br></p>
+<ol start="3" style="list-style-type: decimal">
+<li><strong>Especificación del modelo.</strong> Por ejemplo, al agregar
+términos polinomiales a un modelo cuando el rango de la predictora es
+pequeño.</li>
+</ol>
+<p></br></p>
+<ol start="4" style="list-style-type: decimal">
+<li><strong>Un modelo sobredefinido.</strong> Por ejemplo, en
+investigación médica donde para algunos pocos pacientes se toma una gran
+cantidad de predictoras. Es decir que posee más variables que
+observaciones.</li>
+</ol>
 <p></br></br></br></p>
-<p>En esta unidad se presentan los principales conceptos del
-<strong>Modelo de Regresión Lineal Múltiple</strong> (RLM), su
-estructura en forma matricial, estimación por el método de Mínimos
-Cuadrados Ordinarios (MCO), las propiedades de los estimadores, los
-supuestos que lo rigen, la validación de los mismos, inferencia tanto
-para los estimadores como las predicciones y pronósticos de la variable
-dependiente, el problema de la multicolinealidad y el código en R
-relacionado con las anteriores estimaciones y validaciones.</p>
+</div>
+<div id="efectos-de-la-multicolinealidad" class="section level2">
+<h2><strong>Efectos de la multicolinealidad</strong></h2>
+<p></br></p>
+<p>Algunos de los efectos más notorios de la multicolinealidad son:</p>
+<p></br></p>
+<ol style="list-style-type: decimal">
+<li><strong>Inflación de las varianzas de los estimadores:</strong>
+consiste en la inflación de los valores <span
+class="math inline">\(c^*_{jj}\)</span> en las varianzas de los
+estimadores <span class="math inline">\(V(\widehat\beta_j^*) = \sigma^2
+c^*_{jj}\)</span>, cuando se considera un modelo con variables escaladas
+de longitud unitaria, en cuyo caso se puede demostrar que:</li>
+</ol>
+<p><span class="math display">\[
+c^*_{jj} = \frac{1}{1 - R_j^2},
+\]</span></p>
+<p></br></p>
+<p>donde <span class="math inline">\(R_j^2\)</span> es el coeficiente de
+determinación muestral obtenido de una regresión de <span
+class="math inline">\(X_j\)</span> (como respuesta) en función de las
+otras variables predictoras consideradas en el modelo (actuando como
+predictoras de la primera).</p>
+<p></br></p>
+<ol start="2" style="list-style-type: decimal">
+<li><strong><span
+class="math inline">\(\boldsymbol{\widehat{\beta}_j}\)</span> muy
+grandes en términos absolutos:</strong> esto se manifiesta en una traza
+muy grande de la matriz <span
+class="math inline">\(\left(\boldsymbol{X}&#39;\boldsymbol{X}\right)^{-1}\)</span>,
+donde:</li>
+</ol>
+<p><span
+class="math inline">\(\text{traza}\left(\boldsymbol{X}&#39;\boldsymbol{X}\right)^{-1}
+= \sum_{j = 1}^{p} \frac{1}{\lambda_j},\ \lambda_j &gt; 0\)</span> es el
+<span class="math inline">\(j\)</span>-ésimo valor propio (usualmente
+ordenados de mayor a menor) de la matriz <span
+class="math inline">\(\boldsymbol{X}&#39;\boldsymbol{X}\)</span>.</p>
+<p></br></p>
+<p>Si la <span
+class="math inline">\(\text{traza}\left(\boldsymbol{X}&#39;\boldsymbol{X}\right)^{-1}\)</span>
+es muy grande, mayor es la distancia entre el vector de parámetros
+estimados y el verdadero valor del vector de parámetros.</p>
+<p></br></p>
+<ol start="3" style="list-style-type: decimal">
+<li><strong>Valores de los coeficientes con signo contrario a lo
+esperado:</strong> esto puede ser causado por la presencia de
+multicolinealidad.</li>
+</ol>
+<p></br></p>
+<ol start="4" style="list-style-type: decimal">
+<li><strong>Regresión significativa pero ninguna variable
+individualmente significativa:</strong> otra de las maneras en que se
+puede manifestar la multicolinealidad grave es cuando el modelo de
+regresión ajustado es significativo (según la prueba <span
+class="math inline">\(F\)</span> de la tabla ANOVA) pero
+individualmente, ninguno de los coeficientes asociados a las variables
+predictoras resulta significativo (según las pruebas <span
+class="math inline">\(T\)</span> de significancia individual).</li>
+</ol>
+<p></br></br></p>
+</div>
 
 
 

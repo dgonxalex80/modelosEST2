@@ -1,0 +1,140 @@
+---
+title: <span style="color:#034a94"> **Asociaciones**</span>
+author: "Unidad 2"
+output: html_document
+css: style.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA)
+library(paqueteMOD)
+data("creditos")
+
+```
+
+</br></br>
+
+# **Exploración de posibles asociaciones**
+
+</br>
+
+Inicialmente, puede ser útil realizar chequeos gráficos de la naturaleza y la fuerza de las asociaciones entre las variables predictoras con la variable respuesta, y aún entre predictoras.
+
+</br>
+
+Una matriz de **gráficas de dispersión** es la herramienta más útil para visualizar rápida y simultáneamente estas relaciones. Si las variables predictoras se asocian linealmente a la variable respuesta, los gráficos de dispersión respectivos deben presentar las nubes de puntos tendiendo a una línea recta. También se puede chequear si existen relaciones de tipo no lineal entre las distintas variables, y la presencia de observaciones atípicas.
+
+
+
+</br>
+
+Por otra parte, se espera que entre las predictoras no existan relaciones lineales fuertes ($\rho=0$), pues de lo contrario, habría información que podría ser redundante en el modelo, y se tendría un  **problema de multicolinealidad**, lo cuál se estudiará en mayor detalle más adelante en la asignatura. El **coeficiente de correlación** permite medir la intensidad de la relación lineal que existe entre las variables independientes.
+
+</br>
+
+Es útil también acompañar este análisis gráfico con la matriz de correlaciones de las variables del modelo, la cual muestra los coeficientes de correlación entre la variable respuesta con cada una de las predictoras y también todas las correlaciones entre las predictoras.
+
+
+</br></br></br>
+
+### **Ejemplo**
+
+ </br>
+ 
+En la siguiente figura se presentan algunas matrices de gráficos de dispersión para un conjunto de datos sobre tres variables y su prelación con la variable dependiente.
+
+</br>
+
+La base ausentismo  contenida en paqueteMOD contiene las variables 
+
+* **id**     : identificación del empleado
+* **ausen**  : número de dias ausentes en el trabajo, en este caso variable dependiente 
+* **taller** : si labora en el taller
+* **sexo**   : sexo del trabajador
+* **edad**   : edad del trabajador
+* **antg**   : antiguedad en la empresa
+* **sala**   : salario que debenga
+
+
+</br></br>
+
+<center>
+```{r, echo=FALSE}
+data=ausentismo[,c(2,5,6,7)]
+plot(data, las=1)
+```
+
+Diagrama de dispersión
+</center>
+
+</br>
+
+
+Este diagrama permite visualizar la fuerte relación que existe entre las variables **edad** y **antiguedad**, es decir que estas dos variables no son independientes y podrían generar problema en el momento que las integremos a un mismo modelo como se verá más adelante.
+
+</br></br>
+
+<center>
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+library(tidyverse)
+cor(data) %>% 
+  round(.,3)
+```
+Matriz de correlaciones
+</center>
+
+</br>
+
+La información contenida en la matriz de correlaciones permite valorar la magnitud relación lineal entre las variables y el sentido de la misma. $\widehat{\rho}_{_{\text{edad, antg}}} = 0.872$, lo que indica que a mayor edad, más antigüedad
+
+
+</br></br>
+
+<center>
+```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.align='center'}
+library(paqueteMOD)
+data("ausentismo")
+data=ausentismo[,c(2,5,6,7)]
+library(GGally)
+ggpairs(data, title=" ") 
+```
+</center>
+
+</br></br>
+
+
+```{r fig35, echo = F, fig.cap = '', fig.show = "hold", out.width = "25%", fig.scap='e'}
+# knitr::include_graphics(c("figures/MGDS.png", "figures/MGDH.png"))
+
+#knitr::include_graphics(c("figures/MGDB.png", "figures/MGDC.png"))
+```
+
+
+</br></br>
+
+* **Matrices de diagramas de dispersión:** Simple (abajo izquierda), 
+* **Diagrama de desnsidad** en la diagonal
+* **Correlaciones**  parte superior derecha de la matriz, acompañadas de su significancia ($Ho: \rho = 0$ vs $Ha: \rho \neq 0$)
+
+</br>
+
+Se puede observar que la mayor relación de la variable $y$ (ausen) con alguna de las variables independientes es con antg (antiguedad en la empresa) y tiene signo negativo lo cual indica que los empleados mas antiguo tienen menos ausentismo, de igual manera que las variables edad y salario.
+
+</br>
+
+Tambien es importante notar que entre las variables independientes existen fuertes correlaciones, lo cual puede generar problemas en la estimación del modelo y su inferencia. Este tema (multicolinealidad) será abordado más adelante.
+
+</br></br>
+
+<div class="content-box-yellow">
+
+### **Nota**
+
+Las variables independientes  deben de ser independientes unas de otras, por tanto sus correlaciones deberán ser no significativas al realizar pruebas de hipótesis ( $Ho: \rho = 0$).
+
+En caso de haber una relación perfecta entre dos variables regresoras ($X_{1} = aX_{2}$), el método MCO no tendrá solución (problema de la multicolinealidad perfecta).
+
+
+</div>
+
+

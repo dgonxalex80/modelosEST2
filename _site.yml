@@ -1,20 +1,60 @@
-name: " "
+name: "Modelos"
 output_dir: "docs"
 navbar:
-  title: "Modelos Estadísticos "
+  title: "Modelos Estadísticos para la toma de decisiones"
   left:
-    - text: "Conceptos básicos"
-      href: recurso201.html
+    - text: "Conceptos"
+      menu:
+        - text: "Modelo de Regresión Lineal Múltiple"
+          href: recurso005.html      
+        - text: "Correlación"
+          href: recurso010.html
+        - text: "Algebra Lineal"
+          href: recurso015.html         
+        - text: "Notación matricial de modelo"
+          href: recurso020.html            
     - text: "Estimación"
-      href: recurso202.html
-    - text: "Supuestos"
-      href: recurso203.html
-    - text: "Métricas de validación"
-      href: recurso204.html
-    - text: "Variables categóricas"
-      href: recurso205.html
-    - text: "ANOVA"
-      href: recurso206.html
-output:
+      menu:
+        - text: "Mínimos Cuadrados Ordinarios"
+          href: recurso030.html
+        - text: "Validación de los supuestos"
+          href: recurso050.html          
+        - text: "Propiedades de los estimadores"
+          href: recurso035.html         
+    - text: "Inferencia"
+      menu:
+        - text: "Inferencia sobre los parámetros"    
+          href: recurso040.html
+        - text: "Inferencia sobre subconjunto de parámetros"    
+          href: recurso042.html          
+        - text: "Sobre los pronósticos"    
+          href: recurso045.html
+    - text: "Ajuste del modelo"
+      menu:
+        - text: "Indicadores de ajuste"
+          href: recurso055.html         
+        - text: "Validación cruzada"
+          href: recurso060.html         
+    - text: "Variables cat."
+      menu:
+        - text: "En el modelo de RLM"
+          href: recurso061.html
+    - text: "Multicolinealidad"
+      menu:
+        - text: "Multicolinealidad"  
+          href: recurso080.html
+        - text: "Causas / Efectos"  
+          href: recurso081.html          
+        - text: "Diagnóstico"  
+          href: recurso082.html          
+    - text: "R "
+      menu:
+        - text: "Estimación MCO"
+          href: recurso100.html   
+        - text: "Validación de supuestos"
+          href: recurso110.html   
+        - text: "Validación cruzada"
+          href: recurso120.html   
+  output:
   html_document:
     css: style.css

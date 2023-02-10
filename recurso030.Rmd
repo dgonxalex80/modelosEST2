@@ -1,0 +1,143 @@
+---
+title: <span style="color:#034a94"> **Estimación**</span>
+author: "Unidad 2"
+output: html_document
+css: style.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA)
+
+# colores
+c1="#FF7F00"
+c2="#=EB0C6"
+c3="#034A94"
+c4="#686868"
+
+```
+
+<br/><br/>
+
+# **Estimación de parámetros **
+
+<br/>
+
+El modelo 
+
+<div class="content-box-blue">
+$$Y_i = \beta_0 + \beta_1X_{i1} + \beta_2X_{i2} + \cdots + \beta_kX_{ik} + \varepsilon_i,\ i = 1, \ldots, n,$$
+</div>
+
+<br/>
+
+Está compuesto de una variable dependiente $y$, ($k$) variables independietes  y un componente aleatorio $\varepsilon$, formando un sistema de $n$ ecuaciones con $p = k + 1$ incógnitas correspondiendo al intercepto y los $k$ coeficientes de regresión, donde los $Y_i$ y las $X_{ij}$ toman valores conocidos en cada caso.
+
+<br/>
+
+
+El sistema expresado en forma matricial corresponde a:
+
+<div class="content-box-blue">
+$$
+\boldsymbol{y} = \boldsymbol{X\beta} + \boldsymbol{\varepsilon}
+$$
+</div>
+
+<br/>
+
+
+
+$$\left[\begin{array}{c} Y_1\\ Y_2\\ \vdots\\ Y_n\end{array}\right]_{n \times 1} = 
+\left[\begin{array}{ccccc} 1 & X_{11} & X_{12} & \cdots & X_{1k}\\ 1 & X_{21} & X_{22} & \cdots & X_{2k}\\ \vdots & \vdots & \vdots & \cdots & \vdots\\ 1 & X_{n1} & X_{n2} & \cdots & X_{nk}\end{array}\right]_{n \times p} \hspace{.2cm}
+\left[\begin{array}{c} \beta_0\\ \beta_1\\ \vdots\\ \beta_k\end{array}\right]_{p \times 1} +  
+\left[\begin{array}{c} \varepsilon_1\\ \varepsilon_2\\ \vdots\\ \varepsilon_n\end{array}\right]_{n \times 1}$$
+
+
+<br/><br/>
+
+<div class="content-box-yellow">
+### **Nota** 
+
+Los supuestos del modelo sobre los errores establecen que:
+
+$$\varepsilon_i \overset{\text{iid}}{\sim} N\left(0,\sigma ^2 \right), \quad i = 1, 2, \ldots, n$$
+
+<br/>
+
+Lo cual en forma matricial establece que el vector $\boldsymbol{\varepsilon}$ (de los errores aleatorios) es un vector aleatorio normal $n$-variado con valor esperado $E\left(\boldsymbol{\varepsilon}\right) = \boldsymbol{0}$ y matriz de varianzas covarianzas $V\left(\boldsymbol{\varepsilon}\right) = \sigma^2 \boldsymbol{I}_n$, donde $\boldsymbol{I}_n$ es la matriz identidad de orden $n$.
+
+<br/>
+
+Observe que $E\left(\boldsymbol{\varepsilon}\right) = \left[\begin{array}{c} 0\\ 0\\ \vdots\\ 0\end{array}\right]$ y $V\left(\boldsymbol{\varepsilon}\right) = \left[\begin{array}{cccc} \sigma^2 & 0 & \cdots & 0\\ 0 & \sigma^2 & \cdots & 0\\ \vdots & \vdots & \ddots & \vdots\\ 0 & 0 & \cdots & \sigma^2\end{array}\right]$.
+
+<br/>
+
+Por tanto el vector aleatorio $\boldsymbol{y}$ tiene valor esperado $\boldsymbol{X\beta}$ y la misma matriz de varianzas covarianzas de $\boldsymbol{\varepsilon}$.
+
+</div>
+
+<br/><br/><br/>
+
+## **Estimación MCO**
+
+<br/>
+
+
+Para la estimación por **mínimos cuadrados ordinarios**  (MCO)se buscan los valores estimados de los parámetros tales que se minimice la suma de cuadrado del error:
+
+<div class="content-box-blue">
+$$S\left(\boldsymbol{\beta}\right) = \sum\limits_{i=1}^n \varepsilon_i^2 = \sum\limits_{i=1}^n\left(Y_i - \beta_0 - \beta_1X_{i1} - \beta_2X_{i2} - \cdots - \beta_kX_{ik}\right)^2.$$
+</div>
+
+</br>
+
+Matricialmente, 
+$$
+\begin{aligned}
+S\left(\boldsymbol{\beta}\right) &= \boldsymbol{\varepsilon}'\boldsymbol{\varepsilon} = \left(\boldsymbol{y} - \boldsymbol{X\beta}\right)'\left(\boldsymbol{y} - \boldsymbol{X\beta}\right)\\
+&= \boldsymbol{y}'\boldsymbol{y} - \boldsymbol{y}'\boldsymbol{X\beta} - \boldsymbol{\beta}'\boldsymbol{X}'\boldsymbol{y}+\boldsymbol{\beta}'\boldsymbol{X}'\boldsymbol{X\beta}\\
+&= \boldsymbol{y}'\boldsymbol{y} - 2\boldsymbol{\beta}'\boldsymbol{X}'\boldsymbol{y}+\boldsymbol{\beta}'\boldsymbol{X}'\boldsymbol{X\beta},
+\end{aligned}
+$$
+
+</br>
+
+y el estimador de mínimos cuadrados se obtiene al resolver
+
+$$\left.\frac{d\ S\left(\boldsymbol{\beta}\right)}{d\boldsymbol\beta}=0\ \right|_{\ \boldsymbol\beta=\boldsymbol{\widehat\beta}}\quad\iff -2\boldsymbol{X}'\boldsymbol{y} + 2\boldsymbol{X}'\boldsymbol{X}\boldsymbol{\widehat\beta} = 0$$
+</br>
+
+
+De donde las ecuaciones normales de mínimos cuadrados para el modelo de RLM son: 
+
+$$\boldsymbol{X}'\boldsymbol{X\widehat\beta} = \boldsymbol{X}'\boldsymbol{y},$$
+
+</br>
+
+y el vector de los estimadores MCO es 
+
+<div class="content-box-blue">
+$$\boldsymbol{\widehat\beta} = \left(\boldsymbol{X}'\boldsymbol{X}\right)^{-1}\ \boldsymbol{X}'\boldsymbol{y}$$ 
+</div>
+
+</br>
+
+cuyos elementos corresponden a los estimadores de mínimos cuadrados para los parámetros del modelo de RLM. Esto es,
+
+$$
+\boldsymbol{\widehat\beta} = \left[\begin{array}{cccc} \widehat{\beta}_0 & \widehat{\beta}_1& \cdots& \widehat{\beta}_k\end{array}\right]'
+$$
+
+Luego, la ecuación de regresión ajustada igual a 
+
+$$
+\widehat{Y}_i = \widehat{\beta}_0 + \widehat{\beta}_1x_1 + \widehat{\beta}_2x_2 + \cdots + \widehat{\beta}_kx_k = \text{x}_i\boldsymbol{\widehat\beta}.
+$$
+
+donde, $\text{x}_i$ es la $i$-ésima fila de la matrix $\boldsymbol{X}$.
+
+
+</br></br></br>
+
+
+

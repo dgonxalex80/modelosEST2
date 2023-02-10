@@ -11,7 +11,7 @@
 
 
 
-<title> Introducción</title>
+<title> Construcción del modelo</title>
 
 <script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -376,22 +376,197 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore"><span style="color:#034a94">
-<strong>Introducción</strong></span></h1>
+<strong>Construcción del modelo</strong></span></h1>
 
 </div>
 
 
 <p></br></br></p>
-<p><img src="img/banner_presentacion.png" width="100%" style="display: block; margin: auto;" /></p>
+<p></br></br></p>
+<div id="selección-de-variables" class="section level2">
+<h2><strong>Selección de variables</strong></h2>
+<p></br></p>
+<p>En algunos estudios observacionales o exploratorios se parte de un
+modelo de regresión en el que se considera un conjunto grande de
+variables predictoras potenciales para luego identificar un subconjunto
+entre tales variables, que resulte potencialmente útil para construir el
+modelo de regresión final.</p>
+<p></br> Dependiendo de los usos que se deseen dar a un modelo de
+regresión variará el subconjunto de variables seleccionadas. Por
+ejemplo, desde el punto de vista del ajuste, cierto subgrupo de
+variables serán útiles, en tanto que desde el punto de vista del
+pronóstico, otro subconjunto podría resultar ser mejor. Es necesario
+pues fijar un criterio de selección del mejor subconjunto de
+variables.</p>
+<p></br></br></p>
+</div>
+<div id="método-de-todas-las-regresiones-posibles"
+class="section level2">
+<h2><strong>Método de todas las regresiones posibles</strong></h2>
+<p></br></p>
+<p>Este procedimiento consiste en correr todos los <span
+class="math inline">\(2^k - 1\)</span> modelos posibles (con intercepto)
+de la variable respuesta vs. los posibles subconjuntos de variables
+predictoras,</p>
+<p></br></p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;\left(\begin{array}{c} k\\1\end{array}\right) = k
+&amp;&amp;\text{modelos de una predictora}\\
+&amp;\left(\begin{array}{c} k\\2\end{array}\right)
+&amp;&amp;\text{modelos de dos predictoras}\\[-0.2cm]
+&amp;\,\quad\ \vdots\\[-0.2cm]
+&amp;\left(\begin{array}{c} k\\k\end{array}\right) = 1
+&amp;&amp;\text{modelo de }k\text{ predictoras}\\[-0.2cm]
+&amp;\rule{1in}{1pt}\\[-0.1cm]
+&amp;\;\ \quad2^k - 1 &amp;&amp;\text{modelos posibles,}
+\end{aligned}
+\]</span></p>
+<p></br></p>
+<p>y comparar tales modelos con base en criterios estadísticos.</p>
 <p></br></br></br></p>
-<p>En esta unidad se presentan los principales conceptos del
-<strong>Modelo de Regresión Lineal Múltiple</strong> (RLM), su
-estructura en forma matricial, estimación por el método de Mínimos
-Cuadrados Ordinarios (MCO), las propiedades de los estimadores, los
-supuestos que lo rigen, la validación de los mismos, inferencia tanto
-para los estimadores como las predicciones y pronósticos de la variable
-dependiente, el problema de la multicolinealidad y el código en R
-relacionado con las anteriores estimaciones y validaciones.</p>
+</div>
+<div id="criterios-estadísticos-en-la-comparación-de-modelos"
+class="section level2">
+<h2><strong>Criterios estadísticos en la comparación de
+modelos</strong></h2>
+<ul>
+<li><p><span class="math inline">\(\boldsymbol{R^2_p}\)</span>: el mejor
+modelo es aquel con el mayor valor en este estadístico, sin embargo, al
+ser una función no decreciente del número de predictoras, tiende a
+señalar al modelo con todas las predictoras.</p>
+<p>Con el fin de resolver esta dificultad, se busca un modelo con un
+menor número de variables cuyo <span class="math inline">\(R^2\)</span>
+no cambie significativamente al aumentar el número de
+predictoras.</p></li>
+</ul>
+<p></br></br></p>
+<div id="ilustración-criterio-boldsymbolr2_p" class="section level3">
+<h3><strong>Ilustración criterio <span
+class="math inline">\(\boldsymbol{R^2_p}\)</span></strong></h3>
+</br>
+<center>
+<p><img src="img/diagrama2.png" width="70%" style="display: block; margin: auto;" /></p>
+Fuente: Mongomery et al. (2002)
+</center>
+<p></br></p>
+<ul>
+<li><span
+class="math inline">\(\boldsymbol{R_{\textbf{adj,p}}^2}\)</span> (o
+<span class="math inline">\(\textbf{MSE}_{\boldsymbol{p}}\)</span>): el
+mejor modelo es aquel con mayor (menor) valor en este estadístico.</li>
+</ul>
+<p></br></br></p>
+<center>
+<p><img src="img/diagrama3.png" width="70%" style="display: block; margin: auto;" /></p>
+Fuente: Mongomery et al. (2002)
+</center>
+<p></br></p>
+<ul>
+<li><strong><span class="math inline">\(\boldsymbol{C_p}\)</span> de
+Mallows</strong>: el mejor modelo es aquél para el cual <span
+class="math inline">\(C_p\)</span> es el más pequeño posible (es decir,
+el modelo con el menor número de variables predictoras posible) y tal
+que la diferencia <span class="math inline">\(\vert C_p -
+p\vert\)</span> es mínima, con <span class="math inline">\(p\)</span>
+igual al número de parámetros del modelo considerado, incluyendo el
+intercepto.</li>
+</ul>
+<p>Este estadístico es una medida del sesgo en el modelo de regresión,
+es decir, de <span class="math inline">\(E\left(\widehat{Y}_i\right) -
+\mu_i\)</span>, y es tal que a mayor sesgo, mayor <span
+class="math inline">\(C_{p}\)</span>. Este estadístico se calcula como:
+</br></p>
+<p><span class="math display">\[
+C_p = \frac{\text{SSE}_p}{\text{MSE}\left(\beta_0, \beta_1, \ldots,
+\beta_k\right)} - \left(n - 2p\right)
+\]</span></p>
+<p></br></p>
+<p>donde <span class="math inline">\(\text{SSE}_p\)</span> es la suma de
+cuadrados del error del modelo considerado y <span
+class="math inline">\(\text{MSE}\left(\beta_0, \beta_1, \ldots,
+\beta_k\right)\)</span> es el cuadrado medio del error para el modelo de
+regresión con todas las <span class="math inline">\(k\)</span>
+variables.</p>
+<p></br></br></p>
+<p><strong>Ilustración criterio <span
+class="math inline">\(\boldsymbol{C_p}\)</span></strong></p>
+<p></br></p>
+<center>
+<p><img src="img/diagrama4.png" width="70%" style="display: block; margin: auto;" /></p>
+Fuente: Mongomery et al. (2002)
+</center>
+<p></br></br></p>
+<ul>
+<li><strong><span
+class="math inline">\(\textbf{PRESS}_{\boldsymbol{p}}\)</span> o suma de
+cuadrados de predicción</strong>: mide qué también el uso de los valores
+ajustados por un submodelo puede predecir las respuestas observadas.
+Mientras menor sea esta medida, mejor se considera el modelo.</li>
+</ul>
+<p></br></p>
+<p>El PRESS es como un SSE, pero en el cual el valor ajustado para cada
+observación <span class="math inline">\(Y_i\)</span> se halla estimando
+el submodelo sin considerar dicha observación, tales valores ajustados
+se denotan por <span
+class="math inline">\(\widehat{Y}_{\left(i\right)}\)</span>; así el
+PRESS es la suma de cuadrados de los residuales de predicción <span
+class="math inline">\(e_{\left(i\right)} = Y_i -
+\widehat{Y}_{\left(i\right)}\)</span>, es decir, <span
+class="math inline">\(\text{PRESS}_p = \sum\limits_{i = 1}^n
+e_{\left(i\right)}^2\)</span>.</p>
+<p></br></p>
+<p>Para cada submodelo, la definición del error de predicción implica
+correr <span class="math inline">\(n\)</span> regresiones separadas
+(cada una con <span class="math inline">\(n - 1\)</span> datos) con cada
+observación eliminada en cada caso, sin embargo, basta con correr una
+vez el modelo con todas las observaciones, hallar sus residuales
+ordinarios, y los elementos de la diagonal principal de la matriz hat y
+calcular <span class="math inline">\(e_{\left(i\right)} = e_i /\left(1 -
+h_{ii}\right)\)</span>.</p>
+<p></br></p>
+<p>Si se usan dos o más criterios de selección de modelos, es posible
+que cada criterio lleve a modelos distintos. La decisión final debe
+basarse en el análisis de residuales y otros diagnósticos, además de
+complementar con el conocimiento y la experiencia de personas expertas
+en el ámbito en el cual está inmerso el problema.</p>
+<p></br></br></p>
+</div>
+</div>
+<div id="método-paso-a-paso-o-stepwise" class="section level2">
+<h2><strong>Método paso a paso o Stepwise</strong></h2>
+<p></br></br></p>
+<p>Este método selecciona las variables paso a paso. En cada paso puede
+incorporar una variable o eliminarla segun criterio de inclusión o
+exclusión.</p>
+<p></br></p>
+<p>Paso 1: Incluye la variable más correlacionada con la variable
+dependiente, validando el criterio de inclusión.</p>
+<p></br></p>
+<p>Paso 2: Se incluye en el modelo una segunda variable con el mayor
+coeficiente de correlación parcial con la variable dependiente, excluida
+la variable introducida en el primer paso, validando el criterio de
+inclusión.</p>
+<p></br></p>
+<p>Paso 3: Se incluye la variable con mayor coeficiente de correlación
+parcial con la variable dependiente, excluidas las dos variables que
+estan en el modelo, validando el criterio de inclusión.</p>
+<p></br></p>
+<p>Paso 4 : Cuando al verificar el criterio de inclusión y</p>
+<p></br></p>
+<p>Existen dos versiones del metodo, una hacia atraś, el cual parte
+incluye todas las variables independientes sin importar que tan
+realacionadas se encuenten entre si. En cada paso elimina una variable y
+finaliza cuando el valor del estadístico F de la ANOVA correspondiente
+aumente en una cantida tolerable, previamente establecida.</p>
+<p></br></p>
+<p>En el caso del método paso a paso adelante, inicia con una sola
+variable independiente, escogiendo la que mayor correlación tenga con la
+variable dependiente y va incorporando variables hasta tanto el valor
+del incremento del valor del estadístco F, sea no significativo
+comparado con un valor establecido previamente.</p>
+<p></br></br></p>
+</div>
 
 
 

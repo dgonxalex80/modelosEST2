@@ -11,7 +11,7 @@
 
 
 
-<title> Introducción</title>
+<title>Diagnósticos de la multicolinealidad</title>
 
 <script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -375,23 +375,110 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore"><span style="color:#034a94">
-<strong>Introducción</strong></span></h1>
+<h1 class="title toc-ignore"><span
+style="color:#034a94"><strong>Diagnósticos de la
+multicolinealidad</strong></span></h1>
 
 </div>
 
 
 <p></br></br></p>
-<p><img src="img/banner_presentacion.png" width="100%" style="display: block; margin: auto;" /></p>
-<p></br></br></br></p>
-<p>En esta unidad se presentan los principales conceptos del
-<strong>Modelo de Regresión Lineal Múltiple</strong> (RLM), su
-estructura en forma matricial, estimación por el método de Mínimos
-Cuadrados Ordinarios (MCO), las propiedades de los estimadores, los
-supuestos que lo rigen, la validación de los mismos, inferencia tanto
-para los estimadores como las predicciones y pronósticos de la variable
-dependiente, el problema de la multicolinealidad y el código en R
-relacionado con las anteriores estimaciones y validaciones.</p>
+<p>Entre los diagnósticos más usados para detectar multicolinealidad en
+un modelo se tienen:</p>
+<p></br></p>
+<ol style="list-style-type: decimal">
+<li><strong>Examinar la matriz de correlaciones entre las
+predictoras:</strong> sea <span
+class="math inline">\(\text{COR}(\boldsymbol{X})\)</span> una matriz
+cuyo elemento (<span class="math inline">\(j,k\)</span>) corresponde a
+la correlación entre las predictoras <span
+class="math inline">\(X_j\)</span> y <span
+class="math inline">\(X_k\)</span>, <span
+class="math inline">\(\text{COR}\left(X_j, X_k\right)\)</span>.</li>
+</ol>
+<p>Esta matriz resulta útil para detectar multicolinealidad si en ésta
+no intervienen más de dos variables en una dependencia casi lineal.</p>
+<p></br></p>
+<p>También valores de <span class="math inline">\(\text{COR}\left(X_j,
+X_k\right)\)</span> pequeños no necesariamente implican la ausencia de
+multicolinealidad.</p>
+<p></br></p>
+<ol start="2" style="list-style-type: decimal">
+<li><strong>Factores de Inflación de Varianza:</strong> denotados <span
+class="math inline">\(\text{VIF}_j,\ j = 1, \ldots, k\)</span> se
+calculan como:</li>
+</ol>
+<p><span class="math display">\[\text{VIF}_j = c^*_{jj} = \frac{1}{1 -
+R_j^2}\]</span></p>
+<p>A continuación se establece el criterio para detectar la
+multicolinealidad de acuerdo a esta medida.</p>
+<ul>
+<li><p>Si <span class="math inline">\(\text{VIF}_j \leq 5\)</span> no
+hay problemas de multicolinealidad.</p></li>
+<li><p>Si <span class="math inline">\(5 &lt; \text{VIF}_j \leq
+10\)</span> hay problemas de multicolinealidad moderada.</p></li>
+<li><p>Si <span class="math inline">\(\text{VIF}_j &gt; 10\)</span> hay
+problemas de multicolinealidad graves.</p></li>
+</ul>
+<p></br></p>
+<ol start="3" style="list-style-type: decimal">
+<li><strong>Análisis de los valores propios de <span
+class="math inline">\(\boldsymbol{X}&#39;\boldsymbol{X}\)</span>:</strong>
+se trata de evaluar si hay valores propios con valores cercanos a cero.
+Para ello se definen las medidas que se presentan a continuación:</li>
+</ol>
+<p><strong>Número de condición:</strong> mide la dispersión en el
+espectro de los valores propios de la matriz <span
+class="math inline">\(\boldsymbol{X}&#39;\boldsymbol{X}\)</span>. Se
+calcula como: <span class="math inline">\(\kappa = \lambda_{\max} /
+\lambda_{\min}\)</span>. En <span class="math inline">\(R\)</span> se
+obtienen valores en raíz cuadrada, es decir, <span
+class="math inline">\(\sqrt{\kappa}\)</span>, para el cual el criterio
+para detectar multicolinealidad es:</p>
+<ul>
+<li><p>Si <span class="math inline">\(\sqrt{\kappa} \leq 10\)</span> no
+hay problemas de multicolinealidad.</p></li>
+<li><p>Si <span class="math inline">\(10 &lt; \sqrt{\kappa} \leq
+31.62\)</span> hay problemas de multicolinealidad moderada.</p></li>
+<li><p>Si <span class="math inline">\(\sqrt{\kappa} &gt; 31.62\)</span>
+hay problemas de multicolinealidad graves.</p></li>
+</ul>
+<p></br></p>
+<p><strong>Índice de condición:</strong> es una medida útil para
+determinar el número de dependencias casi lineales en <span
+class="math inline">\(\boldsymbol{X}&#39;\boldsymbol{X}\)</span>. Se
+calcula como: <span class="math inline">\(\kappa_j = \lambda_{\max} /
+\lambda_j,\ j = 1, \ldots, p\)</span> (en <span
+class="math inline">\(R\)</span> se obtienen los valores <span
+class="math inline">\(\sqrt{\kappa_j}\)</span>). El criterio para
+detectar multicolinealidad es:</p>
+<ul>
+<li><p>Si <span class="math inline">\(\sqrt{\kappa_j} \leq 10\ \forall
+j\)</span>, no hay problemas de multicolinealidad.</p></li>
+<li><p>Si al menos para un <span class="math inline">\(j\)</span>, <span
+class="math inline">\(10 &lt; \sqrt{\kappa_j} \leq 31.62\)</span>,
+entonces hay problemas de multicolinealidad moderada.</p></li>
+<li><p>Si al menos para un <span class="math inline">\(j\)</span>, <span
+class="math inline">\(\sqrt{\kappa_j} &gt; 31.62\)</span>, entonces hay
+problemas de multicolinealidad graves (por lo menos hay una asociación
+casi lineal entre dos o más predictoras).</p></li>
+</ul>
+<p></br></p>
+<p><strong>Proporciones de descomposición de varianza:</strong>
+denotados <span class="math inline">\(\pi_{ij}\)</span> representan la
+proporción de la varianza de cada <span
+class="math inline">\(\widehat\beta_j\)</span> (o de cada factor de
+inflación de varianza) debida al <span
+class="math inline">\(i\)</span>-ésimo valor propio de la matriz <span
+class="math inline">\(\boldsymbol{X}&#39;\boldsymbol{X}\)</span>.</p>
+<p>Proporciones altas (<span class="math inline">\(\pi_{ij} &gt;
+0.5\)</span>) para dos o más coeficientes de regresión asociados con un
+mismo valor propio pequeño es evidencia de multicolinealidad entre las
+variables correspondientes a tales coeficientes.</p>
+<p></br></br></p>
+<p><strong>Nota:</strong></p>
+<p>El análisis de valores propios se puede realizar usando datos
+centrados o con los datos originales.</p>
 
 
 

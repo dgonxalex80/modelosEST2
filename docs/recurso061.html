@@ -11,7 +11,7 @@
 
 
 
-<title> Introducción</title>
+<title>Variables categóricas en el modelo de regresión lineal</title>
 
 <script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -375,23 +375,186 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore"><span style="color:#034a94">
-<strong>Introducción</strong></span></h1>
+<h1 class="title toc-ignore"><span
+style="color:#034a94"><strong>Variables categóricas en el modelo de
+regresión lineal</strong></span></h1>
 
 </div>
 
 
 <p></br></br></p>
-<p><img src="img/banner_presentacion.png" width="100%" style="display: block; margin: auto;" /></p>
+<p>Cuando se desea incluir variables categóricas al modelo de regresión
+lineal múltiple es necesario crear variables conocidas como ficticias,
+llamadas tambien binarias o dicotómicas. Estas variables se redefinen a
+aprtir de las categorías de la variable cualitativa a ser incluida en el
+modelo y solo puede tomar dos valores : 0 ó 1.</p>
+<p>En el caso de una variable categórica con <span
+class="math inline">\(k\)</span> categorías, es necesaria la
+construcción de <span class="math inline">\((k-1\)</span> variables
+binarias</p>
 <p></br></br></br></p>
-<p>En esta unidad se presentan los principales conceptos del
-<strong>Modelo de Regresión Lineal Múltiple</strong> (RLM), su
-estructura en forma matricial, estimación por el método de Mínimos
-Cuadrados Ordinarios (MCO), las propiedades de los estimadores, los
-supuestos que lo rigen, la validación de los mismos, inferencia tanto
-para los estimadores como las predicciones y pronósticos de la variable
-dependiente, el problema de la multicolinealidad y el código en R
-relacionado con las anteriores estimaciones y validaciones.</p>
+<div id="ejemplo" class="section level3">
+<h3><strong>Ejemplo</strong></h3>
+<p></br></p>
+<p>La base de datos arboles1 contiene las siguientes variables:</p>
+<p></br></p>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="75%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td align="left"><strong>finca</strong></td>
+<td align="left">finca donde se ubica el árbol : FINCA_1, FINCA_2 y
+FINA_3</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>mg</strong></td>
+<td align="left">genotipo del árbol : GENOTIPO_1, GENOTIPO_2</td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>peso</strong></td>
+<td align="left">peso del árbol</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>diametro</strong></td>
+<td align="left">diametro del árbol</td>
+</tr>
+<tr class="odd">
+<td align="left"><strong>altura</strong></td>
+<td align="left">altura del árbol</td>
+</tr>
+</tbody>
+</table>
+<p></br></p>
+<p>Para incluir las variables mg con dos categorías utilizamos una
+variable binaria <span class="math inline">\(D_1\)</span> que puede
+tomar el nombre de uno de sus valores así:</p>
+<p></br></p>
+<p><span class="math display">\[D_{1i} = \left \{ \begin{matrix}
+                       1 &amp;  \text{ mg= GENOTIPO_2} \\
+                         &amp;  \\
+                       0 &amp; \text{mg =
+GENOTIPO_1}\end{matrix}\right.  \]</span></p>
+<p></br></p>
+<p>En este caso el rango de la varuiable es: <span
+class="math inline">\(R_D =\{0,1\}\)</span>, temiendo como referencia o
+base al GENOTIPO_1</p>
+<p></br></p>
+<pre class="r"><code>library(paqueteMOD)
+data(&quot;arboles1&quot;)
+arboles1$D1=as.numeric(arboles1$mg==&quot;GENOTIPO_2&quot;)</code></pre>
+<p></br></p>
+<p>El modelo de regresión que solo incluye la variable
+<strong>mp</strong> como predictora es:</p>
+<p></br></p>
+<p><span class="math display">\[\text{peso}_{i} =  \beta_{0} + \beta_{1}
+D_{1i} + \varepsilon_{i} \]</span></p>
+<p></br></p>
+<p>Y el modelo estimado</p>
+<p></br></p>
+<p><span class="math display">\[\widehat{\text{peso}}_{i}
+=  \widehat{\beta}_{0} + \widehat{\beta}_{1} D_{1i} \]</span></p>
+<p></br></p>
+<p>Cuando el individuo observado pertenece al genotipo 1, la variable
+D_{i} toma el valor de cero luego:</p>
+<p></br></p>
+<p><span class="math display">\[\widehat{\text{peso}}_{i}
+=  \widehat{\beta}_{0} + \widehat{\beta}_{1} (0)  = \widehat{\beta}_{0}
+\]</span></p>
+<p></br></p>
+<p>En caso de pertenecer al genotipo, la la variable D_{i} toma el valor
+de uno y el valor de la estimación del peso sería:</p>
+<p></br></p>
+<p><span class="math display">\[\widehat{\text{peso}}_{i}
+=  \widehat{\beta}_{1} + \widehat{\beta}_{1} (1)  = \widehat{\beta}_{0}
++ \widehat{\beta}_{1} \]</span></p>
+<p></br></p>
+<p>Indicando que <span
+class="math inline">\(\widehat{\beta}_{1}\)</span> corresponde al valor
+del peso estimado adicional (si el signo del coeficiente es positivo)
+por ser el árbol del genotipo 2, con respecto al gonotipo 1.</p>
+<p></br></p>
+<p>Para la variable finca con tres categorias, es necesario la creación
+de dos variables binarias, las cuales pueden ser generadas por R y en
+caso de tener una intensión especial la construcción de las variables
+será necesario realizarlas previamente a la estimación del modelo.</p>
+<p></br></br></p>
+</div>
+<div id="nota" class="section level3">
+<h3><strong>Nota</strong></h3>
+<p></br></p>
+<p>La estimación en R genera las variables binarias para las categorías
+FINCA_2 y FINCA_3, dejando como base la categoria FINCA_1, esto es
+equivalente a contruir dos variables adicionales a la base:</p>
+<p></br></br></p>
+<pre>
+# A tibble: 90 × 7
+   finca   mg         peso  diametro altura    D2    D3
+   <chr>   <chr>      <chr> <chr>    <chr>  <dbl> <dbl>
+ 1 FINCA_1 GENOTIPO_1 13.73 4.7      5          0     0
+ 2 FINCA_1 GENOTIPO_1 14.58 5.3      5.6        0     0
+ 3 FINCA_1 GENOTIPO_1 15.88 4.8      5.8        0     0
+ 4 FINCA_1 GENOTIPO_1 8.99  3.2      4.3        0     0
+ 5 FINCA_1 GENOTIPO_1 6.99  2.2      3.3        0     0
+.
+.
+.
+
+31 FINCA_2 GENOTIPO_2 16.24 5.8      8.1        1     0
+32 FINCA_2 GENOTIPO_2 16.08 5.9      7.5        1     0
+33 FINCA_2 GENOTIPO_2 23.82 7.1      9.3        1     0
+34 FINCA_2 GENOTIPO_2 30.83 7.9      10.9       1     0
+35 FINCA_2 GENOTIPO_2 26.38 7.1      9.2        1     0
+.
+.
+.
+
+61 FINCA_3 GENOTIPO_2 13.98 4.7      5.8        0     1
+62 FINCA_3 GENOTIPO_2 24.47 6        7.2        0     1
+63 FINCA_3 GENOTIPO_2 22.82 6.7      7.8        0     1
+64 FINCA_3 GENOTIPO_2 21.8  6.8      7.3        0     1
+65 FINCA_3 GENOTIPO_2 18.12 5.9      7.7        0     1
+.
+.
+.
+
+</pre>
+<p></br></p>
+<p>El modelo de regresión que incluye esta variable es:</p>
+<p></br></p>
+<p><span class="math display">\[\text{peso}_{i} =  \beta_{0} + \beta_{1}
+D_{2i} + \beta_{3} D_{3i} + \varepsilon_{i}\]</span></p>
+<p></br></br></p>
+<p>Y su estumación MCO :</p>
+<pre class="r"><code>library(paqueteMOD)
+data(&quot;arboles1&quot;)
+arboles1$D2=as.numeric(arboles1$finca==&quot;FINCA_2&quot;)
+arboles1$D3=as.numeric(arboles1$finca==&quot;FINCA_3&quot;)
+
+modelo1 &lt;- lm(peso ~ D2+D3, data = arboles1)
+summary(modelo1)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = peso ~ D2 + D3, data = arboles1)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -17.042  -5.264  -1.363   3.308  24.848 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   13.086      1.291  10.136  &lt; 2e-16 ***
+## D2             9.936      1.826   5.442 4.79e-07 ***
+## D3             7.104      1.826   3.891 0.000195 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 7.071 on 87 degrees of freedom
+## Multiple R-squared:  0.2655, Adjusted R-squared:  0.2486 
+## F-statistic: 15.72 on 2 and 87 DF,  p-value: 1.484e-06</code></pre>
+</div>
 
 
 

@@ -9,9 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Unidad 2" />
 
 
-<title> Introducción</title>
+<title> Estimación</title>
 
 <script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -376,22 +377,154 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore"><span style="color:#034a94">
-<strong>Introducción</strong></span></h1>
+<strong>Estimación</strong></span></h1>
+<h4 class="author">Unidad 2</h4>
 
 </div>
 
 
-<p></br></br></p>
-<p><img src="img/banner_presentacion.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><br/><br/></p>
+<div id="estimación-de-parámetros" class="section level1">
+<h1><strong>Estimación de parámetros </strong></h1>
+<p><br/></p>
+<p>El modelo</p>
+<div class="content-box-blue">
+<p><span class="math display">\[Y_i = \beta_0 + \beta_1X_{i1} +
+\beta_2X_{i2} + \cdots + \beta_kX_{ik} + \varepsilon_i,\ i = 1, \ldots,
+n,\]</span></p>
+</div>
+<p><br/></p>
+<p>Está compuesto de una variable dependiente <span
+class="math inline">\(y\)</span>, (<span
+class="math inline">\(k\)</span>) variables independietes y un
+componente aleatorio <span class="math inline">\(\varepsilon\)</span>,
+formando un sistema de <span class="math inline">\(n\)</span> ecuaciones
+con <span class="math inline">\(p = k + 1\)</span> incógnitas
+correspondiendo al intercepto y los <span
+class="math inline">\(k\)</span> coeficientes de regresión, donde los
+<span class="math inline">\(Y_i\)</span> y las <span
+class="math inline">\(X_{ij}\)</span> toman valores conocidos en cada
+caso.</p>
+<p><br/></p>
+<p>El sistema expresado en forma matricial corresponde a:</p>
+<div class="content-box-blue">
+<p><span class="math display">\[
+\boldsymbol{y} = \boldsymbol{X\beta} + \boldsymbol{\varepsilon}
+\]</span></p>
+</div>
+<p><br/></p>
+<p><span class="math display">\[\left[\begin{array}{c} Y_1\\ Y_2\\
+\vdots\\ Y_n\end{array}\right]_{n \times 1} =
+\left[\begin{array}{ccccc} 1 &amp; X_{11} &amp; X_{12} &amp; \cdots
+&amp; X_{1k}\\ 1 &amp; X_{21} &amp; X_{22} &amp; \cdots &amp; X_{2k}\\
+\vdots &amp; \vdots &amp; \vdots &amp; \cdots &amp; \vdots\\ 1 &amp;
+X_{n1} &amp; X_{n2} &amp; \cdots &amp; X_{nk}\end{array}\right]_{n
+\times p} \hspace{.2cm}
+\left[\begin{array}{c} \beta_0\\ \beta_1\\ \vdots\\
+\beta_k\end{array}\right]_{p \times 1} +  
+\left[\begin{array}{c} \varepsilon_1\\ \varepsilon_2\\ \vdots\\
+\varepsilon_n\end{array}\right]_{n \times 1}\]</span></p>
+<p><br/><br/></p>
+<div id="nota" class="section level3 content-box-yellow">
+<h3><strong>Nota</strong></h3>
+<p>Los supuestos del modelo sobre los errores establecen que:</p>
+<p><span class="math display">\[\varepsilon_i \overset{\text{iid}}{\sim}
+N\left(0,\sigma ^2 \right), \quad i = 1, 2, \ldots, n\]</span></p>
+<p><br/></p>
+<p>Lo cual en forma matricial establece que el vector <span
+class="math inline">\(\boldsymbol{\varepsilon}\)</span> (de los errores
+aleatorios) es un vector aleatorio normal <span
+class="math inline">\(n\)</span>-variado con valor esperado <span
+class="math inline">\(E\left(\boldsymbol{\varepsilon}\right) =
+\boldsymbol{0}\)</span> y matriz de varianzas covarianzas <span
+class="math inline">\(V\left(\boldsymbol{\varepsilon}\right) = \sigma^2
+\boldsymbol{I}_n\)</span>, donde <span
+class="math inline">\(\boldsymbol{I}_n\)</span> es la matriz identidad
+de orden <span class="math inline">\(n\)</span>.</p>
+<p><br/></p>
+<p>Observe que <span
+class="math inline">\(E\left(\boldsymbol{\varepsilon}\right) =
+\left[\begin{array}{c} 0\\ 0\\ \vdots\\ 0\end{array}\right]\)</span> y
+<span class="math inline">\(V\left(\boldsymbol{\varepsilon}\right) =
+\left[\begin{array}{cccc} \sigma^2 &amp; 0 &amp; \cdots &amp; 0\\ 0
+&amp; \sigma^2 &amp; \cdots &amp; 0\\ \vdots &amp; \vdots &amp; \ddots
+&amp; \vdots\\ 0 &amp; 0 &amp; \cdots &amp;
+\sigma^2\end{array}\right]\)</span>.</p>
+<p><br/></p>
+<p>Por tanto el vector aleatorio <span
+class="math inline">\(\boldsymbol{y}\)</span> tiene valor esperado <span
+class="math inline">\(\boldsymbol{X\beta}\)</span> y la misma matriz de
+varianzas covarianzas de <span
+class="math inline">\(\boldsymbol{\varepsilon}\)</span>.</p>
+</div>
+<p><br/><br/><br/></p>
+<div id="estimación-mco" class="section level2">
+<h2><strong>Estimación MCO</strong></h2>
+<p><br/></p>
+<p>Para la estimación por <strong>mínimos cuadrados ordinarios</strong>
+(MCO)se buscan los valores estimados de los parámetros tales que se
+minimice la suma de cuadrado del error:</p>
+<div class="content-box-blue">
+<p><span class="math display">\[S\left(\boldsymbol{\beta}\right) =
+\sum\limits_{i=1}^n \varepsilon_i^2 = \sum\limits_{i=1}^n\left(Y_i -
+\beta_0 - \beta_1X_{i1} - \beta_2X_{i2} - \cdots -
+\beta_kX_{ik}\right)^2.\]</span></p>
+</div>
+<p></br></p>
+<p>Matricialmente, <span class="math display">\[
+\begin{aligned}
+S\left(\boldsymbol{\beta}\right) &amp;=
+\boldsymbol{\varepsilon}&#39;\boldsymbol{\varepsilon} =
+\left(\boldsymbol{y} -
+\boldsymbol{X\beta}\right)&#39;\left(\boldsymbol{y} -
+\boldsymbol{X\beta}\right)\\
+&amp;= \boldsymbol{y}&#39;\boldsymbol{y} -
+\boldsymbol{y}&#39;\boldsymbol{X\beta} -
+\boldsymbol{\beta}&#39;\boldsymbol{X}&#39;\boldsymbol{y}+\boldsymbol{\beta}&#39;\boldsymbol{X}&#39;\boldsymbol{X\beta}\\
+&amp;= \boldsymbol{y}&#39;\boldsymbol{y} -
+2\boldsymbol{\beta}&#39;\boldsymbol{X}&#39;\boldsymbol{y}+\boldsymbol{\beta}&#39;\boldsymbol{X}&#39;\boldsymbol{X\beta},
+\end{aligned}
+\]</span></p>
+<p></br></p>
+<p>y el estimador de mínimos cuadrados se obtiene al resolver</p>
+<p><span class="math display">\[\left.\frac{d\
+S\left(\boldsymbol{\beta}\right)}{d\boldsymbol\beta}=0\ \right|_{\
+\boldsymbol\beta=\boldsymbol{\widehat\beta}}\quad\iff
+-2\boldsymbol{X}&#39;\boldsymbol{y} +
+2\boldsymbol{X}&#39;\boldsymbol{X}\boldsymbol{\widehat\beta} =
+0\]</span> </br></p>
+<p>De donde las ecuaciones normales de mínimos cuadrados para el modelo
+de RLM son:</p>
+<p><span
+class="math display">\[\boldsymbol{X}&#39;\boldsymbol{X\widehat\beta} =
+\boldsymbol{X}&#39;\boldsymbol{y},\]</span></p>
+<p></br></p>
+<p>y el vector de los estimadores MCO es</p>
+<div class="content-box-blue">
+<p><span class="math display">\[\boldsymbol{\widehat\beta} =
+\left(\boldsymbol{X}&#39;\boldsymbol{X}\right)^{-1}\
+\boldsymbol{X}&#39;\boldsymbol{y}\]</span></p>
+</div>
+<p></br></p>
+<p>cuyos elementos corresponden a los estimadores de mínimos cuadrados
+para los parámetros del modelo de RLM. Esto es,</p>
+<p><span class="math display">\[
+\boldsymbol{\widehat\beta} = \left[\begin{array}{cccc} \widehat{\beta}_0
+&amp; \widehat{\beta}_1&amp; \cdots&amp;
+\widehat{\beta}_k\end{array}\right]&#39;
+\]</span></p>
+<p>Luego, la ecuación de regresión ajustada igual a</p>
+<p><span class="math display">\[
+\widehat{Y}_i = \widehat{\beta}_0 + \widehat{\beta}_1x_1 +
+\widehat{\beta}_2x_2 + \cdots + \widehat{\beta}_kx_k =
+\text{x}_i\boldsymbol{\widehat\beta}.
+\]</span></p>
+<p>donde, <span class="math inline">\(\text{x}_i\)</span> es la <span
+class="math inline">\(i\)</span>-ésima fila de la matrix <span
+class="math inline">\(\boldsymbol{X}\)</span>.</p>
 <p></br></br></br></p>
-<p>En esta unidad se presentan los principales conceptos del
-<strong>Modelo de Regresión Lineal Múltiple</strong> (RLM), su
-estructura en forma matricial, estimación por el método de Mínimos
-Cuadrados Ordinarios (MCO), las propiedades de los estimadores, los
-supuestos que lo rigen, la validación de los mismos, inferencia tanto
-para los estimadores como las predicciones y pronósticos de la variable
-dependiente, el problema de la multicolinealidad y el código en R
-relacionado con las anteriores estimaciones y validaciones.</p>
+</div>
+</div>
 
 
 

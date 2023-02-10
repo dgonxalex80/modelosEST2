@@ -9,9 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Unidad 2" />
 
 
-<title> Introducción</title>
+<title> Validación de supuestos</title>
 
 <script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -376,22 +377,180 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore"><span style="color:#034a94">
-<strong>Introducción</strong></span></h1>
+<strong>Validación de supuestos</strong></span></h1>
+<h4 class="author">Unidad 2</h4>
 
 </div>
 
 
 <p></br></br></p>
-<p><img src="img/banner_presentacion.png" width="100%" style="display: block; margin: auto;" /></p>
+<div id="validación-de-los-supuestos" class="section level2">
+<h2><strong>Validación de los supuestos</strong></h2>
+<p></br></p>
+<p>Para la validación de supuestos se usan generalmente los residuales
+del modelo, los cuales sabemos que se definen así:</p>
+<p></br></p>
+<div class="content-box-blue">
+<p><span class="math display">\[\widehat{\varepsilon_i} = e_i =
+(y_i-\widehat{y_i}) ,\hspace{1cm} i=1, \ldots, n\]</span></p>
+</div>
+<p></br></p>
+<p>çObserve que, la magnitud de los residuales <span
+class="math inline">\(e_i\)</span> depende de la escala de medida de la
+respuesta <span class="math inline">\(Y\)</span>, lo cual no permite
+determinar cuando un residual es ‘grande’. Para resolver este problema
+en lugar de usar los residuales crudos definidos arriba, se recomienda
+utilizar residuales escalados que transforman a los anteriores para
+tener media cero y varianza unitaria.</p>
+<p></br></br></p>
+</div>
+<div id="residuales-escalados" class="section level2">
+<h2><strong>Residuales escalados</strong></h2>
+<p></br></p>
+<p>Se han definido varias versiones de residuales escalados, entre los
+que se destacan:</p>
+<p></br></p>
+<ul>
+<li><strong>Residuales estandarizados:</strong> para su definición se
+considera el supuesto sobre los errores, que establece que <span
+class="math inline">\(\varepsilon_i\)</span> se distribuye con media
+cero y varianza <span class="math inline">\(\sigma^2\)</span>. Por
+tanto, los residuales estandarizados, denotados <span
+class="math inline">\(d_i\)</span> se definen como: <span
+class="math display">\[d_i = \frac{e_i}{\sqrt{\text{MSE}}},\ i = 1,
+\ldots, n\]</span></li>
+</ul>
+<p></br></p>
+<p>Si el supuesto es adecuado los valores de <span
+class="math inline">\(d_i\)</span> deben oscilar entre -3 y 3. Por
+tanto, Un <span class="math inline">\(d_i\)</span> grande (<span
+class="math inline">\(\vert d_i\vert &gt; 3\)</span>) es indicio de una
+observación atípica potencial.</p>
+<p></br></p>
+<ul>
+<li><strong>Residuales estudentizados:</strong> para su definición se
+considera el hecho de que realmente los residuales <span
+class="math inline">\(e_i\)</span> en general no son independientes ni
+tienen varianza constante como los errores <span
+class="math inline">\(\varepsilon_i\)</span>. Veamos,</li>
+</ul>
+<p>Sabemos que, <span class="math inline">\(\boldsymbol{e} =
+(\boldsymbol{I}-\boldsymbol{H})\boldsymbol{Y}\)</span>, donde <span
+class="math inline">\(\boldsymbol{I}-\boldsymbol{H}\)</span> es una
+matriz simétrica e idempotente. Luego,</p>
+<p></br></p>
+<p><span class="math display">\[\begin{aligned}
+  E\left[\boldsymbol{e}\right] &amp;=
+E\left[(\boldsymbol{I}-\boldsymbol{H})\boldsymbol{Y}\right] =
+(\boldsymbol{I}-\boldsymbol{H}) E\left[\boldsymbol{Y}\right] =
+(\boldsymbol{I}-\boldsymbol{H}) \boldsymbol{X\beta}\\
+&amp;= \boldsymbol{X\beta} - \boldsymbol{H}\boldsymbol{X\beta} =
+\boldsymbol{X\beta} -
+\boldsymbol{X}\left(\boldsymbol{X}&#39;\boldsymbol{X}\right)^{-1}\
+\boldsymbol{X}&#39;\boldsymbol{X\beta} = \boldsymbol{0}\\[0.2cm]
+V\left[\boldsymbol{e}\right] &amp;=
+V\left[(\boldsymbol{I}-\boldsymbol{H})\boldsymbol{Y}\right] =
+(\boldsymbol{I}-\boldsymbol{H}) V\left[\boldsymbol{Y}\right]
+(\boldsymbol{I}-\boldsymbol{H})&#39; = \sigma^2(\boldsymbol{I-H})
+\end{aligned}\]</span></p>
+<p></br></p>
+<p>De donde, <span class="math inline">\(V(e_i) =
+\sigma^2(1-h_{ii})\)</span> y <span
+class="math inline">\(\text{cov}(e_i, e_j) =
+-\sigma^2h_{ij}\)</span>.</p>
+<p></br></br></p>
+<p>Por tanto, mientras que los errores <span
+class="math inline">\(\varepsilon_i\)</span> tienen varianza constante
+<span class="math inline">\(\sigma^2\)</span> y son incorrelacionados,
+los residuales no necesariamente tienen la misma varianza y pueden ser
+correlacionados!.</p>
+<p>De esta forma, los residuales estudentizados, denotados <span
+class="math inline">\(r_i\)</span>, se definen como:</p>
+<p></br></p>
+<p><span class="math display">\[r_i=\dfrac{e_i}{\sqrt{\text{MSE}(1 -
+h_{ii})}},\hspace{1cm} i = 1, \ldots, n.\]</span> Este residual, con
+mayor razón debe moverse entre -3 y 3. Se considera atípica aquella
+observación con un <span class="math inline">\(r_i\)</span> grande
+(<span class="math inline">\(\vert r_i\vert &gt; 3\)</span>).</p>
+<p></br></br></p>
+<div class="content-box-gray">
+<p><strong>NOTAS</strong></p>
+<ul>
+<li>Si el modelo de RLM especificado es correcto los <span
+class="math inline">\(r_i\)</span> tienen varianza aproximadamente
+constante!! igual a 1.</li>
+<li>En conjuntos grandes de datos la varianza de los <span
+class="math inline">\(r_i\)</span> se puede estabilizar en 1 y así no
+habrá mucha diferencia entre éstos y los <span
+class="math inline">\(d_i\)</span>.</li>
+</ul>
+<p></br></p>
+<ul>
+<li>Si todos los supuestos del modelo se cumplen, se espera que
+aproximadamente el 68% de los residuales <span
+class="math inline">\(d_i\)</span> ó <span
+class="math inline">\(r_i\)</span>, estén entre <span
+class="math inline">\(-1\)</span> y <span
+class="math inline">\(+1\)</span>, aproximadamente el 95% entre <span
+class="math inline">\(-2\)</span> y <span
+class="math inline">\(+2\)</span> y aproximadamente 99.7% entre <span
+class="math inline">\(-3\)</span> y <span
+class="math inline">\(+3\)</span>.</li>
+</ul>
+</div>
+<p></br></br></p>
+<p>La validación de los supuestos vista en regresión lineal simple se
+mantiene, solo que ahora se recomienda utilizar residuales escalados
+(<span class="math inline">\(d_i\)</span> ó preferiblemente <span
+class="math inline">\(r_i\)</span>) en lugar de utilizar los residuales
+crudos <span class="math inline">\(e_i\)</span>.</p>
 <p></br></br></br></p>
-<p>En esta unidad se presentan los principales conceptos del
-<strong>Modelo de Regresión Lineal Múltiple</strong> (RLM), su
-estructura en forma matricial, estimación por el método de Mínimos
-Cuadrados Ordinarios (MCO), las propiedades de los estimadores, los
-supuestos que lo rigen, la validación de los mismos, inferencia tanto
-para los estimadores como las predicciones y pronósticos de la variable
-dependiente, el problema de la multicolinealidad y el código en R
-relacionado con las anteriores estimaciones y validaciones.</p>
+</div>
+<div id="validación-de-los-supuestos-en-los-errores"
+class="section level1">
+<h1><strong>Validación de los supuestos en los errores</strong></h1>
+<p></br></p>
+<p>Recuerde que en los modelos de regresión se han impuesto las
+siguientes cuatro condiciones sobre el término de error:</p>
+<div class="content-box-blue">
+<ul>
+<li><p>Los errores son variables aleatorias normales. <span
+class="math inline">\(e \sim normal\)</span></p></li>
+<li><p>Los errores tienen media cero. <span class="math inline">\(E[e] =
+0\)</span></p></li>
+<li><p>Los errores tienen varianza constante. <span
+class="math inline">\(V[e] = \sigma^{2}\)</span></p></li>
+<li><p>Los errores son mutuamente independientes. <span
+class="math inline">\(E[e_i, e_j] =0\)</span></p></li>
+</ul>
+</div>
+<p></br></p>
+<p>Recuerde que en esta asignatura asumiremos el supuesto de
+independencia de los errores y en virtud de que usando los residuales
+del modelo el supuesto de media cero siempre se cumple, entonces se
+define lo siguiente:</p>
+<p></br></p>
+<ul>
+<li>El supuesto de normalidad puede chequearse bien sea con el gráfico
+de probabilidad normal de los residuales o con alguna de las pruebas
+analíticas de normalidad, entre las cuales se tienen las de
+<strong>Shapiro Wilk</strong>, <strong>Kolmogorov Smirnov</strong>,
+<strong>Cramér von Mises</strong> y <strong>Anderson
+Darling</strong>.</li>
+</ul>
+<p></br></p>
+<ul>
+<li>Para chequear el supuesto de varianza constante, resulta útil un
+gráfico de residuales versus valores ajustados de la respuesta, al igual
+que la prueba de <strong>Goldfeld-Quandt</strong>.</li>
+</ul>
+<p></br></p>
+<ul>
+<li>Para la independencia de los errores se realiza la prueba de
+<strong>Durbin-Watson</strong>.</li>
+</ul>
+<p></br></br></br></p>
+</div>
 
 
 

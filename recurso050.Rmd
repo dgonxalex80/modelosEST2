@@ -1,0 +1,140 @@
+---
+title: <span style="color:#034a94"> **Validación de supuestos**</span>
+author: "Unidad 2"
+output: html_document
+css: style.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA)
+
+# colores
+c1="#FF7F00"
+c2="#=EB0C6"
+c3="#034A94"
+c4="#686868"
+
+```
+
+</br></br>
+
+
+## **Validación de los supuestos**
+
+</br>
+
+Para la validación de supuestos se usan generalmente los residuales del modelo, los cuales sabemos que se definen así:
+
+</br>
+
+<div class="content-box-blue">
+$$\widehat{\varepsilon_i} = e_i = (y_i-\widehat{y_i}) ,\hspace{1cm} i=1, \ldots, n$$
+</div>
+
+</br>
+
+çObserve que, la magnitud de los residuales $e_i$ depende de la escala de medida de la respuesta $Y$, lo cual no permite determinar cuando un residual es 'grande'. Para resolver este problema en lugar de usar los residuales crudos definidos arriba, se recomienda utilizar residuales escalados que transforman a los anteriores para tener media cero y varianza unitaria.
+
+</br></br>
+
+## **Residuales escalados**
+
+</br>
+
+Se han definido varias versiones de residuales escalados, entre los que se destacan:
+
+</br>
+
+* **Residuales estandarizados:** para su definición se considera el supuesto sobre los errores, que establece que $\varepsilon_i$ se distribuye con media cero y varianza $\sigma^2$. Por tanto, los residuales estandarizados, denotados $d_i$ se definen como:
+$$d_i = \frac{e_i}{\sqrt{\text{MSE}}},\ i = 1, \ldots, n$$
+
+</br>
+
+Si el supuesto es adecuado los valores de $d_i$ deben oscilar entre -3 y 3. Por tanto, Un $d_i$ grande ($\vert d_i\vert > 3$) es indicio de una observación atípica potencial.
+
+
+</br>
+
+* **Residuales estudentizados:** para su definición se considera el hecho de que realmente los residuales $e_i$ en general no son independientes ni tienen varianza constante como los errores $\varepsilon_i$. Veamos,
+
+ Sabemos que, $\boldsymbol{e} = (\boldsymbol{I}-\boldsymbol{H})\boldsymbol{Y}$, donde $\boldsymbol{I}-\boldsymbol{H}$ es una matriz simétrica e idempotente. Luego,
+
+</br>
+
+$$\begin{aligned}
+  E\left[\boldsymbol{e}\right] &= E\left[(\boldsymbol{I}-\boldsymbol{H})\boldsymbol{Y}\right] = (\boldsymbol{I}-\boldsymbol{H}) E\left[\boldsymbol{Y}\right] = (\boldsymbol{I}-\boldsymbol{H}) \boldsymbol{X\beta}\\
+&= \boldsymbol{X\beta} - \boldsymbol{H}\boldsymbol{X\beta} = \boldsymbol{X\beta} - \boldsymbol{X}\left(\boldsymbol{X}'\boldsymbol{X}\right)^{-1}\ \boldsymbol{X}'\boldsymbol{X\beta} = \boldsymbol{0}\\[0.2cm]
+V\left[\boldsymbol{e}\right] &= V\left[(\boldsymbol{I}-\boldsymbol{H})\boldsymbol{Y}\right] = (\boldsymbol{I}-\boldsymbol{H}) V\left[\boldsymbol{Y}\right] (\boldsymbol{I}-\boldsymbol{H})' = \sigma^2(\boldsymbol{I-H})
+\end{aligned}$$
+
+</br>
+
+De donde, $V(e_i) = \sigma^2(1-h_{ii})$ y $\text{cov}(e_i, e_j) = -\sigma^2h_{ij}$.
+  
+</br></br>
+
+Por tanto, mientras que los errores $\varepsilon_i$ tienen varianza constante $\sigma^2$ y son incorrelacionados, los residuales no necesariamente tienen la misma varianza y pueden ser correlacionados!.
+
+De esta forma, los residuales estudentizados, denotados $r_i$, se definen como:
+
+</br>
+
+$$r_i=\dfrac{e_i}{\sqrt{\text{MSE}(1 - h_{ii})}},\hspace{1cm} i = 1, \ldots, n.$$
+Este residual, con mayor razón debe moverse entre -3 y 3. Se considera atípica aquella observación con un $r_i$ grande ($\vert r_i\vert > 3$).
+
+</br></br>
+
+<div class="content-box-gray">
+**NOTAS**
+
+* Si el modelo de RLM especificado es correcto los $r_i$ tienen varianza aproximadamente constante!! igual a 1.
+* En conjuntos grandes de datos la varianza de los $r_i$ se puede estabilizar en 1 y así no habrá mucha diferencia entre éstos y los $d_i$.
+
+</br>
+
+* Si todos los supuestos del modelo se cumplen, se espera que aproximadamente el 68\% de los residuales $d_i$ ó $r_i$, estén entre $-1$ y $+1$, aproximadamente el 95\% entre $-2$ y $+2$ y aproximadamente 99.7\% entre $-3$ y $+3$.
+
+</div>
+
+</br></br>
+
+La validación de los supuestos vista en regresión lineal simple se mantiene, solo que ahora se recomienda utilizar residuales escalados ($d_i$ ó preferiblemente $r_i$) en lugar de utilizar los residuales crudos $e_i$.
+
+
+</br></br></br>
+
+# **Validación de los supuestos en los errores**
+
+</br>
+
+Recuerde que en los modelos de regresión se han impuesto las siguientes cuatro condiciones sobre el término de error:
+
+<div class="content-box-blue">
+
+* Los errores son variables aleatorias normales. $e \sim normal$
+
+* Los errores tienen media cero. $E[e] = 0$
+
+* Los errores tienen varianza constante. $V[e] = \sigma^{2}$
+
+* Los errores son mutuamente independientes. $E[e_i, e_j] =0$
+</div>
+
+</br>
+
+Recuerde que en esta asignatura asumiremos el supuesto de independencia de los errores y en virtud de que usando los residuales del modelo el supuesto de media cero siempre se cumple, entonces se define lo siguiente:
+
+</br>
+
+* El supuesto de normalidad puede chequearse bien sea con el gráfico de probabilidad normal de los residuales o con alguna de las pruebas analíticas de normalidad, entre las cuales se tienen las de **Shapiro Wilk**, **Kolmogorov Smirnov**, **Cramér von Mises** y **Anderson Darling**.
+
+</br>
+
+* Para chequear el supuesto de varianza constante, resulta útil un gráfico de residuales versus valores ajustados de la respuesta, al igual que la prueba de  **Goldfeld-Quandt**. 
+
+</br>
+
+* Para la independencia de los errores se realiza la prueba de **Durbin-Watson**. 
+
+</br></br></br>
+

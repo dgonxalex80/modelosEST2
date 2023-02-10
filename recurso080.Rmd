@@ -1,0 +1,98 @@
+---
+title: <span style="color:#034a94"> **Multicolinealidad**</span>
+author: "Unidad 2"
+output: html_document
+css: style.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA)
+
+# colores
+c1="#FF7F00"
+c2="#=EB0C6"
+c3="#034A94"
+c4="#686868"
+
+```
+
+</br>
+
+## **Comparación de efectos parciales de las variables predictoras**
+
+</br>
+
+Considere el modelo de RLM:
+
+</br>
+<div class="content-box-blue">
+$$Y_i = \beta_0 + \beta_1X_{i1} + \beta_2X_{i2} + \cdots + \beta_kX_{ik} + \ \varepsilon_i,\text{ con }\ \varepsilon_i \overset{\text{i.i.d}}{\sim} N\left(0, \sigma^2\right).$$
+</div>
+
+</br>
+
+1. Si las variables predictoras no están en una misma escala de medida, no podemos determinar cual tiene mayor o menor efecto parcial sobre la respuesta promedio, en presencia de las demás, esto es, la magnitud de $\beta_j$ refleja las unidades de la variable $X_j$.
+
+</br>
+
+2. Para hacer comparaciones en forma directa de los coeficientes de regresión se recurre al uso de variables escaladas, tanto en la respuesta como en las predictoras.
+
+</br>
+
+**Escalamiento de longitud unitaria:** cada variable es escalada restando su media muestral y dividiendo esta diferencia por la raíz cuadrada de la suma de cuadrados corregida de cada variable, es decir,
+
+</br>
+
+$$\begin{aligned}
+&Y_i^* = \frac{Y_i - \bar{Y}}{\sqrt{\sum\limits_{h = 1}^n \left(Y_h - \bar{Y}\right)^2}}, \quad X_{ij}^* = \frac{X_{ij} - \bar{X}_j}{\sqrt{\sum\limits_{h = 1}^n \left(X_{hj} - \bar{X}_j\right)^2}},\\[0.2cm]
+&\\
+&\text{con } \left\{\begin{array}{c}
+i = 1, 2, \ldots, n\\
+j = 1, 2, \ldots, k
+\end{array}\right.
+\end{aligned}$$
+
+</br>
+
+Luego, se ajusta el modelo de RLM sin intercepto
+
+</br>
+
+<div class="content-box-blue">
+$$Y_i^* = \beta_1^*X_{i1}^* + \beta_2^*X_{i2}^* + \cdots + \beta_k^*X_{ik}^* + \varepsilon_i,\hspace{.5cm}\text{con } \hspace{.5cm}\varepsilon_i \overset{\text{i.i.d}}{\sim} N\left(0, \sigma^2\right)$$
+
+</div>
+</br>
+
+Los coeficientes $\beta_j^*$ son llamados *coeficientes de regresión estandarizados*, y estos pueden ser comparados directamente teniendo en cuenta que siguen siendo coeficientes de regresión parcial, es decir, $\beta_j^*$ mide el efecto de $X_j^*$ dado que las demás variables predictoras están en el modelo.
+
+</br>
+
+
+Además, los $\beta_j^*$ pueden servir para determinar la importancia relativa de $X_j^*$ en presencia de las demás variables, en la muestra o conjunto de datos particular considerado para el ajuste.
+
+</br></br>
+
+## **Multicolinealidad**
+
+</br>
+
+Multicolinealidad es la existencia de dependencia casi lineal entre variables predictoras en el modelo de RLM.
+
+Si existiera dependencia lineal exacta entre dos o más variables predictoras, la matriz 
+
+$\boldsymbol{X}'\boldsymbol{X}$ sería singular y por tanto **no podríamos hallar los estimadores de mínimos cuadrados!**.
+
+```{r, comment = NA, include = F}
+#dt <- read.table('trabajos/RLM/bases/Equipo60.txt', h = T)[, -(4:6)]
+# dt <- read.table('Trabajos/01/Bases_de_datos/Equipo50.txt', h = T)[, -(4:5)]
+# dt$X3 <- 2*dt$X1 - dt$X2
+# summary(lm(Y ~ X1 + X2 + X3, data = dt))
+```
+
+</br></br>
+
+
+
+
+

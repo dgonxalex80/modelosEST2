@@ -9,9 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Unidad 2" />
 
 
-<title> Introducción</title>
+<title> Inferencia</title>
 
 <script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -376,22 +377,136 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore"><span style="color:#034a94">
-<strong>Introducción</strong></span></h1>
+<strong>Inferencia</strong></span></h1>
+<h4 class="author">Unidad 2</h4>
 
 </div>
 
 
+<p><br/> <br/></p>
+<div id="sobre-los-parámetros-del-modelo" class="section level1">
+<h1><strong>Sobre los parámetros del modelo</strong></h1>
+<p></br></p>
+<p>Se puede demostrar que bajo los supuestos del modelo de regresión, se
+cumple que:</p>
+<p><span class="math display">\[
+{T_j} = {\frac{\widehat\beta_j -
+\beta_j}{\text{se}\left(\widehat\beta_j\right)} \sim t_{n - p}},
+\hspace{1cm} j = 0, 1, \ldots, k
+\]</span></p>
+<p>con :</p>
+<ul>
+<li><p><span class="math inline">\(\text{se}\left(\widehat\beta_j\right)
+= \sqrt{\widehat{V}\left(\widehat\beta_j\right)}\)</span> y</p></li>
+<li><p><span class="math inline">\({t_{n - p}}\)</span>, variable
+aleatoria <span class="math inline">\(t\)</span>-Student con <span
+class="math inline">\((n-p)\)</span> grados de libertad.</p></li>
+</ul>
+<p></br></p>
+<p>Basados en este resultado se pueden construir pruebas de hipótesis e
+intervalos de confianza para los parámetros del modelo de RLM como se
+describe a continuación.</p>
 <p></br></br></p>
-<p><img src="img/banner_presentacion.png" width="100%" style="display: block; margin: auto;" /></p>
+<div id="pruebas-de-hipótesis-sobre-los-parámetros"
+class="section level2">
+<h2><strong>Pruebas de hipótesis sobre los parámetros</strong></h2>
+<p></br></p>
+<div class="content-box-blue">
+<p>Se tienen en total <span class="math inline">\((k + 1)\)</span>
+pruebas de hipótesis sobre los coeficientes individuales del modelo de
+<strong>RLM</strong>. Veamos el procedimiento para el <span
+class="math inline">\(j\)</span>-ésimo parámetro (<span
+class="math inline">\(j = 0, 1, \ldots, k\)</span>). Se quiere
+probar:</p>
+<p></br></p>
+<table>
+<colgroup>
+<col width="44%" />
+<col width="55%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Pruebas</th>
+<th align="center">Estadístico de prueba</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><span class="math inline">\(\begin{array}{l} H_0:
+\beta_j = B_{j,0}\\ H_1: \beta_j \ne B_{j,0} \end{array}\ \text{ con }\
+B_{j,0} \in \mathbb{R}\)</span></td>
+<td align="center"><span class="math inline">\(T_{j,0} =
+\dfrac{\widehat\beta_j - B_{j,0}}{\text{se}\left(\widehat\beta_j\right)}
+\overset{\text{bajo }H_0}{\sim} t_{v: n - p}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p></br></p>
+<p>Un caso particular de las pruebas de hipótesis anteriores son las
+conocidas <strong>pruebas de significancia de los parámetros
+individuales</strong>, donde el procedimiento de prueba es idéntico al
+anteriormente mostrado haciendo <span class="math inline">\(B_{j,0} =
+0\)</span>. Acá, las hipótesis son:</p>
+<p></br></p>
+<table>
+<colgroup>
+<col width="44%" />
+<col width="55%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Pruebas</th>
+<th align="center">Estadístico de prueba</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><span class="math inline">\(\begin{array}{l} H_0:
+\beta_j = 0\\ H_1: \beta_j \ne 0 \end{array}\)</span></td>
+<td align="center"><span class="math inline">\(T_{j,0} =
+\dfrac{\widehat\beta_j}{\text{se}\left(\widehat\beta_j\right)}
+\overset{\text{bajo }H_0}{\sim} t_{n - p}\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="nota" class="section level3 content-box-yellow">
+<h3><strong>NOTA</strong></h3>
+<p>En todos los casos un valor-p bajo apuntará hacia el rechazo de <span
+class="math inline">\(H_0\)</span> y la aceptación de <span
+class="math inline">\(H_1\)</span> como verdad, en caso contrario no se
+rechaza <span class="math inline">\(H_0\)</span>, se asume que Ho es
+verdadera.</p>
+</div>
 <p></br></br></br></p>
-<p>En esta unidad se presentan los principales conceptos del
-<strong>Modelo de Regresión Lineal Múltiple</strong> (RLM), su
-estructura en forma matricial, estimación por el método de Mínimos
-Cuadrados Ordinarios (MCO), las propiedades de los estimadores, los
-supuestos que lo rigen, la validación de los mismos, inferencia tanto
-para los estimadores como las predicciones y pronósticos de la variable
-dependiente, el problema de la multicolinealidad y el código en R
-relacionado con las anteriores estimaciones y validaciones.</p>
+</div>
+<div id="intervalos-de-confianza-para-los-parámetros"
+class="section level2">
+<h2><strong>Intervalos de confianza para los parámetros</strong></h2>
+<p>De nuevo con base en el resultado <span
+class="math inline">\((\star)\)</span> un intervalo de confianza (IC)
+del <span class="math inline">\({(1 - \alpha)\%}\)</span> para el <span
+class="math inline">\(j\)</span>-ésimo parámetro <span
+class="math inline">\({\beta_j}\)</span> (<span class="math inline">\(j
+= 0, 1, \ldots, k\)</span>), es:</p>
+<p></br></p>
+<div class="content-box-blue">
+<p><span class="math display">\[
+\widehat\beta_j \pm t_{\alpha/2, n - p}\,
+\text{se}\left(\widehat\beta_j\right)
+\]</span></p>
+</div>
+<p></br></p>
+<p>donde</p>
+<ul>
+<li><span class="math inline">\({t_{\alpha/2, n - p}}\)</span> es el
+percentil <span class="math inline">\(1 - \alpha/2\)</span> de la
+distribución <span class="math inline">\(t\)</span>-Student con <span
+class="math inline">\((n - p)\)</span> grados de libertad.</li>
+</ul>
+<p></br></br></br></p>
+</div>
+</div>
 
 
 

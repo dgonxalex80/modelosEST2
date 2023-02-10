@@ -1,0 +1,108 @@
+---
+title: <span style="color:#034a94"> **Inferencia**</span>
+author: "Unidad 2"
+output: html_document
+css: style.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA)
+
+# colores
+c1="#FF7F00"
+c2="#=EB0C6"
+c3="#034A94"
+c4="#686868"
+
+```
+
+```{r, echo=FALSE, out.width="100%", fig.align = "center"}
+# knitr::include_graphics("img/puntos1.png")
+```
+
+
+<br/> <br/>
+
+
+# **Sobre los parámetros del modelo**
+
+</br>
+
+Se puede demostrar que bajo los supuestos del modelo de regresión, se cumple que:
+
+$$
+{T_j} = {\frac{\widehat\beta_j - \beta_j}{\text{se}\left(\widehat\beta_j\right)} \sim t_{n - p}}, \hspace{1cm} j = 0, 1, \ldots, k
+$$
+
+con :
+
+* $\text{se}\left(\widehat\beta_j\right) = \sqrt{\widehat{V}\left(\widehat\beta_j\right)}$ y 
+
+* ${t_{n - p}}$, variable aleatoria $t$-Student con $(n-p)$ grados de libertad.
+
+</br>
+
+Basados en este resultado se pueden construir pruebas de hipótesis e intervalos de confianza para los parámetros del modelo de RLM como se describe a continuación.
+
+</br></br>
+
+## **Pruebas de hipótesis sobre los parámetros**
+
+</br>
+
+<div class="content-box-blue">
+
+Se tienen en total $(k + 1)$ pruebas de hipótesis sobre los coeficientes individuales del modelo de **RLM**. Veamos el procedimiento para el $j$-ésimo parámetro ($j = 0, 1, \ldots, k$). Se quiere probar:
+
+</br>
+
+
+| Pruebas                                   | Estadístico de prueba                                |
+|:-----------------------------------------:|:----------------------------------------------------:|
+|$\begin{array}{l} H_0: \beta_j = B_{j,0}\\ H_1: \beta_j \ne B_{j,0} \end{array}\ \text{ con }\ B_{j,0} \in \mathbb{R}$     | $T_{j,0} = \dfrac{\widehat\beta_j - B_{j,0}}{\text{se}\left(\widehat\beta_j\right)} \overset{\text{bajo }H_0}{\sim} t_{v: n - p}$ |
+
+</br>
+
+Un caso particular de las pruebas de hipótesis anteriores son las conocidas **pruebas de significancia de los parámetros individuales**, donde el procedimiento de prueba es idéntico al anteriormente mostrado haciendo $B_{j,0} = 0$. Acá, las hipótesis son:
+
+</br>
+
+| Pruebas                                   | Estadístico de prueba                                |
+|:-----------------------------------------:|:----------------------------------------------------:|
+|$\begin{array}{l} H_0: \beta_j = 0\\ H_1: \beta_j \ne 0 \end{array}$  | $T_{j,0} = \dfrac{\widehat\beta_j}{\text{se}\left(\widehat\beta_j\right)} \overset{\text{bajo }H_0}{\sim} t_{n - p}$ |
+
+</div>
+
+
+<div class="content-box-yellow">
+### **NOTA** 
+
+En todos los casos un valor-p bajo apuntará hacia el rechazo de $H_0$ y la aceptación de $H_1$ como verdad, en caso contrario no se rechaza $H_0$, se asume que Ho es verdadera.
+</div>
+
+</br></br></br>
+
+## **Intervalos de confianza para los parámetros**
+
+De nuevo con base en el resultado $(\star)$ un intervalo de confianza (IC) del ${(1 - \alpha)\%}$ para el $j$-ésimo parámetro ${\beta_j}$ ($j = 0, 1, \ldots, k$), es:
+
+</br>
+
+<div class="content-box-blue">
+$$
+\widehat\beta_j \pm t_{\alpha/2, n - p}\, \text{se}\left(\widehat\beta_j\right)
+$$
+</div>
+
+</br>
+
+donde 
+
+* ${t_{\alpha/2, n - p}}$ es el percentil $1 - \alpha/2$ de la distribución $t$-Student con $(n - p)$ grados de libertad.
+
+</br></br></br>
+
+
+
+
+

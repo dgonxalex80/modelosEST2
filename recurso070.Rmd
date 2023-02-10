@@ -1,6 +1,6 @@
 ---
-title: <span style="color:#034a94"> **Estimación de parámetros**</span>
-author: "Modelos Estadísticos para la toma de decisiones"
+title: <span style="color:#034a94"> **Análisis de varianza - ANOVA**</span>
+author: "Unidad 2"
 output: html_document
 css: style.css
 ---
@@ -13,6 +13,8 @@ c1="#FF7F00"
 c2="#=EB0C6"
 c3="#034A94"
 c4="#686868"
+
 ```
 
-<br/> <br/>
+
+<br/><br/>

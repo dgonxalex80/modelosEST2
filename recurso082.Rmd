@@ -1,0 +1,135 @@
+---
+title: <span style="color:#034a94">**Diagnósticos de la multicolinealidad**</span>
+output: html_document
+css: style.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(paqueteMOD)
+data("creditos")
+
+```
+
+</br></br>
+
+
+Entre los diagnósticos más usados para detectar multicolinealidad en un modelo se tienen:
+
+</br>
+
+1. **Examinar la matriz de correlaciones entre las predictoras:** sea  $\text{COR}(\boldsymbol{X})$ una matriz cuyo elemento ($j,k$) corresponde a la correlación entre las predictoras $X_j$ y $X_k$, $\text{COR}\left(X_j, X_k\right)$.
+
+Esta matriz resulta útil para detectar multicolinealidad si en ésta no intervienen más de dos variables en una dependencia casi lineal.
+
+</br>
+      
+También valores de $\text{COR}\left(X_j, X_k\right)$ pequeños no necesariamente implican la ausencia de multicolinealidad.
+
+</br>
+
+2. **Factores de Inflación de Varianza:** denotados $\text{VIF}_j,\ j = 1, \ldots, k$ se calculan como: 
+
+
+$$\text{VIF}_j = c^*_{jj} = \frac{1}{1 - R_j^2}$$
+
+A continuación se establece el criterio para detectar la multicolinealidad de acuerdo a esta medida.
+      
+* Si $\text{VIF}_j \leq 5$ no hay problemas de multicolinealidad.
+
+* Si $5 < \text{VIF}_j \leq 10$ hay problemas de multicolinealidad moderada.
+
+* Si $\text{VIF}_j > 10$ hay problemas de multicolinealidad graves.
+
+```{r, include = F}
+# #base <- read.table('trabajos/RLM/bases/Equipo60.txt', h = T)
+# # base <- read.table('Trabajos/01/Bases_de_datos/Equipo50.txt', h = T)
+# lm1 <- lm(Y ~ X1 + X2 + X3, data = base)
+# 
+# Resultados <- NULL
+# Resultados$Xsin <- model.matrix(lm1)
+# Resultados$XtXsin <- t(Resultados$Xsin)%*%Resultados$Xsin
+# Resultados$XtXinv.sin <- solve(Resultados$XtXsin)
+# Resultados$corrX <- cor(base[, -c(1, 5, 6)])
+# 
+# # Escalamiento normal unitario
+# Ysnu <- with(base, scale(Y))
+# X1snu <- with(base, scale(X1))
+# X2snu <- with(base, scale(X2))
+# X3snu <- with(base, scale(X3))
+# Resultados$Xsnu <- cbind(X1snu, X2snu, X3snu)
+# Resultados$XtXsnu <- t(Resultados$Xsnu)%*%Resultados$Xsnu
+# Resultados$XtXinv.snu <- solve(Resultados$XtXsnu)
+# # VIF R Stats
+# Resultados$vifR <- vif(lm1)
+# # Escalamiento longitud unitaria
+# Yslu <- with(base, (Y - mean(Y))/sqrt(sum((Y - mean(Y))^2)))
+# X1slu <- with(base, (X1 - mean(X1))/sqrt(sum((X1 - mean(X1))^2)))
+# X2slu <- with(base, (X2 - mean(X2))/sqrt(sum((X2 - mean(X2))^2)))
+# X3slu <- with(base, (X3 - mean(X3))/sqrt(sum((X3 - mean(X3))^2)))
+# Resultados$Xslu <- cbind(X1slu, X2slu, X3slu)
+# Resultados$XtXslu <- t(Resultados$Xslu)%*%Resultados$Xslu
+# Resultados$XtXinv.slu <- solve(Resultados$XtXslu)
+# # VIF by definition without scale
+# lmX1sin <- summary(lm(X1 ~ X2 + X3, base))
+# Resultados$vifx1sin <- 1/(1 - lmX1sin$r.squared)
+# # VIF by definition with snu
+# lmX1snu <- summary(lm(X1snu ~ X2snu + X3snu))
+# Resultados$vifx1snu <- 1/(1 - lmX1snu$r.squared)
+# # VIF by definition with slu
+# lmX1slu <- summary(lm(X1slu ~ X2slu + X3slu))
+# Resultados$vifx1slu <- 1/(1 - lmX1slu$r.squared)
+# # Coeficientes estandarizados Nelfi
+# #Resultados$myCoefficients <- myCoefficients(lm1, base)
+# # Función para coeficientes estandarizados
+# stdcoeff <- function(MOD){
+#    b <- summary(MOD)$coef[-1, 1]
+#    sx <- apply(MOD$model[, -1], 2, sd)
+#    sy <- sd(MOD$model[, 1])
+#    beta <- b*sx/sy
+#    return(beta)
+# }
+# Resultados$stdcoeff <- stdcoeff(lm1)
+# # Coeficientes estandarizados snu 
+# Resultados$beta_snu <- coef(lm(Ysnu ~ X1snu + X2snu + X3snu + 0))
+# # Coeficientes estandarizados snu 
+# Resultados$beta_slu <- coef(lm(Yslu ~ X1slu + X2slu + X3slu + 0))
+```
+
+</br>
+
+3. **Análisis de los valores propios de $\boldsymbol{X}'\boldsymbol{X}$:** se trata de evaluar si hay valores propios con valores cercanos a cero. Para ello se definen las medidas que se presentan a continuación:
+
+**Número de condición:** mide la dispersión en el espectro de los valores propios de la matriz $\boldsymbol{X}'\boldsymbol{X}$. Se calcula como: $\kappa = \lambda_{\max} / \lambda_{\min}$. En $R$ se obtienen valores en raíz cuadrada, es decir, $\sqrt{\kappa}$, para el cual el criterio para detectar multicolinealidad es:
+
+* Si $\sqrt{\kappa} \leq 10$ no hay problemas de multicolinealidad.
+
+* Si $10 < \sqrt{\kappa} \leq 31.62$ hay problemas de multicolinealidad moderada.
+
+* Si $\sqrt{\kappa} > 31.62$ hay problemas de multicolinealidad graves.
+
+</br>
+
+**Índice de condición:** es una medida útil para determinar el número de dependencias casi lineales en $\boldsymbol{X}'\boldsymbol{X}$. Se calcula como: $\kappa_j = \lambda_{\max} / \lambda_j,\ j = 1, \ldots, p$ (en $R$ se obtienen los valores $\sqrt{\kappa_j}$). El criterio para detectar multicolinealidad es:
+
+* Si $\sqrt{\kappa_j} \leq 10\ \forall j$, no hay problemas de multicolinealidad.
+
+* Si al menos para un $j$, $10 < \sqrt{\kappa_j} \leq 31.62$, entonces hay problemas de multicolinealidad moderada.
+
+* Si al menos para un $j$, $\sqrt{\kappa_j} > 31.62$, entonces hay problemas de multicolinealidad graves (por lo menos hay una asociación casi lineal entre dos o más predictoras).
+
+</br>
+
+**Proporciones de descomposición de varianza:** denotados $\pi_{ij}$ representan la proporción de la varianza de cada $\widehat\beta_j$ (o de cada factor de inflación de varianza) debida al $i$-ésimo valor propio de la matriz $\boldsymbol{X}'\boldsymbol{X}$.
+
+Proporciones altas ($\pi_{ij} > 0.5$) para dos o más coeficientes de regresión asociados con un mismo valor propio pequeño es evidencia de multicolinealidad entre las variables correspondientes a tales coeficientes.
+
+</br></br>
+
+**Nota:** 
+
+El análisis de valores propios se puede realizar usando datos centrados o con los datos originales. 
+
+
+
+

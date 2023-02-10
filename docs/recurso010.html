@@ -9,9 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Unidad 2" />
 
 
-<title> Introducción</title>
+<title> Asociaciones</title>
 
 <script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -376,22 +377,125 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore"><span style="color:#034a94">
-<strong>Introducción</strong></span></h1>
+<strong>Asociaciones</strong></span></h1>
+<h4 class="author">Unidad 2</h4>
 
 </div>
 
 
 <p></br></br></p>
-<p><img src="img/banner_presentacion.png" width="100%" style="display: block; margin: auto;" /></p>
+<div id="exploración-de-posibles-asociaciones" class="section level1">
+<h1><strong>Exploración de posibles asociaciones</strong></h1>
+<p></br></p>
+<p>Inicialmente, puede ser útil realizar chequeos gráficos de la
+naturaleza y la fuerza de las asociaciones entre las variables
+predictoras con la variable respuesta, y aún entre predictoras.</p>
+<p></br></p>
+<p>Una matriz de <strong>gráficas de dispersión</strong> es la
+herramienta más útil para visualizar rápida y simultáneamente estas
+relaciones. Si las variables predictoras se asocian linealmente a la
+variable respuesta, los gráficos de dispersión respectivos deben
+presentar las nubes de puntos tendiendo a una línea recta. También se
+puede chequear si existen relaciones de tipo no lineal entre las
+distintas variables, y la presencia de observaciones atípicas.</p>
+<p></br></p>
+<p>Por otra parte, se espera que entre las predictoras no existan
+relaciones lineales fuertes (<span
+class="math inline">\(\rho=0\)</span>), pues de lo contrario, habría
+información que podría ser redundante en el modelo, y se tendría un
+<strong>problema de multicolinealidad</strong>, lo cuál se estudiará en
+mayor detalle más adelante en la asignatura. El <strong>coeficiente de
+correlación</strong> permite medir la intensidad de la relación lineal
+que existe entre las variables independientes.</p>
+<p></br></p>
+<p>Es útil también acompañar este análisis gráfico con la matriz de
+correlaciones de las variables del modelo, la cual muestra los
+coeficientes de correlación entre la variable respuesta con cada una de
+las predictoras y también todas las correlaciones entre las
+predictoras.</p>
 <p></br></br></br></p>
-<p>En esta unidad se presentan los principales conceptos del
-<strong>Modelo de Regresión Lineal Múltiple</strong> (RLM), su
-estructura en forma matricial, estimación por el método de Mínimos
-Cuadrados Ordinarios (MCO), las propiedades de los estimadores, los
-supuestos que lo rigen, la validación de los mismos, inferencia tanto
-para los estimadores como las predicciones y pronósticos de la variable
-dependiente, el problema de la multicolinealidad y el código en R
-relacionado con las anteriores estimaciones y validaciones.</p>
+<div id="ejemplo" class="section level3">
+<h3><strong>Ejemplo</strong></h3>
+<p></br></p>
+<p>En la siguiente figura se presentan algunas matrices de gráficos de
+dispersión para un conjunto de datos sobre tres variables y su prelación
+con la variable dependiente.</p>
+<p></br></p>
+<p>La base ausentismo contenida en paqueteMOD contiene las variables</p>
+<ul>
+<li><strong>id</strong> : identificación del empleado</li>
+<li><strong>ausen</strong> : número de dias ausentes en el trabajo, en
+este caso variable dependiente</li>
+<li><strong>taller</strong> : si labora en el taller</li>
+<li><strong>sexo</strong> : sexo del trabajador</li>
+<li><strong>edad</strong> : edad del trabajador</li>
+<li><strong>antg</strong> : antiguedad en la empresa</li>
+<li><strong>sala</strong> : salario que debenga</li>
+</ul>
+<p></br></br></p>
+<center>
+<p><img src="recurso010_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+Diagrama de dispersión
+</center>
+<p></br></p>
+<p>Este diagrama permite visualizar la fuerte relación que existe entre
+las variables <strong>edad</strong> y <strong>antiguedad</strong>, es
+decir que estas dos variables no son independientes y podrían generar
+problema en el momento que las integremos a un mismo modelo como se verá
+más adelante.</p>
+<p></br></br></p>
+<center>
+<pre><code>       ausen   edad   antg   sala
+ausen  1.000 -0.675 -0.715 -0.667
+edad  -0.675  1.000  0.872  0.316
+antg  -0.715  0.872  1.000  0.439
+sala  -0.667  0.316  0.439  1.000</code></pre>
+Matriz de correlaciones
+</center>
+<p></br></p>
+<p>La información contenida en la matriz de correlaciones permite
+valorar la magnitud relación lineal entre las variables y el sentido de
+la misma. <span class="math inline">\(\widehat{\rho}_{_{\text{edad,
+antg}}} = 0.872\)</span>, lo que indica que a mayor edad, más
+antigüedad</p>
+<p></br></br></p>
+<center>
+<img src="recurso010_files/figure-html/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" />
+</center>
+<p></br></br></p>
+<p></br></br></p>
+<ul>
+<li><strong>Matrices de diagramas de dispersión:</strong> Simple (abajo
+izquierda),</li>
+<li><strong>Diagrama de desnsidad</strong> en la diagonal</li>
+<li><strong>Correlaciones</strong> parte superior derecha de la matriz,
+acompañadas de su significancia (<span class="math inline">\(Ho: \rho =
+0\)</span> vs <span class="math inline">\(Ha: \rho \neq 0\)</span>)</li>
+</ul>
+<p></br></p>
+<p>Se puede observar que la mayor relación de la variable <span
+class="math inline">\(y\)</span> (ausen) con alguna de las variables
+independientes es con antg (antiguedad en la empresa) y tiene signo
+negativo lo cual indica que los empleados mas antiguo tienen menos
+ausentismo, de igual manera que las variables edad y salario.</p>
+<p></br></p>
+<p>Tambien es importante notar que entre las variables independientes
+existen fuertes correlaciones, lo cual puede generar problemas en la
+estimación del modelo y su inferencia. Este tema (multicolinealidad)
+será abordado más adelante.</p>
+<p></br></br></p>
+</div>
+<div id="nota" class="section level3 content-box-yellow">
+<h3><strong>Nota</strong></h3>
+<p>Las variables independientes deben de ser independientes unas de
+otras, por tanto sus correlaciones deberán ser no significativas al
+realizar pruebas de hipótesis ( <span class="math inline">\(Ho: \rho =
+0\)</span>).</p>
+<p>En caso de haber una relación perfecta entre dos variables regresoras
+(<span class="math inline">\(X_{1} = aX_{2}\)</span>), el método MCO no
+tendrá solución (problema de la multicolinealidad perfecta).</p>
+</div>
+</div>
 
 
 

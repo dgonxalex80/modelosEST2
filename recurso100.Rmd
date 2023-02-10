@@ -1,0 +1,264 @@
+---
+title: <span style="color:#034a94"> **R - Estimación MCO**</span>
+output: html_document
+css: style.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(paqueteMOD)
+data("arboles1")
+arboles1$D1 = as.numeric(arboles1$mg=="GENOTIPO_2")
+arboles1$D2 = as.numeric(arboles1$finca=="FINCA_2")
+arboles1$D3 = as.numeric(arboles1$finca=="FINCA_3")
+arboles1$peso = as.numeric(arboles1$peso)
+arboles1$diametro = as.numeric(arboles1$diametro)
+arboles1$altura = as.numeric(arboles1$altura)
+
+
+library(tidyverse)
+library(lmtest) # diagnosticos de modelos lineales
+library(sandwich) # errores estandar robustos
+library(ggeffects) # efectos y predicciones en modelos de regresion
+library(modelsummary) # tablas de regresion
+```
+
+</br></br>
+
+## **Exploración previa**
+
+</br>
+
+```{r, warning=FALSE, message=FALSE}
+library(paqueteMOD)
+library(tidyverse)
+library(modelsummary)
+data("arboles1")
+arboles1$D1 = as.numeric(arboles1$mg=="GENOTIPO_2")
+arboles1$D2 = as.numeric(arboles1$finca=="FINCA_2")
+arboles1$D3 = as.numeric(arboles1$finca=="FINCA_3")
+arboles1$peso = as.numeric(arboles1$peso)
+arboles1$diametro = as.numeric(arboles1$diametro)
+arboles1$altura = as.numeric(arboles1$altura)
+
+summary(arboles1)
+# modelsummary::datasummary_skim(arboles1)
+
+```
+</br></br>
+
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.align='center'}
+library(GGally)
+ggpairs(arboles1[,3:5], title=" ") 
+```
+
+</br></br>
+
+## **Modelación MCO**
+
+```{r}
+library(paqueteMOD)
+data("arboles1")
+arboles1$D1 = as.numeric(arboles1$mg=="GENOTIPO_2")
+arboles1$D2 = as.numeric(arboles1$finca=="FINCA_2")
+arboles1$D3 = as.numeric(arboles1$finca=="FINCA_3")
+arboles1$peso = as.numeric(arboles1$peso)
+arboles1$diametro = as.numeric(arboles1$diametro)
+arboles1$altura = as.numeric(arboles1$altura)
+
+
+modelo1 <- lm(peso ~ diametro + altura + D2 + D3, data = arboles1)
+summary(modelo1)
+```
+
+</br></br>
+
+## **Estimación paso a paso**
+
+</br>
+
+```{r}
+# se define el modelo  ingenuo  y= b0
+modelo_b0<- lm(peso ~ 1, data=arboles1)
+
+#define model with all predictors
+modelo_all <- lm(peso ~ diametro + altura + D1 +D2 +D3, data=arboles1)
+
+#perform forward stepwise regression
+forward <- step(modelo_b0, direction='forward', scope=formula(modelo_all), trace=0)
+
+#view results of forward stepwise regression
+forward$anova
+
+
+#view final model
+forward$coefficients
+```
+
+</br></br>
+
+## **Validación simple**
+
+</br>
+
+`
+```{r}
+# Se seleccionan 196 índices aleatorios que formarán el training set. 
+set.seed(1)
+train <- sample(x = 1:90, 90*0.6)
+
+
+modelo_train <- lm(peso ~ diametro + altura + D2 + D3, data = arboles1, subset = train)
+summary(modelo_train)
+
+```
+
+</br></br>
+
+```{r}
+predicciones <- predict(object = modelo_train, newdata = arboles1[-train, ])
+error <- mean((arboles1$peso[-train] - predicciones)^2)
+error
+
+```
+</br></br>
+
+De acuerdo con [Joaquín Amat Rodrigo](https://rpubs.com/Joaquin_AR/238251#:~:text=Consiste%20en%20dividir%20los%20datos,como%20validaci%C3%B3n%20en%20cada%20iteraci%C3%B3n.) la validación siple puede presentar algunas desventajas debido a la dependencia de la estimación de lerro y la elección de la muestra de entrenamiento.
+
+</br></br>
+
+
+```{r, message=FALSE, warning=FALSE, fig.align='center', fig.height=2}
+library(ggplot2)
+library(gridExtra)
+library(dplyr)
+
+cv_MSE <- rep(NA,100)
+for (i in 1:100) {
+  train <- sample(x = 1:90, 90*0.6)
+  modelo_train <- lm(peso ~ diametro +  D3, data = arboles1, subset = train)
+  predicciones <- predict(object = modelo_train, newdata = arboles1[-train, ])
+  cv_MSE[i] <- mean((arboles1$peso[-train] - predicciones)^2)
+}
+
+p1 <- ggplot(data = data.frame(cv_MSE = cv_MSE), aes(x = 1, y = cv_MSE)) +
+      geom_boxplot(outlier.shape = NA) +
+      geom_jitter(colour = c("firebrick3"), width = 0.1) +
+      coord_flip() +
+      labs(title = "Distribución del error de validación simple") +
+      theme_bw() +
+      theme(axis.title.x = element_blank())
+p1
+
+```
+
+</br></br>
+
+## **Bootstrapping**
+
+</br>
+
+Este método permite estudiar la variabilidad de la estimación de los coeficientes de regresión lineal. 
+
+El método consiste en tomar una muestra con repetición de la data y con ella estimar el modelo. Los coeficientes estimados son guardados en un vector por cada estimador, al que se le obtiene la media y la desviación estandar.
+
+</br></br>
+
+```{r, warning=FALSE, message=FALSE}
+#-------------------------------------------------------------------------------
+library(boot)
+# Se define la función que devuelve el estadístico de interés, los coeficientes
+# de regresión
+fun_coeficientes <- function(data, index){
+  return(coef(lm(peso  ~ diametro + D3, data = arboles1, subset = index)))
+}
+
+# Se implementa un bucle que genere los modelos de forma iterativa y almacene
+# los coeficientes. El data frame Auto tiene 392 observaciones
+beta_0 <- rep(NA,9999)
+beta_1 <- rep(NA,9999)
+beta_2 <- rep(NA,9999)
+
+for(i in 1:9999) {
+  coeficientes <- fun_coeficientes(data = arboles1,
+                                   index = sample(1:90, 90, replace = TRUE))
+  beta_0[i] <- coeficientes[1]
+  beta_1[i] <- coeficientes[2]
+  beta_2[i] <- coeficientes[3]
+  }
+# Se muestra la distribución de los coeficientes
+p0 <- ggplot(data = data.frame(beta_0 = beta_0), aes(beta_0)) +
+  geom_histogram(colour = "firebrick3") + 
+  theme_bw()
+p1 <- ggplot(data = data.frame(beta_1 = beta_1), aes(beta_1)) +
+  geom_histogram(colour = "firebrick3") +
+  theme_bw()
+p2 <- ggplot(data = data.frame(beta_2 = beta_2), aes(beta_2)) +
+  geom_histogram(colour = "firebrick3") +
+  theme_bw()
+
+grid.arrange(p0,p1,p2, ncol = 3, nrow=2,top = "Bootstrap distribution de los coeficientes")
+```
+
+</br></br>
+
+| Coeficiente estimado    | media           | desviación estandar |
+|:------------------------|----------------:|--------------------:|  
+| $\widehat{\beta}_0$     | -10.01251       |  1.948114           |
+| $\widehat{\beta}_1$     |   5.118228      |  0.3805767          |
+| $\widehat{\beta}_2$     |   2.616257      |  0.6410573          |
+| $\widehat{\beta}_3$     |   0.54685       |  0.825865           |
+
+ 
+</br></br>  
+
+Igual procedimiento se puede realiar con la función `boot`
+
+</br>
+
+```{r}
+library(boot)
+boot(data = arboles1, statistic = fun_coeficientes, R = 9999)
+```
+Al comparar los resultados obtenidos por el remuestreo y las estimaciones del modelo se obtienen diferencias pequeñas
+
+</br></br>
+
+```{r}
+summary(lm(peso ~ diametro +  D3, data = arboles1))$coef
+```
+
+```{r}
+library(knitr)
+modelo4 <- lm(peso ~ diametro + D3 , data = arboles1)
+modelo3 <- lm(peso ~ diametro + D2 , data = arboles1)
+modelo2 <- lm(peso ~ diametro + D2 + D3, data = arboles1)
+modelo1 <- lm(peso ~ diametro + altura + D2 + D3, data = arboles1)
+
+g1 <- glance(modelo1)
+g2 <- glance(modelo2)
+g3 <- glance(modelo3)
+g4 <- glance(modelo4)
+
+kable(rbind(g1, g2, g3, g4), digits = 2)
+```
+
+```{r, warning=FALSE, message=FALSE}
+library(stargazer)
+stargazer(modelo1, modelo2, modelo3, modelo4, type = "text",
+          omit.stat=c("ser","f"), 
+          model.numbers = FALSE, object.names = TRUE,
+          star.cutoffs = c(0.05, 0.01, 0.001))
+```
+
+
+
+```{r}
+# library(mgcv)
+# gam.check(modelo4)
+```
+
+
+
