@@ -17,10 +17,10 @@ navbar:
       menu:
         - text: "Mínimos Cuadrados Ordinarios"
           href: recurso030.html
-        - text: "Validación de los supuestos"
-          href: recurso050.html          
         - text: "Propiedades de los estimadores"
           href: recurso035.html         
+        - text: "Validación de los supuestos"
+          href: recurso050.html      
     - text: "Inferencia"
       menu:
         - text: "Inferencia sobre los parámetros"    

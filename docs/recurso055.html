@@ -32,6 +32,8 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -275,10 +277,10 @@ $(document).ready(function () {
       <a href="recurso030.html">Mínimos Cuadrados Ordinarios</a>
     </li>
     <li>
-      <a href="recurso050.html">Validación de los supuestos</a>
+      <a href="recurso035.html">Propiedades de los estimadores</a>
     </li>
     <li>
-      <a href="recurso035.html">Propiedades de los estimadores</a>
+      <a href="recurso050.html">Validación de los supuestos</a>
     </li>
   </ul>
 </li>
@@ -388,7 +390,410 @@ $(document).ready(function () {
 <div id="indicadores-de-bondad-de-ajuste" class="section level2">
 <h2><span style="color:#034a94"><strong>Indicadores de bondad de
 ajuste</strong></span></h2>
+<p>Dentro de los indicadores más utilizado en la comparación de modelos
+están:</p>
 <p></br></br></p>
+<div id="r2" class="section level3">
+<h3><strong><span class="math inline">\(R^2\)</span></strong></h3>
+<p>Coeficiente de determinación : mide que tanto se ajusta un modelo de
+regresión a los datos, es decir mide la prorción del total de la
+variación de <span class="math inline">\(Y\)</span> que es represenada
+por la variación de las variables regresoras (<span
+class="math inline">\(X_1\)</span>, <span
+class="math inline">\(X_2\)</span>, <span
+class="math inline">\(\dots\)</span>, <span
+class="math inline">\(X_k\)</span>) . Toma valor de cero cuando la
+regresión es una linea horizontal y el modelo está formado solo por el
+intercepto <span class="math inline">\(\beta_0\)</span>. Toma el valor
+de 1 cuando todas las variables predictoras y la variable dependientes
+están en el mismo plano (una linea recta en el caso del MRLS).</p>
+<p></br></br></p>
+</div>
+<div id="r2_adj" class="section level3">
+<h3><strong><span class="math inline">\(R^2_{adj}\)</span></strong></h3>
+<p>Coeficiente de determinación ajustado, corresponde a una versión
+ajustada de <span class="math inline">\(R^2\)</span>, por tamaño de
+muestra y número de variables predictoras. Permite detectar si agregar
+una predictora mejora o no el modelo de regresión. Además permite la
+comparación de modelos con diferentes tipos de predictoras y diferentes
+tamaños de muestra.</p>
+<p></br></br></p>
+</div>
+<div id="aic" class="section level3">
+<h3><strong>AIC</strong></h3>
+<p>Criterio de información de Akaike. es un indicador útil en la
+selección de modelos</p>
+<p><span class="math display">\[AIC = 2k - 2 \ln( \widehat{L})\]</span>
+Donde <span class="math inline">\(\widehat{L}\)</span>, es el valor
+máximo que toma la función de verosimilitud para el modelo y <span
+class="math inline">\(k\)</span> es el número de parámetro en el modelo.
+Al comparar los modelos presenta mejor ajuste el que tenga el valor
+<span class="math inline">\(AIC\)</span> más pequeño.</p>
+<p></br></br></p>
+</div>
+<div id="bic" class="section level3">
+<h3><strong>BIC</strong></h3>
+<p>Criterio de información bayesiano o criterio de información de
+Schwarz, empleado en la selección de modelos, se basa en la información
+del valor máximo de la función de verosimilitud del modelo, incluyendo
+además del número de parámetros, el tamaño de la muestra <span
+class="math inline">\(n\)</span>, para <span class="math inline">\(n
+&lt; 7\)</span></p>
+<p><span class="math display">\[BIC = 2k \ln(n) - 2 \ln(
+\widehat{L})\]</span> Al comparar modelos, se prefiere al modelo con
+valor BIC más bajo.</p>
+<p></br></br></p>
+</div>
+<div id="nota" class="section level3 content-box-yellow">
+<h3><span style="color:#FF7F00"><strong>Nota</strong></span></h3>
+<p>Este criterio al igual que ACI utilizan solo cuando la variable
+dependiente <span class="math inline">\(Y\)</span> es la misma en todos
+los modelos comparados</p>
+</div>
+<!-- </br> -->
+<!-- ### **Log Lik** -->
+<!-- Logaritmo maximo verosimil -->
+<p></br></br></p>
+<div id="f" class="section level3">
+<h3><strong>F</strong></h3>
+<p>Estadístico F, construido a partir de la descomposición de la
+varianza de la variable dependiente <span
+class="math inline">\(Y\)</span> en la ANOVA, valida la existencia de
+por lo menos una variable independiente significativa. El valor de <span
+class="math inline">\(F\)</span> está asociado con el valor de <span
+class="math inline">\(R^2\)</span> del modelo, luego valores mas altos
+constituye un mayor ajuste del modelo a los datos</p>
+<p></br></br></p>
+</div>
+<div
+id="rmse-raiz-del-error-cuadrático-medio-compara-las-estimaciones-obtenidas-contra-los-valores-realies-de-la-variable-y-permitiendo-valorar-el-ajuste-del-modelo"
+class="section level3">
+<h3><strong>RMSE</strong>, raiz del error cuadrático medio, compara las
+estimaciones obtenidas contra los valores realies de la variable <span
+class="math inline">\(Y\)</span>, permitiendo valorar el ajuste del
+modelo</h3>
+<p><span class="math display">\[RMSE =
+\sqrt{\dfrac{\sum_{i=1}^{n}(_i-\widehat{y}_1)^{2}}{n}}\]</span></p>
+<p></br></br></p>
+<div class="content-box-yellow">
+</div>
+<div id="ejemplo" class="section level3">
+<h3><span style="color:#FF7F00"><strong>Ejemplo</strong></span></h3>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:center;">
+modelo 1
+</th>
+<th style="text-align:center;">
+ modelo 2
+</th>
+<th style="text-align:center;">
+ modelo 3
+</th>
+<th style="text-align:center;">
+ modelo 4
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:center;">
+-10.017
+</td>
+<td style="text-align:center;">
+-9.703
+</td>
+<td style="text-align:center;">
+-9.999
+</td>
+<td style="text-align:center;">
+-9.020
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(1.380)
+</td>
+<td style="text-align:center;">
+(1.382)
+</td>
+<td style="text-align:center;">
+(1.356)
+</td>
+<td style="text-align:center;">
+(1.413)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+diametro
+</td>
+<td style="text-align:center;">
+3.837
+</td>
+<td style="text-align:center;">
+4.976
+</td>
+<td style="text-align:center;">
+5.125
+</td>
+<td style="text-align:center;">
+5.103
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(0.726)
+</td>
+<td style="text-align:center;">
+(0.273)
+</td>
+<td style="text-align:center;">
+(0.236)
+</td>
+<td style="text-align:center;">
+(0.251)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+altura
+</td>
+<td style="text-align:center;">
+0.942
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(0.558)
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+D2
+</td>
+<td style="text-align:center;">
+1.384
+</td>
+<td style="text-align:center;">
+1.046
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:center;">
+(0.976)
+</td>
+<td style="text-align:center;">
+(0.965)
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+D3
+</td>
+<td style="text-align:center;">
+3.522
+</td>
+<td style="text-align:center;">
+3.074
+</td>
+<td style="text-align:center;">
+2.563
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;box-shadow: 0px 1px">
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+(0.893)
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+(0.862)
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+(0.722)
+</td>
+<td style="text-align:center;box-shadow: 0px 1px">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Num.Obs.
+</td>
+<td style="text-align:center;">
+90
+</td>
+<td style="text-align:center;">
+90
+</td>
+<td style="text-align:center;">
+90
+</td>
+<td style="text-align:center;">
+90
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+R2
+</td>
+<td style="text-align:center;">
+0.854
+</td>
+<td style="text-align:center;">
+0.849
+</td>
+<td style="text-align:center;">
+0.847
+</td>
+<td style="text-align:center;">
+0.825
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+R2 Adj.
+</td>
+<td style="text-align:center;">
+0.847
+</td>
+<td style="text-align:center;">
+0.844
+</td>
+<td style="text-align:center;">
+0.843
+</td>
+<td style="text-align:center;">
+0.823
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+AIC
+</td>
+<td style="text-align:center;">
+471.1
+</td>
+<td style="text-align:center;">
+472.1
+</td>
+<td style="text-align:center;">
+471.3
+</td>
+<td style="text-align:center;">
+481.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+BIC
+</td>
+<td style="text-align:center;">
+486.1
+</td>
+<td style="text-align:center;">
+484.6
+</td>
+<td style="text-align:center;">
+481.3
+</td>
+<td style="text-align:center;">
+489.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Log.Lik.
+</td>
+<td style="text-align:center;">
+-229.569
+</td>
+<td style="text-align:center;">
+-231.055
+</td>
+<td style="text-align:center;">
+-231.665
+</td>
+<td style="text-align:center;">
+-237.751
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:center;">
+124.130
+</td>
+<td style="text-align:center;">
+161.085
+</td>
+<td style="text-align:center;">
+240.559
+</td>
+<td style="text-align:center;">
+413.961
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+RMSE
+</td>
+<td style="text-align:center;">
+3.10
+</td>
+<td style="text-align:center;">
+3.15
+</td>
+<td style="text-align:center;">
+3.17
+</td>
+<td style="text-align:center;">
+3.40
+</td>
+</tr>
+</tbody>
+</table>
+<p></br></p>
+<p>En este caso el modelo 1 presenta el mejor ajuste</p>
+<p></br></br></br></p>
+</div>
 </div>
 <div id="falta-de-ajuste-en-el-modelo-de-rlm" class="section level2">
 <h2><span style="color:#034a94"><strong>Falta de ajuste en el modelo de
@@ -751,7 +1156,7 @@ class="math inline">\(i\)</span>.</p>
 class="math inline">\(\vert \text{DFBETAS}_{j\left(i\right)}\vert &gt;
 2/\sqrt{n}\)</span>.</p>
 <p></br></p>
-<div id="nota" class="section level3 content-box-gray">
+<div id="nota-1" class="section level3 content-box-gray">
 <h3><span style="color:#FF7F00"> <strong>Nota</strong></span></h3>
 <p>Tanto los <span class="math inline">\(D_i\)</span>, como los DFFITS y
 los DFBETAS se pueden afectar tanto por un error de ajuste grande como

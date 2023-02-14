@@ -19,7 +19,7 @@ data("creditos")
 
 * Los estimadores de mínimos cuadrados corresponden a los estimadores de máxima verosimilitud, bajo el modelo lineal normal.
 
-* $\boldsymbol{\widehat\beta}$ es un estimador insesgado del vector de parámetros $\boldsymbol{\beta}$, es decir
+* $\boldsymbol{\widehat\beta}$ es un estimador **insesgado** del vector de parámetros $\boldsymbol{\beta}$, es decir
 
 <div class="content-box-blue">
 $$

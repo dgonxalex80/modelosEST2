@@ -30,7 +30,7 @@ $$Y_i = \beta_0 + \beta_1X_{i1} + \beta_2X_{i2} + \cdots + \beta_kX_{ik} + \vare
 
 <br/>
 
-Está compuesto de una variable dependiente $y$, ($k$) variables independietes  y un componente aleatorio $\varepsilon$, formando un sistema de $n$ ecuaciones con $p = k + 1$ incógnitas correspondiendo al intercepto y los $k$ coeficientes de regresión, donde los $Y_i$ y las $X_{ij}$ toman valores conocidos en cada caso.
+Está compuesto de una variable dependiente $y$, ($k$) variables independietes  y un componente aleatorio $\varepsilon$, formando un sistema de $n$ ecuaciones con $p = (k + 1)$ incógnitas correspondiendo al intercepto y los $k$ coeficientes de regresión, donde los $Y_i$ y las $X_{ij}$ toman valores conocidos en cada caso.
 
 <br/>
 

@@ -61,13 +61,17 @@ Sean $\sigma_{ij} = \text{COV}\left[ y_i, y_j\right] = E\left[\left(y_i - \mu_i\
 
 </br>
 
-Se define el vector con **media o vector de medias** y **varianza o matriz de varianzas-covarianzas**
+Se define el vector con:
+
+#### **media o vector de medias** 
 
 $$\boldsymbol{y} = \left[ y_1, y_2, \ldots, y_n\right]'$$
 </br>
 
 $$\boldsymbol{\mu_y} = E\left[\boldsymbol{y}\right] = \left[ E\left[ y_1\right], \cdots, E\left[ y_n\right]\right]' = \left[\mu_1, \ldots, \mu_n\right]',$$
 </br>
+
+#### **varianza o matriz de varianzas-covarianzas**
 
 $$
 \boldsymbol{\Sigma_y} = V(\boldsymbol{y}) = \begin{bmatrix}

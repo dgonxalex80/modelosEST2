@@ -15,10 +15,118 @@ data("creditos")
 
 ## <span style="color:#034a94">**Indicadores de bondad de ajuste**</span>
 
+Dentro de los indicadores más utilizado en la comparación de modelos están:
+
+</br></br>
+
+### **$R^2$** 
+
+Coeficiente de determinación : mide que tanto se ajusta un modelo de regresión a los datos, es decir mide la prorción del total de la variación de $Y$ que es represenada por la variación de las variables regresoras ($X_1$, $X_2$, $\dots$, $X_k$) . Toma valor de cero cuando la regresión es una linea horizontal y el modelo está formado solo por el intercepto $\beta_0$. Toma el valor de 1 cuando todas las variables predictoras y la variable dependientes están en el mismo plano (una linea recta en el caso del MRLS). 
+
+</br></br>
+
+### **$R^2_{adj}$**
+
+
+Coeficiente de determinación ajustado, corresponde a una versión ajustada de $R^2$, por tamaño de muestra y número de variables predictoras.  Permite detectar si agregar una predictora mejora o no el modelo de regresión. Además permite la comparación de modelos con diferentes tipos de predictoras y diferentes tamaños de muestra.
+
+</br></br>
+
+### **AIC**
+
+Criterio de información de Akaike.  es un indicador útil en la selección de modelos 
+
+$$AIC = 2k - 2 \ln( \widehat{L})$$
+Donde $\widehat{L}$, es el valor máximo que toma la función de verosimilitud para el modelo y $k$ es el número de parámetro en el modelo.  Al comparar los modelos presenta mejor ajuste el que tenga el valor $AIC$ más pequeño. 
+
+</br></br>
+
+### **BIC**
+
+Criterio de información bayesiano o criterio de información de Schwarz, empleado en la selección de modelos, se basa en la información del valor máximo de la función de verosimilitud del modelo, incluyendo además del número de parámetros, el tamaño de la muestra $n$, para $n < 7$ 
+
+$$BIC = 2k \ln(n) - 2 \ln( \widehat{L})$$
+Al comparar modelos, se prefiere al modelo con valor BIC más bajo.
+
+
+</br></br>
+
+<div class="content-box-yellow">
+### <span style="color:#FF7F00">**Nota**</span>
+
+
+Este criterio al igual que ACI  utilizan solo cuando la variable dependiente $Y$ es la misma en todos los modelos comparados
+
+</div>
+
+
+
+<!-- </br> -->
+
+
+<!-- ### **Log Lik** -->
+
+
+<!-- Logaritmo maximo verosimil -->
+
+
+</br></br>
+
+### **F**
+
+Estadístico F, construido a partir de la descomposición de la varianza de la variable dependiente $Y$ en la ANOVA, valida la existencia de por lo menos una variable independiente significativa. El valor de $F$ está asociado con el valor de $R^2$ del modelo, luego valores mas altos constituye un mayor ajuste del modelo a los datos
+
+
+
+
+</br></br>
+
+### **RMSE**, raiz del error cuadrático medio, compara las estimaciones obtenidas contra los valores realies de la variable $Y$, permitiendo valorar el ajuste del modelo
+
+$$RMSE = \sqrt{\dfrac{\sum_{i=1}^{n}(_i-\widehat{y}_1)^{2}}{n}}$$
+
+
 </br></br>
 
 
+<div class="content-box-yellow">
+### <span style="color:#FF7F00">**Ejemplo**</span>
 
+```{r, echo=FALSE}
+
+library(modelsummary)
+data("arboles1")
+arboles1$D1 = as.numeric(arboles1$mg=="GENOTIPO_2")
+arboles1$D2 = as.numeric(arboles1$finca=="FINCA_2")
+arboles1$D3 = as.numeric(arboles1$finca=="FINCA_3")
+arboles1$peso = as.numeric(arboles1$peso)
+arboles1$diametro = as.numeric(arboles1$diametro)
+arboles1$altura = as.numeric(arboles1$altura)
+
+
+modelo1 <- lm(peso ~ diametro + altura + D2 + D3, data = arboles1)
+modelo2 <- lm(peso ~ diametro +  D2 + D3, data = arboles1)
+modelo3 <- lm(peso ~ diametro + D3, data = arboles1)
+modelo4 <- lm(peso ~ diametro, data = arboles1)
+
+lista_modelos <- list(
+  "modelo 1" = modelo1,
+  "modelo 2" = modelo2,
+  "modelo 3" = modelo3,
+  "modelo 4" =modelo4
+)
+modelsummary(
+  lista_modelos # varios modelos
+   )
+
+```
+
+</br>
+
+En este caso el modelo 1 presenta el mejor ajuste
+
+
+</br></br></br>
 
 
 ## <span style="color:#034a94">**Falta de ajuste en el modelo de RLM**</span>

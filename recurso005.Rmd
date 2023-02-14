@@ -27,7 +27,7 @@ En el ajuste y análisis de este modelo se obtienen resultados que son extension
 </br></br></br>
 
 ## <span style="color:#034a94">**Definición del modelo** </span>
-&
+
 </br>
 
 Considere el caso en el cual se desea modelar la variabilidad total de una variable respuesta de interés $Y$, en función de relaciones lineales con dos o más variables predictoras ($X_1, X_2, \dots, X_k$), formuladas simultáneamente en un único modelo.

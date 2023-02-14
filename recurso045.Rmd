@@ -77,9 +77,9 @@ $T = \dfrac{\widehat{Y}_0 - E\left[ Y\vert\boldsymbol{x_0}\right]}{\text{se}(\wi
 
 </br>
 
-| **Juego de hipótesis** | **Estadístico de prueba** | **Criterio de rechazo** |
-|:--:|:-----:|:---:|
-| $\begin{array}{l} H_0: \mu_{Y\vert\boldsymbol{x_0}} = c\\ H_1: \mu_{Y\vert\boldsymbol{x_0}} \neq c \end{array}$ con $c \in \mathbb{R}$ | $T_0 = \dfrac{\widehat{Y}_0 - c}{\text{se}\left(\widehat{Y}_0\right)} \overset{\text{bajo }H_0}{\sim} t_{n - p}$ | Se rechaza $H_0$ si $\vert T_0 \vert > t_{\alpha/2, n - p}$ |
+| **Hipótesis** | **Estadístico de prueba** |
+|:--:|:-----:|
+| $\begin{array}{l} H_0: \mu_{Y\vert\boldsymbol{x_0}} = c\\ H_1: \mu_{Y\vert\boldsymbol{x_0}} \neq c \end{array}$ con $c \in \mathbb{R}$ | $T_0 = \dfrac{\widehat{Y}_0 - c}{\text{se}\left(\widehat{Y}_0\right)} \overset{\text{bajo }H_0}{\sim} t_{n - p}$ | 
 
 </br>
 
@@ -187,4 +187,4 @@ Deben evitarse las extrapolaciones por fuera del rango de experimentación en el
 
 </br>
 
-Para ello basta con verificar si $h_{00} = \boldsymbol{x_0\left(\boldsymbol{X}'\boldsymbol{X}\right)^{-1}x'_0} < \max\limits_{1\leq i\leq n} \left\{h_{ii}\right\}$, con $h_{ii}$ el $i$-ésimo elemento de la matriz 'hat' $\boldsymbol{H}$.
+<!-- Para ello basta con verificar si $h_{00} = \boldsymbol{x_0\left(\boldsymbol{X}'\boldsymbol{X}\right)^{-1}x'_0} < \max\limits_{1\leq i\leq n} \left\{h_{ii}\right\}$, con $h_{ii}$ el $i$-ésimo elemento de la matriz 'hat' $\boldsymbol{H}$. -->
