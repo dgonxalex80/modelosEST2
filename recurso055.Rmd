@@ -121,6 +121,7 @@ modelsummary(
 
 ```
 
+</div>
 </br>
 
 En este caso el modelo 1 presenta el mejor ajuste

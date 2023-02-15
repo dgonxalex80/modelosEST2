@@ -114,16 +114,16 @@ summary(forward)
 </br></br>
 
 
-## <span style="color:#034a94">**Estimación por el método de Máxima Verosimilitud**</span>
+<!-- ## <span style="color:#034a94">**Estimación por el método de Máxima Verosimilitud**</span> -->
 
-</br>
+<!-- </br> -->
 
-```{r}
-library(stats4) # para la función mle
-library(bbmle) # para la función mle2
+<!-- ```{r} -->
+<!-- library(stats4) # para la función mle -->
+<!-- library(bbmle) # para la función mle2 -->
 
 
-```
+<!-- ``` -->
 
 
 
