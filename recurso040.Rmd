@@ -86,7 +86,7 @@ En todos los casos un valor-p bajo apuntará hacia el rechazo de $H_0$ y la acep
 
 </br>
 
-De nuevo con base en el resultado $(\star)$ un intervalo de confianza (IC) del ${(1 - \alpha)\%}$ para el $j$-ésimo parámetro ${\beta_j}$ ($j = 0, 1, \ldots, k$), es:
+De nuevo con base en el resultado : $T_j  \sim t_{n - p}, \hspace{1cm} j = 0, 1, \ldots, k$ un intervalo de confianza (IC) del ${(1 - \alpha)\%}$ para el $j$-ésimo parámetro ${\beta_j}$ ($j = 0, 1, \ldots, k$), es:
 
 </br>
 

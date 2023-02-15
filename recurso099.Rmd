@@ -5,7 +5,7 @@ css: style.css
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, comment = NA)
 
 library(paqueteMOD)
 data("arboles1")
@@ -67,7 +67,7 @@ library(Hmisc)
 describe(arboles1)
 ```
 
-
+</br></br></br>
 
 ## **Asociación entre las variables cuantitativas**
 
