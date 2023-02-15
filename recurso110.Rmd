@@ -29,9 +29,26 @@ library(modelsummary) # tablas de regresion
 </br></br>
 
 ```{r}
-
+modelo1 <- lm(peso ~ diametro + altura + D2 + D3, data = arboles1)
+summary(modelo1)
 ```
 
 </br>
 
-`
+El modelo presenta un $R^{2} = 0.8538$, indicando un ajuste del 85% de los datos al modelo. Si deseamos compararlo con otro modelo con igual variable dependiente, utilizamos el $R^{2}_{adj} = 0.847$ 
+
+
+</br></br>
+
+### **Validación de supuestos gráficamente**
+
+``{r}
+par(mfrow = c(2, 2))
+plot(modelo1)
+```
+
+
+
+
+
+

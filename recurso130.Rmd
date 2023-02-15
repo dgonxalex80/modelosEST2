@@ -1,0 +1,10 @@
+---
+title: <span style="color:#034a94"> **R - Inferencia estadística**</span>
+output: html_document
+css: style.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
