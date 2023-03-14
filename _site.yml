@@ -56,7 +56,7 @@ navbar:
         - text: "Validación cruzada"
           href: recurso120.html 
         - text: "Mapa"
-          href: recurso120.html  
+          href: recurso140.html  
   output:
   html_document:
     css: style.css
