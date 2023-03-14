@@ -65,7 +65,7 @@ Luego, se tiene que el estadístico
 
 </br>
 
-$T = \dfrac{\widehat{Y}_0 - E\left[ Y\vert\boldsymbol{x_0}\right]}{\text{se}(\widehat{Y}_0)} \sim t_{n - p}$, con $\text{se}(\widehat{Y}_0) = \sqrt{\widehat{V}[\widehat{Y}_0]}$, lo cual permite demostrar lo siguiente:
+$T = \dfrac{\widehat{Y}_0 - E\left[ Y\vert\boldsymbol{x_0}\right]}{\text{se}(\widehat{Y}_0)} \sim t_{n - p}$, con $\text{se}(\widehat{Y}_0) = \sqrt{V[\widehat{Y}_0]}$, lo cual permite demostrar lo siguiente:
 
 </br>
 
@@ -150,7 +150,7 @@ con $\text{se}(Y_0 - \widehat{Y}_0) = \sqrt{\widehat{V}[Y_0 - \widehat{Y}_0]}$, 
 
 $$P\left(-t_{\alpha/2, n - p}<\dfrac{Y_0 - \widehat{Y}_0 }{\text{se}(Y_0 - \widehat{Y}_0)}<t_{\alpha/2, n - p}\right) = 1 - \alpha$$
 </br>
-De donde se obtiene que un IP del ($1 - \alpha$)100% para un valor futuro $Y_0$ es:
+De donde se obtiene que un IC del ($1 - \alpha$)100% para un valor futuro $Y_0$ es:
 
 <div class="content-box-blue">
 $$\widehat{Y}_0 \ \pm \ t_{\alpha/2, n - p} \,\text{se}(Y_0 - \widehat{Y}_0)$$

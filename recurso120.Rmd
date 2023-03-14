@@ -25,6 +25,7 @@ library(lmtest) # diagnosticos de modelos lineales
 library(sandwich) # errores estandar robustos
 library(ggeffects) # efectos y predicciones en modelos de regresion
 library(modelsummary) # tablas de regresion
+library(broom)
 ```
 
 </br></br>

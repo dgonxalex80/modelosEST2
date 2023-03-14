@@ -54,7 +54,9 @@ navbar:
         - text: "Estimación MCO"
           href: recurso100.html   
         - text: "Validación cruzada"
-          href: recurso120.html   
+          href: recurso120.html 
+        - text: "Mapa"
+          href: recurso120.html  
   output:
   html_document:
     css: style.css

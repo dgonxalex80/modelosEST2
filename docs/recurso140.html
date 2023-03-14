@@ -11,7 +11,7 @@
 
 
 
-<title> R - Validación de supuestos</title>
+<title> R - Mapa</title>
 
 <script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -361,9 +361,6 @@ $(document).ready(function () {
     <li>
       <a href="recurso120.html">Validación cruzada</a>
     </li>
-    <li>
-      <a href="recurso120.html">Mapa</a>
-    </li>
   </ul>
 </li>
       </ul>
@@ -379,45 +376,66 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore"><span style="color:#034a94"> <strong>R -
-Validación de supuestos</strong></span></h1>
+Mapa</strong></span></h1>
 
 </div>
 
 
 <p></br></br></p>
-<pre class="r"><code>modelo1 &lt;- lm(peso ~ diametro + altura + D2 + D3, data = arboles1)
-summary(modelo1)</code></pre>
-<pre><code>## 
-## Call:
-## lm(formula = peso ~ diametro + altura + D2 + D3, data = arboles1)
-## 
-## Residuals:
-##    Min     1Q Median     3Q    Max 
-## -5.667 -1.987 -0.518  1.803 12.087 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) -10.0175     1.3801  -7.258 1.72e-10 ***
-## diametro      3.8374     0.7261   5.285 9.59e-07 ***
-## altura        0.9423     0.5579   1.689 0.094890 .  
-## D2            1.3837     0.9756   1.418 0.159777    
-## D3            3.5217     0.8928   3.945 0.000164 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 3.191 on 85 degrees of freedom
-## Multiple R-squared:  0.8538, Adjusted R-squared:  0.847 
-## F-statistic: 124.1 on 4 and 85 DF,  p-value: &lt; 2.2e-16</code></pre>
-<p></br></p>
-<p>El modelo presenta un <span class="math inline">\(R^{2} =
-0.8538\)</span>, indicando un ajuste del 85% de los datos al modelo. Si
-deseamos compararlo con otro modelo con igual variable dependiente,
-utilizamos el <span class="math inline">\(R^{2}_{adj} =
-0.847\)</span></p>
+<div id="paso1-cargar-archivo-cali.shp" class="section level3">
+<h3><span style="color:#034A94"><strong>Paso1 : Cargar archivo
+cali.shp</strong></span></h3>
+<pre class="r"><code>library(raster)
+library(sf)
+library(tmap)
+
+cali=shapefile(&quot;map/cali/cali.shp&quot;)</code></pre>
 <p></br></br></p>
-<div id="validación-de-supuestos-gráficamente" class="section level3">
-<h3><strong>Validación de supuestos gráficamente</strong></h3>
-<p>``{r} par(mfrow = c(2, 2)) plot(modelo1) ```</p>
+</div>
+<div id="paso-2-construir-mapa-de-cali" class="section level3">
+<h3><span style="color:#034A94"><strong>Paso 2 : Construir mapa de
+Cali</strong></span></h3>
+<pre class="r"><code>cali.tmap = tm_shape(cali) +  tm_polygons()
+# cali.tmap  # mapa</code></pre>
+<p></br></br></p>
+</div>
+<div
+id="paso-3-crear-conjunto-de-puntos-a-marcar-en-mapa-.-coordenadas-de-latitud-y-de-longitud-en-data.frame"
+class="section level3">
+<h3><span style="color:#034A94"><strong>Paso 3 : Crear conjunto de
+puntos a marcar en mapa . Coordenadas de latitud y de longitud en
+data.frame</strong></span></h3>
+<pre class="r"><code>oferta=data.frame(lat=c(3.43382,     3.43369,   3.42566,      3.435,   3.45891),
+                  long=c(-76.51168, -76.51237, -76.51737,    -76.54,  -76.5135))
+
+# convierte el data.frame en objeto sfc 
+oferta_sf=st_as_sf(oferta, coords = c(&#39;long&#39;, &#39;lat&#39;))
+#            , crs = st_crs(cali)$proj4string)</code></pre>
+<p></br></br></p>
+</div>
+<div id="paso-4-construir-mapa-y-marcar-puntos" class="section level3">
+<h3><span style="color:#034A94"><strong>Paso 4: Construir mapa y marcar
+puntos</strong></span></h3>
+<pre class="r"><code>cali2 = tm_shape(cali) +  tm_polygons() + 
+        tm_shape(oferta_sf) + tm_dots(size=0.3, col=&quot;red&quot;)
+cali2 </code></pre>
+<p><img src="recurso140_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+</div>
+<div id="nota" class="section level3 content-box-yellow">
+<h3><span style="color:#686868"> <strong>Nota</strong></span></h3>
+<ul>
+<li><p>Debe instalar lo paquetes :</p>
+<ul>
+<li><code>raster</code></li>
+<li><code>sf</code></li>
+<li><code>tmap</code></li>
+</ul></li>
+<li><p>Copie la carpeta Cali con el contenido de los archivos en el
+directorio donde esta el archivo Rmd fuente (ubicada en Actividades :
+<code>map.zip</code>)</p></li>
+<li><p>Debe actualizar la dirección del archivo
+<code>cali.shp</code></p></li>
+</ul>
 </div>
 
 
