@@ -385,6 +385,10 @@ Mapa</strong></span></h1>
 
 
 <p></br></br></p>
+<p>El siguiente código permite la visualización de puntos en el mapa de
+la ciudad de Cali, teniendo como base el archivo cali.shp que debe estar
+acompañado de otros archivos contenidos en la carpeta comprimidad
+cali.zip</p>
 <div id="paso1-cargar-archivo-cali.shp" class="section level3">
 <h3><span style="color:#034A94"><strong>Paso1 : Cargar archivo
 cali.shp</strong></span></h3>
@@ -434,11 +438,42 @@ cali2 </code></pre>
 <li><code>tmap</code></li>
 </ul></li>
 <li><p>Copie la carpeta Cali con el contenido de los archivos en el
-directorio donde esta el archivo Rmd fuente (ubicada en Actividades :
+directorio donde está el archivo Rmd fuente (ubicada en Actividades :
 <code>map.zip</code>)</p></li>
 <li><p>Debe actualizar la dirección del archivo
 <code>cali.shp</code></p></li>
+<li><p>La ubicación de un archivo en R se puede obtener utilizando la
+función <code>file.choose()</code> desde la consola.</p></li>
 </ul>
+</div>
+<div class="content-box-gray">
+<div id="resumen" class="section level3">
+<h3><span style="color:#686868"> <strong>Resumen</strong></span></h3>
+<pre class="r"><code>library(raster)
+library(sf)
+library(tmap)
+
+
+cali=shapefile(&quot;~/map/cali/cali.shp&quot;)
+cali.tmap = tm_shape(cali) +  tm_polygons()
+cali.tmap  # mapa
+
+qtm(cali) # mapa 2
+
+ oferta=data.frame(lat=c(3.43382,     3.43369,   3.42566,      3.435,   3.45891),
+                  long=c(-76.51168, -76.51237, -76.51737,    -76.54,  -76.5135))
+ 
+oferta_sf=st_as_sf(oferta, coords = c(&#39;long&#39;, &#39;lat&#39;))
+#            , crs = st_crs(cali)$proj4string)
+
+
+cali2 = tm_shape(cali) +  tm_polygons() + 
+        tm_shape(oferta_sf) + tm_dots(size=0.3, col=&quot;red&quot;)
+cali2 </code></pre>
+<div>
+
+
+
 </div>
 
 

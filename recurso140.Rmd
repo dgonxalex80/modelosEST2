@@ -28,6 +28,8 @@ library(modelsummary) # tablas de regresion
 
 </br></br>
 
+El siguiente código permite la visualización de puntos en el mapa de la ciudad de Cali, teniendo como base el archivo cali.shp que debe estar acompañado de otros archivos contenidos en la carpeta comprimidad cali.zip
+
 
 ###  <span style="color:#034A94">**Paso1 : Cargar archivo cali.shp**</span>
 
@@ -87,9 +89,44 @@ cali2
   + `sf`
   + `tmap`
   
-* Copie la carpeta Cali con el contenido de los archivos en el directorio donde esta el archivo Rmd fuente (ubicada en Actividades : `map.zip`)
+* Copie la carpeta Cali con el contenido de los archivos en el directorio donde está el archivo Rmd fuente (ubicada en Actividades : `map.zip`)
 
 * Debe actualizar la dirección del archivo `cali.shp`
 
+* La ubicación de un archivo en R se puede obtener utilizando la función  `file.choose()` desde la consola. 
+
 </div>
+
+
+
+<div class="content-box-gray">
+### <span style="color:#686868"> **Resumen**</span>
+
+
+```{r, eval=FALSE}
+library(raster)
+library(sf)
+library(tmap)
+
+
+cali=shapefile("~/map/cali/cali.shp")
+cali.tmap = tm_shape(cali) +  tm_polygons()
+cali.tmap  # mapa
+
+qtm(cali) # mapa 2
+
+ oferta=data.frame(lat=c(3.43382,     3.43369,   3.42566,      3.435,   3.45891),
+                  long=c(-76.51168, -76.51237, -76.51737,    -76.54,  -76.5135))
+ 
+oferta_sf=st_as_sf(oferta, coords = c('long', 'lat'))
+#            , crs = st_crs(cali)$proj4string)
+
+
+cali2 = tm_shape(cali) +  tm_polygons() + 
+        tm_shape(oferta_sf) + tm_dots(size=0.3, col="red")
+cali2 
+```
+
+<div>
+
 
