@@ -23,7 +23,7 @@ c4="#686868"
 knitr::include_graphics("img/banner_presentacion.png")
 ```
 
-# **Introducción**
+# <span style="color:#034a94">**Introducción**</span>
 
 </br></br></br>
 

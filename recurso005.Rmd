@@ -123,8 +123,8 @@ Como los efectos de una predictora sobre la respuesta media no dependen del nive
 
 </br>
 
-<div class="content-box-yellow">
-### <span style="color:#FF7F00">**NOTA:**</span> 
+<div class="content-box-gray">
+### <span style="color:#686868">**NOTA:**</span> 
 
 El término *modelo lineal* significa que el modelo es lineal en los parámetros, lo cual no hace referencia a la forma de la superficie de respuesta.
 

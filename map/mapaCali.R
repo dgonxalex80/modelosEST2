@@ -20,4 +20,5 @@ cali2 = tm_shape(cali) +  tm_polygons() +
         tm_shape(oferta_sf) + tm_dots(size=0.3, col="red")
 cali2 
 
+file.choose()
 

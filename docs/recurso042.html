@@ -13,7 +13,7 @@
 
 <title> Modelo de Regresión Lineal Múltiple</title>
 
-<script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
@@ -431,7 +431,7 @@ class="math inline">\(B\)</span> se denota y calcula como:</p>
 \text{SSR}\left(A \cup B\right) - \text{SSR}\left(B\right) =
 \text{SSE}\left(B\right) - \text{SSE}\left(A \cup B\right)\]</span></p>
 <p></br></br></p>
-<div id="ejemplo" class="section level3 content-box-yellow">
+<div id="ejemplo" class="section level3">
 <h3><span style="color:#FF7F00"> <strong>Ejemplo</strong></span></h3>
 <p>Suponga un modelo de regresión múltiple de una respuesta <span
 class="math inline">\(Y\)</span> en función de tres variables
@@ -439,7 +439,6 @@ predictoras <span class="math inline">\(X_1, X_2, X_3\)</span>, esto
 es,</p>
 <p><span class="math display">\[Y = \beta_0 + \beta_1X_1 + \beta_2X_2 +
 \beta_3X_3 + \varepsilon\]</span></p>
-</div>
 <p></br></p>
 <p>Veamos algunas de las posibles sumas de cuadrados extras:</p>
 <p></br> <span class="math display">\[
@@ -529,7 +528,8 @@ class="math inline">\(A = \left\{\beta_1, \beta_2,
 \end{aligned}
 \]</span></p>
 <p></br></br></p>
-<div id="ejemplo-1" class="section level3 content-box-yellow">
+</div>
+<div id="ejemplo-1" class="section level3">
 <h3><span style="color:#FF7F00"> <strong>Ejemplo</strong></span></h3>
 <p></br></p>
 <p>En este cálculo se pueden definir dos modelos:</p>
@@ -552,7 +552,6 @@ es:</li>
 </ul>
 <p><span class="math display">\[Y = \beta_0 + \beta_3X_3 + \beta_4X_4 +
 \varepsilon.\]</span></p>
-</div>
 <p></br></p>
 <p>Al igual que en las sumas de cuadrados vistas en la tabla
 <strong>ANOVA</strong>, las sumas de cuadrados extra tienen asociados
@@ -603,7 +602,8 @@ F_0 &amp;= \frac{\text{MSR}\left(\beta_1, \beta_2, \beta_5 \vert
 class="math inline">\(\alpha\)</span>, el criterio de rechazo es <span
 class="math inline">\(F_0 &gt; f_{\alpha, 3, n - 6}\)</span>.</p>
 <p></br></br></p>
-<div id="ejemplo-2" class="section level3 content-box-yellow">
+</div>
+<div id="ejemplo-2" class="section level3">
 <h3><span style="color:#FF7F00"> <strong>Ejemplo</strong></span></h3>
 <p>En el modelo <span class="math inline">\(Y = \beta_0 + \beta_1X_1 +
 \beta_2X_2 + \beta_3X_3 + \beta_4X_4 + \beta_5X_5 +
@@ -614,7 +614,6 @@ H_0: \beta_2 = \beta_4 = 0\\
 H_1: \text{Algún }\beta_j \ne 0, \ j = 2, 4.
 \end{array}
 \]</span></p>
-</div>
 <p></br></p>
 <p>se usa como estadístico de prueba a</p>
 <p><span class="math display">\[F_0 = \frac{\text{SSR}\left(\beta_2,
@@ -765,7 +764,6 @@ class="math inline">\(H_0\)</span> si <span class="math inline">\(F_0
 &gt; f_{\alpha, r, n - p}\)</span>.</p>
 <p>Veamos, ejemplos de cómo trabaja este procedimiento de prueba.</p>
 <p></br></br></p>
-<div class="content-box-yellow">
 <H3>
 <span style="color:#FF7F00"> <strong>Ejemplo</strong></span>
 </H3>
@@ -775,7 +773,6 @@ siguiente prueba de hipótesis: <span class="math display">\[H_0: \beta_1
 = \beta _2,\ \beta_3 = \beta_4\]</span></p>
 <p><span class="math display">\[H_1: \beta_1 \ne \beta_2\ \text{ ó }\
 \beta_3 \ne \beta_4\]</span></p>
-</div>
 <p></br></p>
 <p>Podemos reescribir la hipótesis nula de la siguiente manera: <span
 class="math display">\[
@@ -841,7 +838,7 @@ F_0 = \dfrac{\text{SSH}/2}{\text{MSE}}
 <p></br></br></p>
 <div class="content-box-gray">
 <H3>
-<span style="color:#FF7F00"> <strong>Nota</strong></span>
+<span style="color:#686868"> <strong>Nota</strong></span>
 </H3>
 <p>Observe que en el denominador se encuentra el cuadrado medio del
 modelo completo que tiene <span class="math inline">\(n - 5\)</span>
@@ -855,7 +852,6 @@ es pequeño. O bien, si <span class="math inline">\(F_0 &gt; f_{\alpha,
 class="math inline">\(\alpha\)</span>.</p>
 </div>
 <p></br></br></p>
-<div class="content-box-yellow">
 <H3>
 <span style="color:#FF7F00"> <strong>Ejemplo</strong></span>
 </H3>
@@ -866,7 +862,6 @@ H_0:\ \beta_1 = \beta_2 = 0, \ \beta_3 = \beta_4 \ \ \text{ vs. }\ H_1:\
 \beta_1 \ne 0 \text{ \ ó \ } \beta_2 \ne 0 \text{ \ ó \ } \beta_3 \ne
 \beta_4
 \]</span></p>
-</div>
 <p></br></p>
 <p>Como en el ejemplo anterior, también se puede reescribir la hipótesis
 nula en términos de ecuaciones igualadas a cero:</p>
@@ -931,7 +926,8 @@ class="math inline">\(\text{VP} = P\left(f_{3, n - 5} &gt; F_0\right)
 es el nivel de significancia de la prueba. O bien, si <span
 class="math inline">\(F_0 &gt; f_{\alpha, 3, n - 5}\)</span>.</p>
 <p></br></br></p>
-<div id="ejemplo-3" class="section level3 content-box-yellow">
+</div>
+<div id="ejemplo-3" class="section level3">
 <h3><span style="color:#FF7F00"> <strong>Ejemplo</strong></span></h3>
 <p></br></p>
 <p>Considere ahora la prueba de significancia del modelo de RLM con
@@ -940,10 +936,10 @@ class="math inline">\(F_0 &gt; f_{\alpha, 3, n - 5}\)</span>.</p>
 H_0:\ \beta_1 = \beta_2 = \beta_3 = \beta_4 = 0 \quad\text{ vs. }\quad
 H_1:\ \text{Algún}\ \beta_j \ne 0,\ j = 1, 2, 3, 4.
 \]</span></p>
-</div>
 <p></br></br></p>
+</div>
 <div id="nota" class="section level3 content-box-gray">
-<h3><span style="color:#FF7F00"> <strong>Nota</strong></span></h3>
+<h3><span style="color:#686868"> <strong>Nota</strong></span></h3>
 <p></br></p>
 <p><span class="math inline">\(H_0\)</span> se puede reescribir
 como:</p>
@@ -1024,7 +1020,7 @@ es el nivel de significancia de la prueba. O bien, si <span
 class="math inline">\(F_0 &gt; f_{\alpha, 4, n - 5}\)</span>.</p>
 <p></br></br></p>
 <div id="retos" class="section level3 content-box-gray">
-<h3><span style="color:#FF7F00"> <strong>Retos</strong></span></h3>
+<h3><span style="color:#686868"> <strong>Retos</strong></span></h3>
 <ul>
 <li>Comprobar que una prueba de significancia individual o para un
 subconjunto de coeficientes de regresión son casos particulares de la

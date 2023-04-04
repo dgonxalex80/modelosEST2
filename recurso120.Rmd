@@ -30,7 +30,7 @@ library(broom)
 
 </br></br>
 
-## **Exploración previa**
+## <span style="color:#034a94">**Exploración previa**</span>
 
 </br>
 
@@ -52,7 +52,7 @@ summary(arboles1)
 ```
 </br></br>
 
-## **Validación simple**
+## <span style="color:#034a94">**Validación simple**</span>
 
 </br>
 
@@ -98,7 +98,7 @@ for (i in 1:100) {
 
 p1 <- ggplot(data = data.frame(cv_MSE = cv_MSE), aes(x = 1, y = cv_MSE)) +
       geom_boxplot(outlier.shape = NA) +
-      geom_jitter(colour = c("firebrick3"), width = 0.1) +
+      geom_jitter(colour = c("#034A94"), width = 0.1) +
       coord_flip() +
       labs(title = "Distribución del error de validación simple") +
       theme_bw() +
@@ -109,13 +109,13 @@ p1
 
 </br></br>
 
-## **Bootstrapping**
+## <span style="color:#034a94">**Bootstrapping**</span>
 
 </br>
 
 Este método permite estudiar la variabilidad de la estimación de los coeficientes de regresión lineal. 
 
-El método consiste en tomar una muestra con repetición de la data y con ella estimar el modelo. Los coeficientes estimados son guardados en un vector por cada estimador, al que se le obtiene la media y la desviación estandar.
+El método consiste en tomar una muestra con repetición de la data y con ella estimar el modelo. Los coeficientes estimados son guardados en un vector por cada estimador, al que se le obtiene la media y la desviación estándar.
 
 </br></br>
 

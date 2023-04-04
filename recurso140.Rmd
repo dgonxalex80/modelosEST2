@@ -17,11 +17,11 @@ arboles1$diametro = as.numeric(arboles1$diametro)
 arboles1$altura = as.numeric(arboles1$altura)
 
 
-library(tidyverse)
-library(lmtest) # diagnosticos de modelos lineales
-library(sandwich) # errores estandar robustos
-library(ggeffects) # efectos y predicciones en modelos de regresion
-library(modelsummary) # tablas de regresion
+# library(tidyverse)
+# library(lmtest) # diagnosticos de modelos lineales
+# library(sandwich) # errores estandar robustos
+# library(ggeffects) # efectos y predicciones en modelos de regresion
+# library(modelsummary) # tablas de regresion
 
 ```
 
@@ -33,7 +33,7 @@ El siguiente código permite la visualización de puntos en el mapa de la ciudad
 
 ###  <span style="color:#034A94">**Paso1 : Cargar archivo cali.shp**</span>
 
-```{r, message=FALSE, warning=FALSE}
+```{r,  eval=FALSE}
 library(raster)
 library(sf)
 library(tmap)
@@ -46,7 +46,7 @@ cali=shapefile("map/cali/cali.shp")
 
 ###  <span style="color:#034A94">**Paso 2 : Construir mapa de Cali**</span>
 
-```{r, message=FALSE, warning=FALSE}
+```{r , eval=FALSE}
 cali.tmap = tm_shape(cali) +  tm_polygons()
 # cali.tmap  # mapa
 ```
@@ -57,12 +57,12 @@ cali.tmap = tm_shape(cali) +  tm_polygons()
 ###  <span style="color:#034A94">**Paso 3 : Crear conjunto de puntos a marcar en mapa . Coordenadas de latitud y de longitud en data.frame**</span>
 
 
-```{r, message=FALSE, warning=FALSE}
+```{r, eva=FALSE}
 oferta=data.frame(lat=c(3.43382,     3.43369,   3.42566,      3.435,   3.45891),
                   long=c(-76.51168, -76.51237, -76.51737,    -76.54,  -76.5135))
 
 # convierte el data.frame en objeto sfc 
-oferta_sf=st_as_sf(oferta, coords = c('long', 'lat'))
+# oferta_sf=st_as_sf(oferta, coords = c('long', 'lat'))
 #            , crs = st_crs(cali)$proj4string)
 ```
 
@@ -72,7 +72,7 @@ oferta_sf=st_as_sf(oferta, coords = c('long', 'lat'))
 
 ###  <span style="color:#034A94">**Paso 4: Construir mapa y marcar puntos**</span>
 
-```{r warning=FALSE, message=FALSE}
+```{r, eval=FALSE}
 cali2 = tm_shape(cali) +  tm_polygons() + 
         tm_shape(oferta_sf) + tm_dots(size=0.3, col="red")
 cali2 
@@ -81,7 +81,15 @@ cali2
 ```
 
 
-<div class="content-box-yellow">
+</br>
+
+```{r, echo=FALSE, out.width="40%", fig.align = "center"}
+knitr::include_graphics("img/Cali1.png")
+```
+
+</br></br>
+
+<div class="content-box-gray">
 ### <span style="color:#686868"> **Nota**</span>
 
 * Debe instalar lo paquetes : 
@@ -97,7 +105,7 @@ cali2
 
 </div>
 
-
+</br></br>
 
 <div class="content-box-gray">
 ### <span style="color:#686868"> **Resumen**</span>
@@ -130,3 +138,8 @@ cali2
 <div>
 
 
+</br></br>
+
+```{r, echo=FALSE, out.width="40%", fig.align = "center"}
+knitr::include_graphics("img/Cali1.png")
+```

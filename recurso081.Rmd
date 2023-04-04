@@ -22,7 +22,7 @@ Algunas de las causas más comunes de la multicolinealidad son:
 
 </br>
 
-1. **El método de recolección de los datos.**, muestras recogidas en un rango reducido de valores.
+1. <span style="color:#034a94">**El método de recolección de los datos.**</spam>, muestras recogidas en un rango reducido de valores.
 
 ```{r, echo = F, fig.align = 'center', fig.height = 6, fig.width = 6, out.width = '50%'}
 #data3.1 <- read_excel("data-ex-3-1.xls")[, -1]
@@ -34,7 +34,7 @@ Algunas de las causas más comunes de la multicolinealidad son:
 </br>
 
 
-2. **Restricciones en el modelo o en la población.**
+2. <span style="color:#034a94">**Restricciones en el modelo o en la población.**</span> 
 
 <!-- <center> -->
 <!-- ```{r, echo=FALSE, out.width="60%", fig.align = "center"} -->
@@ -47,24 +47,26 @@ Algunas de las causas más comunes de la multicolinealidad son:
 </br>
 
 
-3. **Especificación del modelo.** Por ejemplo, al agregar términos polinomiales a un modelo cuando el rango de la predictora es pequeño.
+3. <span style="color:#034a94">**Especificación del modelo.**</span> Por ejemplo, al agregar términos polinomiales a un modelo cuando el rango de la predictora es pequeño.
 
 </br>
 
-4. **Un modelo sobredefinido.** Por ejemplo, en investigación médica donde para algunos pocos pacientes se toma una gran cantidad de predictoras. Es decir que posee más variables que observaciones.
+4. <span style="color:#034a94">**Un modelo sobredefinido.**</span> Por ejemplo, en investigación médica donde para algunos pocos pacientes se toma una gran cantidad de predictoras. Es decir que posee más variables que observaciones.
 
 
 </br></br></br>
 
 ## <span style="color:#034a94">**Efectos de la multicolinealidad**</span>
 
-</br>
+</br></br>
 
 Algunos de los efectos más notorios de la multicolinealidad son:
 
 </br>
 
-1. **Inflación de las varianzas de los estimadores:** consiste en la inflación de los valores $c^*_{jj}$ en las varianzas de los estimadores $V(\widehat\beta_j^*) = \sigma^2 c^*_{jj}$, cuando se considera un modelo con variables escaladas de longitud unitaria, en cuyo caso se puede demostrar que:
+### <span style="color:#034a94">**Inflación de las varianzas de los estimadores:**</span> 
+
+Consiste en la inflación de los valores $c^*_{jj}$ en las varianzas de los estimadores $V(\widehat\beta_j^*) = \sigma^2 c^*_{jj}$, cuando se considera un modelo con variables escaladas de longitud unitaria, en cuyo caso se puede demostrar que:
 
 $$
 c^*_{jj} = \frac{1}{1 - R_j^2},
@@ -74,9 +76,11 @@ $$
 
 donde $R_j^2$ es el coeficiente de determinación muestral obtenido de una regresión de $X_j$ (como respuesta) en función de las otras variables predictoras consideradas en el modelo (actuando como predictoras de la primera).
 
-</br>
+</br></br>
 
-2. **$\boldsymbol{\widehat{\beta}_j}$ muy grandes en términos absolutos:** esto se manifiesta en una traza muy grande de la matriz $\left(\boldsymbol{X}'\boldsymbol{X}\right)^{-1}$, donde: 
+### <span style="color:#034a94">**$\boldsymbol{\widehat{\beta}_j}$ muy grandes en términos absolutos:**</span> 
+
+Esto se manifiesta en una traza muy grande de la matriz $\left(\boldsymbol{X}'\boldsymbol{X}\right)^{-1}$, donde: 
 
 $$\text{traza}\left(\boldsymbol{X}'\boldsymbol{X}\right)^{-1} = \sum_{j = 1}^{p} \frac{1}{\lambda_j}$$  
 
@@ -86,14 +90,18 @@ y  $\lambda_j > 0$ es el $j$-ésimo valor propio (usualmente ordenados de mayor 
 
 Si la $\text{traza}\left(\boldsymbol{X}'\boldsymbol{X}\right)^{-1}$ es muy grande, mayor es la distancia entre el vector de parámetros estimados y el verdadero valor del vector de parámetros.
 
-</br>
+</br></br>
 
-3. **Valores de los coeficientes con signo contrario a lo esperado:** esto puede ser causado por la presencia de multicolinealidad.
+### <span style="color:#034a94">**Valores de los coeficientes con signo contrario a lo esperado:**</span> 
+
+Esto puede ser causado por la presencia de multicolinealidad.
 
 
-</br>
+</br></br>
 
-4. **Regresión significativa pero ninguna variable individualmente significativa:** otra de las maneras en que se puede manifestar la multicolinealidad grave es cuando el modelo de regresión ajustado es significativo (según la prueba $F$ de la tabla ANOVA) pero individualmente, ninguno de los coeficientes asociados a las variables predictoras resulta significativo (según las pruebas $T$ de significancia individual).
+### <span style="color:#034a94">**Regresión significativa pero ninguna variable individualmente significativa:**</span> 
+
+Otra de las maneras en que se puede manifestar la multicolinealidad grave es cuando el modelo de regresión ajustado es significativo (según la prueba $F$ de la tabla ANOVA) pero individualmente, ninguno de los coeficientes asociados a las variables predictoras resulta significativo (según las pruebas $T$ de significancia individual).
 
 
 </br></br>

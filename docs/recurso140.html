@@ -13,7 +13,7 @@
 
 <title> R - Mapa</title>
 
-<script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
@@ -416,7 +416,7 @@ data.frame</strong></span></h3>
                   long=c(-76.51168, -76.51237, -76.51737,    -76.54,  -76.5135))
 
 # convierte el data.frame en objeto sfc 
-oferta_sf=st_as_sf(oferta, coords = c(&#39;long&#39;, &#39;lat&#39;))
+# oferta_sf=st_as_sf(oferta, coords = c(&#39;long&#39;, &#39;lat&#39;))
 #            , crs = st_crs(cali)$proj4string)</code></pre>
 <p></br></br></p>
 </div>
@@ -426,9 +426,11 @@ puntos</strong></span></h3>
 <pre class="r"><code>cali2 = tm_shape(cali) +  tm_polygons() + 
         tm_shape(oferta_sf) + tm_dots(size=0.3, col=&quot;red&quot;)
 cali2 </code></pre>
-<p><img src="recurso140_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p></br></p>
+<p><img src="img/Cali1.png" width="40%" style="display: block; margin: auto;" /></p>
+<p></br></br></p>
 </div>
-<div id="nota" class="section level3 content-box-yellow">
+<div id="nota" class="section level3 content-box-gray">
 <h3><span style="color:#686868"> <strong>Nota</strong></span></h3>
 <ul>
 <li><p>Debe instalar lo paquetes :</p>
@@ -446,6 +448,7 @@ directorio donde está el archivo Rmd fuente (ubicada en Actividades :
 función <code>file.choose()</code> desde la consola.</p></li>
 </ul>
 </div>
+<p></br></br></p>
 <div class="content-box-gray">
 <div id="resumen" class="section level3">
 <h3><span style="color:#686868"> <strong>Resumen</strong></span></h3>
@@ -473,7 +476,8 @@ cali2 </code></pre>
 <div>
 
 
-
+<p></br></br></p>
+<p><img src="img/Cali1.png" width="40%" style="display: block; margin: auto;" /></p>
 </div>
 
 

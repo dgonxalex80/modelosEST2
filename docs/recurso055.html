@@ -13,7 +13,7 @@
 
 <title> Indicadores de ajuste</title>
 
-<script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
@@ -394,10 +394,11 @@ ajuste</strong></span></h2>
 están:</p>
 <p></br></br></p>
 <div id="r2" class="section level3">
-<h3><strong><span class="math inline">\(R^2\)</span></strong></h3>
+<h3><span style="color:#034a94"><strong><span
+class="math inline">\(R^2\)</span></strong></span></h3>
 <p>Coeficiente de determinación : mide que tanto se ajusta un modelo de
 regresión a los datos, es decir mide la prorción del total de la
-variación de <span class="math inline">\(Y\)</span> que es represenada
+variación de <span class="math inline">\(Y\)</span> que es representada
 por la variación de las variables regresoras (<span
 class="math inline">\(X_1\)</span>, <span
 class="math inline">\(X_2\)</span>, <span
@@ -410,7 +411,8 @@ están en el mismo plano (una linea recta en el caso del MRLS).</p>
 <p></br></br></p>
 </div>
 <div id="r2_adj" class="section level3">
-<h3><strong><span class="math inline">\(R^2_{adj}\)</span></strong></h3>
+<h3><span style="color:#034a94"><strong><span
+class="math inline">\(R^2_{adj}\)</span></strong></span></h3>
 <p>Coeficiente de determinación ajustado, corresponde a una versión
 ajustada de <span class="math inline">\(R^2\)</span>, por tamaño de
 muestra y número de variables predictoras. Permite detectar si agregar
@@ -420,7 +422,7 @@ tamaños de muestra.</p>
 <p></br></br></p>
 </div>
 <div id="aic" class="section level3">
-<h3><strong>AIC</strong></h3>
+<h3><span style="color:#034a94"><strong>AIC</strong></span></h3>
 <p>Criterio de información de Akaike. es un indicador útil en la
 selección de modelos</p>
 <p><span class="math display">\[AIC = 2k - 2 \ln( \widehat{L})\]</span>
@@ -432,7 +434,7 @@ Al comparar los modelos presenta mejor ajuste el que tenga el valor
 <p></br></br></p>
 </div>
 <div id="bic" class="section level3">
-<h3><strong>BIC</strong></h3>
+<h3><span style="color:#034a94"><strong>BIC</strong></span></h3>
 <p>Criterio de información bayesiano o criterio de información de
 Schwarz, empleado en la selección de modelos, se basa en la información
 del valor máximo de la función de verosimilitud del modelo, incluyendo
@@ -444,8 +446,8 @@ class="math inline">\(n\)</span>, para <span class="math inline">\(n
 valor BIC más bajo.</p>
 <p></br></br></p>
 </div>
-<div id="nota" class="section level3 content-box-yellow">
-<h3><span style="color:#FF7F00"><strong>Nota</strong></span></h3>
+<div id="nota" class="section level3 content-box-gray">
+<h3><span style="color:#686868"><strong>Nota</strong></span></h3>
 <p>Este criterio al igual que ACI utilizan solo cuando la variable
 dependiente <span class="math inline">\(Y\)</span> es la misma en todos
 los modelos comparados</p>
@@ -455,7 +457,7 @@ los modelos comparados</p>
 <!-- Logaritmo maximo verosimil -->
 <p></br></br></p>
 <div id="f" class="section level3">
-<h3><strong>F</strong></h3>
+<h3><span style="color:#034a94"><strong>F</strong></span></h3>
 <p>Estadístico F, construido a partir de la descomposición de la
 varianza de la variable dependiente <span
 class="math inline">\(Y\)</span> en la ANOVA, valida la existencia de
@@ -465,18 +467,17 @@ class="math inline">\(R^2\)</span> del modelo, luego valores mas altos
 constituye un mayor ajuste del modelo a los datos</p>
 <p></br></br></p>
 </div>
-<div
-id="rmse-raiz-del-error-cuadrático-medio-compara-las-estimaciones-obtenidas-contra-los-valores-realies-de-la-variable-y-permitiendo-valorar-el-ajuste-del-modelo"
-class="section level3">
-<h3><strong>RMSE</strong>, raiz del error cuadrático medio, compara las
-estimaciones obtenidas contra los valores realies de la variable <span
+<div id="rmse" class="section level3">
+<h3><span style="color:#034a94"><strong>RMSE</strong></span></h3>
+<p>Raiz del error cuadrático medio, compara las estimaciones obtenidas
+contra los valores realies de la variable <span
 class="math inline">\(Y\)</span>, permitiendo valorar el ajuste del
-modelo</h3>
+modelo</p>
 <p><span class="math display">\[RMSE =
 \sqrt{\dfrac{\sum_{i=1}^{n}(_i-\widehat{y}_1)^{2}}{n}}\]</span></p>
 <p></br></br></p>
 </div>
-<div id="ejemplo" class="section level3 content-box-yellow">
+<div id="ejemplo" class="section level3">
 <h3><span style="color:#FF7F00"><strong>Ejemplo</strong></span></h3>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
@@ -789,10 +790,10 @@ RMSE
 </tr>
 </tbody>
 </table>
-</div>
 <p></br></p>
 <p>En este caso el modelo 1 presenta el mejor ajuste</p>
 <p></br></br></br></p>
+</div>
 </div>
 <div id="falta-de-ajuste-en-el-modelo-de-rlm" class="section level2">
 <h2><span style="color:#034a94"><strong>Falta de ajuste en el modelo de
@@ -829,8 +830,8 @@ descompocisión de la SSE</p>
 <p></br></br></p>
 <div id="anova-con-prueba-de-falta-de-ajuste-en-el-modelo-de-rlm"
 class="section level3">
-<h3><strong>ANOVA con prueba de falta de ajuste en el modelo de
-RLM</strong></h3>
+<h3><span style="color:#034a94"><strong>ANOVA con prueba de falta de
+ajuste en el modelo de RLM</strong></span></h3>
 <p></br></p>
 <table>
 <colgroup>
@@ -1052,23 +1053,32 @@ son influenciales.</p>
 <!-- ``` -->
 <p></br></p>
 <p>Para la evaluación se cuenta con las siguientes medidas:</p>
-<ul>
-<li><p><strong>Distancia de Cook</strong>.</p></li>
-<li><p><strong>Diagnóstico DFFITS</strong>.</p></li>
-<li><p><strong>Diagnóstico DFBETAS</strong>.</p></li>
-</ul>
+<p></br></p>
+<div id="distancia-de-cook" class="section level4">
+<h4><span style="color:#034a94"><strong>Distancia de
+Cook</strong></span></h4>
+</div>
+<div id="diagnóstico-dffits" class="section level4">
+<h4><span style="color:#034a94"><strong>Diagnóstico
+DFFITS</strong></span></h4>
+</div>
+<div id="diagnóstico-dfbetas" class="section level4">
+<h4><span style="color:#034a94"><strong>Diagnóstico
+DFBETAS</strong></span></h4>
+<p></br></p>
 <p>A continuación se presentan los diagnósticos para detectar
 observaciones influenciales.</p>
-<p></br></p>
-<ol style="list-style-type: decimal">
-<li><strong>Distancia de Cook:</strong> es una medida de la distancia
-cuadrática entre, el estimador de <span
+<p></br></br></p>
+</div>
+<div id="distancia-de-cook-1" class="section level4">
+<h4><span style="color:#034a94"> 1. <strong>Distancia de
+Cook:</strong></span></h4>
+<p>Es una medida de la distancia cuadrática entre, el estimador de <span
 class="math inline">\(\boldsymbol\beta\)</span> por mínimos cuadrados
 basado en las <span class="math inline">\(n\)</span> observaciones, y el
 estimador de <span class="math inline">\(\boldsymbol\beta\)</span>
 obtenido eliminando la <span class="math inline">\(i\)</span>-ésima
-observación, así:</li>
-</ol>
+observación, así:</p>
 <div class="content-box-blue">
 <p><span class="math display">\[D_i =
 \frac{\left(\boldsymbol{\widehat{\beta}}_{\left(i\right)} -
@@ -1087,8 +1097,9 @@ la observación <span class="math inline">\(i\)</span> tiene influencia
 sobre el vector de parámetros estimados <span
 class="math inline">\(\boldsymbol{\widehat{\beta}}\)</span>.</p>
 <p></br></br></p>
+</div>
 <div id="notas" class="section level3 content-box-gray">
-<h3><span style="color:#FF7F00"> <strong>Notas</strong></span></h3>
+<h3><span style="color:#686868"> <strong>Notas</strong></span></h3>
 <ul>
 <li><p>Si <span class="math inline">\(D_i = f_{0.5, p, n - p}\)</span>
 entonces al eliminar el punto <span class="math inline">\(i\)</span> se
@@ -1106,12 +1117,12 @@ class="math inline">\(i\)</span> será <strong>influencial</strong> si
 </ul>
 </div>
 <p></br></p>
-<ol start="2" style="list-style-type: decimal">
-<li><strong>Diagnóstico DFFITS:</strong> es el número de desviaciones
-estándar que el valor ajustado <span
+<div id="diagnóstico-dffits-1" class="section level4">
+<h4><span style="color:#034a94">2. <strong>Diagnóstico
+DFFITS:</strong></span></h4>
+<p>Es el número de desviaciones estándar que el valor ajustado <span
 class="math inline">\(\widehat{y}_i\)</span> se mueve si la observación
-<span class="math inline">\(i\)</span> es omitida,</li>
-</ol>
+<span class="math inline">\(i\)</span> es omitida,</p>
 <div class="content-box-blue">
 <p><span class="math display">\[
 \text{DFFITS}_i = \frac{\widehat{Y}_i -
@@ -1132,13 +1143,15 @@ del modelo a la observación <span class="math inline">\(i\)</span>.</p>
 class="math inline">\(\vert\text{DFFITS}_i\vert &gt;
 2\sqrt{\frac{p}{n}}\)</span>.</p>
 <p></br></p>
-<ol start="3" style="list-style-type: decimal">
-<li><strong>Diagnóstico DFBETAS:</strong> indica cuánto cambia el <span
-class="math inline">\(j\)</span>-ésimo coeficiente de regresión estimado
-<span class="math inline">\(\widehat{\beta}_j\)</span> en unidades de
+</div>
+<div id="diagnóstico-dfbetas-1" class="section level4">
+<h4><span style="color:#034a94">3. <strong>Diagnóstico
+DFBETAS:</strong></span></h4>
+<p>Indica cuánto cambia el <span class="math inline">\(j\)</span>-ésimo
+coeficiente de regresión estimado <span
+class="math inline">\(\widehat{\beta}_j\)</span> en unidades de
 desviación estándar, si se omite la <span
-class="math inline">\(i\)</span>-ésima observación,</li>
-</ol>
+class="math inline">\(i\)</span>-ésima observación,</p>
 <div class="content-box-blue">
 <p><span class="math display">\[\text{DFBETAS}_{j\left(i\right)} =
 \frac{\widehat{\beta}_j -
@@ -1155,8 +1168,9 @@ class="math inline">\(i\)</span>.</p>
 class="math inline">\(\vert \text{DFBETAS}_{j\left(i\right)}\vert &gt;
 2/\sqrt{n}\)</span>.</p>
 <p></br></p>
+</div>
 <div id="nota-1" class="section level3 content-box-gray">
-<h3><span style="color:#FF7F00"> <strong>Nota</strong></span></h3>
+<h3><span style="color:#686868"> <strong>Nota</strong></span></h3>
 <p>Tanto los <span class="math inline">\(D_i\)</span>, como los DFFITS y
 los DFBETAS se pueden afectar tanto por un error de ajuste grande como
 por un gran balanceo, por eso, los puntos que sean detectados por estos

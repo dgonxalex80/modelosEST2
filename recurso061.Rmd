@@ -20,7 +20,7 @@ Cuando se desea incluir variables categóricas al modelo de regresión lineal m�
 En el caso de una variable categórica con $k$ categorías, es necesaria la construcción de $(k-1$ variables binarias
 
 </br></br></br>
-<div class="content-box-yellow">
+
 ### <span style="color:#FF7F00"> **Ejemplo**</span>
 
 </br>
@@ -53,7 +53,6 @@ $$D_{1i} = \left \{ \begin{matrix}
 
 En este caso el rango de la varuiable es: $R_D =\{0,1\}$, temiendo como referencia o base al GENOTIPO_1
 
-</div>
 </br>
 
 
@@ -110,11 +109,11 @@ Para la variable finca con tres categorias, es necesario la creación de dos var
 
 <div class="content-box-gray">
 
-### <span style="color:#FF7F00"> **Nota**</span>
+### <span style="color:#686868"> **Nota**</span>
 
 </br>
 La estimación en R genera las variables binarias para las categorías FINCA_2 y FINCA_3, dejando como base la categoría FINCA_1, esto es equivalente a construir dos variables adicionales a la base:
-
+</div>
 </br></br>
 
 
@@ -143,7 +142,7 @@ La estimación en R genera las variables binarias para las categorías FINCA_2 y
 </pre>
 
 </br>
-</div>
+
 
 
 </br>
@@ -185,7 +184,7 @@ Si el árbol pertenece a la FINCA1, el valor de ($D_1$, $D_2$), será (0,0) y en
 </br></br>
 
 <div class="content-box-gray">
-### <span style="color:#FF7F00"> **Nota**</span>
+### <span style="color:#686868"> **Nota**</span>
 
 La variable finca que corresponde a tres categorías se representa con dos variables binarias 
 

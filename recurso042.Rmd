@@ -47,14 +47,14 @@ $$\text{SSR}\left(A\vert B\right) = \text{SSR}\left(A \cup B\right) - \text{SSR}
 </br></br>
 
 
-<div class="content-box-yellow">
+
 
 ### <span style="color:#FF7F00"> **Ejemplo**</span>
 
 Suponga un modelo de regresión múltiple de una respuesta $Y$ en función de tres variables predictoras $X_1, X_2, X_3$, esto es,
 
 $$Y = \beta_0 + \beta_1X_1 + \beta_2X_2 + \beta_3X_3 + \varepsilon$$
-</div>
+
 
 </br>
 
@@ -126,7 +126,7 @@ $$
 
 </br></br>
 
-<div class="content-box-yellow">
+
 ### <span style="color:#FF7F00"> **Ejemplo**</span>
 
 </br>
@@ -141,7 +141,7 @@ $$Y = \beta_0 + \beta_1X_1 + \beta_2X_2 + \beta_3X_3 + \beta_4X_4 + \beta_5X_5 +
 * **Un modelo nulo o reducido:** que se obtiene al aplicar lo establecido en $H_0$ al modelo completo, es decir, eliminar los coeficientes de regresión en $A$ (quedando los coeficientes de regresión en $B$). Para el ejemplo es:
 
 $$Y = \beta_0 + \beta_3X_3 + \beta_4X_4 + \varepsilon.$$
-</div>
+
 
 </br>
 
@@ -187,7 +187,7 @@ A un nivel de significancia $\alpha$, el criterio de rechazo es $F_0 > f_{\alpha
 
 </br></br>
 
-<div class="content-box-yellow">
+
 ### <span style="color:#FF7F00"> **Ejemplo**</span>
 
 En el modelo $Y = \beta_0 + \beta_1X_1 + \beta_2X_2 + \beta_3X_3 + \beta_4X_4 + \beta_5X_5 + \varepsilon$, para probar la hipótesis:
@@ -198,7 +198,6 @@ H_1: \text{Algún }\beta_j \ne 0, \ j = 2, 4.
 \end{array}
 $$
 
-</div>
 
 </br>
 
@@ -335,7 +334,6 @@ Veamos, ejemplos de cómo trabaja este procedimiento de prueba.
 
 </br></br>
 
-<div class="content-box-yellow">
 
 <H3>
 <span style="color:#FF7F00"> **Ejemplo**</span>
@@ -346,7 +344,7 @@ $$H_0: \beta_1 = \beta _2,\ \beta_3 = \beta_4$$
 
 $$H_1: \beta_1 \ne \beta_2\ \text{ ó }\ \beta_3 \ne \beta_4$$
 
-</div>
+
 
 </br>
 
@@ -420,7 +418,7 @@ $$
 
 <div class="content-box-gray">
 <H3>
-<span style="color:#FF7F00"> **Nota**</span>
+<span style="color:#686868"> **Nota**</span>
 </H3>
  
 
@@ -431,7 +429,6 @@ Bajo $H_0$ y los supuestos sobre los errores, $F_0\sim f_{2, n - 5}$. Se rechaza
 
 </br></br>
 
-<div class="content-box-yellow">
 
 <H3>
 <span style="color:#FF7F00"> **Ejemplo**</span>
@@ -442,7 +439,6 @@ Bajo el mismo modelo de RLM con $k=4$ considere la siguiente prueba:
 $$
 H_0:\ \beta_1 = \beta_2 = 0, \ \beta_3 = \beta_4 \ \ \text{ vs. }\ H_1:\ \beta_1 \ne 0 \text{ \ ó \ } \beta_2 \ne 0 \text{ \ ó \ } \beta_3 \ne \beta_4
 $$
-</div>
 
 </br>
 
@@ -519,7 +515,7 @@ Bajo $H_0$ y los supuestos sobre los errores, $F_0\sim f_{3, n - 5}$. Se rechaza
 
 </br></br>
 
-<div class="content-box-yellow">
+
 ### <span style="color:#FF7F00"> **Ejemplo**</span>
 
 </br>
@@ -529,12 +525,12 @@ Considere ahora la prueba de significancia del modelo de RLM con $k=4$ variables
 $$
 H_0:\ \beta_1 = \beta_2 = \beta_3 = \beta_4 = 0 \quad\text{ vs. }\quad H_1:\ \text{Algún}\ \beta_j \ne 0,\ j = 1, 2, 3, 4.
 $$
-</div>
+
 
 </br></br>
 
 <div class="content-box-gray">
-### <span style="color:#FF7F00"> **Nota**</span>
+### <span style="color:#686868"> **Nota**</span>
 
 </br>
 
@@ -608,7 +604,7 @@ Por lo tanto, bajo $H_0$ y los supuestos sobre los errores se cumple que, $F_0 \
 
 
 <div class="content-box-gray">
-### <span style="color:#FF7F00"> **Retos**</span>
+### <span style="color:#686868"> **Retos**</span>
 
 * Comprobar que una prueba de significancia individual o para un subconjunto de coeficientes de regresión son casos particulares de la prueba de hipótesis lineal general.)
 

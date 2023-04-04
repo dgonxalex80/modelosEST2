@@ -13,7 +13,7 @@
 
 <title>Variables categóricas en el modelo de regresión lineal</title>
 
-<script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
@@ -395,8 +395,8 @@ modelo y solo puede tomar dos valores : 0 ó 1.</p>
 class="math inline">\(k\)</span> categorías, es necesaria la
 construcción de <span class="math inline">\((k-1\)</span> variables
 binarias</p>
-</br></br></br>
-<div id="ejemplo" class="section level3 content-box-yellow">
+<p></br></br></br></p>
+<div id="ejemplo" class="section level3">
 <h3><span style="color:#FF7F00"> <strong>Ejemplo</strong></span></h3>
 <p></br></p>
 <p>La base de datos arboles1 contiene las siguientes variables:</p>
@@ -444,7 +444,6 @@ GENOTIPO_1}\end{matrix}\right.  \]</span></p>
 <p>En este caso el rango de la varuiable es: <span
 class="math inline">\(R_D =\{0,1\}\)</span>, temiendo como referencia o
 base al GENOTIPO_1</p>
-</div>
 <p></br></p>
 <pre class="r"><code>library(paqueteMOD)
 data(&quot;arboles1&quot;)
@@ -486,11 +485,13 @@ de dos variables binarias, las cuales pueden ser generadas por R y en
 caso de tener una intensión especial la construcción de las variables
 será necesario realizarlas previamente a la estimación del modelo.</p>
 <p></br></br></p>
+</div>
 <div id="nota" class="section level3 content-box-gray">
-<h3><span style="color:#FF7F00"> <strong>Nota</strong></span></h3>
+<h3><span style="color:#686868"> <strong>Nota</strong></span></h3>
 <p></br> La estimación en R genera las variables binarias para las
 categorías FINCA_2 y FINCA_3, dejando como base la categoría FINCA_1,
 esto es equivalente a construir dos variables adicionales a la base:</p>
+</div>
 <p></br></br></p>
 <pre>
 # A tibble: 90 × 7
@@ -516,7 +517,6 @@ esto es equivalente a construir dos variables adicionales a la base:</p>
 .
 </pre>
 <p></br></p>
-</div>
 <p></br></p>
 <p>El modelo de regresión que incluye esta variable es:</p>
 <p></br></p>
@@ -568,7 +568,7 @@ corresponderá a un peso promedio de <span
 class="math inline">\(13.086\)</span></p>
 <p></br></br></p>
 <div id="nota-1" class="section level3 content-box-gray">
-<h3><span style="color:#FF7F00"> <strong>Nota</strong></span></h3>
+<h3><span style="color:#686868"> <strong>Nota</strong></span></h3>
 <p>La variable finca que corresponde a tres categorías se representa con
 dos variables binarias</p>
 <table>

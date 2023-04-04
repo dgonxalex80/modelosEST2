@@ -1,5 +1,5 @@
 ---
-title: <span style="color:#034a94"> **R - Analisis descriptivo**</span>
+title: <span style="color:#034a94">**R - Analisis descriptivo**</span>
 output: html_document
 css: style.css
 ---
@@ -32,7 +32,7 @@ library(modelsummary) # tablas de regresion
 
 </br></br>
 
-## **Exploración previa**
+## <span style="color:#034a94">**Exploración previa**</span>
 
 En esta etapa se realiza una exploración de la data, tipo de variables, datos faltantes, datos atípicos. Podemos realizarlo con la función summary() o con 
 </br>
@@ -61,15 +61,9 @@ summary(arboles1)
 glimpse(arboles1)
 ```
 
-
-```{r, message=FALSE, warning=FALSE}
-library(Hmisc)
-describe(arboles1)
-```
-
 </br></br></br>
 
-## **Asociación entre las variables cuantitativas**
+## <span style="color:#034a94">**Asociación entre las variables cuantitativas**</span>
 
 
 ```{r, warning=FALSE, message=FALSE, fig.align='center'}

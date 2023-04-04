@@ -7,6 +7,7 @@ css: style.css
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, comment = NA)
+#devtools::install_github("dgonxalex80/paqueteMOD", force = TRUE) # descarga paquete
 library(paqueteMOD)
 data("creditos")
 
@@ -37,7 +38,6 @@ Es útil también acompañar este análisis gráfico con la matriz de correlacio
 
 </br></br></br>
 
-<div class="content-box-yellow">
 
 ### <span style="color:#FF7F00"> **Ejemplo**</span>
 
@@ -55,9 +55,8 @@ La base ausentismo  contenida en paqueteMOD contiene las variables
 * **sexo**   : sexo del trabajador
 * **edad**   : edad del trabajador
 * **antg**   : antiguedad en la empresa
-* **sala**   : salario que debenga
+* **sala**   : salario del empleado
 
-</div>
 
 El diagrama de dispersión permite visualizar la relación lineal que puede existir entre dos variables numéticas, para ello  se construye la siguiente matriz de diagramas.
 
@@ -137,9 +136,9 @@ Tambien es importante notar que entre las variables independientes existen fuert
 
 </br></br>
 
-<div class="content-box-yellow">
+<div class="content-box-gray">
 
-### <span style="color:#FF7F00"> **Nota**</span>
+### <span style="color:#686868"> **Nota**</span>
 
 Las variables independientes  deben de ser independientes unas de otras, por tanto sus correlaciones deberán ser no significativas al realizar pruebas de hipótesis ( $Ho: \rho = 0$).
 

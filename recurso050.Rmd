@@ -85,7 +85,7 @@ Este residual, con mayor razón debe moverse entre -3 y 3. Se considera atípica
 </br></br>
 
 <div class="content-box-gray">
-### <span style="color:#FF7F00"> **Nota**</span>
+### <span style="color:#686868"> **Nota**</span>
 
 * Si el modelo de RLM especificado es correcto los $r_i$ tienen varianza aproximadamente constante!! igual a 1.
 * En conjuntos grandes de datos la varianza de los $r_i$ se puede estabilizar en 1 y así no habrá mucha diferencia entre éstos y los $d_i$.

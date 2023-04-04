@@ -74,8 +74,8 @@ Un caso particular de las pruebas de hipótesis anteriores son las conocidas **p
 </div>
 
 
-<div class="content-box-yellow">
-### <span style="color:#FF7F00"> **Nota**</span>
+<div class="content-box-gray">
+### <span style="color:#686868"> **Nota**</span>
 
 En todos los casos un valor-p bajo apuntará hacia el rechazo de $H_0$ y la aceptación de $H_1$ como verdad, en caso contrario no se rechaza $H_0$, se asume que Ho es verdadera.
 </div>

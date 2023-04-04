@@ -136,7 +136,7 @@ Entonces:
 
 </br>
 
-<div class="content-box-blue">
+
 
 Sea $\boldsymbol{y}$ un vector aleatorio normal $n$-variado con media $\boldsymbol{\mu_y}$ y matriz de varianzas-covarianzas no singular $\boldsymbol{\Sigma_y}$, es decir, $\boldsymbol{y} \sim \boldsymbol{N}_n\boldsymbol{\left(\mu_y, \Sigma_y\right)}$.
 
@@ -146,6 +146,8 @@ Sean $\boldsymbol{A}$ una matriz $n\times n$ de constantes y $\boldsymbol{U}$ un
 
 Se tienen los siguientes resultados:
 
+<div class="content-box-blue">
+
 1. Si $\boldsymbol{A\Sigma_y}$ ó $\boldsymbol{\Sigma_yA}$ es una matriz idempotente de rango $p$, entonces
 $$
 \boldsymbol{U} \sim \chi^2_{p, \lambda}
@@ -153,8 +155,12 @@ $$
 
    donde, $\lambda = \boldsymbol{\mu_y}'\boldsymbol{A\mu_y}$ es el parámetro de no centralidad de la distribución chi-cuadrado. 
 
+</div>
+
 </br>
 
+
+<div class="content-box-blue">
 2. Si $\boldsymbol{\Sigma_y} = \sigma^2\boldsymbol{I}$ y $\boldsymbol{A}$ es idempotente y de rango $p$, entonces
 $$
 \frac{\boldsymbol{U}}{\sigma^2}\sim \chi^2_{p,\lambda}
@@ -162,8 +168,11 @@ $$
 
    donde, $\lambda = \boldsymbol{\mu_y}'\boldsymbol{A\mu_y}/\sigma^2$.
 
+</div>
+
 </br>
 
+<div class="content-box-blue">
 3. Sean $\boldsymbol{B}$ una matriz $m\times n$ y $\boldsymbol{W}$ una forma lineal definida como: $\boldsymbol{W} = \boldsymbol{By}$, entonces la forma cuadrática $\boldsymbol{U} = \boldsymbol{y}'\boldsymbol{Ay}$ y $\boldsymbol{W}$ son independientes si
 $$
 \boldsymbol{B\Sigma_yA} = \boldsymbol{0}
@@ -171,28 +180,30 @@ $$
 
    donde $\boldsymbol{0}$ es la matriz nula de orden $m\times n$.
 
-</br>
+</div>
+
 
 <div class="content-box-gray">
 
-### <span style="color:#FF7F00"> **Nota**</span>
+### <span style="color:#686868"> **Nota**</span>
 
 Si $\boldsymbol{\Sigma_y} = \sigma^2\boldsymbol{I}$, entonces $\boldsymbol{U}$ y $\boldsymbol{W}$ son independientes si $\boldsymbol{BA} = \boldsymbol{0}$.
 </div>
 
 </br>
 
+<div class="content-box-blue">
 4. Sean $\boldsymbol{B}$ una matriz $n\times n$ y $\boldsymbol{V} = \boldsymbol{y}'\boldsymbol{By}$ otra forma cuadrática de $\boldsymbol{y}$, entonces las dos formas cuadráticas $\boldsymbol{U}$ y $\boldsymbol{V}$ son independientes si $$\boldsymbol{A\Sigma_yB} = \boldsymbol{0}$$
 
-</br>
+</div>
+
 
 <div class="content-box-gray">
-### <span style="color:#FF7F00"> **Nota**</span>
+### <span style="color:#686868"> **Nota**</span>
 
 Si $\boldsymbol{\Sigma_y} = \sigma^2\boldsymbol{I}$, entonces $\boldsymbol{U}$ y $\boldsymbol{V}$ son independientes si $\boldsymbol{AB} = \boldsymbol{0}$.
 </div>
 
-</div>
 
 </br></br>
 

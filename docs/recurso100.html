@@ -13,7 +13,7 @@
 
 <title> R - Estimación del modelo</title>
 
-<script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
@@ -398,7 +398,7 @@ lm(formula, data, subset, weights, na.action,
    singular.ok = TRUE, contrasts = NULL, offset, ...)                      
 </pre>
 <p></br></br></p>
-<div id="ejemplo" class="section level3 content-box-yellow">
+<div id="ejemplo" class="section level3">
 <h3><span style="color:#FF7F00"> <strong>Ejemplo</strong></span></h3>
 <p></br></p>
 <p>Para la base de datos arboles1 que con tiene las variables</p>
@@ -451,7 +451,6 @@ cero en otro caso</td>
 </tr>
 </tbody>
 </table>
-</div>
 <p></br></br></p>
 <pre class="r"><code>library(paqueteMOD)
 data(&quot;arboles1&quot;)
@@ -487,6 +486,7 @@ Residual standard error: 3.191 on 85 degrees of freedom
 Multiple R-squared:  0.8538,    Adjusted R-squared:  0.847 
 F-statistic: 124.1 on 4 and 85 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p></br></br></p>
+</div>
 </div>
 <div id="estimación-paso-a-paso-o-steppwise" class="section level2">
 <h2><span style="color:#034a94"><strong>Estimación paso a paso o

@@ -18,7 +18,12 @@ Entre los diagnósticos más usados para detectar multicolinealidad en un modelo
 
 </br>
 
-1. **Examinar la matriz de correlaciones entre las predictoras:** sea  $\text{COR}(\boldsymbol{X})$ una matriz cuyo elemento ($j,k$) corresponde a la correlación entre las predictoras $X_j$ y $X_k$, $\text{COR}\left(X_j, X_k\right)$.
+### 1. <span style="color:#034a94">**Examinar la matriz de correlaciones entre las predictoras:**</span> 
+
+</br>
+
+
+Sea  $\text{COR}(\boldsymbol{X})$ una matriz cuyo elemento ($j,k$) corresponde a la correlación entre las predictoras $X_j$ y $X_k$, $\text{COR}\left(X_j, X_k\right)$.
 
 Esta matriz resulta útil para detectar multicolinealidad si en ésta no intervienen más de dos variables en una dependencia casi lineal.
 
@@ -28,7 +33,9 @@ También valores de $\text{COR}\left(X_j, X_k\right)$ pequeños no necesariament
 
 </br></br>
 
-2. **Factores de Inflación de Varianza:** denotados $\text{VIF}_j,\ j = 1, \ldots, k$ se calculan como: 
+### 2. <span style="color:#034a94">**Factores de Inflación de Varianza:**</span> 
+
+Denotados $\text{VIF}_j,\ j = 1, \ldots, k$ se calculan como: 
 
 
 $$\text{VIF}_j = c^*_{jj} = \frac{1}{1 - R_j^2}$$
@@ -98,36 +105,52 @@ A continuación se establece el criterio para detectar la multicolinealidad de a
 
 </br></br>
 
-3. **Análisis de los valores propios de $\boldsymbol{X}'\boldsymbol{X}$:** se trata de evaluar si hay valores propios con valores cercanos a cero. Para ello se definen las medidas que se presentan a continuación:
+### 3. <span style="color:#034a94">**Análisis de los valores propios de $\boldsymbol{X}'\boldsymbol{X}$:**</span> 
 
-**Número de condición:** mide la dispersión en el espectro de los valores propios de la matriz $\boldsymbol{X}'\boldsymbol{X}$. Se calcula como: $\kappa = \lambda_{\max} / \lambda_{\min}$. En $R$ se obtienen valores en raíz cuadrada, es decir, $\sqrt{\kappa}$, para el cual el criterio para detectar multicolinealidad es:
+Se trata de evaluar si hay valores propios con valores cercanos a cero. Para ello se definen las medidas que se presentan a continuación:
+
+</br>
+
+<span style="color:#034a94">**Número de condición:**</span> :  mide la dispersión en el espectro de los valores propios de la matriz $\boldsymbol{X}'\boldsymbol{X}$. Se calcula como: $\kappa = \lambda_{\max} / \lambda_{\min}$. En $R$ se obtienen valores en raíz cuadrada, es decir, $\sqrt{\kappa}$, para el cual el criterio para detectar multicolinealidad es:
+
+</br>
 
 * Si $\sqrt{\kappa} \leq 10$ no hay problemas de multicolinealidad.
 
+</br>
+
 * Si $10 < \sqrt{\kappa} \leq 31.62$ hay problemas de multicolinealidad moderada.
+
+</br>
 
 * Si $\sqrt{\kappa} > 31.62$ hay problemas de multicolinealidad graves.
 
 </br>
 
-**Índice de condición:** es una medida útil para determinar el número de dependencias casi lineales en $\boldsymbol{X}'\boldsymbol{X}$. Se calcula como: $\kappa_j = \lambda_{\max} / \lambda_j,\ j = 1, \ldots, p$ (en $R$ se obtienen los valores $\sqrt{\kappa_j}$). El criterio para detectar multicolinealidad es:
+<span style="color:#034a94">**Índice de condición:**</span> es una medida útil para determinar el número de dependencias casi lineales en $\boldsymbol{X}'\boldsymbol{X}$. Se calcula como: $\kappa_j = \lambda_{\max} / \lambda_j,\ j = 1, \ldots, p$ (en $R$ se obtienen los valores $\sqrt{\kappa_j}$). El criterio para detectar multicolinealidad es:
+
+</br>
 
 * Si $\sqrt{\kappa_j} \leq 10\ \forall j$, no hay problemas de multicolinealidad.
 
+</br>
+
 * Si al menos para un $j$, $10 < \sqrt{\kappa_j} \leq 31.62$, entonces hay problemas de multicolinealidad moderada.
+
+</br>
 
 * Si al menos para un $j$, $\sqrt{\kappa_j} > 31.62$, entonces hay problemas de multicolinealidad graves (por lo menos hay una asociación casi lineal entre dos o más predictoras).
 
 </br>
 
-**Proporciones de descomposición de varianza:** denotados $\pi_{ij}$ representan la proporción de la varianza de cada $\widehat\beta_j$ (o de cada factor de inflación de varianza) debida al $i$-ésimo valor propio de la matriz $\boldsymbol{X}'\boldsymbol{X}$.
+<span style="color:#034a94">**Proporciones de descomposición de varianza:**</span> denotados $\pi_{ij}$ representan la proporción de la varianza de cada $\widehat\beta_j$ (o de cada factor de inflación de varianza) debida al $i$-ésimo valor propio de la matriz $\boldsymbol{X}'\boldsymbol{X}$.
 
 Proporciones altas ($\pi_{ij} > 0.5$) para dos o más coeficientes de regresión asociados con un mismo valor propio pequeño es evidencia de multicolinealidad entre las variables correspondientes a tales coeficientes.
 
 </br></br>
 
 <div class="content-box-gray">
-### <span style="color:#FF7F00"> **Nota**</span>
+### <span style="color:#686868"> **Nota**</span>
 
 El análisis de valores propios se puede realizar usando datos centrados o con los datos originales. 
 

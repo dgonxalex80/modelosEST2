@@ -13,7 +13,7 @@
 
 <title> R - Validación del modelo</title>
 
-<script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
@@ -387,7 +387,8 @@ Validación del modelo</strong></span></h1>
 <p></br></br></p>
 <p></br></br></p>
 <div id="exploración-previa" class="section level2">
-<h2><strong>Exploración previa</strong></h2>
+<h2><span style="color:#034a94"><strong>Exploración
+previa</strong></span></h2>
 <p></br></p>
 <pre class="r"><code>library(paqueteMOD)
 library(tidyverse)
@@ -419,7 +420,8 @@ summary(arboles1)</code></pre>
 <p></br></br></p>
 </div>
 <div id="validación-simple" class="section level2">
-<h2><strong>Validación simple</strong></h2>
+<h2><span style="color:#034a94"><strong>Validación
+simple</strong></span></h2>
 <p></br></p>
 <p>`</p>
 <pre class="r"><code># Se seleccionan 196 índices aleatorios que formarán el training set. 
@@ -477,7 +479,7 @@ for (i in 1:100) {
 
 p1 &lt;- ggplot(data = data.frame(cv_MSE = cv_MSE), aes(x = 1, y = cv_MSE)) +
       geom_boxplot(outlier.shape = NA) +
-      geom_jitter(colour = c(&quot;firebrick3&quot;), width = 0.1) +
+      geom_jitter(colour = c(&quot;#034A94&quot;), width = 0.1) +
       coord_flip() +
       labs(title = &quot;Distribución del error de validación simple&quot;) +
       theme_bw() +
@@ -487,14 +489,15 @@ p1</code></pre>
 <p></br></br></p>
 </div>
 <div id="bootstrapping" class="section level2">
-<h2><strong>Bootstrapping</strong></h2>
+<h2><span
+style="color:#034a94"><strong>Bootstrapping</strong></span></h2>
 <p></br></p>
 <p>Este método permite estudiar la variabilidad de la estimación de los
 coeficientes de regresión lineal.</p>
 <p>El método consiste en tomar una muestra con repetición de la data y
 con ella estimar el modelo. Los coeficientes estimados son guardados en
 un vector por cada estimador, al que se le obtiene la media y la
-desviación estandar.</p>
+desviación estándar.</p>
 <p></br></br></p>
 <pre class="r"><code>#-------------------------------------------------------------------------------
 library(boot)

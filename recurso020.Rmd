@@ -86,8 +86,8 @@ $$
 
 </br></br>
 
-<div class="content-box-yellow">
-### <span style="color:#FF7F00"> **Nota**</span>
+<div class="content-box-gray">
+### <span style="color:#686868"> **Nota**</span>
 
 Observe que en la matriz $\boldsymbol{\Sigma_y}$ los elementos:
 
@@ -113,7 +113,7 @@ $$
 
 <div class="content-box-gray">
 
-### <span style="color:#FF7F00"> **Resumen**</span>
+### <span style="color:686868"> **Resumen**</span>
 
 En resumen, la matriz de varianzas-covarianzas asociada a un vector aleatorio es una matriz:
 
@@ -149,8 +149,8 @@ Sean $\boldsymbol{A}$ una matriz $m\times n$ de constantes y $\boldsymbol{b}$ un
 
 </br></br>
 
-<div class="content-box-yellow">
-### <span style="color:#FF7F00"> **Nota**</span>
+<div class="content-box-gray">
+### <span style="color:#686868"> **Nota**</span>
 
 Observe que se conservan las propiedades de la esperanza y la varianza del caso univariado, por ejemplo.
 

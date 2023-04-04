@@ -19,20 +19,20 @@ Dentro de los indicadores más utilizado en la comparación de modelos están:
 
 </br></br>
 
-### **$R^2$** 
+### <span style="color:#034a94">**$R^2$**</span> 
 
-Coeficiente de determinación : mide que tanto se ajusta un modelo de regresión a los datos, es decir mide la prorción del total de la variación de $Y$ que es represenada por la variación de las variables regresoras ($X_1$, $X_2$, $\dots$, $X_k$) . Toma valor de cero cuando la regresión es una linea horizontal y el modelo está formado solo por el intercepto $\beta_0$. Toma el valor de 1 cuando todas las variables predictoras y la variable dependientes están en el mismo plano (una linea recta en el caso del MRLS). 
+Coeficiente de determinación : mide que tanto se ajusta un modelo de regresión a los datos, es decir mide la prorción del total de la variación de $Y$ que es representada por la variación de las variables regresoras ($X_1$, $X_2$, $\dots$, $X_k$) . Toma valor de cero cuando la regresión es una linea horizontal y el modelo está formado solo por el intercepto $\beta_0$. Toma el valor de 1 cuando todas las variables predictoras y la variable dependientes están en el mismo plano (una linea recta en el caso del MRLS). 
 
 </br></br>
 
-### **$R^2_{adj}$**
+### <span style="color:#034a94">**$R^2_{adj}$**</span>
 
 
 Coeficiente de determinación ajustado, corresponde a una versión ajustada de $R^2$, por tamaño de muestra y número de variables predictoras.  Permite detectar si agregar una predictora mejora o no el modelo de regresión. Además permite la comparación de modelos con diferentes tipos de predictoras y diferentes tamaños de muestra.
 
 </br></br>
 
-### **AIC**
+### <span style="color:#034a94">**AIC**</span>
 
 Criterio de información de Akaike.  es un indicador útil en la selección de modelos 
 
@@ -41,7 +41,7 @@ Donde $\widehat{L}$, es el valor máximo que toma la función de verosimilitud p
 
 </br></br>
 
-### **BIC**
+### <span style="color:#034a94">**BIC**</span>
 
 Criterio de información bayesiano o criterio de información de Schwarz, empleado en la selección de modelos, se basa en la información del valor máximo de la función de verosimilitud del modelo, incluyendo además del número de parámetros, el tamaño de la muestra $n$, para $n < 7$ 
 
@@ -51,8 +51,8 @@ Al comparar modelos, se prefiere al modelo con valor BIC más bajo.
 
 </br></br>
 
-<div class="content-box-yellow">
-### <span style="color:#FF7F00">**Nota**</span>
+<div class="content-box-gray">
+### <span style="color:#686868">**Nota**</span>
 
 
 Este criterio al igual que ACI  utilizan solo cuando la variable dependiente $Y$ es la misma en todos los modelos comparados
@@ -72,7 +72,7 @@ Este criterio al igual que ACI  utilizan solo cuando la variable dependiente $Y$
 
 </br></br>
 
-### **F**
+### <span style="color:#034a94">**F**</span>
 
 Estadístico F, construido a partir de la descomposición de la varianza de la variable dependiente $Y$ en la ANOVA, valida la existencia de por lo menos una variable independiente significativa. El valor de $F$ está asociado con el valor de $R^2$ del modelo, luego valores mas altos constituye un mayor ajuste del modelo a los datos
 
@@ -81,7 +81,9 @@ Estadístico F, construido a partir de la descomposición de la varianza de la v
 
 </br></br>
 
-### **RMSE**, raiz del error cuadrático medio, compara las estimaciones obtenidas contra los valores realies de la variable $Y$, permitiendo valorar el ajuste del modelo
+### <span style="color:#034a94">**RMSE**</span>
+
+Raiz del error cuadrático medio, compara las estimaciones obtenidas contra los valores realies de la variable $Y$, permitiendo valorar el ajuste del modelo
 
 $$RMSE = \sqrt{\dfrac{\sum_{i=1}^{n}(_i-\widehat{y}_1)^{2}}{n}}$$
 
@@ -89,7 +91,6 @@ $$RMSE = \sqrt{\dfrac{\sum_{i=1}^{n}(_i-\widehat{y}_1)^{2}}{n}}$$
 </br></br>
 
 
-<div class="content-box-yellow">
 ### <span style="color:#FF7F00">**Ejemplo**</span>
 
 ```{r, echo=FALSE}
@@ -121,7 +122,7 @@ modelsummary(
 
 ```
 
-</div>
+
 </br>
 
 En este caso el modelo 1 presenta el mejor ajuste
@@ -167,7 +168,7 @@ El procedimiento de prueba se resume en la siguiente tabla:
 
 </br></br>
 
-### **ANOVA con prueba de falta de ajuste en el modelo de RLM**
+### <span style="color:#034a94">**ANOVA con prueba de falta de ajuste en el modelo de RLM**</span>
                                
 </br>
 
@@ -314,17 +315,23 @@ Después de identificar las observaciones que están alejadas con respecto a los
 
 Para la evaluación se cuenta con las siguientes medidas:
 
-* **Distancia de Cook**.
+</br>
 
-* **Diagnóstico DFFITS**.
+#### <span style="color:#034a94">**Distancia de Cook**</span>
 
-* **Diagnóstico DFBETAS**.
+#### <span style="color:#034a94">**Diagnóstico DFFITS**</span>
 
-A continuación se presentan los diagnósticos para detectar observaciones influenciales.
+#### <span style="color:#034a94">**Diagnóstico DFBETAS**</span>
 
 </br>
 
-1. **Distancia de Cook:** es una medida de la distancia cuadrática entre,
+A continuación se presentan los diagnósticos para detectar observaciones influenciales.
+
+</br></br>
+
+#### <span style="color:#034a94"> 1. **Distancia de Cook:**</span> 
+
+Es una medida de la distancia cuadrática entre,
 el estimador de $\boldsymbol\beta$ por mínimos cuadrados basado en las $n$ observaciones, y el estimador de $\boldsymbol\beta$ obtenido eliminando la $i$-ésima observación, así:
 
 <div class="content-box-blue">
@@ -339,7 +346,7 @@ donde, $\boldsymbol{\widehat{\beta}}_{\left(i\right)}$ es el vector de parámetr
 
 
 <div class="content-box-gray">
-### <span style="color:#FF7F00"> **Notas**</span>
+### <span style="color:#686868"> **Notas**</span>
 
 * Si $D_i = f_{0.5, p, n - p}$ entonces al eliminar el punto $i$ se movería $\boldsymbol{\widehat{\beta}_{\left(i\right)}}$ hacia la frontera de una región de confianza aproximada del 50\% para $\boldsymbol{\beta}$, basándose en el conjunto completo de datos, lo cual es un desplazamiento grande e indica que el estimador por mínimos cuadrados es sensible al $i$-ésimo punto de datos.
 
@@ -349,7 +356,9 @@ donde, $\boldsymbol{\widehat{\beta}}_{\left(i\right)}$ es el vector de parámetr
 
 </br>
 
-2. **Diagnóstico DFFITS:** es el número de desviaciones estándar que el valor ajustado $\widehat{y}_i$ se mueve si la observación $i$ es omitida,
+#### <span style="color:#034a94">2. **Diagnóstico DFFITS:**</span> 
+
+Es el número de desviaciones estándar que el valor ajustado $\widehat{y}_i$ se mueve si la observación $i$ es omitida,
 
 <div class="content-box-blue">
 $$
@@ -364,7 +373,9 @@ donde, $\widehat{Y}_{\left(i\right)}$ es el $i$-ésimo valor ajustado obtenido c
 
 </br>
 
-3. **Diagnóstico DFBETAS:** indica cuánto cambia el $j$-ésimo coeficiente de regresión estimado $\widehat{\beta}_j$ en unidades de desviación estándar, si se omite la $i$-ésima observación,
+#### <span style="color:#034a94">3. **Diagnóstico DFBETAS:**</span> 
+
+Indica cuánto cambia el $j$-ésimo coeficiente de regresión estimado $\widehat{\beta}_j$ en unidades de desviación estándar, si se omite la $i$-ésima observación,
 
 
 <div class="content-box-blue">
@@ -378,7 +389,7 @@ Una observación será **influencial** si $\vert \text{DFBETAS}_{j\left(i\right)
 </br>
 
 <div class="content-box-gray">
-### <span style="color:#FF7F00"> **Nota**</span>
+### <span style="color:#686868"> **Nota**</span>
 
 Tanto los $D_i$, como los DFFITS y los DFBETAS se pueden afectar tanto por un error de ajuste grande como por un gran balanceo, por eso, los puntos que sean detectados por estos criterios deben ser investigados.
 

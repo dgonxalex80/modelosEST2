@@ -55,8 +55,8 @@ $$\left[\begin{array}{c} Y_1\\ Y_2\\ \vdots\\ Y_n\end{array}\right]_{n \times 1}
 
 <br/><br/>
 
-<div class="content-box-yellow">
-### <span style="color:#FF7F00"> **Nota**</span>
+<div class="content-box-gray">
+### <span style="color:#686868"> **Nota**</span>
 
 Los supuestos del modelo sobre los errores establecen que:
 

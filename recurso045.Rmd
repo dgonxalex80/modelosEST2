@@ -55,7 +55,7 @@ el cual tiene las siguientes propiedades:
 </br></br>
 
 <div class="content-box-gray">
-### <span style="color:#FF7F00"> **Resumen**</span>
+### <span style="color:#686868"> **Resumen**</span>
 
 $$\widehat{Y}_0 \sim N\left(E\left[ Y\vert\boldsymbol{x_0}\right], \sigma^2\,\boldsymbol{x_0}\left(\boldsymbol{X}'\boldsymbol{X}\right)^{-1}\boldsymbol{x_0}'\right)$$
 </div>
@@ -160,7 +160,7 @@ $$\widehat{Y}_0 \ \pm \ t_{\alpha/2, n - p} \,\text{se}(Y_0 - \widehat{Y}_0)$$
 </br></br>
 
 <div class="content-box-gray">
-### <span style="color:#FF7F00"> **Nota**</span>
+### <span style="color:#686868"> **Nota**</span>
 
 </br>
 
@@ -177,8 +177,8 @@ $$\widehat{Y}_0 \ \pm \ t_{\alpha/2, n - p} \,\text{se}(Y_0 - \widehat{Y}_0)$$
 </div>
 </br></br></br>
 
-<div class="content-box-yellow">
-### <span style="color:#FF7F00">**Precaución:**</span>
+<div class="content-box-gray">
+### <span style="color:#686868">**Nota**</span>
 
 </br>
 Deben evitarse las extrapolaciones por fuera del rango de experimentación en el espacio de las predictoras, para lo cual no basta con evaluar si cada valor componente del vector $\boldsymbol{x_0}$ se encuentra dentro del rango usado (u observado) para la correspondiente predictora, sino que es necesario evaluar si $x_0$ pertenece a la región de observación conjunta.
