@@ -22,7 +22,7 @@ Algunas de las causas más comunes de la multicolinealidad son:
 
 </br>
 
-1. <span style="color:#034a94">**El método de recolección de los datos.**</spam>, muestras recogidas en un rango reducido de valores.
+1. <span style="color:#034a94">**El método de recolección de los datos.**</span>, muestras recogidas en un rango reducido de valores.
 
 ```{r, echo = F, fig.align = 'center', fig.height = 6, fig.width = 6, out.width = '50%'}
 #data3.1 <- read_excel("data-ex-3-1.xls")[, -1]

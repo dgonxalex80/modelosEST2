@@ -137,7 +137,7 @@ Con esto podemos hallar los siguientes resultados:
 
 </br></br></br>
 
-## <span style="color:#034a94">**IP del ($\boldsymbol{1} - \boldsymbol{\alpha}$)100% para un valor futuro $\boldsymbol{Y_0}$**</span>
+## <span style="color:#034a94">**IC del ($\boldsymbol{1} - \boldsymbol{\alpha}$)100% para un valor futuro $\boldsymbol{Y_0}$**</span>
   
 </br>
 
