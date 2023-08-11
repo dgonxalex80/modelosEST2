@@ -365,3 +365,8 @@ Si $\boldsymbol{\Sigma_y} = \sigma^2\boldsymbol{I}$, entonces $\boldsymbol{U}$ y
 
 
 Los anteriores resultados se utilizan en la construcción de la estimación por MCO y las propiedades de los estimadores, la matriz de varianza covarianzas de los errores y la sus respectivas inferencias.
+
+
+
+
+

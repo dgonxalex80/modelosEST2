@@ -35,6 +35,7 @@ La magnitud de este indicador es numérico y dependiendo las caracteristicas de 
 
 * **Coeficiente de Incluido de Goodman y Kruskal** : Utilizado para medir la fuerza y dirección de la asociación entre dos variables categóricas ordinales.
 
+</br></br>
 
 # <span style="color:#034a94">**Exploración de posibles asociaciones**</span>
 

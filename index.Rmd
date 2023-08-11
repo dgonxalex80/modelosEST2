@@ -32,4 +32,9 @@ knitr::include_graphics("img/banner_presentacion.png")
 En esta unidad se presentan los principales conceptos del **Modelo de Regresión Lineal Múltiple** (RLM), su estructura en forma matricial, estimación por el método de Mínimos Cuadrados Ordinarios (MCO), las propiedades de los estimadores, los supuestos que lo rigen, la validación de los mismos, inferencia tanto para los estimadores como las predicciones y pronósticos de la variable dependiente, el problema de la multicolinealidad y el código en R relacionado con las anteriores estimaciones y validaciones.
 
 
+Estarémos utilizando varios conceptos y métodos estadiísticos que nos permita un manejo adecuado del análisis de regresión lineal
 
+
+```{r, echo=FALSE, out.width="100%", fig.align = "center"}
+knitr::include_graphics("img/nube1.png")
+```
