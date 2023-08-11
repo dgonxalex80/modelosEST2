@@ -6,10 +6,65 @@ css: style.css
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-library(paqueteMOD)
+# install.packages("devtools") # solo una vez
+# devtools::install_github("dgonxalex80/paqueteMODELOS", force = TRUE)
+library(paqueteMODELOS)
 data("creditos")
 
 ```
+
+</br></br>
+
+Antes de empezar revicemos el concepto de estimador y sus propiedades
+
+</br>
+
+## <span style="color:#034a94">**Estimador estadístico**</span>
+
+Es una función de los valores obtenidos en una muestra que se emplea para encontrar una aproximación a un parámetro población desconocido. Este proceso se puede realizarse de manera puntual o por intervalos de confianza. Los estimadores se represntan en general por  $\widehat{\theta}$ y su respectivo parámetro como $\theta$.   
+
+<br/>
+
+Ahora como los resultados obtenidos proceden de una muestra (la base de datos), hace que el valor del estimador encontrado sea diferente para muestras diferentes, lo cual hace que el estimador se convierta en una variable aleatoria que se puede caracterizar por una modelo de probabilidad (en el caso de los $\widehat{\beta}_{i}$por lo general t-Student), bajo el supuesto de que los errores tengan distribución normal
+
+</br></br>
+
+## <span style="color:#034a94">**Propidedades de los estimadores**</span>
+
+Dentro de las princopales propiedades de los estimadores
+
+</br>
+
+###  <span style="color:#FF7F00"> **Insesgadez**</span>
+
+Un estimador es insesgado cuando su valor esperado es igual al parametro :
+$$E\Big[\widehat{\beta}_{i}\Big] = \beta_{i} $$
+
+</br>
+
+### <span style="color:#FF7F00"> **Consistencia**</span>
+
+Cuando un estimador es sesgado, es decir que su valor esperado no coincide con el parámetro, puede tener la propiedad de consistente, que ocurre cuando al aumentar el tamaño de la miestra el estimador se convierte en insesgado como por ejemplo:
+
+$$s^{2} = \dfrac{\sum_{i=1}^{n} (x_{1}- \bar{x})² }{n}$$
+En este caso se puede demostrar que 
+
+
+$$E[s²] = \dfrac{(n-1) \sigma²}{n}$$
+El termino que genera el sesgo es : $(n-1)/n$, el cual tiende a 1 cuando $n$ es grade, haciendo que el sesgo desaparesca
+
+
+</br>
+
+### <span style="color:#FF7F00"> **Eficiencia**</span>
+
+Es el estimador que tiene la varianza mas baja al compararlo con otros estimadores, todos insesgados
+
+</br>
+
+### <span style="color:#FF7F00"> **Robustez**</span>
+
+Es aquel estimador que sigue siendo insesgado a pesar de contener datos atípicos
 
 </br></br>
 

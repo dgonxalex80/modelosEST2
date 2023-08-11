@@ -17,7 +17,26 @@ c4="#686868"
 
 ```
 
-</br></br></br>
+</br></br>
+
+Es importante tener un lenguaje simple pero potente para presentar y desarrollar los temas relacionados con MRLM, este lenguaje lo suministra el **algebra lineal**, partiendo de una base de datos (matriz de datos) se conforman un sistema de $n$ ecuaciones con $k$ incognitas que se presentan a continuación :
+
+
+\begin{align*}
+y_{1} & = & \beta_{0}  + \beta_{1} x_{11} +  \beta_{2} x_{12}+ \ldots \ldots + \beta_{k} x_{1k} + \epsilon_{1} \\
+y_{2} & = & \beta_{0}  + \beta_{1} x_{21} +  \beta_{2} x_{22}+ \ldots \ldots+ \beta_{k} x_{2k} + \epsilon_{2} \\
+\vdots  & &  \vdots \hspace{1cm} \vdots \hspace{1cm} \vdots \hspace{1cm} \vdots \hspace{1cm} \vdots\hspace{1cm} \vdots \hspace{1cm} \vdots \\
+
+y_{n} & = & \beta_{0}  + \beta_{1} x_{n1} +  \beta_{2} x_{n2}+ \ldots \ldots+ \beta_{k} x_{nk} + \epsilon_{n} \\
+\end{align*}
+
+
+
+
+</br>
+
+
+
 
 # <span style="color:#034a94">**Notación**</span> 
 

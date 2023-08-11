@@ -6,22 +6,178 @@ css: style.css
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-library(paqueteMOD)
+library(paqueteMODELOS)
 data("creditos")
 
 ```
 
 </br></br>
 
-A continuación se revisan una serie de propiedades y conceptos de algebra relacionados con vectores y matrices, importantes para entender la estimación de MCO y los procesos de inferencia estadiística bajo el enfoque matricial.
+A continuación se revisan una serie de propiedades y conceptos de álgebra relacionados con vectores y matrices, importantes para entender la estimación de **MCO** y los procesos de inferencia estadística bajo el enfoque matricial.
 
 </br></br>
 
 # <span style="color:#034a94"> **Algunas definiciones básicas en teoría matricial**</span>
 
+</br></br>
+
+### <span style="color:#FF7F00"> **Vector**</span> 
+
+Un vector es un conjunto de valores que conforman un arreglo de números que tienen como características principales dimensión, magnitud y dirección para un espacio multidimensional. Se representan por lo general con letras minúsculas 
+
+$$x = [x_1,x_2,x_3,\dots , x_n]$$ 
+
+La dimensión o tamaño lo determina el número de componentes $dim(x)= 1 \times n$. 
+
+Las principales propiedades y operaciones de los vectores son:
+
+</br>
+
+####  <span style="color:#FF7F00"> **Suma de vectores**</span> 
+
+La suma de dos vectores **u** y **v** se hace elemento a elemento correspondientes $u + v = [u_1+v_1, u_2 + v_2, \dots, u_n+v_n]$, y posee la siguientes propiedades:
+
+* conmutatica : $u +v = v + u$
+* asociativa : $(u + v) + w = u + (v + w)$
+
+</br>
+
+#### <span style="color:#FF7F00"> **Producto escalar**</span>  
+
+El producto de un vector por una constante $c$ se realiza multiplicando todos los elementos del vector por la constante : $cv = [cv_1, cv_2, \dots, cv_n]$  
+
+</br>
+
+* <span style="color:#FF7F00"> **vector nulo**</span>: $0$ , es un vector en el cual todos sus componentes son ceros. Como propiedades se tienen que la suma de cualquier vector con 0 da como resultado el mismo vector : $v + 0 = v$. 
+* 
+
+</br>
+
+### <span style="color:#FF7F00"> **Vectores linealmente independientes**</span> 
+
+Un conjunto de vectores $v_1, v_2, \dots v_k$ se consideran linealmente independientes si ninguno se puede escribir como una combinación lineal de los demás vectores, como por ejemplo : $v_1 = [1,0,0]$, $v_2 = [0,1,0]$ y $v_3 = [0,0,1]$, los cuales constituyen una base 
+
+</br>
+
+### <span style="color:#FF7F00"> **producto punto entre dos vectores**</span> 
+
+El producto punto entre dos vectores $u.v = [u_1v_1 + u_2v_2 + \dots + u_nv_n ]$ 
+
+</br></br>
+
+### <span style="color:#FF7F00"> **Matrices**</span>
+
+Una matriz es un arreglo de números organizados por filas y columnas y se emplean en la representación de sistemas de ecuaciones lineales y transformaciones lineales
+
+$$
+\begin{bmatrix}
+	a_{11} & a_{12} & \ldots & a_{1n} \\
+	a_{21} & a_{22} & \ldots & a_{2n} \\
+	\vdots & \vdots & \ddots & \vdots \\
+	a_{m1} & a_{m2} & \ldots & a_{mn}
+\end{bmatrix}
+$$
+
+</br>
+
+#### <span style="color:#FF7F00"> **Matriz cuadrada**</span> 
+
+Es la matriz que tiene el mismo número de filas y columnas 
+
+$$
+\begin{bmatrix}
+	a_{11} & a_{12} & \ldots & a_{1n} \\
+	a_{21} & a_{22} & \ldots & a_{2n} \\
+	\vdots & \vdots & \ddots & \vdots \\
+	a_{n1} & a_{n2} & \ldots & a_{nn}
+\end{bmatrix}
+$$
+
+</br>
+
+#### <span style="color:#FF7F00"> **Matriz Singular**</span> 
+
+Una matriz es singular si su determinante es igual a cero. Este tipo de matrices no tienen una matriz inversa y puede indicar que el sistema de ecuaciones lineales asociado tiene infinitas soluciones o ninguna solución. Por ejemplo la siguiente matriz $A$ es singular: 
+
+$$
+A=
+\begin{bmatrix}
+	1 & 2 & 3 \\
+	2 & 4 & 6 \\
+	1 & 3 & 4
+\end{bmatrix} 
+$$
+
+Esta matriz presenta dependencia en dos de sus filas: $\hspace{1cm}2.[1,2,3] = [2,4,6] \hspace{1cm}$ lo que hace que su determinante sea cero
+
+</br>
+
+#### <span style="color:#FF7F00"> **Matriz Identidad**</span> $I$ 
+
+Una matriz cuadrada en la que todos los elementos fuera de la diagonal principal son cero y todos los elementos en la diagonal principal son unos. Cuando una matriz se multiplica por su matriz identidad correspondiente, el resultado es la matriz original. Por ejemplo $I_3$ será: 
+
+$$
+I_3 =
+\begin{bmatrix}
+	1 & 0 & 0 \\
+	0 & 1 & 0 \\
+	0 & 0 & 1
+\end{bmatrix} 
+$$
+
+</br>
+
+#### <span style="color:#FF7F00"> **Matriz Transpuesta**</span> 
+
+La matriz transpuesta de una matriz $A$ se obtiene intercambiando filas por columnas. Si la matriz $A$ es de dimensión $m \times n$, entonces su matriz transpuesta $A^T$ será de dimensión $n \times m$, por ejemplo: 
+
+$$
+A=
+\begin{bmatrix}
+	1 & 2 & 3 & 4 \\
+	5 & 6 & 7 & 8 \\
+	9 & 10 & 11 & 12
+\end{bmatrix} 
+\hspace{1cm}
+A^{T}= \begin{bmatrix}
+	1 & 5 & 9 \\
+	2 & 6 & 10 \\
+	3 & 7 & 11 \\
+	4 & 8 & 12
+\end{bmatrix}
+$$
+
+</br>
+
+#### <span style="color:#FF7F00"> **Matriz Inversa**</span>
+
+Una matriz cuadrada $A$ tiene una matriz inversa $A^{-1}$, si el producto de $A$ con $A^{-1}$ es igual a la matriz identidad $I$. La matriz inversa solo existe si el determinante de A no es cero.
+
+$$
+A=
+\begin{bmatrix}
+	2 & 1 & 3 \\
+	0 & 1 & -1 \\
+	1 & 0 & 2
+\end{bmatrix} 
+\hspace{1cm}
+A^{-1} = \begin{bmatrix}
+	1 & -1 & -1 \\
+	-1 & 3 & 1 \\
+	0 & -2 & 1
+\end{bmatrix} 
+$$
+
+</br></br>
+
+## <span style="color:#034A94"> **Otras propiedades importantes** </span>
+
+A partir de las anteriores deficiniciones podemos resumir :
+
 </br>
 
 <div class="content-box-blue">
+
 
 Sean : 
 
@@ -29,15 +185,15 @@ Sean :
 
 $$ 
 A= \left[\begin{array}{ccccc} a_{11} & a_{12} & \cdots & a_{1n}\\ 
-                           a_{21} & a_{22} & \cdots & a_{2n}\\ 
-                           \vdots & \vdots & \vdots & \cdots \\ 
-                           a_{n1} & a_{n2} & \cdots & a_{nn}\end{array}\right]
+	a_{21} & a_{22} & \cdots & a_{2n}\\ 
+	\vdots & \vdots & \vdots & \cdots \\ 
+	a_{n1} & a_{n2} & \cdots & a_{nn}\end{array}\right]
 \hspace{1cm}
 B= \left[\begin{array}{ccccc} b_{11} & b_{12} & \cdots & b_{1n}\\ 
-                              b_{21} & b_{22} & \cdots & b_{2n}\\ 
-                              \vdots & \vdots & \vdots & \cdots \\
-                              \vdots & \vdots & \vdots & \cdots \\
-                              b_{m1} & b_{m2} & \cdots & b_{mn}\end{array}\right]
+	b_{21} & b_{22} & \cdots & b_{2n}\\ 
+	\vdots & \vdots & \vdots & \cdots \\
+	\vdots & \vdots & \vdots & \cdots \\
+	b_{m1} & b_{m2} & \cdots & b_{mn}\end{array}\right]
 $$
 
 
@@ -58,9 +214,9 @@ $$
 
 $$
 I_n = \left[\begin{array}{ccccc} 1 & 0 & \cdots & 0\\ 
-                              0 & 1 & \cdots & 0\\ 
-                              \vdots & \vdots & \vdots & \cdots \\ 
-                              0 & 0 & \cdots & 1\end{array}\right]
+	0 & 1 & \cdots & 0\\ 
+	\vdots & \vdots & \vdots & \cdots \\ 
+	0 & 0 & \cdots & 1\end{array}\right]
 $$
 
 </br>
@@ -92,8 +248,8 @@ se le llama forma cuadrática de $\boldsymbol{x}$, donde $a_{ij}$ es la $ij$-és
 </br>
 
 6. **Matriz definida positiva y semidefinida positiva:** la matriz $\boldsymbol{A}$ se dice que es:
-   a) Definida positiva, si $\boldsymbol{x}'\boldsymbol{Ax} > 0,\; \forall\boldsymbol{x}$.
-   a) Semidefinida positiva si $\boldsymbol{x}'\boldsymbol{Ax} \geq 0,\; \forall\boldsymbol{x}$.
+a) Definida positiva, si $\boldsymbol{x}'\boldsymbol{Ax} > 0,\; \forall\boldsymbol{x}$.
+a) Semidefinida positiva si $\boldsymbol{x}'\boldsymbol{Ax} \geq 0,\; \forall\boldsymbol{x}$.
 
 </div>
 
@@ -153,7 +309,7 @@ $$
 \boldsymbol{U} \sim \chi^2_{p, \lambda}
 $$
 
-   donde, $\lambda = \boldsymbol{\mu_y}'\boldsymbol{A\mu_y}$ es el parámetro de no centralidad de la distribución chi-cuadrado. 
+donde, $\lambda = \boldsymbol{\mu_y}'\boldsymbol{A\mu_y}$ es el parámetro de no centralidad de la distribución chi-cuadrado. 
 
 </div>
 
@@ -166,7 +322,7 @@ $$
 \frac{\boldsymbol{U}}{\sigma^2}\sim \chi^2_{p,\lambda}
 $$
 
-   donde, $\lambda = \boldsymbol{\mu_y}'\boldsymbol{A\mu_y}/\sigma^2$.
+donde, $\lambda = \boldsymbol{\mu_y}'\boldsymbol{A\mu_y}/\sigma^2$.
 
 </div>
 
@@ -178,7 +334,7 @@ $$
 \boldsymbol{B\Sigma_yA} = \boldsymbol{0}
 $$
 
-   donde $\boldsymbol{0}$ es la matriz nula de orden $m\times n$.
+donde $\boldsymbol{0}$ es la matriz nula de orden $m\times n$.
 
 </div>
 

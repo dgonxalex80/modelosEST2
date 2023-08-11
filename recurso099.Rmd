@@ -7,7 +7,7 @@ css: style.css
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, comment = NA)
 
-library(paqueteMOD)
+library(paqueteMODELOS)
 data("arboles1")
 arboles1$D1 = as.numeric(arboles1$mg=="GENOTIPO_2")
 arboles1$D2 = as.numeric(arboles1$finca=="FINCA_2")
@@ -38,7 +38,7 @@ En esta etapa se realiza una exploración de la data, tipo de variables, datos f
 </br>
 
 ```{r, warning=FALSE, message=FALSE}
-library(paqueteMOD)
+library(paqueteMODELOS)
 library(tidyverse)
 library(modelsummary)
 data("arboles1")

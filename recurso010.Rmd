@@ -7,13 +7,34 @@ css: style.css
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, comment = NA)
-#devtools::install_github("dgonxalex80/paqueteMOD", force = TRUE) # descarga paquete
-library(paqueteMOD)
+# devtools::install_github("dgonxalex80/paqueteMODELOS", force = TRUE) # descarga paquete
+library(paqueteMODELOS)
 data("creditos")
 
 ```
 
 </br></br>
+
+# <span style="color:#034a94">**Correlación**</span>
+
+La correlación entre dos variables es un concepto fundamental en ciencia de datos, pues permite medir el grado de asociación que entre un par de variables que permite la identificación de patrones, tendencias y asociaciones en conjunto de datos. Permite identifica las relaciones a traves de los cambios que se producen o no sobre una variables cuando otra cambia. 
+
+La magnitud de este indicador es numérico y dependiendo las caracteristicas de las variables (tipo y escala de medisión) son utilizados diversos coeficientes como son:
+
+* **Coeficiente de Correlación de Pearson** : Mide la relación lineal entre dos variables continuas. Varía entre -1 y 1, con 0 indicando una correlación nula.
+
+* **Coeficiente de Correlación de Spearman**: o correlación de rango de Spearman, se utiliza para medir la relación entre dos variables en escalas de intervalo, principalmente producidas por la cuantificación de un cuestionario que mide una caracteristica cualitativa a traves de la suma de puntuaciones obtenidas de las respuestas dadas. Utilizan los rangos de los valores para calcular la correlación.
+
+* **Coeficiente de Correlación de Kendall**: es similar al coeficiente de Spearman, mide la concordancia entre las clasificaciones de dos variables, independientemente del valor numérico absoluto.
+
+* **Coeficiente de Correlación Parcial** : Utilizado para medir la relación entre dos variables después de haber eliminado el efecto de otras variables relacionadas, lo que permite examinar la asociación única entre esas dos variables.
+
+* **Coeficiente de Concordancia**: Usado para medir la similitud o acuerdo entre dos clasificadores o evaluadores en relación con una variable categórica.
+
+* **Coeficiente de Asociación**: En el contexto de tablas de contingencia, como las utilizadas en análisis de datos categóricos, este coeficiente mide la asociación o dependencia entre dos variables categóricas.
+
+* **Coeficiente de Incluido de Goodman y Kruskal** : Utilizado para medir la fuerza y dirección de la asociación entre dos variables categóricas ordinales.
+
 
 # <span style="color:#034a94">**Exploración de posibles asociaciones**</span>
 
@@ -96,7 +117,7 @@ La información contenida en la matriz de correlaciones permite valorar la magni
 
 <center>
 ```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.align='center'}
-library(paqueteMOD)
+library(paqueteMODELOS)
 data("ausentismo")
 data=ausentismo[,c(2,5,6,7)]
 library(GGally)
@@ -140,7 +161,7 @@ Tambien es importante notar que entre las variables independientes existen fuert
 
 ### <span style="color:#686868"> **Nota**</span>
 
-Las variables independientes  deben de ser independientes unas de otras, por tanto sus correlaciones deberán ser no significativas al realizar pruebas de hipótesis ( $Ho: \rho = 0$).
+Las variables denominadas independientes  deben de ser independientes unas de otras, por tanto sus correlaciones deberán ser no significativas al realizar pruebas de hipótesis ( $Ho: \rho = 0$).
 
 En caso de haber una relación perfecta entre dos variables regresoras ($X_{1} = aX_{2}$), el método MCO no tendrá solución (problema de la multicolinealidad perfecta).
 

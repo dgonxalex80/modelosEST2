@@ -13,7 +13,7 @@
 
 <title> Propiedades de los estimadores MCO</title>
 
-<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.23/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
@@ -385,6 +385,70 @@ $(document).ready(function () {
 
 
 <p></br></br></p>
+<p>Antes de empezar revicemos el concepto de estimador y sus
+propiedades</p>
+<p></br></p>
+<div id="estimador-estadístico" class="section level2">
+<h2><span style="color:#034a94"><strong>Estimador
+estadístico</strong></span></h2>
+<p>Es una función de los valores obtenidos en una muestra que se emplea
+para encontrar una aproximación a un parámetro población desconocido.
+Este proceso se puede realizarse de manera puntual o por intervalos de
+confianza. Los estimadores se represntan en general por <span
+class="math inline">\(\widehat{\theta}\)</span> y su respectivo
+parámetro como <span class="math inline">\(\theta\)</span>.</p>
+<p><br/></p>
+<p>Ahora como los resultados obtenidos proceden de una muestra (la base
+de datos), hace que el valor del estimador encontrado sea diferente para
+muestras diferentes, lo cual hace que el estimador se convierta en una
+variable aleatoria que se puede caracterizar por una modelo de
+probabilidad (en el caso de los <span
+class="math inline">\(\widehat{\beta}_{i}\)</span>por lo general
+t-Student), bajo el supuesto de que los errores tengan distribución
+normal</p>
+<p></br></br></p>
+</div>
+<div id="propidedades-de-los-estimadores" class="section level2">
+<h2><span style="color:#034a94"><strong>Propidedades de los
+estimadores</strong></span></h2>
+<p>Dentro de las princopales propiedades de los estimadores</p>
+<p></br></p>
+<div id="insesgadez" class="section level3">
+<h3><span style="color:#FF7F00"> <strong>Insesgadez</strong></span></h3>
+<p>Un estimador es insesgado cuando su valor esperado es igual al
+parametro : <span class="math display">\[E\Big[\widehat{\beta}_{i}\Big]
+= \beta_{i} \]</span></p>
+<p></br></p>
+</div>
+<div id="consistencia" class="section level3">
+<h3><span style="color:#FF7F00">
+<strong>Consistencia</strong></span></h3>
+<p>Cuando un estimador es sesgado, es decir que su valor esperado no
+coincide con el parámetro, puede tener la propiedad de consistente, que
+ocurre cuando al aumentar el tamaño de la miestra el estimador se
+convierte en insesgado como por ejemplo:</p>
+<p><span class="math display">\[s^{2} = \dfrac{\sum_{i=1}^{n} (x_{1}-
+\bar{x})² }{n}\]</span> En este caso se puede demostrar que</p>
+<p><span class="math display">\[E[s²] = \dfrac{(n-1)
+\sigma²}{n}\]</span> El termino que genera el sesgo es : <span
+class="math inline">\((n-1)/n\)</span>, el cual tiende a 1 cuando <span
+class="math inline">\(n\)</span> es grade, haciendo que el sesgo
+desaparesca</p>
+<p></br></p>
+</div>
+<div id="eficiencia" class="section level3">
+<h3><span style="color:#FF7F00"> <strong>Eficiencia</strong></span></h3>
+<p>Es el estimador que tiene la varianza mas baja al compararlo con
+otros estimadores, todos insesgados</p>
+<p></br></p>
+</div>
+<div id="robustez" class="section level3">
+<h3><span style="color:#FF7F00"> <strong>Robustez</strong></span></h3>
+<p>Es aquel estimador que sigue siendo insesgado a pesar de contener
+datos atípicos</p>
+<p></br></br></p>
+</div>
+</div>
 <div id="algunas-propiedades-de-widehatbeta" class="section level1">
 <h1><span style="color:#034a94"><strong>Algunas propiedades de <span
 class="math inline">\(\widehat{\beta}\)</span></strong></span></h1>

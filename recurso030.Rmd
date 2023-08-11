@@ -18,6 +18,15 @@ c4="#686868"
 
 <br/><br/>
 
+El objetivo principal del método de mínimos cuadrados ordinarios es poder estimar los valores correspondientes a los parámetros ($\beta_i$) utilizando para ello un modelo de optimización.
+
+Aunque se trata de un método matemático de optimización (minimizar los errores), dado que los datos proceden de una muestra y que en el sistema de ecuaciones se incorpora el termino error ($\epsilon_{i}$) que posee caracteristicas estadísticas, se pueden realizar inferencias (intervalos de confianza y pruebas de hipótesis) al rededor de los estimadores encontrados y de los valores encontrados a partir del modelo estimado.
+
+
+
+<br/><br/>
+
+
 # <span style="color:#034a94">**Estimación de parámetros **</span>
 
 <br/>

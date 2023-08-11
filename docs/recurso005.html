@@ -13,7 +13,7 @@
 
 <title> Modelo de Regresión Lineal Múltiple</title>
 
-<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.23/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
@@ -385,13 +385,26 @@ de Regresión Lineal Múltiple</strong></span></h1>
 
 
 <p></br></br></p>
-<p>En análisis de regresión usualmente se utiliza más de una variable
-predictora <span class="math inline">\(X_1, X_2, ....\)</span>, para
-modelar el valor de una variable respuesta de interés <span
-class="math inline">\(Y\)</span>. Si la relación funcional entre la
-respuesta <span class="math inline">\(Y\)</span> y las variables
-predictoras es lineal en los parámetros, se llega al caso de la
-regresión lineal múltiple (<strong>RLM</strong>).</p>
+<p>El <strong>modelo de regresión lineal</strong> es una técnica
+fundamental en el campo de la ciencia de datos que permite el
+modelamiento y análisis relaciones complejas entre múltiples variables.
+Cuando el model está conformado por una variable dependiente (<span
+class="math inline">\(Y\)</span>) y una variable independiente (<span
+class="math inline">\(X\)</span>) se denomina <strong>modelo de
+regresión lineal simple</strong> (MRLS), a diferencia cuando el número
+de variables independientes esta conformado por mas de dos (<span
+class="math inline">\(X_1, X_2, \dots X_p\)</span>) se le denomina
+<strong>modelo de regesión lineal multiple</strong> (MRLM).</p>
+<p><br/></p>
+<p>Dentro de sus principales aplicaciones están:</p>
+<ul>
+<li>Análisis de relaciones entre variables, mediante la estimación de
+parametros que miden los cambios producidos en una variables como efecto
+del cambio en otra variable</li>
+<li>Predicción de una variables mediante el conocimiento de otras</li>
+<li>Control de variables mediante la inclusión de variables de control
+para controlar el efecto de eventos especiales</li>
+</ul>
 <p></br></p>
 <p>En el ajuste y análisis de este modelo se obtienen resultados que son
 extensiones de los que se revisaron para el regresión lineal simple.</p>
@@ -542,7 +555,7 @@ class="section level2">
 <h2><span style="color:#034a94"><strong>Tipos de variables y de efectos
 en los modelos</strong></span></h2>
 <p></br></p>
-<p>Las variables predictoras (<span
+<p>Las variables <strong>predictoras</strong> (<span
 class="math inline">\(X_{i}\)</span>) pueden ser:</p>
 <ul>
 <li><p><strong>Cuantitativas</strong>, caso en el cual se supone se
@@ -558,8 +571,8 @@ class="math inline">\(X_j^{4}\)</span>, <span
 class="math inline">\(\dots\)</span></p></li>
 </ul>
 <p></br></p>
-<p>La variable dependiente o respuesta se considera en todos los casos
-como una variable cuantitativa</p>
+<p>La variable <strong>dependiente</strong> o <strong>respuesta</strong>
+se considera en todos los casos como una variable cuantitativa</p>
 <p></br></br></p>
 <p>Todos estos casos serán abordados en esta Unidad.</p>
 </div>

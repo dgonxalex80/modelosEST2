@@ -6,14 +6,23 @@ css: style.css
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-library(paqueteMOD)
+library(paqueteMODELOS)
 data("creditos")
 
 ```
 
 </br></br>
 
-En análisis de regresión usualmente se utiliza más de una variable predictora $X_1, X_2, ....$,  para modelar el valor de una variable respuesta de interés $Y$. Si la relación funcional entre la respuesta $Y$ y las variables predictoras es lineal en los parámetros, se llega al caso de la regresión lineal múltiple (**RLM**).
+El **modelo de regresión lineal** es una técnica fundamental en el campo de la ciencia de datos que permite el modelamiento y análisis relaciones complejas entre múltiples variables. Cuando el model está conformado por una variable dependiente ($Y$) y una variable independiente ($X$) se denomina **modelo de regresión lineal simple** (MRLS), a diferencia cuando el número de variables independientes esta conformado por mas de dos ($X_1, X_2, \dots X_p$) se le denomina **modelo de regesión lineal multiple** (MRLM).
+
+<br/>
+
+Dentro de sus principales aplicaciones están:
+
+* Análisis de relaciones entre variables, mediante la estimación de parametros que miden los cambios producidos en una variables como efecto del cambio en otra variable
+* Predicción de una variables mediante el conocimiento de otras
+* Control de variables mediante la inclusión de variables de control para controlar el efecto de eventos especiales
+
 
 </br>
 
@@ -141,7 +150,7 @@ El término *modelo lineal* significa que el modelo es lineal en los parámetros
 
 </br>
 
-Las variables predictoras ($X_{i}$) pueden ser:
+Las variables **predictoras** ($X_{i}$) pueden ser:
 
 * **Cuantitativas**, caso en el cual se supone se miden sin error (o el error es despreciable). 
 
@@ -151,7 +160,7 @@ Las variables predictoras ($X_{i}$) pueden ser:
 
 </br>
 
-La variable dependiente o respuesta se considera en todos los casos como una variable cuantitativa
+La variable **dependiente** o **respuesta** se considera en todos los casos como una variable cuantitativa
 
 </br></br>
 

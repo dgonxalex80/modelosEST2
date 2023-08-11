@@ -8,6 +8,8 @@ css: style.css
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, comment = NA)
 library(summarytools)
+# install.packages("devtools") # solo una vez
+# devtools::install_github("dgonxalex80/paqueteMODELOS", force = TRUE)
 
 # colores
 c1="#FF7F00"

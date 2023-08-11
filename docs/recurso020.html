@@ -14,7 +14,7 @@
 
 <title> Notación matricial</title>
 
-<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.23/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
@@ -386,7 +386,27 @@ $(document).ready(function () {
 </div>
 
 
-<p></br></br></br></p>
+<p></br></br></p>
+<p>Es importante tener un lenguaje simple pero potente para presentar y
+desarrollar los temas relacionados con MRLM, este lenguaje lo suministra
+el <strong>algebra lineal</strong>, partiendo de una base de datos
+(matriz de datos) se conforman un sistema de <span
+class="math inline">\(n\)</span> ecuaciones con <span
+class="math inline">\(k\)</span> incognitas que se presentan a
+continuación :</p>
+<p><span class="math display">\[\begin{align*}
+y_{1} &amp; = &amp; \beta_{0}  + \beta_{1} x_{11} +  \beta_{2} x_{12}+
+\ldots \ldots + \beta_{k} x_{1k} + \epsilon_{1} \\
+y_{2} &amp; = &amp; \beta_{0}  + \beta_{1} x_{21} +  \beta_{2} x_{22}+
+\ldots \ldots+ \beta_{k} x_{2k} + \epsilon_{2} \\
+\vdots  &amp; &amp;  \vdots \hspace{1cm} \vdots \hspace{1cm} \vdots
+\hspace{1cm} \vdots \hspace{1cm} \vdots\hspace{1cm} \vdots \hspace{1cm}
+\vdots \\
+
+y_{n} &amp; = &amp; \beta_{0}  + \beta_{1} x_{n1} +  \beta_{2} x_{n2}+
+\ldots \ldots+ \beta_{k} x_{nk} + \epsilon_{n} \\
+\end{align*}\]</span></p>
+<p></br></p>
 <div id="notación" class="section level1">
 <h1><span style="color:#034a94"><strong>Notación</strong></span></h1>
 <p>Para facilitar la notación y el desarrollo de algunas pruebas se
