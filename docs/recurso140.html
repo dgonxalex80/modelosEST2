@@ -32,6 +32,14 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<link href="site_libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="site_libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="site_libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="site_libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="site_libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="site_libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="site_libs/leaflet-binding-2.1.2/leaflet.js"></script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -389,96 +397,26 @@ Mapa</strong></span></h1>
 la ciudad de Cali, teniendo como base el archivo cali.shp que debe estar
 acompañado de otros archivos contenidos en la carpeta comprimidad
 cali.zip</p>
-<div id="paso1-cargar-archivo-cali.shp" class="section level3">
-<h3><span style="color:#034A94"><strong>Paso1 : Cargar archivo
-cali.shp</strong></span></h3>
-<pre class="r"><code>library(raster)
-library(sf)
-library(tmap)
+<pre class="r"><code># install.packages(&quot;leaflet&quot;)
+library(leaflet)
 
-cali=shapefile(&quot;map/cali/cali.shp&quot;)</code></pre>
-<p></br></br></p>
-</div>
-<div id="paso-2-construir-mapa-de-cali" class="section level3">
-<h3><span style="color:#034A94"><strong>Paso 2 : Construir mapa de
-Cali</strong></span></h3>
-<pre class="r"><code>cali.tmap = tm_shape(cali) +  tm_polygons()
-# cali.tmap  # mapa</code></pre>
-<p></br></br></p>
-</div>
-<div
-id="paso-3-crear-conjunto-de-puntos-a-marcar-en-mapa-.-coordenadas-de-latitud-y-de-longitud-en-data.frame"
-class="section level3">
-<h3><span style="color:#034A94"><strong>Paso 3 : Crear conjunto de
-puntos a marcar en mapa . Coordenadas de latitud y de longitud en
-data.frame</strong></span></h3>
-<pre class="r"><code>oferta=data.frame(lat=c(3.43382,     3.43369,   3.42566,      3.435,   3.45891),
-                  long=c(-76.51168, -76.51237, -76.51737,    -76.54,  -76.5135))
+oferta &lt;- data.frame(
+  lat = c(3.43382, 3.43369, 3.42566, 3.435, 3.45891),
+  long = c(-76.51168, -76.51237, -76.51737, -76.54, -76.5135)
+)
 
-# convierte el data.frame en objeto sfc 
-# oferta_sf=st_as_sf(oferta, coords = c(&#39;long&#39;, &#39;lat&#39;))
-#            , crs = st_crs(cali)$proj4string)</code></pre>
-<p></br></br></p>
-</div>
-<div id="paso-4-construir-mapa-y-marcar-puntos" class="section level3">
-<h3><span style="color:#034A94"><strong>Paso 4: Construir mapa y marcar
-puntos</strong></span></h3>
-<pre class="r"><code>cali2 = tm_shape(cali) +  tm_polygons() + 
-        tm_shape(oferta_sf) + tm_dots(size=0.3, col=&quot;red&quot;)
-cali2 </code></pre>
-<p></br></p>
-<p><img src="img/Cali1.png" width="40%" style="display: block; margin: auto;" /></p>
-<p></br></br></p>
-</div>
-<div id="nota" class="section level3 content-box-gray">
-<h3><span style="color:#686868"> <strong>Nota</strong></span></h3>
-<ul>
-<li><p>Debe instalar lo paquetes :</p>
-<ul>
-<li><code>raster</code></li>
-<li><code>sf</code></li>
-<li><code>tmap</code></li>
-</ul></li>
-<li><p>Copie la carpeta Cali con el contenido de los archivos en el
-directorio donde está el archivo Rmd fuente (ubicada en Actividades :
-<code>map.zip</code>)</p></li>
-<li><p>Debe actualizar la dirección del archivo
-<code>cali.shp</code></p></li>
-<li><p>La ubicación de un archivo en R se puede obtener utilizando la
-función <code>file.choose()</code> desde la consola.</p></li>
-</ul>
-</div>
-<p></br></br></p>
-<div class="content-box-gray">
-<div id="resumen" class="section level3">
-<h3><span style="color:#686868"> <strong>Resumen</strong></span></h3>
-<pre class="r"><code>library(raster)
-library(sf)
-library(tmap)
+# Crea un mapa
+map &lt;- leaflet(oferta) %&gt;%
+  addTiles() %&gt;%
+  addMarkers(
+    lng = ~long,
+    lat = ~lat,
+    popup = ~as.character(lat) # Puedes personalizar el contenido del popup aquí
+  )
 
-
-cali=shapefile(&quot;~/map/cali/cali.shp&quot;)
-cali.tmap = tm_shape(cali) +  tm_polygons()
-cali.tmap  # mapa
-
-qtm(cali) # mapa 2
-
- oferta=data.frame(lat=c(3.43382,     3.43369,   3.42566,      3.435,   3.45891),
-                  long=c(-76.51168, -76.51237, -76.51737,    -76.54,  -76.5135))
- 
-oferta_sf=st_as_sf(oferta, coords = c(&#39;long&#39;, &#39;lat&#39;))
-#            , crs = st_crs(cali)$proj4string)
-
-
-cali2 = tm_shape(cali) +  tm_polygons() + 
-        tm_shape(oferta_sf) + tm_dots(size=0.3, col=&quot;red&quot;)
-cali2 </code></pre>
-<div>
-
-
-<p></br></br></p>
-<p><img src="img/Cali1.png" width="40%" style="display: block; margin: auto;" /></p>
-</div>
+map # Muestra el mapa</code></pre>
+<div class="leaflet html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-5a4e6c17d5517822a27f" style="width:672px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-5a4e6c17d5517822a27f">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[[3.43382,3.43369,3.42566,3.435,3.45891],[-76.51168,-76.51237,-76.51737,-76.54000000000001,-76.51349999999999],null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["3.43382","3.43369","3.42566","3.435","3.45891"],null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[3.42566,3.45891],"lng":[-76.54000000000001,-76.51168]}},"evals":[],"jsHooks":[]}</script>
 
 
 

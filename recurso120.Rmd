@@ -78,7 +78,7 @@ error
 ```
 </br></br>
 
-De acuerdo con [Joaquín Amat Rodrigo](https://rpubs.com/Joaquin_AR/238251#:~:text=Consiste%20en%20dividir%20los%20datos,como%20validaci%C3%B3n%20en%20cada%20iteraci%C3%B3n.) la validación siple puede presentar algunas desventajas debido a la dependencia de la estimación de lerro y la elección de la muestra de entrenamiento.
+De acuerdo con [Joaquín Amat Rodrigo](https://rpubs.com/Joaquin_AR/238251#:~:text=Consiste%20en%20dividir%20los%20datos,como%20validaci%C3%B3n%20en%20cada%20iteraci%C3%B3n.) la validación simple puede presentar algunas desventajas debido a la dependencia de la estimación del error y la elección de la muestra de entrenamiento.
 
 </br></br>
 
