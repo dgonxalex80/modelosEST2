@@ -22,36 +22,76 @@ Algunas de las causas más comunes de la multicolinealidad son:
 
 </br>
 
-1. <span style="color:#034a94">**El método de recolección de los datos.**</span>, muestras recogidas en un rango reducido de valores.
+### <span style="color:#034a94">**Correlación entre variables predictoras:** 
 
-```{r, echo = F, fig.align = 'center', fig.height = 6, fig.width = 6, out.width = '50%'}
-#data3.1 <- read_excel("data-ex-3-1.xls")[, -1]
-#pairs(data3.1, lower.panel = myPanel.cor, diag.panel = myPanel.box, #upper.panel = panel.smooth, labels = names(data3.1))
-```
+Si dos o más variables predictoras están altamente correlacionadas, esto indica que proporcionan información similar o redundante al modelo. Por ejemplo, si estás modelando el precio de una casa y tienes tanto el área construida como el número de habitaciones como predictores, es probable que estas dos variables estén correlacionadas.
 
- <!-- **Datos de tiempos de entrega** (*Fuente: Mongomery et al. (2002)*) -->
-      
 </br>
 
+### <span style="color:#034a94">**Inclusión de variables derivadas:** 
 
-2. <span style="color:#034a94">**Restricciones en el modelo o en la población.**</span> 
+Si incluyes variables derivadas o calculadas a partir de otras variables en el modelo, es posible que estas nuevas variables tengan una alta correlación con las variables originales, lo que puede llevar a multicolinealidad. Por ejemplo, si tienes la altura y el peso de una persona y luego incluyes el índice de masa corporal (IMC) calculado a partir de estas dos variables, es probable que haya multicolinealidad.
 
-<!-- <center> -->
-<!-- ```{r, echo=FALSE, out.width="60%", fig.align = "center"} -->
-<!-- knitr::include_graphics("img/diagrama1.png") -->
+</br>
+
+### <span style="color:#034a94">**Variables categóricas correlacionadas:** 
+
+Si incluyes variables categóricas que están relacionadas entre sí, como regiones geográficas o categorías similares, podrían generar multicolinealidad si hay patrones de correlación entre estas variables categóricas.
+
+</br>
+
+### <span style="color:#034a94">**Sobreajuste del modelo:** 
+
+Cuando se incluyen demasiadas variables predictoras en el modelo en comparación con el número de observaciones, aumenta la probabilidad de multicolinealidad. Si el número de observaciones es mucho menor que el número de variables predictoras, el modelo puede intentar ajustarse a los datos de manera excesiva, lo que podría llevar a la multicolinealidad.
+
+</br>
+
+### <span style="color:#034a94"> **Medición de variables similares:** 
+
+Si tienes variables que miden conceptos muy similares o relacionados, como diferentes medidas de ingresos (salario, bonificaciones, ingresos totales), es posible que estas variables estén altamente correlacionadas y, por lo tanto, contribuyan a la multicolinealidad.
+
+</br>
+
+### <span style="color:#034a94">**Errores de medición:** 
+
+Si las variables predictoras se miden con errores de medición considerables, esto puede generar una aparente correlación alta entre las variables incluso si en realidad no existe una relación causal.
+
+
+
+
+<!-- Muestras recogidas en un rango reducido de valores. -->
+
+<!-- ```{r, echo = F, fig.align = 'center', fig.height = 6, fig.width = 6, out.width = '50%'} -->
+<!-- #data3.1 <- read_excel("data-ex-3-1.xls")[, -1] -->
+<!-- #pairs(data3.1, lower.panel = myPanel.cor, diag.panel = myPanel.box, #upper.panel = panel.smooth, labels = names(data3.1)) -->
 <!-- ``` -->
 
-<!-- Fuente: Datos de consumo de electricidad - Mongomery et al. (2002) -->
-<!-- </center> -->
+<!--  <!-- **Datos de tiempos de entrega** (*Fuente: Mongomery et al. (2002)*) --> 
 
-</br>
+<!-- </br> -->
 
 
-3. <span style="color:#034a94">**Especificación del modelo.**</span> Por ejemplo, al agregar términos polinomiales a un modelo cuando el rango de la predictora es pequeño.
+<!-- ###  <span style="color:#034a94">**Restricciones en el modelo o en la población.**</span>  -->
 
-</br>
+<!-- <!-- <center> --> 
+<!-- <!-- ```{r, echo=FALSE, out.width="60%", fig.align = "center"} --> 
+<!-- <!-- knitr::include_graphics("img/diagrama1.png") --> 
+<!-- <!-- ``` --> 
+<!-- <!-- Fuente: Datos de consumo de electricidad - Mongomery et al. (2002) -->
+<!-- <!-- </center> --> 
 
-4. <span style="color:#034a94">**Un modelo sobredefinido.**</span> Por ejemplo, en investigación médica donde para algunos pocos pacientes se toma una gran cantidad de predictoras. Es decir que posee más variables que observaciones.
+<!-- </br> -->
+
+
+<!-- ### <span style="color:#034a94">**Especificación del modelo.**</span>  -->
+
+<!-- Por ejemplo, al agregar términos polinomiales a un modelo cuando el rango de la predictora es pequeño. -->
+
+<!-- </br> -->
+
+<!-- ### <span style="color:#034a94">**Un modelo sobredefinido.**</span>  -->
+
+<!-- Por ejemplo, en investigación médica donde para algunos pocos pacientes se toma una gran cantidad de predictoras. Es decir que posee más variables que observaciones. -->
 
 
 </br></br></br>
