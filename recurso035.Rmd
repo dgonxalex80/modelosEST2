@@ -15,7 +15,7 @@ data("creditos")
 
 </br></br>
 
-Antes de empezar revicemos el concepto de estimador y sus propiedades
+Antes de empezar revisemos el concepto de estimador y sus propiedades
 
 </br>
 
@@ -37,14 +37,14 @@ Dentro de las princopales propiedades de los estimadores
 
 ###  <span style="color:#FF7F00"> **Insesgadez**</span>
 
-Un estimador es insesgado cuando su valor esperado es igual al parametro :
+Un estimador es insesgado cuando su valor esperado es igual al parámetro :
 $$E\Big[\widehat{\beta}_{i}\Big] = \beta_{i} $$
 
 </br>
 
 ### <span style="color:#FF7F00"> **Consistencia**</span>
 
-Cuando un estimador es sesgado, es decir que su valor esperado no coincide con el parámetro, puede tener la propiedad de consistente, que ocurre cuando al aumentar el tamaño de la miestra el estimador se convierte en insesgado como por ejemplo:
+Cuando un estimador es sesgado, es decir que su valor esperado no coincide con el parámetro, puede tener la propiedad de consistente, que ocurre cuando al aumentar el tamaño de la muestra el estimador se convierte en insesgado como por ejemplo:
 
 $$s^{2} = \dfrac{\sum_{i=1}^{n} (x_{1}- \bar{x})² }{n}$$
 En este caso se puede demostrar que 
@@ -91,7 +91,7 @@ En efecto, sea $\boldsymbol{A} = \left(\boldsymbol{X}'\boldsymbol{X}\right)^{-1}
 $$
 E\left[\boldsymbol{\widehat\beta}\right] = E\left[\boldsymbol{A}\boldsymbol{y}\right] = \boldsymbol{A}E\left[\boldsymbol{y}\right] = \boldsymbol{A\ X\beta} = \left(\boldsymbol{X}'\boldsymbol{X}\right)^{-1}\boldsymbol{X}'\ \boldsymbol{X\beta} = \boldsymbol{\beta}
 $$
-  
+
 </br>
 
 * La matriz de varianzas covarianzas de $\boldsymbol{\widehat\beta}$ es 
@@ -109,9 +109,9 @@ En efecto,
 
 $$
 \begin{aligned}
-V\left[\boldsymbol{\widehat\beta}\right] &= V\left[\boldsymbol{A}\boldsymbol{y}\right] = \boldsymbol{A}V\left[\boldsymbol{y}\right]\boldsymbol{A}' = \boldsymbol{A}\, \sigma^2\boldsymbol{I}_n\, \boldsymbol{A}'\\
-&= \sigma^2\left\{\left(\boldsymbol{X}'\boldsymbol{X}\right)^{-1}\boldsymbol{X}'\boldsymbol{I}_n\left[\left(\boldsymbol{X}'\boldsymbol{X}\right)^{-1}\boldsymbol{X}'\right]'\right\}\\
-&= \sigma^2\left\{\left(\boldsymbol{X}'\boldsymbol{X}\right)^{-1}\boldsymbol{X}'\,\boldsymbol{X}\left[\left(\boldsymbol{X}'\boldsymbol{X}\right)^{-1}\right]'\right\} = \sigma^2\left(\boldsymbol{X}'\boldsymbol{X}\right)^{-1},
+	V\left[\boldsymbol{\widehat\beta}\right] &= V\left[\boldsymbol{A}\boldsymbol{y}\right] = \boldsymbol{A}V\left[\boldsymbol{y}\right]\boldsymbol{A}' = \boldsymbol{A}\, \sigma^2\boldsymbol{I}_n\, \boldsymbol{A}'\\
+	&= \sigma^2\left\{\left(\boldsymbol{X}'\boldsymbol{X}\right)^{-1}\boldsymbol{X}'\boldsymbol{I}_n\left[\left(\boldsymbol{X}'\boldsymbol{X}\right)^{-1}\boldsymbol{X}'\right]'\right\}\\
+	&= \sigma^2\left\{\left(\boldsymbol{X}'\boldsymbol{X}\right)^{-1}\boldsymbol{X}'\,\boldsymbol{X}\left[\left(\boldsymbol{X}'\boldsymbol{X}\right)^{-1}\right]'\right\} = \sigma^2\left(\boldsymbol{X}'\boldsymbol{X}\right)^{-1},
 \end{aligned}
 $$
 </br>

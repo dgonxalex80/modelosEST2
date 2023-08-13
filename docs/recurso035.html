@@ -385,7 +385,7 @@ $(document).ready(function () {
 
 
 <p></br></br></p>
-<p>Antes de empezar revicemos el concepto de estimador y sus
+<p>Antes de empezar revisemos el concepto de estimador y sus
 propiedades</p>
 <p></br></p>
 <div id="estimador-estadístico" class="section level2">
@@ -416,7 +416,7 @@ estimadores</strong></span></h2>
 <div id="insesgadez" class="section level3">
 <h3><span style="color:#FF7F00"> <strong>Insesgadez</strong></span></h3>
 <p>Un estimador es insesgado cuando su valor esperado es igual al
-parametro : <span class="math display">\[E\Big[\widehat{\beta}_{i}\Big]
+parámetro : <span class="math display">\[E\Big[\widehat{\beta}_{i}\Big]
 = \beta_{i} \]</span></p>
 <p></br></p>
 </div>
@@ -425,7 +425,7 @@ parametro : <span class="math display">\[E\Big[\widehat{\beta}_{i}\Big]
 <strong>Consistencia</strong></span></h3>
 <p>Cuando un estimador es sesgado, es decir que su valor esperado no
 coincide con el parámetro, puede tener la propiedad de consistente, que
-ocurre cuando al aumentar el tamaño de la miestra el estimador se
+ocurre cuando al aumentar el tamaño de la muestra el estimador se
 convierte en insesgado como por ejemplo:</p>
 <p><span class="math display">\[s^{2} = \dfrac{\sum_{i=1}^{n} (x_{1}-
 \bar{x})² }{n}\]</span> En este caso se puede demostrar que</p>
@@ -497,13 +497,13 @@ V\left(\boldsymbol{\widehat\beta}\right) =
 <p>En efecto,</p>
 <p><span class="math display">\[
 \begin{aligned}
-V\left[\boldsymbol{\widehat\beta}\right] &amp;=
+    V\left[\boldsymbol{\widehat\beta}\right] &amp;=
 V\left[\boldsymbol{A}\boldsymbol{y}\right] =
 \boldsymbol{A}V\left[\boldsymbol{y}\right]\boldsymbol{A}&#39; =
 \boldsymbol{A}\, \sigma^2\boldsymbol{I}_n\, \boldsymbol{A}&#39;\\
-&amp;=
+    &amp;=
 \sigma^2\left\{\left(\boldsymbol{X}&#39;\boldsymbol{X}\right)^{-1}\boldsymbol{X}&#39;\boldsymbol{I}_n\left[\left(\boldsymbol{X}&#39;\boldsymbol{X}\right)^{-1}\boldsymbol{X}&#39;\right]&#39;\right\}\\
-&amp;=
+    &amp;=
 \sigma^2\left\{\left(\boldsymbol{X}&#39;\boldsymbol{X}\right)^{-1}\boldsymbol{X}&#39;\,\boldsymbol{X}\left[\left(\boldsymbol{X}&#39;\boldsymbol{X}\right)^{-1}\right]&#39;\right\}
 = \sigma^2\left(\boldsymbol{X}&#39;\boldsymbol{X}\right)^{-1},
 \end{aligned}

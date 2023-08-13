@@ -1,5 +1,5 @@
 ---
-title: <span style="color:#034a94">**R - Analisis descriptivo**</span>
+title: <span style="color:#034a94">**R - Análisis descriptivo**</span>
 output: html_document
 css: style.css
 ---
@@ -18,10 +18,10 @@ arboles1$altura = as.numeric(arboles1$altura)
 
 
 library(tidyverse)
-library(lmtest) # diagnosticos de modelos lineales
-library(sandwich) # errores estandar robustos
-library(ggeffects) # efectos y predicciones en modelos de regresion
-library(modelsummary) # tablas de regresion
+library(lmtest) # diagnósticos de modelos lineales
+library(sandwich) # errores estándar robustos
+library(ggeffects) # efectos y predicciones en modelos de regresión
+library(modelsummary) # tablas de regresión
 
 #install.packages("bbmle")
 #install.packages("stats4")
@@ -34,7 +34,7 @@ library(modelsummary) # tablas de regresion
 
 ## <span style="color:#034a94">**Exploración previa**</span>
 
-En esta etapa se realiza una exploración de la data, tipo de variables, datos faltantes, datos atípicos. Podemos realizarlo con la función summary() o con 
+En esta etapa se realiza una exploración de la data, tipo de variables, datos faltantes, datos atípicos. Podemos realizarlo con la función `summary()` o con 
 </br>
 
 ```{r, warning=FALSE, message=FALSE}

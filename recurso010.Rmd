@@ -19,7 +19,7 @@ data("creditos")
 
 La correlación entre dos variables es un concepto fundamental en ciencia de datos, pues permite medir el grado de asociación que entre un par de variables que permite la identificación de patrones, tendencias y asociaciones en conjunto de datos. Permite identifica las relaciones a traves de los cambios que se producen o no sobre una variables cuando otra cambia. 
 
-La magnitud de este indicador es numérico y dependiendo las caracteristicas de las variables (tipo y escala de medisión) son utilizados diversos coeficientes como son:
+La magnitud de este indicador es numérico y dependiendo las características de las variables (tipo y escala de medición) son utilizados diversos coeficientes como son:
 
 * **Coeficiente de Correlación de Pearson** : Mide la relación lineal entre dos variables continuas. Varía entre -1 y 1, con 0 indicando una correlación nula.
 
@@ -41,7 +41,7 @@ La magnitud de este indicador es numérico y dependiendo las caracteristicas de 
 
 </br>
 
-Inicialmente, puede ser útil realizar chequeos gráficos de la naturaleza y la fuerza de las asociaciones entre las variables predictoras con la variable respuesta, y aún entre predictoras.
+Inicialmente, puede ser útil realizar chequeo gráfico de la naturaleza y la fuerza de las asociaciones entre las variables predictoras con la variable respuesta, y aún entre predictoras.
 
 </br>
 
@@ -63,8 +63,8 @@ Es útil también acompañar este análisis gráfico con la matriz de correlacio
 
 ### <span style="color:#FF7F00"> **Ejemplo**</span>
 
- </br>
- 
+</br>
+
 En la siguiente figura se presentan algunas matrices de gráficos de dispersión para un conjunto de datos sobre tres variables y su prelación con la variable dependiente.
 
 </br>
@@ -72,11 +72,11 @@ En la siguiente figura se presentan algunas matrices de gráficos de dispersión
 La base ausentismo  contenida en paqueteMOD contiene las variables 
 
 * **id**     : identificación del empleado
-* **ausen**  : número de dias ausentes en el trabajo, en este caso variable dependiente 
+* **ausen**  : número de días ausentes en el trabajo, en este caso variable dependiente 
 * **taller** : si labora en el taller
 * **sexo**   : sexo del trabajador
 * **edad**   : edad del trabajador
-* **antg**   : antiguedad en la empresa
+* **antg**   : antigüedad en la empresa
 * **sala**   : salario del empleado
 
 
@@ -96,7 +96,7 @@ Diagrama de dispersión
 </br>
 
 
-Este diagrama permite visualizar la fuerte relación que existe entre las variables **edad** y **antiguedad**, es decir que estas dos variables no son independientes y podrían generar problema en el momento que las integremos a un mismo modelo como se verá más adelante.
+Este diagrama permite visualizar la fuerte relación que existe entre las variables **edad** y **antigüedad**, es decir que estas dos variables no son independientes y podrían generar problema en el momento que las integremos a un mismo modelo como se verá más adelante.
 
 </br></br>
 
@@ -104,7 +104,7 @@ Este diagrama permite visualizar la fuerte relación que existe entre las variab
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 library(tidyverse)
 cor(data) %>% 
-  round(.,3)
+round(.,3)
 ```
 Matriz de correlaciones
 </center>
@@ -150,11 +150,11 @@ ggpairs(data, title=" ")
 
 </br>
 
-Se puede observar que la mayor relación de la variable $y$ (ausen) con alguna de las variables independientes es con antg (antiguedad en la empresa) y tiene signo negativo lo cual indica que los empleados mas antiguo tienen menos ausentismo, de igual manera que las variables edad y salario.
+Se puede observar que la mayor relación de la variable $y$ (ausen) con alguna de las variables independientes es con antg (antigüedad en la empresa) y tiene signo negativo lo cual indica que los empleados mas antiguo tienen menos ausentismo, de igual manera que las variables edad y salario.
 
 </br>
 
-Tambien es importante notar que entre las variables independientes existen fuertes correlaciones, lo cual puede generar problemas en la estimación del modelo y su inferencia. Este tema (multicolinealidad) será abordado más adelante.
+También es importante notar que entre las variables independientes existen fuertes correlaciones, lo cual puede generar problemas en la estimación del modelo y su inferencia. Este tema (multicolinealidad) será abordado más adelante.
 
 </br></br>
 
@@ -168,5 +168,4 @@ En caso de haber una relación perfecta entre dos variables regresoras ($X_{1} =
 
 
 </div>
-
 

@@ -18,10 +18,10 @@ arboles1$altura = as.numeric(arboles1$altura)
 
 
 library(tidyverse)
-library(lmtest) # diagnosticos de modelos lineales
-library(sandwich) # errores estandar robustos
-library(ggeffects) # efectos y predicciones en modelos de regresion
-library(modelsummary) # tablas de regresion
+library(lmtest) # diagnósticos de modelos lineales
+library(sandwich) # errores estándar robustos
+library(ggeffects) # efectos y predicciones en modelos de regresión
+library(modelsummary) # tablas de regresión
 
 #install.packages("bbmle")
 #install.packages("stats4")
@@ -41,8 +41,8 @@ Para estimar el modelo por el método de mínimos cuadrados ordinarios se utiliz
 
 <pre>
 lm(formula, data, subset, weights, na.action,
-   method = "qr", model = TRUE, x = FALSE, y = FALSE, qr = TRUE,
-   singular.ok = TRUE, contrasts = NULL, offset, ...)                      
+method = "qr", model = TRUE, x = FALSE, y = FALSE, qr = TRUE,
+singular.ok = TRUE, contrasts = NULL, offset, ...)                      
 </pre>
 
 </br></br>
@@ -123,7 +123,6 @@ summary(forward)
 
 
 <!-- ``` -->
-
 
 
 

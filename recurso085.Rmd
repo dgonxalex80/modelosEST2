@@ -36,12 +36,12 @@ Este procedimiento consiste en correr todos los $2^k - 1$ modelos posibles (con 
 
 $$
 \begin{aligned}
-&\left(\begin{array}{c} k\\1\end{array}\right) = k &&\text{modelos de una predictora}\\
-&\left(\begin{array}{c} k\\2\end{array}\right) &&\text{modelos de dos predictoras}\\[-0.2cm]
-&\,\quad\ \vdots\\[-0.2cm]
-&\left(\begin{array}{c} k\\k\end{array}\right) = 1 &&\text{modelo de }k\text{ predictoras}\\[-0.2cm]
-&\rule{1in}{1pt}\\[-0.1cm]
-&\;\ \quad2^k - 1 &&\text{modelos posibles,}
+	&\left(\begin{array}{c} k\\1\end{array}\right) = k &&\text{modelos de una predictora}\\
+	&\left(\begin{array}{c} k\\2\end{array}\right) &&\text{modelos de dos predictoras}\\[-0.2cm]
+	&\,\quad\ \vdots\\[-0.2cm]
+	&\left(\begin{array}{c} k\\k\end{array}\right) = 1 &&\text{modelo de }k\text{ predictoras}\\[-0.2cm]
+	&\rule{1in}{1pt}\\[-0.1cm]
+	&\;\ \quad2^k - 1 &&\text{modelos posibles,}
 \end{aligned}
 $$
 
@@ -60,7 +60,7 @@ y comparar tales modelos con base en criterios estadísticos.
 
 El mejor modelo es aquel con el mayor valor en este estadístico, sin embargo, al ser una función no decreciente del número de predictoras, tiende a señalar al modelo con todas las predictoras.
 
-   Con el fin de resolver esta dificultad, se busca un modelo con un menor número de variables cuyo $R^2$ no cambie significativamente al aumentar el número de predictoras.
+Con el fin de resolver esta dificultad, se busca un modelo con un menor número de variables cuyo $R^2$ no cambie significativamente al aumentar el número de predictoras.
 
 </br></br>
 
@@ -169,10 +169,10 @@ Este método selecciona las variables paso a paso. En cada paso puede incorporar
 
 </br>
 
-Existen dos versiones del metodo, una hacia atraś, el cual parte incluye todas las variables independientes sin importar que tan realacionadas se encuenten entre si. En cada paso elimina una variable y finaliza cuando el valor del  estadístico F de la ANOVA correspondiente aumente en una cantida tolerable, previamente establecida.
+Existen dos versiones del método, una hacia atrás, el cual parte incluye todas las variables independientes sin importar que tan realacionadas se encuentren entre si. En cada paso elimina una variable y finaliza cuando el valor del  estadístico F de la ANOVA correspondiente aumente en una cantidad tolerable, previamente establecida.
 
 </br>
 
-En el caso del método paso a paso adelante, inicia con una sola variable independiente, escogiendo la que mayor correlación tenga con la variable dependiente y va incorporando variables hasta tanto el valor del incremento del valor del estadístco F, sea no significativo comparado con un valor establecido previamente.
+En el caso del método paso a paso adelante, inicia con una sola variable independiente, escogiendo la que mayor correlación tenga con la variable dependiente y va incorporando variables hasta tanto el valor del incremento del valor del estadístico F, sea no significativo comparado con un valor establecido previamente.
 
 </br></br>

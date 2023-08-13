@@ -20,7 +20,7 @@ c4="#686868"
 
 </br></br>
 
-Antes de utilizar los resultados obtenidos al estimar un modelo de regresión consiste en validar la sensibilidad del modelo al ser expuesto a información diferente a la utilizada para su estimación. Mediante la validación cruzada se evalua se examina si el modelo de regresión conserva una estabilidad al probarse con otra información.
+Antes de utilizar los resultados obtenidos al estimar un modelo de regresión consiste en validar la sensibilidad del modelo al ser expuesto a información diferente a la utilizada para su estimación. Mediante la validación cruzada se evalúa se examina si el modelo de regresión conserva una estabilidad al probarse con otra información.
 
 
 </br></br>

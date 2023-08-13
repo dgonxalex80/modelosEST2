@@ -21,7 +21,7 @@ Dentro de los indicadores más utilizado en la comparación de modelos están:
 
 ### <span style="color:#034a94">**$R^2$**</span> 
 
-Coeficiente de determinación : mide que tanto se ajusta un modelo de regresión a los datos, es decir mide la prorción del total de la variación de $Y$ que es representada por la variación de las variables regresoras ($X_1$, $X_2$, $\dots$, $X_k$) . Toma valor de cero cuando la regresión es una linea horizontal y el modelo está formado solo por el intercepto $\beta_0$. Toma el valor de 1 cuando todas las variables predictoras y la variable dependientes están en el mismo plano (una linea recta en el caso del MRLS). 
+Coeficiente de determinación : mide que tanto se ajusta un modelo de regresión a los datos, es decir mide la proporción del total de la variación de $Y$ que es representada por la variación de las variables regresoras ($X_1$, $X_2$, $\dots$, $X_k$) . Toma valor de cero cuando la regresión es una linea horizontal y el modelo está formado solo por el intercepto $\beta_0$. Toma el valor de 1 cuando todas las variables predictoras y la variable dependientes están en el mismo plano (una linea recta en el caso del MRLS). 
 
 </br></br>
 
@@ -111,14 +111,14 @@ modelo3 <- lm(peso ~ diametro + D3, data = arboles1)
 modelo4 <- lm(peso ~ diametro, data = arboles1)
 
 lista_modelos <- list(
-  "modelo 1" = modelo1,
-  "modelo 2" = modelo2,
-  "modelo 3" = modelo3,
-  "modelo 4" =modelo4
+"modelo 1" = modelo1,
+"modelo 2" = modelo2,
+"modelo 3" = modelo3,
+"modelo 4" =modelo4
 )
 modelsummary(
-  lista_modelos # varios modelos
-   )
+lista_modelos # varios modelos
+)
 
 ```
 
@@ -146,8 +146,8 @@ es una superficie de respuesta apropiada, es decir, se quiere probar
 
 $$
 \begin{array}{l}
-H_0: E\left[ Y\vert X_1, X_2, \ldots, X_k\right] = \beta_0 + \beta_1X_1 + \beta_2X_2 + \cdots + \beta_kX_k\\
-H_1: E\left[ Y\vert X_1, X_2, \ldots, X_k\right] \ne \beta_0 + \beta_1X_1 + \beta_2X_2 + \cdots + \beta_kX_k
+	H_0: E\left[ Y\vert X_1, X_2, \ldots, X_k\right] = \beta_0 + \beta_1X_1 + \beta_2X_2 + \cdots + \beta_kX_k\\
+	H_1: E\left[ Y\vert X_1, X_2, \ldots, X_k\right] \ne \beta_0 + \beta_1X_1 + \beta_2X_2 + \cdots + \beta_kX_k
 \end{array}
 $$
 
@@ -169,7 +169,7 @@ El procedimiento de prueba se resume en la siguiente tabla:
 </br></br>
 
 ### <span style="color:#034a94">**ANOVA con prueba de falta de ajuste en el modelo de RLM**</span>
-                               
+
 </br>
 
 | Fuente de variación | Suma de cuadrados | Grados de libertad | Cuadrado medio | $F$ calculada |
@@ -339,8 +339,8 @@ $$D_i = \frac{\left(\boldsymbol{\widehat{\beta}}_{\left(i\right)} - \boldsymbol{
 </div>
 
 donde, $\boldsymbol{\widehat{\beta}}_{\left(i\right)}$ es el vector de parámetros estimados obtenido cuando no se considera en el ajuste del modelo a la observación $i$.
-   
-   Note que si $D_i$ es alto entonces la observación $i$ tiene influencia sobre el vector de parámetros estimados $\boldsymbol{\widehat{\beta}}$.
+
+Note que si $D_i$ es alto entonces la observación $i$ tiene influencia sobre el vector de parámetros estimados $\boldsymbol{\widehat{\beta}}$.
 
 </br></br>
 
@@ -369,7 +369,7 @@ $$
 
 donde, $\widehat{Y}_{\left(i\right)}$ es el $i$-ésimo valor ajustado obtenido cuando no se considera en el ajuste del modelo a la observación $i$ y $\text{MSE}_{\left(i\right)}$ es el cuadrado medio del error obtenido cuando no se considera en el ajuste del modelo a la observación $i$.
 
-   Una observación será **influencial** si $\vert\text{DFFITS}_i\vert > 2\sqrt{\frac{p}{n}}$.
+Una observación será **influencial** si $\vert\text{DFFITS}_i\vert > 2\sqrt{\frac{p}{n}}$.
 
 </br>
 
@@ -383,7 +383,7 @@ $$\text{DFBETAS}_{j\left(i\right)} = \frac{\widehat{\beta}_j - \widehat{\beta}_{
 </div>
 
 donde $c_{jj}$ es el $j$-ésimo elemento en la diagonal principal de la matriz $(\boldsymbol{X'X})^{-1}$ y $\text{MSE}_{\left(i\right)}$ es el MSE de la regresión sin la observación $i$.
-   
+
 Una observación será **influencial** si $\vert \text{DFBETAS}_{j\left(i\right)}\vert > 2/\sqrt{n}$.
 
 </br>

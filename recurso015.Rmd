@@ -37,7 +37,7 @@ Las principales propiedades y operaciones de los vectores son:
 
 La suma de dos vectores **u** y **v** se hace elemento a elemento correspondientes $u + v = [u_1+v_1, u_2 + v_2, \dots, u_n+v_n]$, y posee la siguientes propiedades:
 
-* conmutatica : $u +v = v + u$
+* conmutativa : $u +v = v + u$
 * asociativa : $(u + v) + w = u + (v + w)$
 
 </br>
@@ -172,7 +172,7 @@ $$
 
 ## <span style="color:#034A94"> **Otras propiedades importantes** </span>
 
-A partir de las anteriores deficiniciones podemos resumir :
+A partir de las anteriores definiciones podemos resumir :
 
 </br>
 
@@ -365,8 +365,5 @@ Si $\boldsymbol{\Sigma_y} = \sigma^2\boldsymbol{I}$, entonces $\boldsymbol{U}$ y
 
 
 Los anteriores resultados se utilizan en la construcción de la estimación por MCO y las propiedades de los estimadores, la matriz de varianza covarianzas de los errores y la sus respectivas inferencias.
-
-
-
 
 

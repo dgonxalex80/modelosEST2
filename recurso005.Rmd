@@ -13,13 +13,13 @@ data("creditos")
 
 </br></br>
 
-El **modelo de regresión lineal** es una técnica fundamental en el campo de la ciencia de datos que permite el modelamiento y análisis relaciones complejas entre múltiples variables. Cuando el model está conformado por una variable dependiente ($Y$) y una variable independiente ($X$) se denomina **modelo de regresión lineal simple** (MRLS), a diferencia cuando el número de variables independientes esta conformado por mas de dos ($X_1, X_2, \dots X_p$) se le denomina **modelo de regesión lineal multiple** (MRLM).
+El **modelo de regresión lineal** es una técnica fundamental en el campo de la ciencia de datos que permite el modelado y análisis relaciones complejas entre múltiples variables. Cuando el o está conformado por una variable dependiente ($Y$) y una variable independiente ($X$) se denomina **modelo de regresión lineal simple** (MRLS), a diferencia cuando el número de variables independientes esta conformado por mas de dos ($X_1, X_2, \dots X_p$) se le denomina **modelo de regesión lineal múltiple** (MRLM).
 
 <br/>
 
 Dentro de sus principales aplicaciones están:
 
-* Análisis de relaciones entre variables, mediante la estimación de parametros que miden los cambios producidos en una variables como efecto del cambio en otra variable
+* Análisis de relaciones entre variables, mediante la estimación de parámetros que miden los cambios producidos en una variables como efecto del cambio en otra variable
 * Predicción de una variables mediante el conocimiento de otras
 * Control de variables mediante la inclusión de variables de control para controlar el efecto de eventos especiales
 
@@ -70,7 +70,7 @@ Donde:
 
 </br>
 
-* $\varepsilon_i \overset{\text{iid}}{\sim} N\left(0,\sigma ^2 \right), \quad i = 1, 2, \ldots, n$, los errores identica e independientemente distribuidos nornal con media cero y varianza constante.
+* $\varepsilon_i \overset{\text{iid}}{\sim} N\left(0,\sigma ^2 \right), \quad i = 1, 2, \ldots, n$, los errores identica e independientemente distribuidos normal con media cero y varianza constante.
 
 
 

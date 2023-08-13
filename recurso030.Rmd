@@ -20,7 +20,7 @@ c4="#686868"
 
 El objetivo principal del método de mínimos cuadrados ordinarios es poder estimar los valores correspondientes a los parámetros ($\beta_i$) utilizando para ello un modelo de optimización.
 
-Aunque se trata de un método matemático de optimización (minimizar los errores), dado que los datos proceden de una muestra y que en el sistema de ecuaciones se incorpora el termino error ($\epsilon_{i}$) que posee caracteristicas estadísticas, se pueden realizar inferencias (intervalos de confianza y pruebas de hipótesis) al rededor de los estimadores encontrados y de los valores encontrados a partir del modelo estimado.
+Aunque se trata de un método matemático de optimización (minimizar los errores), dado que los datos proceden de una muestra y que en el sistema de ecuaciones se incorpora el termino error ($\epsilon_{i}$) que posee características estadísticas, se pueden realizar inferencias (intervalos de confianza y pruebas de hipótesis) al rededor de los estimadores encontrados y de los valores encontrados a partir del modelo estimado.
 
 
 
@@ -39,7 +39,7 @@ $$Y_i = \beta_0 + \beta_1X_{i1} + \beta_2X_{i2} + \cdots + \beta_kX_{ik} + \vare
 
 <br/>
 
-Está compuesto de una variable dependiente $y$, ($k$) variables independietes  y un componente aleatorio $\varepsilon$, formando un sistema de $n$ ecuaciones con $p = (k + 1)$ incógnitas correspondiendo al intercepto y los $k$ coeficientes de regresión, donde los $Y_i$ y las $X_{ij}$ toman valores conocidos en cada caso.
+Está compuesto de una variable dependiente $y$, ($k$) variables independientes  y un componente aleatorio $\varepsilon$, formando un sistema de $n$ ecuaciones con $p = (k + 1)$ incógnitas correspondiendo al intercepto y los $k$ coeficientes de regresión, donde los $Y_i$ y las $X_{ij}$ toman valores conocidos en cada caso.
 
 <br/>
 
@@ -103,9 +103,9 @@ $$S\left(\boldsymbol{\beta}\right) = \sum\limits_{i=1}^n \varepsilon_i^2 = \sum\
 Matricialmente, 
 $$
 \begin{aligned}
-S\left(\boldsymbol{\beta}\right) &= \boldsymbol{\varepsilon}'\boldsymbol{\varepsilon} = \left(\boldsymbol{y} - \boldsymbol{X\beta}\right)'\left(\boldsymbol{y} - \boldsymbol{X\beta}\right)\\
-&= \boldsymbol{y}'\boldsymbol{y} - \boldsymbol{y}'\boldsymbol{X\beta} - \boldsymbol{\beta}'\boldsymbol{X}'\boldsymbol{y}+\boldsymbol{\beta}'\boldsymbol{X}'\boldsymbol{X\beta}\\
-&= \boldsymbol{y}'\boldsymbol{y} - 2\boldsymbol{\beta}'\boldsymbol{X}'\boldsymbol{y}+\boldsymbol{\beta}'\boldsymbol{X}'\boldsymbol{X\beta},
+	S\left(\boldsymbol{\beta}\right) &= \boldsymbol{\varepsilon}'\boldsymbol{\varepsilon} = \left(\boldsymbol{y} - \boldsymbol{X\beta}\right)'\left(\boldsymbol{y} - \boldsymbol{X\beta}\right)\\
+	&= \boldsymbol{y}'\boldsymbol{y} - \boldsymbol{y}'\boldsymbol{X\beta} - \boldsymbol{\beta}'\boldsymbol{X}'\boldsymbol{y}+\boldsymbol{\beta}'\boldsymbol{X}'\boldsymbol{X\beta}\\
+	&= \boldsymbol{y}'\boldsymbol{y} - 2\boldsymbol{\beta}'\boldsymbol{X}'\boldsymbol{y}+\boldsymbol{\beta}'\boldsymbol{X}'\boldsymbol{X\beta},
 \end{aligned}
 $$
 

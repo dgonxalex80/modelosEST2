@@ -19,15 +19,15 @@ c4="#686868"
 
 </br></br>
 
-Es importante tener un lenguaje simple pero potente para presentar y desarrollar los temas relacionados con MRLM, este lenguaje lo suministra el **algebra lineal**, partiendo de una base de datos (matriz de datos) se conforman un sistema de $n$ ecuaciones con $k$ incognitas que se presentan a continuación :
+Es importante tener un lenguaje simple pero potente para presentar y desarrollar los temas relacionados con MRLM, este lenguaje lo suministra el **álgebra lineal**, partiendo de una base de datos (matriz de datos) se conforman un sistema de $n$ ecuaciones con $k$ incognitas que se presentan a continuación :
 
 
 \begin{align*}
-y_{1} & = & \beta_{0}  + \beta_{1} x_{11} +  \beta_{2} x_{12}+ \ldots \ldots + \beta_{k} x_{1k} + \epsilon_{1} \\
-y_{2} & = & \beta_{0}  + \beta_{1} x_{21} +  \beta_{2} x_{22}+ \ldots \ldots+ \beta_{k} x_{2k} + \epsilon_{2} \\
-\vdots  & &  \vdots \hspace{1cm} \vdots \hspace{1cm} \vdots \hspace{1cm} \vdots \hspace{1cm} \vdots\hspace{1cm} \vdots \hspace{1cm} \vdots \\
-
-y_{n} & = & \beta_{0}  + \beta_{1} x_{n1} +  \beta_{2} x_{n2}+ \ldots \ldots+ \beta_{k} x_{nk} + \epsilon_{n} \\
+	y_{1} & = & \beta_{0}  + \beta_{1} x_{11} +  \beta_{2} x_{12}+ \ldots \ldots + \beta_{k} x_{1k} + \epsilon_{1} \\
+	y_{2} & = & \beta_{0}  + \beta_{1} x_{21} +  \beta_{2} x_{22}+ \ldots \ldots+ \beta_{k} x_{2k} + \epsilon_{2} \\
+	\vdots  & &  \vdots \hspace{1cm} \vdots \hspace{1cm} \vdots \hspace{1cm} \vdots \hspace{1cm} \vdots\hspace{1cm} \vdots \hspace{1cm} \vdots \\
+	
+	y_{n} & = & \beta_{0}  + \beta_{1} x_{n1} +  \beta_{2} x_{n2}+ \ldots \ldots+ \beta_{k} x_{nk} + \epsilon_{n} \\
 \end{align*}
 
 
@@ -52,7 +52,7 @@ Donde :
 
 * $\varepsilon$ : vector de errores ($dim = n \times 1$)
 
-Conformando un sistema de $n$ ecuaciones con $k$ incognitas ($\beta_{i}$)
+Conformando un sistema de $n$ ecuaciones con $k$ incógnitas ($\beta_{i}$)
 
 </div>
 
@@ -94,10 +94,10 @@ $$\boldsymbol{\mu_y} = E\left[\boldsymbol{y}\right] = \left[ E\left[ y_1\right],
 
 $$
 \boldsymbol{\Sigma_y} = V(\boldsymbol{y}) = \begin{bmatrix}
-\sigma_{11} &\sigma_{12} &\cdots &\sigma_{1n}\\
-\sigma_{21} &\sigma_{22} &\cdots &\sigma_{2n}\\
-\vdots &\vdots &\ddots &\vdots\\
-\sigma_{n1} &\sigma_{n2} &\cdots &\sigma_{nn}
+	\sigma_{11} &\sigma_{12} &\cdots &\sigma_{1n}\\
+	\sigma_{21} &\sigma_{22} &\cdots &\sigma_{2n}\\
+	\vdots &\vdots &\ddots &\vdots\\
+	\sigma_{n1} &\sigma_{n2} &\cdots &\sigma_{nn}
 \end{bmatrix}
 $$
 
@@ -121,10 +121,10 @@ Por lo tanto se puede escribir,
 
 $$
 \boldsymbol{\Sigma_y} = \begin{bmatrix}
-\sigma^2_1 &\sigma_{12} &\cdots &\sigma_{1n}\\
-\sigma_{12} &\sigma^2_2 &\cdots &\sigma_{2n}\\
-\vdots &\vdots &\ddots &\vdots\\
-\sigma_{1n} &\sigma_{2n} &\cdots &\sigma^2_n
+	\sigma^2_1 &\sigma_{12} &\cdots &\sigma_{1n}\\
+	\sigma_{12} &\sigma^2_2 &\cdots &\sigma_{2n}\\
+	\vdots &\vdots &\ddots &\vdots\\
+	\sigma_{1n} &\sigma_{2n} &\cdots &\sigma^2_n
 \end{bmatrix}
 $$
 
@@ -188,4 +188,7 @@ Observe que se conservan las propiedades de la esperanza y la varianza del caso 
 </div>
 
 </br></br>
+
+
+
 
