@@ -13,6 +13,12 @@ data("creditos")
 
 </br></br>
 
+En la estimación del Modelo de Regresión Lineal Múltiple (MRLM), se recurre al Método de Mínimos Cuadrados Ordinarios (MCO), un proceso de optimización. A través de este método, se obtiene una solución que estima los coeficientes del modelo al minimizar la suma de las discrepancias entre los valores predichos y los valores reales de la variable dependiente. Es normal que en esta solución puede resultar en una suma de discrepancias sea muy diferente a cero, lo que hace importante evaluar la concordancia de los datos con el modelo establecido.
+
+Los siguientes indicadores nos ayudan en este propósito:
+
+</br>
+
 ## <span style="color:#034a94">**Indicadores de bondad de ajuste**</span>
 
 Dentro de los indicadores más utilizado en la comparación de modelos están:

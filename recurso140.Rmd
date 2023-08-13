@@ -28,7 +28,7 @@ arboles1$altura = as.numeric(arboles1$altura)
 
 </br></br>
 
-El siguiente código permite la visualización de puntos en el mapa de la ciudad de Cali, teniendo como base el archivo cali.shp que debe estar acompañado de otros archivos contenidos en la carpeta comprimidad cali.zip
+El siguiente código permite la visualización de puntos en el mapa de la ciudad de Cali, teniendo como base  las coordenadas de la vivienda y el paquete de R `leaflet`
 
 
 ```{r}

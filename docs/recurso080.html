@@ -387,88 +387,141 @@ $(document).ready(function () {
 
 
 <p></br></p>
-<div id="comparación-de-efectos-parciales-de-las-variables-predictoras"
-class="section level2">
-<h2><span style="color:#034a94"> <strong>Comparación de efectos
-parciales de las variables predictoras</strong></span></h2>
+<p>La multicolinealidad, un problema común en el análisis de regresión
+lineal múltiple que plantea un desafío fundamental al intentar
+comprender las relaciones entre múltiples variables predictoras y una
+variable de respuesta.</p>
 <p></br></p>
-<p>Considere el modelo de RLM:</p>
-</br>
-<div class="content-box-blue">
-<p><span class="math display">\[Y_i = \beta_0 + \beta_1X_{i1} +
-\beta_2X_{i2} + \cdots + \beta_kX_{ik} + \ \varepsilon_i,\text{ con }\
-\varepsilon_i \overset{\text{i.i.d}}{\sim} N\left(0,
-\sigma^2\right).\]</span></p>
-</div>
+<p>En este contexto, las variables predictoras a menudo están
+interrelacionadas entre sí (no son independientes una de otroas), lo que
+puede generar dificultades al intentar determinar la contribución
+individual de cada variable en la explicación de la variable de
+respuesta.</p>
 <p></br></p>
-<ol style="list-style-type: decimal">
-<li>Si las variables predictoras no están en una misma escala de medida,
-no podemos determinar cual tiene mayor o menor efecto parcial sobre la
-respuesta promedio, en presencia de las demás, esto es, la magnitud de
-<span class="math inline">\(\beta_j\)</span> refleja las unidades de la
-variable <span class="math inline">\(X_j\)</span>.</li>
-</ol>
+<p>A medida que la correlación entre las variables predictoras se
+intensifica, la precisión de las estimaciones de los coeficientes de
+regresión puede deteriorarse significativamente, lo que hace que la
+interpretación de los resultados sea más complicada y potencialmente
+sesgada. Esta introducción explorará en detalle la naturaleza de la
+multicolinealidad, sus posibles implicaciones y cómo abordar eficazmente
+este desafío para garantizar la validez y fiabilidad de los análisis de
+regresión lineal múltiple.</p>
 <p></br></p>
-<ol start="2" style="list-style-type: decimal">
-<li>Para hacer comparaciones en forma directa de los coeficientes de
-regresión se recurre al uso de variables escaladas, tanto en la
-respuesta como en las predictoras.</li>
-</ol>
+<p>Es posible que al construir un modelo de regresión para predecir el
+<strong>precio de una vivienda</strong> en función de variables como el
+área de la vivienda en metros cuadrados, el número de habitaciones y la
+ubicación. Si incluimos tanto el área metros cuadrados como el número de
+habitaciones como predictoras, es posible que estas dos variables estén
+altamente correlacionadas ( a más habitaciones más área) . Esto se debe
+a que, en muchas ocasiones, las viviendas más grandes tienden a tener
+más habitaciones. Esta correlación alta puede llevar a la
+multicolinealidad y dificultar la interpretación precisa de cómo cada
+variable afecta al precio.</p>
 <p></br></p>
-<p><strong>Escalamiento de longitud unitaria:</strong> cada variable es
-escalada restando su media muestral y dividiendo esta diferencia por la
-raíz cuadrada de la suma de cuadrados corregida de cada variable, es
-decir,</p>
+<p>Tambien es posible que si estamos analizando el <strong>rendimiento
+académico</strong> de los estudiantes utilizando variables como horas de
+estudio semanales, calificaciones en exámenes anteriores y participación
+en actividades extracurriculares. Si las horas de estudio y las
+calificaciones en exámenes anteriores están fuertemente correlacionadas,
+la multicolinealidad podría surgir. Esto podría dificultar la
+identificación de cuál de estas dos variables tiene un impacto más
+independiente en el rendimiento estudiantil.</p>
 <p></br></p>
-<p><span class="math display">\[\begin{aligned}
-&amp;Y_i^* = \frac{Y_i - \bar{Y}}{\sqrt{\sum\limits_{h = 1}^n \left(Y_h
-- \bar{Y}\right)^2}}, \quad X_{ij}^* = \frac{X_{ij} -
-\bar{X}_j}{\sqrt{\sum\limits_{h = 1}^n \left(X_{hj} -
-\bar{X}_j\right)^2}},\\[0.2cm]
-&amp;\\
-&amp;\text{con } \left\{\begin{array}{c}
-i = 1, 2, \ldots, n\\
-j = 1, 2, \ldots, k
-\end{array}\right.
-\end{aligned}\]</span></p>
+<p>En ambos ejemplos, la multicolinealidad puede hacer que los
+coeficientes de regresión sean difíciles de interpretar. Además, puede
+hacer que los intervalos de confianza sean más amplios y que las pruebas
+de significancia sean menos confiables. Para abordar este problema, es
+importante realizar análisis de correlación entre las variables
+predictoras y, si es necesario, considerar técnicas como reducción de
+dimensionalidad (PCA) o eliminar una de las variables altamente
+correlacionadas. En última instancia, el objetivo es asegurarse de que
+las estimaciones del modelo sean válidas y no se vean distorsionadas por
+la multicolinealidad.</p>
 <p></br></p>
-<p>Luego, se ajusta el modelo de RLM sin intercepto</p>
+<p>Existen dos tipos principales de multicolinealidad: la
+multicolinealidad exacta y la multicolinealidad aproximada. Estos dos
+tipos se diferencian en cómo se manifiestan y en sus implicaciones para
+el análisis.</p>
+<p></br></br></p>
+<div id="multicolinealidad-exacta" class="section level3">
+<h3><span style="color:#FF7F00"><strong>Multicolinealidad
+Exacta:</strong></span></h3>
 <p></br></p>
-<div class="content-box-blue">
-<p><span class="math display">\[Y_i^* = \beta_1^*X_{i1}^* +
-\beta_2^*X_{i2}^* + \cdots + \beta_k^*X_{ik}^* +
-\varepsilon_i,\hspace{.5cm}\text{con } \hspace{.5cm}\varepsilon_i
-\overset{\text{i.i.d}}{\sim} N\left(0, \sigma^2\right)\]</span></p>
-</div>
-<p></br></p>
-<p>Los coeficientes <span class="math inline">\(\beta_j^*\)</span> son
-llamados <em>coeficientes de regresión estandarizados</em>, y estos
-pueden ser comparados directamente teniendo en cuenta que siguen siendo
-coeficientes de regresión parcial, es decir, <span
-class="math inline">\(\beta_j^*\)</span> mide el efecto de <span
-class="math inline">\(X_j^*\)</span> dado que las demás variables
-predictoras están en el modelo.</p>
-<p></br></p>
-<p>Además, los <span class="math inline">\(\beta_j^*\)</span> pueden
-servir para determinar la importancia relativa de <span
-class="math inline">\(X_j^*\)</span> en presencia de las demás
-variables, en la muestra o conjunto de datos particular considerado para
-el ajuste.</p>
+<p>Se presenta cuando hay una relación lineal perfecta entre dos o más
+variables predictoras. En otras palabras, una variable predictora puede
+ser expresada como una combinación lineal exacta de otras variables. Por
+ejemplo, si en un modelo tenemos dos variables predictoras <span
+class="math inline">\(X_1\)</span> y <span
+class="math inline">\(X_2\)</span>, y <span
+class="math inline">\(X_2\)</span> se puede expresar como <span
+class="math inline">\(X_2 = 2 X_1\)</span>, entonces hay
+multicolinealidad exacta entre <span class="math inline">\(X_1\)</span>
+y <span class="math inline">\(X_2\)</span>. En este caso, en el sistema
+matricial:</p>
+<p><span class="math display">\[Y = X \beta + \varepsilon\]</span> La
+matriz de diseño <span class="math inline">\(X\)</span> no es de rango
+completo, lo causa problemas en los cálculos de los coeficientes, pues
+el sistema no tiene solución.</p>
 <p></br></br></p>
 </div>
-<div id="multicolinealidad" class="section level2">
-<h2><span style="color:#034a94">
-<strong>Multicolinealidad</strong></span></h2>
+<div id="multicolinealidad-aproximada" class="section level3">
+<h3><span style="color:#FF7F00"><strong>Multicolinealidad
+Aproximada:</strong></span></h3>
 <p></br></p>
-<p>Multicolinealidad es la existencia de dependencia casi lineal entre
-variables predictoras en el modelo de RLM.</p>
-<p>Si existiera dependencia lineal exacta entre dos o más variables
-predictoras, la matriz</p>
-<p><span
-class="math inline">\(\boldsymbol{X}&#39;\boldsymbol{X}\)</span> sería
-una matriz singular y por tanto <strong>no podríamos hallar los
-estimadores de mínimos cuadrados!</strong>.</p>
-<p></br></br></p>
+<p>Es más común en la práctica y se refiere a una alta correlación entre
+dos o más variables predictoras, aunque no haya una relación lineal
+perfecta entre ellas. En este caso, las variables predictoras están
+estrechamente relacionadas, lo que puede dificultar la interpretación
+individual de sus efectos en la variable de respuesta. La
+multicolinealidad aproximada puede resultar en coeficientes estimados
+con alta variabilidad y valores menos confiables, lo que afecta la
+interpretación y la calidad del modelo.</p>
+<!-- Ambos tipos de multicolinealidad pueden impactar negativamente la interpretación y la eficacia del modelo de regresión lineal múltiple. Identificar y abordar la multicolinealidad es esencial para garantizar resultados confiables y una comprensión precisa de las relaciones entre las variables predictoras y la variable de respuesta. Las técnicas de detección y solución de la multicolinealidad incluyen el análisis de correlación, el uso de factores de inflación de la varianza (VIF), la eliminación de variables redundantes o la aplicación de técnicas avanzadas de selección de características. -->
+<!-- ## <span style="color:#034a94"> **Comparación de efectos parciales de las variables predictoras**</span> -->
+<!-- </br> -->
+<!-- Considere el modelo de RLM: -->
+<!-- </br> -->
+<!-- <div class="content-box-blue"> -->
+<!-- $$Y_i = \beta_0 + \beta_1X_{i1} + \beta_2X_{i2} + \cdots + \beta_kX_{ik} + \ \varepsilon_i,\text{ con }\ \varepsilon_i \overset{\text{i.i.d}}{\sim} N\left(0, \sigma^2\right).$$ -->
+<!-- </div> -->
+<!-- </br> -->
+<!-- 1. Si las variables predictoras no están en una misma escala de medida, no podemos determinar cual tiene mayor o menor efecto parcial sobre la respuesta promedio, en presencia de las demás, esto es, la magnitud de $\beta_j$ refleja las unidades de la variable $X_j$. -->
+<!-- </br> -->
+<!-- 2. Para hacer comparaciones en forma directa de los coeficientes de regresión se recurre al uso de variables escaladas, tanto en la respuesta como en las predictoras. -->
+<!-- </br> -->
+<!-- **Escalamiento de longitud unitaria:** cada variable es escalada restando su media muestral y dividiendo esta diferencia por la raíz cuadrada de la suma de cuadrados corregida de cada variable, es decir, -->
+<!-- </br> -->
+<!-- $$\begin{aligned} -->
+<!-- &Y_i^* = \frac{Y_i - \bar{Y}}{\sqrt{\sum\limits_{h = 1}^n \left(Y_h - \bar{Y}\right)^2}}, \quad X_{ij}^* = \frac{X_{ij} - \bar{X}_j}{\sqrt{\sum\limits_{h = 1}^n \left(X_{hj} - \bar{X}_j\right)^2}},\\[0.2cm] -->
+<!-- &\\ -->
+<!-- &\text{con } \left\{\begin{array}{c} -->
+<!-- i = 1, 2, \ldots, n\\ -->
+<!-- j = 1, 2, \ldots, k -->
+<!-- \end{array}\right. -->
+<!-- \end{aligned}$$ -->
+<!-- </br> -->
+<!-- Luego, se ajusta el modelo de RLM sin intercepto -->
+<!-- </br> -->
+<!-- <div class="content-box-blue"> -->
+<!-- $$Y_i^* = \beta_1^*X_{i1}^* + \beta_2^*X_{i2}^* + \cdots + \beta_k^*X_{ik}^* + \varepsilon_i,\hspace{.5cm}\text{con } \hspace{.5cm}\varepsilon_i \overset{\text{i.i.d}}{\sim} N\left(0, \sigma^2\right)$$ -->
+<!-- </div> -->
+<!-- </br> -->
+<!-- Los coeficientes $\beta_j^*$ son llamados *coeficientes de regresión estandarizados*, y estos pueden ser comparados directamente teniendo en cuenta que siguen siendo coeficientes de regresión parcial, es decir, $\beta_j^*$ mide el efecto de $X_j^*$ dado que las demás variables predictoras están en el modelo. -->
+<!-- </br> -->
+<!-- Además, los $\beta_j^*$ pueden servir para determinar la importancia relativa de $X_j^*$ en presencia de las demás variables, en la muestra o conjunto de datos particular considerado para el ajuste. -->
+<!-- </br></br> -->
+<!-- ## <span style="color:#034a94"> **Multicolinealidad**</span> -->
+<!-- </br> -->
+<!-- Multicolinealidad es la existencia de dependencia casi lineal entre variables predictoras en el modelo de RLM. -->
+<!-- Si existiera dependencia lineal exacta entre dos o más variables predictoras, la matriz  -->
+<!-- $\boldsymbol{X}'\boldsymbol{X}$ sería una matriz singular y por tanto **no podríamos hallar los estimadores de mínimos cuadrados!**. -->
+<!-- ```{r, comment = NA, include = F} -->
+<!-- #dt <- read.table('trabajos/RLM/bases/Equipo60.txt', h = T)[, -(4:6)] -->
+<!-- # dt <- read.table('Trabajos/01/Bases_de_datos/Equipo50.txt', h = T)[, -(4:5)] -->
+<!-- # dt$X3 <- 2*dt$X1 - dt$X2 -->
+<!-- # summary(lm(Y ~ X1 + X2 + X3, data = dt)) -->
+<!-- ``` -->
+<!-- </br></br> -->
 </div>
 
 

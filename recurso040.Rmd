@@ -21,6 +21,8 @@ c4="#686868"
 ```
 
 
+La inferencia sobre los parámetros del MRLM  ($\beta_{i}$), permite obtener estimaciones teniendo encuenta que los datos utilizados corresponden a una muestra y que por lo tanto contienen un grado de incertidumbre o error. Además permite concluir sobre las relaciones existentes entre las variables independientes ($X_i$) y la variable dependiente o respuesta ($Y_i$). 
+
 <br/> <br/>
 
 
