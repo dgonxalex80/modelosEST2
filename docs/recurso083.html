@@ -11,7 +11,7 @@
 
 
 
-<title>Diagnósticos de la multicolinealidad</title>
+<title> Alternativas para la multicolinealidad</title>
 
 <script src="site_libs/header-attrs-2.23/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -381,138 +381,132 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore"><span
-style="color:#034a94"><strong>Diagnósticos de la
-multicolinealidad</strong></span></h1>
+<h1 class="title toc-ignore"><span style="color:#034a94">
+<strong>Alternativas para la multicolinealidad</strong></span></h1>
 
 </div>
 
 
 <p></br></br></p>
-<p>Entre los diagnósticos más usados para detectar multicolinealidad en
-un modelo se tienen:</p>
+<p>Como se mencionó la multicolinealidad es un problema común en modelos
+de regresión lineal múltiple cuando las variables independientes están
+altamente correlacionadas entre sí. Puede dificultar la interpretación
+de los coeficientes y hacer que el modelo sea menos estable. Algunas
+alternativas para manejar la multicolinealidad en un modelo de regresión
+lineal múltiple:</p>
 <p></br></p>
-<div id="examinar-la-matriz-de-correlaciones-entre-las-predictoras"
-class="section level3">
-<h3><span style="color:#FF7F00"><strong>Examinar la matriz de
-correlaciones entre las predictoras:</strong></span></h3>
+<div id="eliminación-de-variables" class="section level3">
+<h3><span style="color:#FF7F00"> <strong>Eliminación de
+variables:</strong></span></h3>
 <p></br></p>
-<p>Sea <span class="math inline">\(\text{COR}(\boldsymbol{X})\)</span>
-una matriz cuyo elemento (<span class="math inline">\(j,k\)</span>)
-corresponde a la correlación entre las predictoras <span
-class="math inline">\(X_j\)</span> y <span
-class="math inline">\(X_k\)</span>, <span
-class="math inline">\(\text{COR}\left(X_j, X_k\right)\)</span>.</p>
-<p>Esta matriz resulta útil para detectar multicolinealidad si en ésta
-no intervienen más de dos variables en una dependencia casi lineal.</p>
-<p></br></p>
-<p>También valores de <span class="math inline">\(\text{COR}\left(X_j,
-X_k\right)\)</span> pequeños no necesariamente implican la ausencia de
-multicolinealidad.</p>
+<p>Si es posible, considera eliminar una de las variables altamente
+correlacionadas. Esto puede ayudar a reducir la multicolinealidad, pero
+se debe tener en cuenta el impacto en la interpretación del modelo y la
+pérdida potencial de información. En caso de no realizar este
+procedimiento adecuadamente puede producir sesgos en las
+estimaciones.</p>
 <p></br></br></p>
 </div>
-<div id="factores-de-inflación-de-varianza" class="section level3">
-<h3><span style="color:#FF7F00"><strong>Factores de Inflación de
-Varianza:</strong></span></h3>
-<p>Denotados <span class="math inline">\(\text{VIF}_j,\ j = 1, \ldots,
-k\)</span> se calculan como:</p>
-<p><span class="math display">\[\text{VIF}_j = c^*_{jj} = \frac{1}{1 -
-R_j^2}\]</span></p>
-<p>A continuación se establece el criterio para detectar la
-multicolinealidad de acuerdo a esta medida.</p>
-<ul>
-<li><p>Si <span class="math inline">\(\text{VIF}_j \leq 5\)</span> no
-hay problemas de multicolinealidad.</p></li>
-<li><p>Si <span class="math inline">\(5 &lt; \text{VIF}_j \leq
-10\)</span> hay problemas de multicolinealidad moderada.</p></li>
-<li><p>Si <span class="math inline">\(\text{VIF}_j &gt; 10\)</span> hay
-problemas de multicolinealidad graves.</p></li>
-</ul>
+<div id="transformación-de-variables" class="section level3">
+<h3><span style="color:#FF7F00"> <strong>Transformación de
+variables:</strong></span></h3>
+<p></br></p>
+<p>Si tienes variables que están relacionadas de manera no lineal,
+puedes considerar transformaciones como logaritmos o raíces cuadradas
+para reducir la correlación entre ellas, pues al reducir la escala de
+las variables es posible que se minimice el problema.</p>
 <p></br></br></p>
 </div>
-<div id="análisis-de-los-valores-propios-de-boldsymbolxboldsymbolx"
+<div id="análisis-de-componentes-principales-pca"
 class="section level3">
-<h3><span style="color:#FF7F00"><strong>Análisis de los valores propios
-de <span
-class="math inline">\(\boldsymbol{X}&#39;\boldsymbol{X}\)</span>:</strong></span></h3>
-<p>Se trata de evaluar si hay valores propios con valores cercanos a
-cero. Para ello se definen las medidas que se presentan a
-continuación:</p>
+<h3><span style="color:#FF7F00"> <strong>Análisis de componentes
+principales (PCA):</strong></span></h3>
+<p>PCA es una técnica de reducción de dimensionalidad que transforma las
+variables originales en un conjunto de componentes no correlacionados
+(llamados componentes principales), es decir que al conformarse un grupo
+de variables nuevas independientes desaparece la multicolinealidad. Se
+debe tener en cuenta que los componentes principales pueden ser
+difíciles de interpretar en términos de las variables originales.</p>
+<p></br></br></p>
+</div>
+<div id="crear-índices-o-sumar-variables" class="section level3">
+<h3><span style="color:#FF7F00"> <strong>Crear índices o sumar
+variables:</strong></span></h3>
 <p></br></p>
-<p><span style="color:#034a94"><strong>Número de
-condición:</strong></span> : mide la dispersión en el espectro de los
-valores propios de la matriz <span
-class="math inline">\(\boldsymbol{X}&#39;\boldsymbol{X}\)</span>. Se
-calcula como: <span class="math inline">\(\kappa = \lambda_{\max} /
-\lambda_{\min}\)</span>. En <span class="math inline">\(R\)</span> se
-obtienen valores en raíz cuadrada, es decir, <span
-class="math inline">\(\sqrt{\kappa}\)</span>, para el cual el criterio
-para detectar multicolinealidad es:</p>
+<p>En lugar de usar variables altamente correlacionadas individualmente,
+puedes considerar crear un índice o una variable suma que capture la
+información de ambas. Esto puede ayudar a reducir la multicolinealidad.
+Como puede ser el caso de variables correspondientes a los estados
+financieros de empresas.</p>
+<p></br></br></p>
+</div>
+<div id="validación-cruzada" class="section level3">
+<h3><span style="color:#FF7F00"> <strong>Validación
+cruzada:</strong></span></h3>
 <p></br></p>
-<ul>
-<li>Si <span class="math inline">\(\sqrt{\kappa} \leq 10\)</span> no hay
-problemas de multicolinealidad.</li>
-</ul>
+<p>Al ajustar modelos, utiliza técnicas como la validación cruzada para
+evaluar cómo se comporta el modelo en datos no vistos. Esto puede ayudar
+a identificar si la multicolinealidad está afectando el rendimiento del
+modelo.</p>
+<p></br></br></p>
+</div>
+<div id="análisis-de-vif-varianza-inflación-factor"
+class="section level3">
+<h3><span style="color:#FF7F00"> <strong>Análisis de VIF (Varianza
+Inflación Factor):</strong></span></h3>
 <p></br></p>
-<ul>
-<li>Si <span class="math inline">\(10 &lt; \sqrt{\kappa} \leq
-31.62\)</span> hay problemas de multicolinealidad moderada.</li>
-</ul>
-<p></br></p>
-<ul>
-<li>Si <span class="math inline">\(\sqrt{\kappa} &gt; 31.62\)</span> hay
-problemas de multicolinealidad graves.</li>
-</ul>
-<p></br></p>
-<p><span style="color:#034a94"><strong>Índice de
-condición:</strong></span> es una medida útil para determinar el número
-de dependencias casi lineales en <span
-class="math inline">\(\boldsymbol{X}&#39;\boldsymbol{X}\)</span>. Se
-calcula como: <span class="math inline">\(\kappa_j = \lambda_{\max} /
-\lambda_j,\ j = 1, \ldots, p\)</span> (en <span
-class="math inline">\(R\)</span> se obtienen los valores <span
-class="math inline">\(\sqrt{\kappa_j}\)</span>). El criterio para
-detectar multicolinealidad es:</p>
-<p></br></p>
-<ul>
-<li>Si <span class="math inline">\(\sqrt{\kappa_j} \leq 10\ \forall
-j\)</span>, no hay problemas de multicolinealidad.</li>
-</ul>
-<p></br></p>
-<ul>
-<li>Si al menos para un <span class="math inline">\(j\)</span>, <span
-class="math inline">\(10 &lt; \sqrt{\kappa_j} \leq 31.62\)</span>,
-entonces hay problemas de multicolinealidad moderada.</li>
-</ul>
-<p></br></p>
-<ul>
-<li>Si al menos para un <span class="math inline">\(j\)</span>, <span
-class="math inline">\(\sqrt{\kappa_j} &gt; 31.62\)</span>, entonces hay
-problemas de multicolinealidad graves (por lo menos hay una asociación
-casi lineal entre dos o más predictoras).</li>
-</ul>
+<p>El <strong>VIF</strong> es una medida que cuantifica cuánto la
+varianza de un coeficiente de regresión se incrementa debido a la
+multicolinealidad. Si los <strong>VIF</strong> son muy altos (por encima
+de 5 o 10), puede indicar alta multicolinealidad, y puedes considerar
+tomar medidas.</p>
+<p></br></br></p>
+</div>
+<div id="regularización-ridge-y-lasso" class="section level3">
+<h3><span style="color:#FF7F00"> <strong>Regularización (Ridge y
+Lasso):</strong></span></h3>
+<p>Tanto la regresión Ridge como la regresión Lasso, permiten reducir la
+multicolinealidad, al forzar la selección de variables, eliminando
+algunos coeficientes a cero. Ambas técnicas introducen penalizaciones
+que reducen la magnitud de los coeficientes.</p>
 <p></br></p>
 </div>
-<div id="proporciones-de-descomposición-de-varianza"
-class="section level3">
-<h3><span style="color:#FF7F00"><strong>Proporciones de descomposición
-de varianza:</strong></span></h3>
-<p>Denotados <span class="math inline">\(\pi_{ij}\)</span> representan
-la proporción de la varianza de cada <span
-class="math inline">\(\widehat\beta_j\)</span> (o de cada factor de
-inflación de varianza) debida al <span
-class="math inline">\(i\)</span>-ésimo valor propio de la matriz <span
-class="math inline">\(\boldsymbol{X}&#39;\boldsymbol{X}\)</span>.</p>
-<p>Proporciones altas (<span class="math inline">\(\pi_{ij} &gt;
-0.5\)</span>) para dos o más coeficientes de regresión asociados con un
-mismo valor propio pequeño es evidencia de multicolinealidad entre las
-variables correspondientes a tales coeficientes.</p>
-<p></br></br></p>
+<div id="regresión-ridge" class="section level3">
+<h3><span style="color:#FF7F00"> <strong>Regresión
+Ridge:</strong></span></h3>
+<p></br></p>
+<p>La regresión Ridge es una técnica utilizada para abordar el problema
+de la multicolinealidad en el análisis de regresión múltiple. Introduce
+una penalización en la función de costo que agrega una suma ponderada de
+los cuadrados de los coeficientes de regresión, lo que ayuda a reducir
+la magnitud de los coeficientes y evitar así la sobreajuste debido a la
+multicolinealidad. Esta suma ponderada está controlada por un
+hiperparámetro llamado “lambda” (<span
+class="math inline">\(\lambda\)</span>), que debe ser ajustado.</p>
+<p><span class="math display">\[y = \beta_0 + \beta_1x_1 + \beta_2x_2 +
+\ldots + \beta_px_p + \lambda \sum_{i=1}^{p} \beta_i^2 \]</span></p>
+<p></br></p>
+</div>
+<div id="regresión-lasso" class="section level3">
+<h3><span style="color:#FF7F00"> <strong>Regresión
+Lasso:</strong></span></h3>
+<p></br></p>
+<p>La regresión Lasso también se utiliza para abordar la
+multicolinealidad y realizar selección de características. Al igual que
+Ridge, Lasso agrega una penalización a la función de costo, pero en este
+caso, utiliza la suma ponderada de los valores absolutos de los
+coeficientes de regresión. Esto puede llevar a que algunos coeficientes
+se vuelvan exactamente cero, lo que implica selección de características
+y ayuda a obtener un modelo más simple.</p>
+<p><span class="math display">\[y = \beta_0 + \beta_1x_1 + \beta_2x_2 +
+\ldots + \beta_px_p + \lambda \sum_{i=1}^{p} |\beta_i|\]</span>
+</br></br></p>
 </div>
 <div id="nota" class="section level3 content-box-gray">
 <h3><span style="color:#686868"> <strong>Nota</strong></span></h3>
-<p>El análisis de valores propios se puede realizar usando datos
-centrados o con los datos originales.</p>
+<p>En esta unidad heremos enfasis en la fundamentación teórica y la
+selección de variables a través de sustentos teótricos y mediante
+metodología de paso a paso</p>
 </div>
 
 

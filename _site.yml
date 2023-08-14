@@ -46,7 +46,9 @@ navbar:
         - text: "Causas / Efectos"  
           href: recurso081.html          
         - text: "Diagnóstico"  
-          href: recurso082.html          
+          href: recurso082.html   
+        - text: "Alternativas"  
+          href: recurso083.html           
     - text: "R "
       menu:
         - text: "Análisis previo"

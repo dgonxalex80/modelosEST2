@@ -18,7 +18,7 @@ Entre los diagnósticos más usados para detectar multicolinealidad en un modelo
 
 </br>
 
-### 1. <span style="color:#034a94">**Examinar la matriz de correlaciones entre las predictoras:**</span> 
+### <span style="color:#FF7F00">**Examinar la matriz de correlaciones entre las predictoras:**</span> 
 
 </br>
 
@@ -33,7 +33,7 @@ También valores de $\text{COR}\left(X_j, X_k\right)$ pequeños no necesariament
 
 </br></br>
 
-### 2. <span style="color:#034a94">**Factores de Inflación de Varianza:**</span> 
+### <span style="color:#FF7F00">**Factores de Inflación de Varianza:**</span> 
 
 Denotados $\text{VIF}_j,\ j = 1, \ldots, k$ se calculan como: 
 
@@ -105,7 +105,7 @@ A continuación se establece el criterio para detectar la multicolinealidad de a
 
 </br></br>
 
-### 3. <span style="color:#034a94">**Análisis de los valores propios de $\boldsymbol{X}'\boldsymbol{X}$:**</span> 
+### <span style="color:#FF7F00">**Análisis de los valores propios de $\boldsymbol{X}'\boldsymbol{X}$:**</span> 
 
 Se trata de evaluar si hay valores propios con valores cercanos a cero. Para ello se definen las medidas que se presentan a continuación:
 
@@ -143,7 +143,9 @@ Se trata de evaluar si hay valores propios con valores cercanos a cero. Para ell
 
 </br>
 
-<span style="color:#034a94">**Proporciones de descomposición de varianza:**</span> denotados $\pi_{ij}$ representan la proporción de la varianza de cada $\widehat\beta_j$ (o de cada factor de inflación de varianza) debida al $i$-ésimo valor propio de la matriz $\boldsymbol{X}'\boldsymbol{X}$.
+### <span style="color:#FF7F00">**Proporciones de descomposición de varianza:**</span> 
+
+Denotados $\pi_{ij}$ representan la proporción de la varianza de cada $\widehat\beta_j$ (o de cada factor de inflación de varianza) debida al $i$-ésimo valor propio de la matriz $\boldsymbol{X}'\boldsymbol{X}$.
 
 Proporciones altas ($\pi_{ij} > 0.5$) para dos o más coeficientes de regresión asociados con un mismo valor propio pequeño es evidencia de multicolinealidad entre las variables correspondientes a tales coeficientes.
 

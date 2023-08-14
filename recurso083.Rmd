@@ -1,0 +1,118 @@
+---
+title: <span style="color:#034a94"> **Alternativas para la multicolinealidad**</span>
+output: html_document
+css: style.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment = NA)
+
+library(paqueteMODELOS)
+data("arboles1")
+arboles1$D1 = as.numeric(arboles1$mg=="GENOTIPO_2")
+arboles1$D2 = as.numeric(arboles1$finca=="FINCA_2")
+arboles1$D3 = as.numeric(arboles1$finca=="FINCA_3")
+arboles1$peso = as.numeric(arboles1$peso)
+arboles1$diametro = as.numeric(arboles1$diametro)
+arboles1$altura = as.numeric(arboles1$altura)
+
+
+# library(tidyverse)
+# library(lmtest) # diagnosticos de modelos lineales
+# library(sandwich) # errores estandar robustos
+# library(ggeffects) # efectos y predicciones en modelos de regresion
+# library(modelsummary) # tablas de regresion
+
+```
+
+
+</br></br>
+
+Como se mencionó la multicolinealidad es un problema común en modelos de regresión lineal múltiple cuando las variables independientes están altamente correlacionadas entre sí. Puede dificultar la interpretación de los coeficientes y hacer que el modelo sea menos estable. Algunas alternativas para manejar la multicolinealidad en un modelo de regresión lineal múltiple:
+
+</br>
+
+
+### <span style="color:#FF7F00"> **Eliminación de variables:**</span> 
+
+</br>
+
+Si es posible, considera eliminar una de las variables altamente correlacionadas. Esto puede ayudar a reducir la multicolinealidad, pero se debe tener en cuenta el impacto en la interpretación del modelo y la pérdida potencial de información. En caso de no realizar este procedimiento adecuadamente puede producir sesgos en las estimaciones.
+
+</br></br>
+
+
+### <span style="color:#FF7F00"> **Transformación de variables:**</span>  
+
+</br>
+
+
+Si tienes variables que están relacionadas de manera no lineal, puedes considerar transformaciones como logaritmos o raíces cuadradas para reducir la correlación entre ellas, pues al reducir la escala de las variables es posible que se minimice el problema.
+
+</br></br>
+
+
+### <span style="color:#FF7F00"> **Análisis de componentes principales (PCA):**</span>  
+
+PCA es una técnica de reducción de dimensionalidad que transforma las variables originales en un conjunto de componentes no correlacionados (llamados componentes principales), es decir que al conformarse un grupo de variables nuevas independientes desaparece la multicolinealidad. Se debe tener en cuenta que los componentes principales pueden ser difíciles de interpretar en términos de las variables originales.
+
+
+</br></br>
+
+### <span style="color:#FF7F00"> **Crear índices o sumar variables:**</span>  
+
+</br>
+
+
+En lugar de usar variables altamente correlacionadas individualmente, puedes considerar crear un índice o una variable suma que capture la información de ambas. Esto puede ayudar a reducir la multicolinealidad. Como puede ser el caso de variables correspondientes a los estados financieros de empresas.
+
+</br></br>
+
+### <span style="color:#FF7F00"> **Validación cruzada:**</span>  
+
+</br>
+
+
+Al ajustar modelos, utiliza técnicas como la validación cruzada para evaluar cómo se comporta el modelo en datos no vistos. Esto puede ayudar a identificar si la multicolinealidad está afectando el rendimiento del modelo.
+
+</br></br>
+
+### <span style="color:#FF7F00"> **Análisis de VIF (Varianza Inflación Factor):**</span>  
+
+</br>
+
+El **VIF** es una medida que cuantifica cuánto la varianza de un coeficiente de regresión se incrementa debido a la multicolinealidad. Si los **VIF** son muy altos (por encima de 5 o 10), puede indicar alta multicolinealidad, y puedes considerar tomar medidas.
+
+</br></br>
+
+### <span style="color:#FF7F00"> **Regularización (Ridge y Lasso):**</span>  
+
+Tanto la regresión Ridge como la regresión Lasso, permiten  reducir la multicolinealidad, al forzar la selección de variables, eliminando algunos coeficientes a cero. Ambas técnicas introducen penalizaciones que reducen la magnitud de los coeficientes.
+
+</br>
+
+### <span style="color:#FF7F00"> **Regresión Ridge:**</span> 
+
+</br>
+
+La regresión Ridge es una técnica utilizada para abordar el problema de la multicolinealidad en el análisis de regresión múltiple. Introduce una penalización en la función de costo que agrega una suma ponderada de los cuadrados de los coeficientes de regresión, lo que ayuda a reducir la magnitud de los coeficientes y evitar así la sobreajuste debido a la multicolinealidad. Esta suma ponderada está controlada por un hiperparámetro llamado "lambda" ($\lambda$), que debe ser ajustado.
+
+$$y = \beta_0 + \beta_1x_1 + \beta_2x_2 + \ldots + \beta_px_p + \lambda \sum_{i=1}^{p} \beta_i^2 $$
+
+</br>
+
+### <span style="color:#FF7F00"> **Regresión Lasso:**</span> 
+
+</br>
+
+La regresión Lasso también se utiliza para abordar la multicolinealidad y realizar selección de características. Al igual que Ridge, Lasso agrega una penalización a la función de costo, pero en este caso, utiliza la suma ponderada de los valores absolutos de los coeficientes de regresión. Esto puede llevar a que algunos coeficientes se vuelvan exactamente cero, lo que implica selección de características y ayuda a obtener un modelo más simple.
+
+$$y = \beta_0 + \beta_1x_1 + \beta_2x_2 + \ldots + \beta_px_p + \lambda \sum_{i=1}^{p} |\beta_i|$$
+</br></br>
+
+<div class="content-box-gray">
+### <span style="color:#686868"> **Nota**</span>
+
+En esta unidad heremos enfasis en la fundamentación teórica y la selección de variables a través de sustentos teótricos y mediante metodología de paso a paso 
+
+</div>
