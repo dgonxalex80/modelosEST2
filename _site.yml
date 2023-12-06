@@ -27,7 +27,7 @@ navbar:
           href: recurso040.html
         - text: "Inferencia sobre subconjunto de parámetros"    
           href: recurso042.html          
-        - text: "Sobre los pronósticos"    
+        - text: "Pronósticos"    
           href: recurso045.html
     - text: "Ajuste del modelo"
       menu:
@@ -49,7 +49,7 @@ navbar:
           href: recurso082.html   
         - text: "Alternativas"  
           href: recurso083.html           
-    - text: "R "
+    - text: "Código R "
       menu:
         - text: "Análisis previo"
           href: recurso099.html         

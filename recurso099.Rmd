@@ -1,8 +1,12 @@
 ---
 title: <span style="color:#034a94">**R - Análisis descriptivo**</span>
-output: html_document
-css: style.css
+author: "Modelos Estadísticos para la toma de decisiones"
+output:
+  html_document:
+    code_folding: hide
+    css: style.css
 ---
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, comment = NA)

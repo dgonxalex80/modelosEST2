@@ -38,3 +38,59 @@ Estarémos utilizando varios conceptos y métodos estadísticos que nos permita 
 ```{r, echo=FALSE, out.width="100%", fig.align = "center"}
 knitr::include_graphics("img/nube1.png")
 ```
+
+</br></br>
+
+El siguiente es el contenido de la unidad:
+
+</br>
+
+* **Conceptos**
+  * Modelo de Regresión Lineal Múltiple
+  * Correlación
+  * Algebra Lineal
+  * Notación matricial del modelo de regresión
+
+</br>
+
+* **Estimación**
+  * Mínimos cuadrados ordinarios
+  * Propiedades de los estimadores
+  * Validación de los supuestos
+
+</br>
+
+* **Inferencia**
+  * Inferencia sobre los parámetros
+  * Inferencia sobre un subconjunto de parámetros
+  * Pronósticos
+
+</br>
+
+* **Ajustes del modelo**
+  * Indicadores de ajustes
+  * Validación cruzada
+    
+</br>
+
+* **Variables categçoricas**
+  * En el modelo de Regresión Lineal Múltiple
+
+</br>
+
+* **Multicolinealidad**
+  * Multicolinealidad
+  * Causas/Efectos
+  * Diagnóstico
+  * Alternativas
+  
+</br>
+
+* **Código R**
+  * Análisis previo
+  * Estimacion de Mínimos Cuadrados Ordinarios
+  * Validación cruzada
+  * Mapa
+
+  
+
