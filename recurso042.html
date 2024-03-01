@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Modelos Estadísticos para la toma de decisiones" />
+
+
+<title> Modelo de Regresión Lineal Múltiple</title>
+
+<script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Modelos Estadísticos para la toma de decisiones</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Conceptos
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso005.html">Modelo de Regresión Lineal Múltiple</a>
+    </li>
+    <li>
+      <a href="recurso010.html">Correlación</a>
+    </li>
+    <li>
+      <a href="recurso015.html">Algebra Lineal</a>
+    </li>
+    <li>
+      <a href="recurso020.html">Notación matricial de modelo</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Estimación
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso030.html">Mínimos Cuadrados Ordinarios</a>
+    </li>
+    <li>
+      <a href="recurso035.html">Propiedades de los estimadores</a>
+    </li>
+    <li>
+      <a href="recurso050.html">Validación de los supuestos</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Inferencia
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso040.html">Inferencia sobre los parámetros</a>
+    </li>
+    <li>
+      <a href="recurso042.html">Inferencia sobre subconjunto de parámetros</a>
+    </li>
+    <li>
+      <a href="recurso045.html">Pronósticos</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Ajuste del modelo
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso055.html">Indicadores de ajuste</a>
+    </li>
+    <li>
+      <a href="recurso060.html">Validación cruzada</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Variables cat.
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso061.html">En el modelo de RLM</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Multicolinealidad
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso080.html">Multicolinealidad</a>
+    </li>
+    <li>
+      <a href="recurso081.html">Causas / Efectos</a>
+    </li>
+    <li>
+      <a href="recurso082.html">Diagnóstico</a>
+    </li>
+    <li>
+      <a href="recurso083.html">Alternativas</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Código R 
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso099.html">Análisis previo</a>
+    </li>
+    <li>
+      <a href="recurso100.html">Estimación MCO</a>
+    </li>
+    <li>
+      <a href="recurso120.html">Validación cruzada</a>
+    </li>
+    <li>
+      <a href="recurso140.html">Mapa</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore"><span style="color:#034a94"> <strong>Modelo
+de Regresión Lineal Múltiple</strong></span></h1>
+<h4 class="author">Modelos Estadísticos para la toma de decisiones</h4>
+
+</div>
+
+
+<p></br></br></p>
+<div id="prueba-de-la-significancia" class="section level2">
+<h2><span style="color:#034a94"> <strong>Prueba de la
+significancia</strong></span></h2>
+<p></br></p>
+<p>Considere el caso en que se desea probar simultáneamente la
+significancia de 2 ó más coeficientes de la regresión, reunidos en el
+subconjunto <span class="math inline">\(A\)</span>, en la presencia de
+otros coeficientes de regresión, reunidos en el subconjunto <span
+class="math inline">\(B\)</span>. Para lo cual, se debe separar la
+<em>importancia</em> de los coeficientes de regresión del subconjunto
+<span class="math inline">\(A\)</span> dado que los coeficientes de
+regresión en el subconjunto <span class="math inline">\(B\)</span> están
+presentes en el modelo.</p>
+<p></br></p>
+<p>Una forma de medir la <em>importancia</em> de un subconjunto de
+coeficientes en un modelo de RLM es a través de las denominadas
+<strong>sumas de cuadrados extra</strong>.</p>
+<p></br></p>
+<p>Una <strong>suma de cuadrados extra</strong>
+(<strong>SSextra</strong>) mide la reducción marginal en la
+<strong>SSE</strong> (o el incremento marginal en la SSR) producida por
+uno o varios coeficientes de regresión, dado que los otros coeficientes
+de regresión están presentes en el modelo.</p>
+<p></br></p>
+<p>Una notación para las <strong>SSextra</strong> en un modelo de
+<strong>RLM</strong> debe definir:</p>
+<ul>
+<li><p>El subconjunto <span class="math inline">\(A\)</span> de
+coeficientes de regresión del que se quiere obtener la SSextra.</p></li>
+<li><p>El subconjunto <span class="math inline">\(B\)</span> de
+coeficientes de regresión que acompañan al subconjunto <span
+class="math inline">\(A\)</span> en el modelo.</p></li>
+</ul>
+<p></br></p>
+<p>Se debe cumplir que <span class="math inline">\(A \cup B\)</span>
+debe estar incluido en el conjunto de todos los coeficientes de
+regresión del modelo, y <span class="math inline">\(A \cap B =
+\phi\)</span>.</p>
+<p>Así, una suma de cuadrados extra para el subconjunto <span
+class="math inline">\(A\)</span> dado un subconjunto <span
+class="math inline">\(B\)</span> se denota y calcula como:</p>
+<p></br></p>
+<p><span class="math display">\[\text{SSR}\left(A\vert B\right) =
+\text{SSR}\left(A \cup B\right) - \text{SSR}\left(B\right) =
+\text{SSE}\left(B\right) - \text{SSE}\left(A \cup B\right)\]</span></p>
+<p></br></br></p>
+<div id="ejemplo" class="section level3">
+<h3><span style="color:#FF7F00"> <strong>Ejemplo</strong></span></h3>
+<p>Suponga un modelo de regresión múltiple de una respuesta <span
+class="math inline">\(Y\)</span> en función de tres variables
+predictoras <span class="math inline">\(X_1, X_2, X_3\)</span>, esto
+es,</p>
+<p><span class="math display">\[Y = \beta_0 + \beta_1X_1 + \beta_2X_2 +
+\beta_3X_3 + \varepsilon\]</span></p>
+<p></br></p>
+<p>Veamos algunas de las posibles sumas de cuadrados extras:</p>
+<p></br> <span class="math display">\[
+\begin{align*}
+\text{SSR}\left(\beta_1\vert \beta_0, \beta_2, \beta_3\right) &amp;
+=  &amp; \text{SSR}\left(\beta_0, \beta_1, \beta_2, \beta_3\right) -
+\text{SSR}\left(\beta_0, \beta_2, \beta_3\right)\\
+         &amp; = &amp; \text{SSE}\left(\beta_0, \beta_2, \beta_3\right)
+- \text{SSE}\left(\beta_0, \beta_1, \beta_2, \beta_3\right)
+\end{align*}
+\]</span></p>
+<p>donde <span class="math inline">\(\text{SSR}\left(\beta_1\vert
+\beta_0, \beta_2, \beta_3\right)\)</span> es la suma de cuadrados extra
+de <span class="math inline">\(\beta_1\)</span> dado que <span
+class="math inline">\(\beta_0\)</span>, <span
+class="math inline">\(\beta_2\)</span> y <span
+class="math inline">\(\beta_3\)</span> están presentes en el modelo de
+regresión.</p>
+<p></br></p>
+<p><span class="math display">\[
+\begin{align*}
+\text{SSR}\left(\beta_1, \beta_2\vert \beta_0, \beta_3\right) &amp; =
+&amp; \text{SSR}\left(\beta_0, \beta_1, \beta_2, \beta_3\right) -
+\text{SSR}\left(\beta_0, \beta_3\right) \\
+   &amp; = &amp; \text{SSE}\left(\beta_0, \beta_3\right) -
+\text{SSE}\left(\beta_0, \beta_1, \beta_2, \beta_3\right)
+\end{align*}
+\]</span></p>
+<p>donde <span class="math inline">\(\text{SSR}\left(\beta_1,
+\beta_2\vert \beta_0, \beta_3\right)\)</span> es la suma de cuadrados
+extra de <span class="math inline">\(\beta_1\)</span> y <span
+class="math inline">\(\beta_2\)</span> dado que <span
+class="math inline">\(\beta_0\)</span> y <span
+class="math inline">\(\beta_3\)</span> están presentes en el modelo de
+regresión.</p>
+<p></br></p>
+<p><span class="math display">\[
+\begin{align*}
+\text{SSR}\left(\beta_1\vert \beta_0,\beta_3\right) &amp;=&amp;
+\text{SSR}\left(\beta_0, \beta_1, \beta_3\right) -
+\text{SSR}\left(\beta_0, \beta_3\right)\\
+&amp;=&amp; \text{SSE}\left(\beta_0, \beta_3\right) -
+\text{SSE}\left(\beta_0, \beta_1, \beta_3\right)
+\end{align*}
+\]</span></p>
+<p>donde <span class="math inline">\(\text{SSR}\left(\beta_1\vert
+\beta_0,\beta_3\right)\)</span> es la suma de cuadrados extras de <span
+class="math inline">\(\beta_1\)</span> dado que <span
+class="math inline">\(\beta_0\)</span> y <span
+class="math inline">\(\beta_3\)</span> están presentes en el modelo de
+regresión.</p>
+<!-- (**Tarea:** defina la suma de cuadrados extra $\text{SSR}\left(\beta_2\vert \beta_0, \beta_1\right)$) -->
+</div>
+<p></br></br></p>
+<p>Volviendo al objetivo inicial donde se desea probar simultáneamente
+la significancia de 2 o más coeficientes de la regresión, por ejemplo,
+en el modelo <span class="math inline">\(Y = \beta_0 + \beta_1X_1 +
+\beta_2X_2 + \beta_3X_3 + \beta_4X_4 + \beta_5X_5 +
+\varepsilon\)</span>, se desea probar si el subconjunto de coeficientes
+de regresión <span class="math inline">\(\beta_1, \beta_2\)</span> y
+<span class="math inline">\(\beta_5\)</span> es significativo en el
+modelo, esto es, se desea probar que:</p>
+<p><span class="math display">\[
+\begin{array}{l}
+H_0:\ \beta_1 = \beta_2 = \beta_5 = 0\\
+H_1:\ \text{Algún }\beta_j\neq 0,\quad j = 1, 2, 5.
+\end{array}
+\]</span></p>
+<p></br></p>
+<p>Para este tipo de pruebas se requiere calcular las sumas de cuadrados
+extra asociada al subconjunto de los coeficientes de regresión <span
+class="math inline">\(A = \left\{\beta_1, \beta_2,
+\beta_5\right\}\)</span> dado el subconjunto de coeficientes restante
+<span class="math inline">\(B = \left\{\beta_0, \beta_3,
+\beta_4\right\}\)</span>.</p>
+<p>Esto es,</p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{SSR}&amp;\left(\beta_1, \beta_2, \beta_5 \vert \beta_0, \beta_3,
+\beta_4\right) =\\
+&amp;\quad\quad\quad\quad= \text{SSR}\left(\beta_0, \beta_1, \beta_2,
+\beta_3, \beta_4, \beta_5\right) - \text{SSR}\left(\beta_0, \beta_3,
+\beta_4\right)\\
+&amp;\quad\quad\quad\quad= \text{SSE}\left(\beta_0, \beta_3,
+\beta_4\right) - \text{SSE}\left(\beta_0, \beta_1, \beta_2, \beta_3,
+\beta_4, \beta_5\right)
+\end{aligned}
+\]</span></p>
+<p></br></br></p>
+</div>
+<div id="ejemplo-1" class="section level3">
+<h3><span style="color:#FF7F00"> <strong>Ejemplo</strong></span></h3>
+<p></br></p>
+<p>En este cálculo se pueden definir dos modelos:</p>
+<ul>
+<li><strong>Un modelo completo:</strong> que incluye todos los
+coeficientes de regresión que se consideran inicialmente en el modelo
+(el subconjunto <span class="math inline">\(A \cup B\)</span>). Para el
+ejemplo es: <span class="math display">\[Y = \beta_0 + \beta_1X_1 +
+\beta_2X_2 + \beta_3X_3 + \beta_4X_4 + \beta_5X_5 +
+\varepsilon.\]</span></li>
+</ul>
+<p></br></br></p>
+<ul>
+<li><strong>Un modelo nulo o reducido:</strong> que se obtiene al
+aplicar lo establecido en <span class="math inline">\(H_0\)</span> al
+modelo completo, es decir, eliminar los coeficientes de regresión en
+<span class="math inline">\(A\)</span> (quedando los coeficientes de
+regresión en <span class="math inline">\(B\)</span>). Para el ejemplo
+es:</li>
+</ul>
+<p><span class="math display">\[Y = \beta_0 + \beta_3X_3 + \beta_4X_4 +
+\varepsilon.\]</span></p>
+<p></br></p>
+<p>Al igual que en las sumas de cuadrados vistas en la tabla
+<strong>ANOVA</strong>, las sumas de cuadrados extra tienen asociados
+unos grados de libertad, que en este caso se obtienen como el tamaño del
+subconjunto <span class="math inline">\(A\)</span> que se está probando,
+o equivalentemente como la diferencia en grados de libertad de la SSR (o
+SSE) de los dos modelos definidos anteriormente.</p>
+<p></br></br></p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{g.l}_{\text{SSR}\left(\beta_1, \beta_2, \beta_5 \vert \beta_0,
+\beta_3, \beta_4\right)}  &amp;=&amp;
+\text{g.l}_{\text{SSR}\left(\beta_0, \beta_1, \beta_2, \beta_3, \beta_4,
+\beta_5\right)} - \text{g.l}_{\text{SSR}\left(\beta_0, \beta_3,
+\beta_4\right)}\\
+&amp;=&amp; 5 - 2 \\
+&amp;=&amp;  \text{g.l}_{\text{SSE}\left(\beta_0, \beta_3,
+\beta_4\right)} - \text{g.l}_{\text{SSE}\left(\beta_0, \beta_1, \beta_2,
+\beta_3, \beta_4, \beta_5\right)}\\
+&amp;=&amp; (n - 3) - (n - 6) \\
+&amp;=&amp; 3
+\end{aligned}
+\]</span></p>
+<p>También se define el <strong>cuadrado medio extra</strong> (MSextra)
+como la razón entre la <strong>suma de cuadrados extra</strong> y sus
+respectivos grados de libertad. Para el ejemplo</p>
+<p><span class="math display">\[\text{MSR}\left(\beta_1, \beta_2,
+\beta_5 \vert \beta_0, \beta_3, \beta_4\right) =
+\frac{\text{SSR}\left(\beta_1, \beta_2, \beta_5 \vert \beta_0, \beta_3,
+\beta_4\right)}{3}\]</span></p>
+<p></br></p>
+<p>Finalmente, el <strong>estadístico de prueba</strong> es igual a la
+razón del cuadrado medio extra sobre el cuadrado medio del error del
+modelo completo. Para el ejemplo, sería</p>
+<p></br></p>
+<p><span class="math display">\[
+\begin{aligned}
+F_0 &amp;= \frac{\text{MSR}\left(\beta_1, \beta_2, \beta_5 \vert
+\beta_0, \beta_3, \beta_4\right)}{\text{MSE}\left(\beta_0, \beta_1,
+\beta_2, \beta_3, \beta_4, \beta_5\right)}\\[0.5cm]
+&amp;= \frac{\text{SSR}\left(\beta_1, \beta_2, \beta_5 \vert \beta_0,
+\beta_3, \beta_4\right)/3}{\text{MSE} }
+\end{aligned}
+\]</span></p>
+<p>siempre en el denominador estará el MSE del modelo completo.</p>
+<p></br></br></p>
+<p>A un nivel de significancia <span
+class="math inline">\(\alpha\)</span>, el criterio de rechazo es <span
+class="math inline">\(F_0 &gt; f_{\alpha, 3, n - 6}\)</span>.</p>
+<p></br></br></p>
+</div>
+<div id="ejemplo-2" class="section level3">
+<h3><span style="color:#FF7F00"> <strong>Ejemplo</strong></span></h3>
+<p>En el modelo <span class="math inline">\(Y = \beta_0 + \beta_1X_1 +
+\beta_2X_2 + \beta_3X_3 + \beta_4X_4 + \beta_5X_5 +
+\varepsilon\)</span>, para probar la hipótesis: <span
+class="math display">\[
+\begin{array}{l}
+H_0: \beta_2 = \beta_4 = 0\\
+H_1: \text{Algún }\beta_j \ne 0, \ j = 2, 4.
+\end{array}
+\]</span></p>
+<p></br></p>
+<p>se usa como estadístico de prueba a</p>
+<p><span class="math display">\[F_0 = \frac{\text{SSR}\left(\beta_2,
+\beta_4\vert \beta_0, \beta_1, \beta_3, \beta_5\right)/2}{\text{MSE}}
+\overset{\ \text{bajo }H_0}{\sim} f_{2, n - 6}\]</span></p>
+<p>y con un nivel de significancia <span
+class="math inline">\(\alpha\)</span> el criterio de rechazo de la
+hipótesis nula es <span class="math inline">\(F_0 &gt; f_{\alpha, 2, n -
+6}\)</span></p>
+<p></br></br></p>
+<!-- ## **Uso de SSextra para la prueba de significancia de un coeficiente individual** -->
+<H2>
+<span style="color:#034a94"><strong>Uso de SSextra para la prueba de
+significancia de un coeficiente individual</strong></span>
+</H2>
+<p></br></p>
+<p>En un modelo de RLM con <span class="math inline">\(k\)</span>
+predictoras, esta prueba establece que</p>
+<p><span class="math display">\[\begin{aligned} &amp;H_0: \beta_j = 0\\
+&amp;H_1: \beta_j \neq 0\end{aligned}, \quad j = 1, 2, \ldots,
+k,\]</span> donde <span class="math inline">\(A =
+\left\{\beta_j\right\}\)</span> y <span class="math inline">\(B =
+\left\{\beta_0, \beta_1, \beta_2, \ldots, \beta_{j - 1}, \beta_{j + 1},
+\beta_{j + 2}, \ldots, \beta_k\right\}\)</span>. Luego, usando SSextra
+el estadístico de prueba es:</p>
+<p></br></br></p>
+<p><span class="math display">\[
+F_{j,0} = \frac{\text{SSR}\left(\beta_j\vert \beta_0, \beta_1, \beta_2,
+\ldots, \beta_{j - 1}, \beta_{j + 1}, \beta_{j + 2}, \ldots,
+\beta_k\right)}{\text{MSE}}
+\]</span></p>
+<p></br></br></p>
+<p>Observe que la SSextra solo tiene un grado de libertad, de forma que
+es igual al MSextra, y bajo la hipótesis nula <span
+class="math inline">\(F_{j,0} \sim f_{1, n - p}\)</span>, por lo cual, a
+un nivel de significancia <span class="math inline">\(\alpha\)</span>,
+el criterio de rechazo de la hipótesis nula es: <span
+class="math inline">\(F_{j,0} &gt; f_{\alpha, 1, n - p}\)</span>.</p>
+<p></br></p>
+<p>La prueba anterior es equivalente a la prueba <span
+class="math inline">\(t\)</span> definida en una clase anterior. De
+hecho se puede demostrar que.</p>
+<ul>
+<li><p><span class="math inline">\(F_{j,0} =
+T_{j,0}^2\)</span>.</p></li>
+<li><p>Si se calculan los valores-P de los dos procedimientos de prueba,
+se llega a que:</p></li>
+</ul>
+<p><span class="math display">\[\text{vp}_F = P\left(f_{1, n - p} &gt;
+F_{j, 0}\right) \equiv P\left(\vert t_{n - p}\vert &gt; \vert T_{j,
+0}\vert\right) = \text{vp}_T\]</span></p>
+<p>Por otro lado, también se puede ver la prueba de significancia de la
+regresión como un caso particular de una prueba basada en SSextra donde
+<span class="math inline">\(A = \left\{\beta_1, \beta_2, \ldots,
+\beta_k\right\}\)</span> y <span class="math inline">\(B =
+\left\{\beta_0\right\}\)</span>.</p>
+<p></br></br></br></p>
+<H2>
+<span style="color:#034a94"><strong>Prueba de la hipótesis lineal
+general</strong></span>
+</H2>
+<p></br></p>
+<p>Suponga un modelo de RLM con <span class="math inline">\(k\)</span>
+variables predictoras, <span class="math inline">\(Y = \beta_0 +
+\beta_1X_1 + \cdots + \beta_kX_k + \varepsilon\)</span>, al que
+llamaremos modelo completo (FM).</p>
+<p></br></p>
+<p>En este modelo se tiene una suma de cuadrados de la regresión <span
+class="math inline">\(\text{SSR}(\text{FM}) = \text{SSR}\left(\beta_0,
+\beta_1,\ldots,\beta_k\right)\)</span> con <span
+class="math inline">\(k\)</span> g.l y una suma de cuadrados del
+error</p>
+<p></br></p>
+<p><span class="math inline">\(\text{SSE}(\text{FM}) =
+\text{SSE}\left(\beta_0, \beta_1,\ldots,\beta_k\right)\)</span> con
+<span class="math inline">\(n - p\)</span> g.l.</p>
+<p></br></p>
+<p>Considere además una matriz <span class="math inline">\(m\times
+p\)</span> de constantes <span
+class="math inline">\(\boldsymbol{L}\)</span>, con <span
+class="math inline">\(r \leq m\)</span> filas linealmente
+independientes. Se puede formular una prueba de hipótesis lineal general
+como:</p>
+<p></br></p>
+<p><span class="math display">\[
+H_0: \boldsymbol{L\beta} = \boldsymbol{0}\ \text{ vs. }\ H_1:
+\boldsymbol{L\beta} \neq \boldsymbol{0},
+\]</span> </br></p>
+<p>donde, <span class="math inline">\(\boldsymbol{0}\)</span> es un
+vector de ceros de dimensión <span class="math inline">\(m\times
+1\)</span>.</p>
+<p></br></p>
+<p><span class="math inline">\(\boldsymbol{L\beta} =
+\boldsymbol{0}\)</span> es simplemente un sistema de ecuaciones donde se
+formulan <span class="math inline">\(m\)</span> hipótesis que se prueban
+simultáneamente.</p>
+<p>Si al modelo completo se le aplica lo establecido en <span
+class="math inline">\(H_0\)</span> se llega a un modelo reducido (RM),
+que tiene asociado tanto una suma de cuadrados de la regresión <span
+class="math inline">\(\text{SSR}(\text{RM})\)</span> como una suma de
+cuadrados del error <span
+class="math inline">\(\text{SSE}(\text{RM})\)</span>.</p>
+<p>Para probar la hipótesis se debe definir una <strong>suma de
+cuadrados debida a la hipótesis</strong> (SSH) que se calcula como la
+diferencia entre las sumas de cuadrados de la regresión (o del error) de
+los modelos completo y reducido. Esto es,</p>
+<p></br></br></p>
+<div class="content-box-blue">
+<p><span class="math display">\[\text{SSH} = \text{SSE}(\text{RM}) -
+\text{SSE}(\text{FM}) = \text{SSR}(\text{FM}) -
+\text{SSR}(\text{RM})\]</span> donde :</p>
+<ul>
+<li><span class="math inline">\(\text{SSE}(\text{RM})\)</span> : suma de
+cuadrado de los errores del modelo restringido</li>
+<li><span class="math inline">\(\text{SSE}(\text{FM})\)</span> ; suma de
+cuadrado de los errores del modelo completo</li>
+</ul>
+</div>
+<p></br></p>
+<p>que tiene tantos grados de libertad como el número <span
+class="math inline">\(r\)</span> de filas linealmente independientes en
+<span class="math inline">\(\boldsymbol{L}\)</span>. O
+equivalentemente:</p>
+<p></br></p>
+<p><span class="math display">\[r = \text{g.l}_{\text{SSE}(\text{RM})} -
+\text{g.l}_{\text{SSE}(\text{FM})} = \text{g.l}_{\text{SSR}(\text{FM})}
+- \text{g.l}_{\text{SSR}(\text{RM})}\]</span></p>
+<p></br></p>
+<p>Luego, se define el <strong>cuadrado medio debido a la
+hipótesis</strong> (MSH) como:</p>
+<p></br> <span class="math display">\[\text{MSH} =
+\frac{\text{SSH}}{r}.\]</span></p>
+<p></br></p>
+<p>Finalmente, se define como estadístico de prueba a la razón entre el
+cuadrado medio de la hipótesis y el cuadrado medio del error del modelo
+completo:</p>
+<p></br></p>
+<p><span class="math display">\[
+F_0 = \frac{\text{MSH}}{\text{MSE}\left(\beta_0, \beta_1, \ldots,
+\beta_4\right)} = \frac{\text{SSH}/r}{\text{MSE}}
+\]</span></p>
+<p></br></p>
+<p>Se puede demostrar que bajo <span class="math inline">\(H_0\)</span>
+el estadístico <span class="math inline">\(F_0\sim f_{r, n -
+p}\)</span>. Lo cual permite a un nivel de significancia <span
+class="math inline">\(\alpha\)</span>, rechazar <span
+class="math inline">\(H_0\)</span> si <span class="math inline">\(F_0
+&gt; f_{\alpha, r, n - p}\)</span>.</p>
+<p>Veamos, ejemplos de cómo trabaja este procedimiento de prueba.</p>
+<p></br></br></p>
+<H3>
+<span style="color:#FF7F00"> <strong>Ejemplo</strong></span>
+</H3>
+<p>Suponga un modelo de RLM con <span class="math inline">\(k =
+4\)</span> variables predictoras, entonces se puede formular la
+siguiente prueba de hipótesis: <span class="math display">\[H_0: \beta_1
+= \beta _2,\ \beta_3 = \beta_4\]</span></p>
+<p><span class="math display">\[H_1: \beta_1 \ne \beta_2\ \text{ ó }\
+\beta_3 \ne \beta_4\]</span></p>
+<p></br></p>
+<p>Podemos reescribir la hipótesis nula de la siguiente manera: <span
+class="math display">\[
+H_0: \beta_1 - \beta_2 = 0,\ \beta_3 - \beta_4 = 0,
+\]</span></p>
+<p>de manera que la hipótesis nula contiene <span
+class="math inline">\(m = 2\)</span> ecuaciones y se puede escribir
+como: <span class="math display">\[
+H_0: \left\{\begin{array}{c}
+\beta_1 - \beta_2 = 0\\
+\beta_3 - \beta_4 = 0
+\end{array}\right.
+\]</span></p>
+<p>que en forma matricial se puede expresar como:</p>
+<p><span class="math display">\[
+H_0: \begin{array}{ccccclll}
+\left[\begin{array}{cccccc}
+0 &amp; 1 &amp; -1 &amp; 0 &amp; 0\\
+0 &amp; 0 &amp; 0 &amp; 1 &amp; -1
+\end{array}\right] &amp; \left[\begin{array}{c}
+\beta_0\\
+\beta_1\\
+\beta_2\\
+\beta_3\\
+\beta_4
+\end{array}\right] &amp; = &amp; \left[\begin{array}{c}
+0\\
+0
+\end{array}\right]
+\end{array}
+\]</span></p>
+<p>por tanto, se tiene una prueba de hipótesis lineal general, con:</p>
+<p><span class="math display">\[
+\boldsymbol{L} = \left[\begin{array}{cccccc}
+0 &amp; 1 &amp; -1 &amp; 0 &amp; 0\\
+0 &amp; 0 &amp; 0 &amp; 1 &amp; -1
+\end{array}\right],
+\]</span></p>
+<p>que tiene <span class="math inline">\(r = 2\)</span> filas
+linealmente independientes (observe que una fila no puede escribirse
+como un múltiplo escalar de la otra).</p>
+<p>El modelo reducido en este caso es <span
+class="math display">\[\begin{aligned}\text{RM: }\ Y &amp;= \beta_0 +
+\beta_1\left(X_1 + X_2\right) + \beta_3\left(X_3 + X_4\right) +
+\varepsilon\\ &amp;= \beta_0 + \beta_1X_{1, 2} + \beta_3X_{3, 4} +
+\varepsilon\end{aligned},\]</span></p>
+<p>donde <span class="math inline">\(X_{1, 2} = X_1 + X_2\)</span>, y
+<span class="math inline">\(X_{3, 4} = X_3 + X_4\)</span>.</p>
+<p></br></p>
+<p>En este modelo se tiene una suma de cuadrados del error <span
+class="math inline">\(\text{SSE}(\text{RM}) = \text{SSE}\left(\beta_0,
+\beta_1, \beta_3\right)\)</span> con <span class="math inline">\(n -
+3\)</span> grados de libertad.</p>
+<p>Luego, la SSH se calcula como: <span
+class="math display">\[\text{SSH} = \text{SSE}(\text{RM}) -
+\text{SSE}(\text{FM}),\]</span> que tiene 2 grados de libertad, de
+manera que el cuadrado medio debido a la hipótesis es: <span
+class="math display">\[\text{MSH} = \frac{\text{SSH}}{2}.\]</span></p>
+<p>Finalmente, se define como estadístico de prueba a:</p>
+<p><span class="math display">\[
+F_0 = \dfrac{\text{SSH}/2}{\text{MSE}}
+\]</span></p>
+<p></br></br></p>
+<div class="content-box-gray">
+<H3>
+<span style="color:#686868"> <strong>Nota</strong></span>
+</H3>
+<p>Observe que en el denominador se encuentra el cuadrado medio del
+modelo completo que tiene <span class="math inline">\(n - 5\)</span>
+grados de libertad.</p>
+<p>Bajo <span class="math inline">\(H_0\)</span> y los supuestos sobre
+los errores, <span class="math inline">\(F_0\sim f_{2, n - 5}\)</span>.
+Se rechaza para valores grandes de este estadístico, esto es, si <span
+class="math inline">\(VP = P\left(f_{2, n - 5} &gt; F_0\right)\)</span>
+es pequeño. O bien, si <span class="math inline">\(F_0 &gt; f_{\alpha,
+2, n - 5}\)</span>, el valor crítico a un nivel de significancia <span
+class="math inline">\(\alpha\)</span>.</p>
+</div>
+<p></br></br></p>
+<H3>
+<span style="color:#FF7F00"> <strong>Ejemplo</strong></span>
+</H3>
+<p>Bajo el mismo modelo de RLM con <span
+class="math inline">\(k=4\)</span> considere la siguiente prueba:</p>
+<p><span class="math display">\[
+H_0:\ \beta_1 = \beta_2 = 0, \ \beta_3 = \beta_4 \ \ \text{ vs. }\ H_1:\
+\beta_1 \ne 0 \text{ \ ó \ } \beta_2 \ne 0 \text{ \ ó \ } \beta_3 \ne
+\beta_4
+\]</span></p>
+<p></br></p>
+<p>Como en el ejemplo anterior, también se puede reescribir la hipótesis
+nula en términos de ecuaciones igualadas a cero:</p>
+<p><span class="math display">\[
+H_0:\ \beta_1 = 0, \ \beta_2 = 0, \ \beta_3 - \beta_4 = 0
+\]</span></p>
+<p></br></p>
+<p>Luego, en <span class="math inline">\(H_0\)</span> se tiene un
+sistema de <span class="math inline">\(m=3\)</span> ecuaciones que se
+puede expresar como:</p>
+<p></br></p>
+<p><span class="math display">\[
+H_0: \begin{array}{ccccclll}
+\left[\begin{array}{cccccc}
+0 &amp; 1 &amp; 0 &amp; 0 &amp; 0\\
+0 &amp; 0 &amp; 1 &amp; 0 &amp; 0\\
+0 &amp; 0 &amp; 0 &amp; 1 &amp; -1
+\end{array}\right] &amp; \left[\begin{array}{c}
+\beta_0\\
+\beta_1\\
+\beta_2\\
+\beta_3\\
+\beta_4
+\end{array}\right] &amp; = &amp; \left[\begin{array}{c}
+0\\
+0\\
+0
+\end{array}\right]
+\end{array}
+\]</span></p>
+<p></br></br></p>
+<p>por tanto, se tiene una prueba de hipótesis lineal general, con:</p>
+<p><span class="math display">\[
+\boldsymbol{L} = \left[\begin{array}{cccccc}
+0 &amp; 1 &amp; 0 &amp; 0 &amp; 0\\
+0 &amp; 0 &amp; 1 &amp; 0 &amp; 0\\
+0 &amp; 0 &amp; 0 &amp; 1 &amp; -1
+\end{array}\right],
+\]</span></p>
+<p></br></br></p>
+<p>que tiene <span class="math inline">\(r = 3\)</span> filas
+linealmente independientes (compruebe que ninguna de las filas se puede
+escribir como combinación lineal de las otras dos filas).</p>
+<p></br></p>
+<p>Entonces, el modelo nulo es:</p>
+<p></br></p>
+<p><span class="math display">\[\begin{aligned} \text{RM: }\ Y &amp;=
+\beta_0 + \beta_3\left(X_3 + X_4\right) + \varepsilon\\ &amp;= \beta_0 +
+\beta_3X_{3, 4} + \varepsilon\end{aligned},\]</span></p>
+<p></br></p>
+<p>donde <span class="math inline">\(X_{3, 4} = X_3 + X_4\)</span>.</p>
+<p></br></br></p>
+<p>El estadístico de prueba es, <span class="math display">\[
+F_0 = \dfrac{\text{SSH}/3}{\text{MSE}}.
+\]</span></p>
+<p></br></p>
+<p>Bajo <span class="math inline">\(H_0\)</span> y los supuestos sobre
+los errores, <span class="math inline">\(F_0\sim f_{3, n - 5}\)</span>.
+Se rechaza para valores grandes de este estadístico, esto es, si <span
+class="math inline">\(\text{VP} = P\left(f_{3, n - 5} &gt; F_0\right)
+&lt; \alpha\)</span>, donde <span class="math inline">\(\alpha\)</span>
+es el nivel de significancia de la prueba. O bien, si <span
+class="math inline">\(F_0 &gt; f_{\alpha, 3, n - 5}\)</span>.</p>
+<p></br></br></p>
+</div>
+<div id="ejemplo-3" class="section level3">
+<h3><span style="color:#FF7F00"> <strong>Ejemplo</strong></span></h3>
+<p></br></p>
+<p>Considere ahora la prueba de significancia del modelo de RLM con
+<span class="math inline">\(k=4\)</span> variables predictoras:</p>
+<p><span class="math display">\[
+H_0:\ \beta_1 = \beta_2 = \beta_3 = \beta_4 = 0 \quad\text{ vs. }\quad
+H_1:\ \text{Algún}\ \beta_j \ne 0,\ j = 1, 2, 3, 4.
+\]</span></p>
+<p></br></br></p>
+</div>
+<div id="nota" class="section level3 content-box-gray">
+<h3><span style="color:#686868"> <strong>Nota</strong></span></h3>
+<p></br></p>
+<p><span class="math inline">\(H_0\)</span> se puede reescribir
+como:</p>
+<p><span class="math display">\[
+H_0:\ \beta_1 = 0,\ \beta_2 = 0,\ \beta_3 = 0,\ \beta_4 = 0.
+\]</span></p>
+</div>
+<p></br></br></p>
+<p>En este caso también se puede reformular la hipótesis nula en la
+forma de una hipótesis lineal general, considerando las <span
+class="math inline">\(m = r = 4\)</span> ecuaciones linealmente
+independientes como sigue:</p>
+<p></br></p>
+<p><span class="math display">\[
+H_0: \begin{array}{ccccclll}
+\left[\begin{array}{cccccc}
+0 &amp; 1 &amp; 0 &amp; 0 &amp; 0\\
+0 &amp; 0 &amp; 1 &amp; 0 &amp; 0\\
+0 &amp; 0 &amp; 0 &amp; 1 &amp; 0\\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 1
+\end{array}\right] &amp; \left[\begin{array}{c}
+\beta_0\\
+\beta_1\\
+\beta_2\\
+\beta_3\\
+\beta_4
+\end{array}\right] &amp; = &amp; \left[\begin{array}{c}
+0\\
+0\\
+0\\
+0
+\end{array}\right]
+\end{array}
+\]</span></p>
+<p></br></p>
+<p>El modelo reducido es simplemente RM: <span class="math inline">\(Y =
+\beta_0 + \varepsilon\)</span>, donde el intercepto representa la media
+de la variable respuesta. Así el estimador de mínimos cuadrados del
+intercepto es simplemente la media muestral de <span
+class="math inline">\(Y\)</span>, es decir, <span
+class="math inline">\(\widehat{\beta}_0 = \bar{Y}\)</span>, por tanto,
+<span class="math inline">\(\widehat{Y} = \bar{Y}\)</span>, y en
+consecuencia tiene una suma de cuadrados del error igual a la suma de
+cuadrados totales (<span
+class="math inline">\(\text{SSE}\left(\beta_0\right) =
+\text{SST}\)</span>) con <span class="math inline">\(n - 1\)</span>
+grados de libertad, mientras que la suma de cuadrados de la regresión es
+igual a cero (<span class="math inline">\(\text{SSR}\left(\beta_0\right)
+= 0\)</span>).</p>
+<p></br></p>
+<p>Al calcular la SSH en función de la diferencia entre las SSE de los
+modelos RM y FM, se obtiene:</p>
+<p></br></p>
+<p><span class="math display">\[\begin{aligned} \text{SSH} &amp;=
+\text{SSE}\left(\beta_0\right) - \text{SSE}\left(\beta_0, \beta_1,
+\beta_2, \beta_3, \beta_4\right)\\ &amp;= \text{SST} -
+\text{SSE}\left(\beta_0, \beta_1, \beta_2, \beta_3, \beta_4\right)\\
+&amp;= \text{SSR}\left(\beta_0, \beta_1, \beta_2, \beta_3,
+\beta_4\right) = \text{SSR}\end{aligned},\]</span> </br></p>
+<p>con <span class="math inline">\(r = m = k = 4\)</span> grados de
+libertad, cuyo MSextra coincide con el MSR del modelo completo.</p>
+<p></br></br></p>
+<p>Así, el estadístico de prueba coincide con el visto en la prueba de
+significancia de la regresión</p>
+<p></br></p>
+<p><span class="math display">\[
+F_0 = \dfrac{\text{MSH}}{\text{MSE}} = \dfrac{\text{SSH}/4}{\text{MSE}}
+= \dfrac{\text{SSR}/4}{\text{MSE}} = \dfrac{\text{MSR}}{\text{MSE}}
+\]</span></p>
+<p></br></p>
+<p>Por lo tanto, bajo <span class="math inline">\(H_0\)</span> y los
+supuestos sobre los errores se cumple que, <span
+class="math inline">\(F_0 \sim f_{4, n - 5}\)</span>. Se rechaza para
+valores grandes de este estadístico, esto es, si <span
+class="math inline">\(\text{VP} = P\left(f_{4, n - 5} &gt; F_0\right)
+&lt; \alpha\)</span>, donde <span class="math inline">\(\alpha\)</span>
+es el nivel de significancia de la prueba. O bien, si <span
+class="math inline">\(F_0 &gt; f_{\alpha, 4, n - 5}\)</span>.</p>
+<p></br></br></p>
+<div id="retos" class="section level3 content-box-gray">
+<h3><span style="color:#686868"> <strong>Retos</strong></span></h3>
+<ul>
+<li>Comprobar que una prueba de significancia individual o para un
+subconjunto de coeficientes de regresión son casos particulares de la
+prueba de hipótesis lineal general.)</li>
+</ul>
+<p></br></br></p>
+<ul>
+<li>También es posible probar hipótesis lineales generales del tipo
+<span class="math inline">\(H_0: \boldsymbol{L\beta} = \boldsymbol{c}\
+\text{ vs. }\ H_1: \boldsymbol{L\beta} \neq \boldsymbol{c}\)</span>,
+donde <span class="math inline">\(\boldsymbol{c}\)</span> es un vector
+de constantes arbitrario.</li>
+</ul>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

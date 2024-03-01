@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Modelos Estadísticos para la toma de decisiones" />
+
+
+<title> Algebra Lineal</title>
+
+<script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Modelos Estadísticos para la toma de decisiones</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Conceptos
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso005.html">Modelo de Regresión Lineal Múltiple</a>
+    </li>
+    <li>
+      <a href="recurso010.html">Correlación</a>
+    </li>
+    <li>
+      <a href="recurso015.html">Algebra Lineal</a>
+    </li>
+    <li>
+      <a href="recurso020.html">Notación matricial de modelo</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Estimación
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso030.html">Mínimos Cuadrados Ordinarios</a>
+    </li>
+    <li>
+      <a href="recurso035.html">Propiedades de los estimadores</a>
+    </li>
+    <li>
+      <a href="recurso050.html">Validación de los supuestos</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Inferencia
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso040.html">Inferencia sobre los parámetros</a>
+    </li>
+    <li>
+      <a href="recurso042.html">Inferencia sobre subconjunto de parámetros</a>
+    </li>
+    <li>
+      <a href="recurso045.html">Pronósticos</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Ajuste del modelo
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso055.html">Indicadores de ajuste</a>
+    </li>
+    <li>
+      <a href="recurso060.html">Validación cruzada</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Variables cat.
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso061.html">En el modelo de RLM</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Multicolinealidad
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso080.html">Multicolinealidad</a>
+    </li>
+    <li>
+      <a href="recurso081.html">Causas / Efectos</a>
+    </li>
+    <li>
+      <a href="recurso082.html">Diagnóstico</a>
+    </li>
+    <li>
+      <a href="recurso083.html">Alternativas</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Código R 
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="recurso099.html">Análisis previo</a>
+    </li>
+    <li>
+      <a href="recurso100.html">Estimación MCO</a>
+    </li>
+    <li>
+      <a href="recurso120.html">Validación cruzada</a>
+    </li>
+    <li>
+      <a href="recurso140.html">Mapa</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore"><span style="color:#034a94">
+<strong>Algebra Lineal</strong></span></h1>
+<h4 class="author">Modelos Estadísticos para la toma de decisiones</h4>
+
+</div>
+
+
+<p></br></br></p>
+<p>A continuación se revisan una serie de propiedades y conceptos de
+álgebra relacionados con vectores y matrices, importantes para entender
+la estimación de <strong>MCO</strong> y los procesos de inferencia
+estadística bajo el enfoque matricial.</p>
+<p></br></br></p>
+<div id="algunas-definiciones-básicas-en-teoría-matricial"
+class="section level1">
+<h1><span style="color:#034a94"> <strong>Algunas definiciones básicas en
+teoría matricial</strong></span></h1>
+<p></br></br></p>
+<div id="vector" class="section level3">
+<h3><span style="color:#FF7F00"> <strong>Vector</strong></span></h3>
+<p>Un vector es un conjunto de valores que conforman un arreglo de
+números que tienen como características principales dimensión, magnitud
+y dirección para un espacio multidimensional. Se representan por lo
+general con letras minúsculas</p>
+<p><span class="math display">\[x = [x_1,x_2,x_3,\dots ,
+x_n]\]</span></p>
+<p>La dimensión o tamaño lo determina el número de componentes <span
+class="math inline">\(dim(x)= 1 \times n\)</span>.</p>
+<p>Las principales propiedades y operaciones de los vectores son:</p>
+<p></br></p>
+<div id="suma-de-vectores" class="section level4">
+<h4><span style="color:#FF7F00"> <strong>Suma de
+vectores</strong></span></h4>
+<p>La suma de dos vectores <strong>u</strong> y <strong>v</strong> se
+hace elemento a elemento correspondientes <span class="math inline">\(u
++ v = [u_1+v_1, u_2 + v_2, \dots, u_n+v_n]\)</span>, y posee la
+siguientes propiedades:</p>
+<ul>
+<li>conmutativa : <span class="math inline">\(u +v = v + u\)</span></li>
+<li>asociativa : <span class="math inline">\((u + v) + w = u + (v +
+w)\)</span></li>
+</ul>
+<p></br></p>
+</div>
+<div id="producto-escalar" class="section level4">
+<h4><span style="color:#FF7F00"> <strong>Producto
+escalar</strong></span></h4>
+<p>El producto de un vector por una constante <span
+class="math inline">\(c\)</span> se realiza multiplicando todos los
+elementos del vector por la constante : <span class="math inline">\(cv =
+[cv_1, cv_2, \dots, cv_n]\)</span></p>
+<p></br></p>
+<ul>
+<li><span style="color:#FF7F00"> <strong>vector nulo</strong></span>:
+<span class="math inline">\(0\)</span> , es un vector en el cual todos
+sus componentes son ceros. Como propiedades se tienen que la suma de
+cualquier vector con 0 da como resultado el mismo vector : <span
+class="math inline">\(v + 0 = v\)</span>.</li>
+<li></li>
+</ul>
+<p></br></p>
+</div>
+</div>
+<div id="vectores-linealmente-independientes" class="section level3">
+<h3><span style="color:#FF7F00"> <strong>Vectores linealmente
+independientes</strong></span></h3>
+<p>Un conjunto de vectores <span class="math inline">\(v_1, v_2, \dots
+v_k\)</span> se consideran linealmente independientes si ninguno se
+puede escribir como una combinación lineal de los demás vectores, como
+por ejemplo : <span class="math inline">\(v_1 = [1,0,0]\)</span>, <span
+class="math inline">\(v_2 = [0,1,0]\)</span> y <span
+class="math inline">\(v_3 = [0,0,1]\)</span>, los cuales constituyen una
+base</p>
+<p></br></p>
+</div>
+<div id="producto-punto-entre-dos-vectores" class="section level3">
+<h3><span style="color:#FF7F00"> <strong>producto punto entre dos
+vectores</strong></span></h3>
+<p>El producto punto entre dos vectores <span class="math inline">\(u.v
+= [u_1v_1 + u_2v_2 + \dots + u_nv_n ]\)</span></p>
+<p></br></br></p>
+</div>
+<div id="matrices" class="section level3">
+<h3><span style="color:#FF7F00"> <strong>Matrices</strong></span></h3>
+<p>Una matriz es un arreglo de números organizados por filas y columnas
+y se emplean en la representación de sistemas de ecuaciones lineales y
+transformaciones lineales</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+    a_{11} &amp; a_{12} &amp; \ldots &amp; a_{1n} \\
+    a_{21} &amp; a_{22} &amp; \ldots &amp; a_{2n} \\
+    \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+    a_{m1} &amp; a_{m2} &amp; \ldots &amp; a_{mn}
+\end{bmatrix}
+\]</span></p>
+<p></br></p>
+<div id="matriz-cuadrada" class="section level4">
+<h4><span style="color:#FF7F00"> <strong>Matriz
+cuadrada</strong></span></h4>
+<p>Es la matriz que tiene el mismo número de filas y columnas</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+    a_{11} &amp; a_{12} &amp; \ldots &amp; a_{1n} \\
+    a_{21} &amp; a_{22} &amp; \ldots &amp; a_{2n} \\
+    \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+    a_{n1} &amp; a_{n2} &amp; \ldots &amp; a_{nn}
+\end{bmatrix}
+\]</span></p>
+<p></br></p>
+</div>
+<div id="matriz-singular" class="section level4">
+<h4><span style="color:#FF7F00"> <strong>Matriz
+Singular</strong></span></h4>
+<p>Una matriz es singular si su determinante es igual a cero. Este tipo
+de matrices no tienen una matriz inversa y puede indicar que el sistema
+de ecuaciones lineales asociado tiene infinitas soluciones o ninguna
+solución. Por ejemplo la siguiente matriz <span
+class="math inline">\(A\)</span> es singular:</p>
+<p><span class="math display">\[
+A=
+\begin{bmatrix}
+    1 &amp; 2 &amp; 3 \\
+    2 &amp; 4 &amp; 6 \\
+    1 &amp; 3 &amp; 4
+\end{bmatrix}
+\]</span></p>
+<p>Esta matriz presenta dependencia en dos de sus filas: <span
+class="math inline">\(\hspace{1cm}2.[1,2,3] = [2,4,6]
+\hspace{1cm}\)</span> lo que hace que su determinante sea cero</p>
+<p></br></p>
+</div>
+<div id="matriz-identidad-i" class="section level4">
+<h4><span style="color:#FF7F00"> <strong>Matriz
+Identidad</strong></span> <span class="math inline">\(I\)</span></h4>
+<p>Una matriz cuadrada en la que todos los elementos fuera de la
+diagonal principal son cero y todos los elementos en la diagonal
+principal son unos. Cuando una matriz se multiplica por su matriz
+identidad correspondiente, el resultado es la matriz original. Por
+ejemplo <span class="math inline">\(I_3\)</span> será:</p>
+<p><span class="math display">\[
+I_3 =
+\begin{bmatrix}
+    1 &amp; 0 &amp; 0 \\
+    0 &amp; 1 &amp; 0 \\
+    0 &amp; 0 &amp; 1
+\end{bmatrix}
+\]</span></p>
+<p></br></p>
+</div>
+<div id="matriz-transpuesta" class="section level4">
+<h4><span style="color:#FF7F00"> <strong>Matriz
+Transpuesta</strong></span></h4>
+<p>La matriz transpuesta de una matriz <span
+class="math inline">\(A\)</span> se obtiene intercambiando filas por
+columnas. Si la matriz <span class="math inline">\(A\)</span> es de
+dimensión <span class="math inline">\(m \times n\)</span>, entonces su
+matriz transpuesta <span class="math inline">\(A^T\)</span> será de
+dimensión <span class="math inline">\(n \times m\)</span>, por
+ejemplo:</p>
+<p><span class="math display">\[
+A=
+\begin{bmatrix}
+    1 &amp; 2 &amp; 3 &amp; 4 \\
+    5 &amp; 6 &amp; 7 &amp; 8 \\
+    9 &amp; 10 &amp; 11 &amp; 12
+\end{bmatrix}
+\hspace{1cm}
+A^{T}= \begin{bmatrix}
+    1 &amp; 5 &amp; 9 \\
+    2 &amp; 6 &amp; 10 \\
+    3 &amp; 7 &amp; 11 \\
+    4 &amp; 8 &amp; 12
+\end{bmatrix}
+\]</span></p>
+<p></br></p>
+</div>
+<div id="matriz-inversa" class="section level4">
+<h4><span style="color:#FF7F00"> <strong>Matriz
+Inversa</strong></span></h4>
+<p>Una matriz cuadrada <span class="math inline">\(A\)</span> tiene una
+matriz inversa <span class="math inline">\(A^{-1}\)</span>, si el
+producto de <span class="math inline">\(A\)</span> con <span
+class="math inline">\(A^{-1}\)</span> es igual a la matriz identidad
+<span class="math inline">\(I\)</span>. La matriz inversa solo existe si
+el determinante de A no es cero.</p>
+<p><span class="math display">\[
+A=
+\begin{bmatrix}
+    2 &amp; 1 &amp; 3 \\
+    0 &amp; 1 &amp; -1 \\
+    1 &amp; 0 &amp; 2
+\end{bmatrix}
+\hspace{1cm}
+A^{-1} = \begin{bmatrix}
+    1 &amp; -1 &amp; -1 \\
+    -1 &amp; 3 &amp; 1 \\
+    0 &amp; -2 &amp; 1
+\end{bmatrix}
+\]</span></p>
+<p></br></br></p>
+</div>
+</div>
+<div id="otras-propiedades-importantes" class="section level2">
+<h2><span style="color:#034A94"> <strong>Otras propiedades
+importantes</strong> </span></h2>
+<p>A partir de las anteriores definiciones podemos resumir :</p>
+<p></br></p>
+<div class="content-box-blue">
+<p>Sean :</p>
+<ul>
+<li><span class="math inline">\(\boldsymbol{A}\)</span> y <span
+class="math inline">\(\boldsymbol{B}\)</span> matrices de constantes de
+orden <span class="math inline">\(n\times n\)</span> y <span
+class="math inline">\(m\times n\)</span> respectivamente,</li>
+</ul>
+<p><span class="math display">\[
+A= \left[\begin{array}{ccccc} a_{11} &amp; a_{12} &amp; \cdots &amp;
+a_{1n}\\
+    a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2n}\\
+    \vdots &amp; \vdots &amp; \vdots &amp; \cdots \\
+    a_{n1} &amp; a_{n2} &amp; \cdots &amp; a_{nn}\end{array}\right]
+\hspace{1cm}
+B= \left[\begin{array}{ccccc} b_{11} &amp; b_{12} &amp; \cdots &amp;
+b_{1n}\\
+    b_{21} &amp; b_{22} &amp; \cdots &amp; b_{2n}\\
+    \vdots &amp; \vdots &amp; \vdots &amp; \cdots \\
+    \vdots &amp; \vdots &amp; \vdots &amp; \cdots \\
+    b_{m1} &amp; b_{m2} &amp; \cdots &amp; b_{mn}\end{array}\right]
+\]</span></p>
+<ul>
+<li><p><span class="math inline">\(\boldsymbol{x} = \left[ x_1, \ldots,
+x_n\right]&#39;\)</span> un vector de variables de orden <span
+class="math inline">\(n\times 1\)</span>,</p></li>
+<li><p><span class="math inline">\(\boldsymbol{a}\)</span> un vector de
+constantes de orden <span class="math inline">\(n\times 1\)</span>;
+y</p></li>
+</ul>
+<p><span class="math display">\[
+\text{x} =\left[\begin{array}{c} x_1\\ x_2\\ \vdots\\
+x_n\end{array}\right]
+\hspace{1cm}
+a = \left[\begin{array}{c} a_1\\ a_2\\ \vdots\\ a_n\end{array}\right]
+\hspace{1cm}
+\]</span></p>
+<ul>
+<li><span class="math inline">\(\boldsymbol{I}\)</span> la matriz
+identidad de orden <span class="math inline">\(n\)</span>.</li>
+</ul>
+<p><span class="math display">\[
+I_n = \left[\begin{array}{ccccc} 1 &amp; 0 &amp; \cdots &amp; 0\\
+    0 &amp; 1 &amp; \cdots &amp; 0\\
+    \vdots &amp; \vdots &amp; \vdots &amp; \cdots \\
+    0 &amp; 0 &amp; \cdots &amp; 1\end{array}\right]
+\]</span></p>
+<p></br></p>
+<p>Entonces:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(\boldsymbol{\left(BA\right)}&#39; =
+\boldsymbol{A}&#39;\boldsymbol{B}&#39;\)</span>, la traspuesta de un
+producto es igual al producto invertido de las traspuestas.</li>
+</ol>
+<p></br></p>
+<ol start="2" style="list-style-type: decimal">
+<li><span class="math inline">\(\boldsymbol{A}\)</span> es simétrica si
+<span class="math inline">\(\boldsymbol{A}&#39; =
+\boldsymbol{A}\)</span>.</li>
+</ol>
+<p></br></p>
+<ol start="3" style="list-style-type: decimal">
+<li><span class="math inline">\(\boldsymbol{A}\)</span> es idempotente
+si <span class="math inline">\(\boldsymbol{AA} =
+\boldsymbol{A}\)</span>.</li>
+</ol>
+<p></br></p>
+<ol start="4" style="list-style-type: decimal">
+<li>Si <span class="math inline">\(\boldsymbol{A}\)</span> es simétrica
+e idempotente, entonces <span class="math inline">\(\left(\boldsymbol{I}
+- \boldsymbol{A}\right)\)</span> también es simétrica e
+idempotente.</li>
+</ol>
+<p></br></p>
+<ol start="5" style="list-style-type: decimal">
+<li><strong>Forma cuadrática:</strong> la función</li>
+</ol>
+<p><span class="math display">\[\boldsymbol{x}&#39;\boldsymbol{Ax} =
+\sum_{i = 1}^n \sum_{j = 1}^n a_{ij}x_ix_j = a_{11}x_{1}^{2}+
+a_{12}x_1x_2+a_{13}x_1x_3+ \dots + a_{nn}x_{n}^{2}\]</span></p>
+<p>se le llama forma cuadrática de <span
+class="math inline">\(\boldsymbol{x}\)</span>, donde <span
+class="math inline">\(a_{ij}\)</span> es la <span
+class="math inline">\(ij\)</span>-ésima componente de la matriz <span
+class="math inline">\(\boldsymbol{A}\)</span>.</p>
+<p></br></p>
+<ol start="6" style="list-style-type: decimal">
+<li><strong>Matriz definida positiva y semidefinida positiva:</strong>
+la matriz <span class="math inline">\(\boldsymbol{A}\)</span> se dice
+que es:</li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li>Definida positiva, si <span
+class="math inline">\(\boldsymbol{x}&#39;\boldsymbol{Ax} &gt; 0,\;
+\forall\boldsymbol{x}\)</span>.</li>
+<li>Semidefinida positiva si <span
+class="math inline">\(\boldsymbol{x}&#39;\boldsymbol{Ax} \geq 0,\;
+\forall\boldsymbol{x}\)</span>.</li>
+</ol>
+</div>
+<p></br></br></br></p>
+</div>
+</div>
+<div id="algunas-propiedades-de-derivadas-vectoriales-o-matriciales"
+class="section level1">
+<h1><span style="color:#034a94"> <strong>Algunas propiedades de
+derivadas vectoriales o matriciales</strong></span></h1>
+<p></br></p>
+<div class="content-box-blue">
+<p>Sean :</p>
+<ul>
+<li><p><span class="math inline">\(\boldsymbol{A}\)</span> una matriz de
+constantes de orden <span class="math inline">\(n\times
+n\)</span>;</p></li>
+<li><p><span class="math inline">\(\boldsymbol{x} = \left[ x_1, \ldots,
+x_n\right]&#39;\)</span> un vector de variables de orden <span
+class="math inline">\(n\times 1\)</span>; y</p></li>
+<li><p><span class="math inline">\(\boldsymbol{a}\)</span> un vector de
+constantes de orden <span class="math inline">\(n\times
+1\)</span>.</p></li>
+</ul>
+<p></br></p>
+<p>Entonces:</p>
+<p></br></p>
+<ol style="list-style-type: decimal">
+<li><span
+class="math inline">\(\dfrac{\partial\left(\boldsymbol{a}&#39;\boldsymbol{x}\right)}{\partial\boldsymbol{x}}
+=
+\dfrac{\partial\left(\boldsymbol{x}&#39;\boldsymbol{a}\right)}{\partial\boldsymbol{x}}
+= \boldsymbol{a}\)</span>.</li>
+</ol>
+<p></br></p>
+<ol start="2" style="list-style-type: decimal">
+<li><span
+class="math inline">\(\dfrac{\partial\left(\boldsymbol{x}&#39;\boldsymbol{x}\right)}{\partial\boldsymbol{x}}
+= 2\boldsymbol{x}\)</span>.</li>
+</ol>
+<p></br></p>
+<ol start="3" style="list-style-type: decimal">
+<li><span
+class="math inline">\(\dfrac{\partial\left(\boldsymbol{x}&#39;\boldsymbol{Ax}\right)}{\partial\boldsymbol{x}}
+= \boldsymbol{Ax} + \boldsymbol{A}&#39;\boldsymbol{x}\)</span>, pero si
+<span class="math inline">\(\boldsymbol{A}\)</span> es simétrica,
+entonces <span
+class="math inline">\(\dfrac{\partial\left(\boldsymbol{x}&#39;\boldsymbol{Ax}\right)}{\partial\boldsymbol{x}}
+= 2\boldsymbol{Ax}\)</span>.</li>
+</ol>
+</div>
+<p></br></br></br></p>
+</div>
+<div id="algunos-resultados-distribucionales-para-vectores-aleatorios"
+class="section level1">
+<h1><span style="color:#034a94"> <strong>Algunos resultados
+distribucionales para vectores aleatorios</strong></span></h1>
+<p></br></p>
+<p>Sea <span class="math inline">\(\boldsymbol{y}\)</span> un vector
+aleatorio normal <span class="math inline">\(n\)</span>-variado con
+media <span class="math inline">\(\boldsymbol{\mu_y}\)</span> y matriz
+de varianzas-covarianzas no singular <span
+class="math inline">\(\boldsymbol{\Sigma_y}\)</span>, es decir, <span
+class="math inline">\(\boldsymbol{y} \sim
+\boldsymbol{N}_n\boldsymbol{\left(\mu_y, \Sigma_y\right)}\)</span>.</p>
+<p>Sean <span class="math inline">\(\boldsymbol{A}\)</span> una matriz
+<span class="math inline">\(n\times n\)</span> de constantes y <span
+class="math inline">\(\boldsymbol{U}\)</span> una forma cuadrática de
+<span class="math inline">\(\boldsymbol{y}\)</span> definida como: <span
+class="math inline">\(\boldsymbol{U} =
+\boldsymbol{y}&#39;\boldsymbol{Ay}\)</span>.</p>
+<p></br></br></p>
+<p>Se tienen los siguientes resultados:</p>
+<div class="content-box-blue">
+<ol style="list-style-type: decimal">
+<li>Si <span class="math inline">\(\boldsymbol{A\Sigma_y}\)</span> ó
+<span class="math inline">\(\boldsymbol{\Sigma_yA}\)</span> es una
+matriz idempotente de rango <span class="math inline">\(p\)</span>,
+entonces <span class="math display">\[
+\boldsymbol{U} \sim \chi^2_{p, \lambda}
+\]</span></li>
+</ol>
+<p>donde, <span class="math inline">\(\lambda =
+\boldsymbol{\mu_y}&#39;\boldsymbol{A\mu_y}\)</span> es el parámetro de
+no centralidad de la distribución chi-cuadrado.</p>
+</div>
+<p></br></p>
+<div class="content-box-blue">
+<ol start="2" style="list-style-type: decimal">
+<li>Si <span class="math inline">\(\boldsymbol{\Sigma_y} =
+\sigma^2\boldsymbol{I}\)</span> y <span
+class="math inline">\(\boldsymbol{A}\)</span> es idempotente y de rango
+<span class="math inline">\(p\)</span>, entonces <span
+class="math display">\[
+\frac{\boldsymbol{U}}{\sigma^2}\sim \chi^2_{p,\lambda}
+\]</span></li>
+</ol>
+<p>donde, <span class="math inline">\(\lambda =
+\boldsymbol{\mu_y}&#39;\boldsymbol{A\mu_y}/\sigma^2\)</span>.</p>
+</div>
+<p></br></p>
+<div class="content-box-blue">
+<ol start="3" style="list-style-type: decimal">
+<li>Sean <span class="math inline">\(\boldsymbol{B}\)</span> una matriz
+<span class="math inline">\(m\times n\)</span> y <span
+class="math inline">\(\boldsymbol{W}\)</span> una forma lineal definida
+como: <span class="math inline">\(\boldsymbol{W} =
+\boldsymbol{By}\)</span>, entonces la forma cuadrática <span
+class="math inline">\(\boldsymbol{U} =
+\boldsymbol{y}&#39;\boldsymbol{Ay}\)</span> y <span
+class="math inline">\(\boldsymbol{W}\)</span> son independientes si
+<span class="math display">\[
+\boldsymbol{B\Sigma_yA} = \boldsymbol{0}
+\]</span></li>
+</ol>
+<p>donde <span class="math inline">\(\boldsymbol{0}\)</span> es la
+matriz nula de orden <span class="math inline">\(m\times n\)</span>.</p>
+</div>
+<div id="nota" class="section level3 content-box-gray">
+<h3><span style="color:#686868"> <strong>Nota</strong></span></h3>
+<p>Si <span class="math inline">\(\boldsymbol{\Sigma_y} =
+\sigma^2\boldsymbol{I}\)</span>, entonces <span
+class="math inline">\(\boldsymbol{U}\)</span> y <span
+class="math inline">\(\boldsymbol{W}\)</span> son independientes si
+<span class="math inline">\(\boldsymbol{BA} =
+\boldsymbol{0}\)</span>.</p>
+</div>
+<p></br></p>
+<div class="content-box-blue">
+<ol start="4" style="list-style-type: decimal">
+<li>Sean <span class="math inline">\(\boldsymbol{B}\)</span> una matriz
+<span class="math inline">\(n\times n\)</span> y <span
+class="math inline">\(\boldsymbol{V} =
+\boldsymbol{y}&#39;\boldsymbol{By}\)</span> otra forma cuadrática de
+<span class="math inline">\(\boldsymbol{y}\)</span>, entonces las dos
+formas cuadráticas <span class="math inline">\(\boldsymbol{U}\)</span> y
+<span class="math inline">\(\boldsymbol{V}\)</span> son independientes
+si <span class="math display">\[\boldsymbol{A\Sigma_yB} =
+\boldsymbol{0}\]</span></li>
+</ol>
+</div>
+<div id="nota-1" class="section level3 content-box-gray">
+<h3><span style="color:#686868"> <strong>Nota</strong></span></h3>
+<p>Si <span class="math inline">\(\boldsymbol{\Sigma_y} =
+\sigma^2\boldsymbol{I}\)</span>, entonces <span
+class="math inline">\(\boldsymbol{U}\)</span> y <span
+class="math inline">\(\boldsymbol{V}\)</span> son independientes si
+<span class="math inline">\(\boldsymbol{AB} =
+\boldsymbol{0}\)</span>.</p>
+</div>
+<p></br></br></p>
+<p>Los anteriores resultados se utilizan en la construcción de la
+estimación por MCO y las propiedades de los estimadores, la matriz de
+varianza covarianzas de los errores y la sus respectivas
+inferencias.</p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
