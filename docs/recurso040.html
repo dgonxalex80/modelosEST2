@@ -535,6 +535,71 @@ class="math inline">\((n - p)\)</span> grados de libertad.</li>
 </ul>
 <p></br></br></br></p>
 </div>
+<div id="interpretación-de-los-parámetros" class="section level2">
+<h2><span style="color:#034a94"><strong>Interpretación de los
+parámetros</strong></span></h2>
+<p><span class="math display">\[
+Y_i = \beta_0 + \beta_1X_{i1} + \beta_2X_{i2} + \cdots+ \beta_kX_{ik} +
+\varepsilon_i, \quad i = 1, 2, \ldots, n.
+\]</span></p>
+<p>En un modelo de regresión lineal las variables tanto la dependiente
+(<span class="math inline">\(Y\)</span>) como las independientes (<span
+class="math inline">\(X_1,X_2, \dots X_k\)</span>) pueden tener
+diferentes escalas de medición. Dependiendo de estas escalas se
+interpretan los coeficientes o pendientes.</p>
+<p>Algunos de los casos más frecuentes son:</p>
+<p></br></br></p>
+<div id="modelo-lin-lin" class="section level3 content-box-blue">
+<h3><strong>Modelo lin-lin</strong></h3>
+<p>Tanto la variable dependiente como la independiente están en su
+escala original</p>
+<p><span class="math display">\[
+Y_i = \beta_0 + \beta_1X_{i1} + \cdots  \cdots
+\]</span></p>
+<p>En este caso <span class="math inline">\(\beta_{1}\)</span>, se
+interpreta como : Un cambio unitario de <span
+class="math inline">\(X_1\)</span>, genera un cambio de <span
+class="math inline">\(\beta_{1}\)</span> unidades en <span
+class="math inline">\(Y\)</span>.</p>
+</div>
+<p></br></br></p>
+<div id="modelo-log-lin" class="section level3 content-box-blue">
+<h3><strong>Modelo log-lin</strong></h3>
+<p><span class="math display">\[
+log{(Y_i)} = \beta_0 + \beta_1X_{i1} + \cdots  \cdots
+\]</span></p>
+<p>En este caso <span class="math inline">\(\beta_{1}\)</span>, se
+interpreta como : Un cambio unitario en <span
+class="math inline">\(X_1\)</span>, genera un cambio porcentual del
+<span class="math inline">\(\beta_{1} \times 100 \%\)</span> en <span
+class="math inline">\(Y\)</span></p>
+</div>
+<p></br></br></p>
+<div id="modelo-lin-log" class="section level3 content-box-blue">
+<h3><strong>Modelo lin-log</strong></h3>
+<p><span class="math display">\[
+Y_i= \beta_0 + \beta_1 \log{(X_{i1})} +\cdots  \cdots
+\]</span></p>
+<p>La pendiente <span class="math inline">\(\beta_{1}\)</span> se
+interpreta como : Una variación del 1% en <span
+class="math inline">\(X_1\)</span>, genera una variación de <span
+class="math inline">\(\dfrac{\beta_{1}}{100}\)</span> unidades en <span
+class="math inline">\(Y\)</span>.</p>
+</div>
+<p></br></br></p>
+<div id="modelo-log-log" class="section level3 content-box-blue">
+<h3><strong>Modelo log-log</strong></h3>
+<p><span class="math display">\[
+log{(Y_i)} = \beta_0 + \beta_1 \log{(X_{i1})} +  \cdots  \cdots
+\]</span></p>
+<p>La pendiente <span class="math inline">\(\beta_{1}\)</span> se
+interpreta como : Un cambio de un 1% en <span
+class="math inline">\(X_1\)</span>, genera un cambio del <span
+class="math inline">\(\beta_{1}\)</span> por ciento en <span
+class="math inline">\(Y\)</span></p>
+</div>
+<p></br></br></br></br></p>
+</div>
 </div>
 
 

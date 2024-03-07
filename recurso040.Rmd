@@ -110,6 +110,74 @@ donde
 </br></br></br>
 
 
+## <span style="color:#034a94">**Interpretación de los parámetros**</span>
 
 
 
+$$
+Y_i = \beta_0 + \beta_1X_{i1} + \beta_2X_{i2} + \cdots+ \beta_kX_{ik} + \varepsilon_i, \quad i = 1, 2, \ldots, n.
+$$ 
+
+En un modelo de regresión lineal las variables tanto la dependiente ($Y$) como las independientes ($X_1,X_2, \dots X_k$) pueden tener diferentes escalas de medición. Dependiendo de estas escalas se interpretan los coeficientes o pendientes.
+
+
+Algunos de los casos más frecuentes son:
+
+</br></br>
+
+<div class="content-box-blue">
+
+### **Modelo lin-lin**
+
+Tanto la variable dependiente como la independiente están en su escala original
+
+$$
+Y_i = \beta_0 + \beta_1X_{i1} + \cdots  \cdots 
+$$ 
+
+En este caso $\beta_{1}$, se interpreta como : Un cambio unitario de $X_1$, genera un cambio de $\beta_{1}$ unidades en $Y$.  
+</div>
+
+</br></br>
+
+<div class="content-box-blue">
+### **Modelo log-lin**
+
+$$
+log{(Y_i)} = \beta_0 + \beta_1X_{i1} + \cdots  \cdots 
+$$ 
+
+En este caso $\beta_{1}$, se interpreta como : Un cambio unitario en $X_1$, genera un cambio porcentual del $\beta_{1} \times 100 \%$ en $Y$  
+</div>
+
+</br></br>
+
+<div class="content-box-blue">
+### **Modelo lin-log**
+
+
+
+$$
+Y_i= \beta_0 + \beta_1 \log{(X_{i1})} +\cdots  \cdots 
+$$
+
+La pendiente $\beta_{1}$ se interpreta como : Una variación del 1% en  $X_1$, genera una variación de  $\dfrac{\beta_{1}}{100}$ unidades en $Y$.
+
+</div>
+
+</br></br>
+
+<div class="content-box-blue">
+
+### **Modelo log-log**
+
+
+$$
+log{(Y_i)} = \beta_0 + \beta_1 \log{(X_{i1})} +  \cdots  \cdots 
+$$ 
+
+
+La pendiente $\beta_{1}$ se interpreta como : Un cambio de un 1% en $X_1$, genera un cambio del $\beta_{1}$ por ciento en $Y$
+</div>
+
+</br></br></br></br>
